@@ -29,7 +29,10 @@
   ~/.emacs.d/private/sonic-pi:
     path: emacs/.emacs.d/private/sonic-pi
     force: true
+  ~/Brewfile: Brewfile
 
+- brewfile:
+    file: Brewfile
 
 - shell:
   - git submodule update --init --recursive

@@ -1,18 +1,28 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
+  ignore = dirty
 [submodule "vim"]
 	path = vim
 	url = git@github.com:magicmonty/vcsh-vim-config.git
+  ignore = dirty
 [submodule "fish"]
 	path = fish
 	url = git@github.com:magicmonty/vcsh-fish.git
+  ignore = dirty
 [submodule "dev"]
 	path = dev
 	url = git@github.com:magicmonty/vcsh-dev-config.git
+  ignore = dirty
 [submodule "tmux"]
 	path = tmux
 	url = git@github.com:magicmonty/vcsh-tmux-config.git
+  ignore = dirty
 [submodule "emacs"]
 	path = emacs
 	url = git@github.com:magicmonty/vcsh-emacs.git
+  ignore = dirty
+[submodule "dotbot-brewfile"]
+	path = dotbot-brewfile
+	url = https://github.com/sobolevn/dotbot-brewfile.git
+  ignore = dirty
