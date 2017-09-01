@@ -1,3 +1,18 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
+[submodule "vim"]
+	path = vim
+	url = git@github.com:magicmonty/vcsh-vim-config.git
+[submodule "fish"]
+	path = fish
+	url = git@github.com:magicmonty/vcsh-fish.git
+[submodule "dev"]
+	path = dev
+	url = git@github.com:magicmonty/vcsh-dev-config.git
+[submodule "tmux"]
+	path = tmux
+	url = git@github.com:magicmonty/vcsh-tmux-config.git
+[submodule "emacs"]
+	path = emacs
+	url = git@github.com:magicmonty/vcsh-emacs.git

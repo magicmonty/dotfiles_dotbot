@@ -1,0 +1,49 @@
+- link:
+  ~/.vim:
+    path: vim/.vim
+    force: true
+  ~/.vimrc: vim/.vimrc
+  ~/.gvimrc: vim/.gvimrc
+  ~/.config/nvim: path: vim/.config/nvim
+  ~/.config/fish:
+    path: fish/.config/fish
+    force: true
+  ~/.editorconfig: dev/.editorconfig
+  ~/.gemrc: dev/.gemrc
+  ~/.gitconfig: dev/.gitconfig
+  ~/.gitignore_global: dev/.gitignore_global
+  ~/.go-version: dev/.go-version
+  ~/.node-version: dev/.node-version
+  ~/.npmrc: dev/.npmrc
+  ~/.ruby-version: dev/.ruby-version
+  ~/bin/battery.sh: tmux/bin/battery.sh
+  ~/bin/tmux-mem-cpu-load: tmux/bin/tmux-mem-cpu-load
+  ~/.tmuxinator:
+    path: tmux/.tmuxinator
+    force: true
+  ~/.tmux.conf: tmux/.tmux.conf
+  ~/.tmux.live.conf: tmux/.tmux.live.conf
+  ~/.tmux: tmux/.tmux
+  ~/.spacemacs: emacs/.spacemacs
+  ~/bin/edit: emacs/bin/edit
+  ~/.emacs.d/private/sonic-pi:
+    path: emacs/.emacs.d/private/sonic-pi
+    force: true
+
+
+- shell:
+  - git submodule update --init --recursive
+  - pip2 install neovim
+  - pip3 install neovim
+  - gem install neovim
+  - curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
+  - fisher
+
+- clean:
+  ~
+  .config
+
+- defaults:
+  link:
+    create: true
+    relink: true
