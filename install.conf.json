@@ -35,7 +35,7 @@
       "~/.spacemacs": "emacs/.spacemacs",
       "~/bin/edit": "emacs/bin/edit",
       "~/.emacs.d/private/sonic-pi": "emacs/.emacs.d/private/sonic-pi",
-      "~/Brewfile": "Brewfile",
+      "~/.Brewfile": "Brewfile",
       "~/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings": "apps/Preferences.sublime-settings",
       "~/Library/Application Support/Spectacle/Shortcuts.json": "apps/spectacle.json",
       "~/.config/profanity": "apps/profanity",
@@ -48,7 +48,7 @@
   },
   {
     "brewfile": {
-      "file": "~/Brewfile"
+      "global": ""
     }
   },
   {
@@ -58,9 +58,7 @@
       ["pip3 install neovim", "Installing Python 3 NeoVim plugin"],
       ["gem install neovim", "Installing Ruby NeoVim Gem"],
       ["fisher", "Installing fisher plugins"],
-      ["mv ~/.config/fish/functions/copy-fish_greeting.fish ~/.config/fish/functions/fish_greeting.fish", "Reapplying fish_greeting.fish"],
-      ["mv ~/.config/fish/functions/copy-fish_mode_prompt.fish ~/.config/fish/functions/fish_mode_prompt.fish", "Reapplying fish_mode_prompt.fish"],
-      ["source macos", "Setting MacOS X defaults"]
+      ["./macos", "Setting MacOS X defaults"]
     ]
   }
 ]
