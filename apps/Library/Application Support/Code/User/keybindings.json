@@ -1,0 +1,13 @@
+// Platzieren Sie Ihre Tastenzuordnungen in dieser Datei, um die Standardwerte zu überschreiben.
+[
+    {
+        "key": "cmd+enter",
+        "command": "fsi.SendLine",
+        "when": "editorFocus && !findWidgetVisible && editorLangId == 'fsharp'"
+    },
+    {
+        "key": "shift+alt+7",
+        "command": "-fsi.SendLine",
+        "when": "editorFocus && !findWidgetVisible && editorLangId == 'fsharp'"
+    }
+]

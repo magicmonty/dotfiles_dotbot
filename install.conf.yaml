@@ -40,6 +40,8 @@
     path: sonic-pi/snippets
     force: true
   ~/.ssh/config: ssh/config
+  ~/Library/Application Support/Code/User/keybindings.json: apps/Library/Application Support/Code/User/keybindings.json
+  ~/Library/Application Support/Code/User/settings.json: apps/Library/Application Support/Code/User/settings.json
 
 - brewfile:
     file: Brewfile
