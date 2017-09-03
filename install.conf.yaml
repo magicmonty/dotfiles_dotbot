@@ -4,7 +4,7 @@
     force: true
   ~/.vimrc: vim/.vimrc
   ~/.gvimrc: vim/.gvimrc
-  ~/.config/nvim: path: vim/.config/nvim
+  ~/.config/nvim: vim/.config/nvim
   ~/.config/fish:
     path: fish/.config/fish
     force: true
