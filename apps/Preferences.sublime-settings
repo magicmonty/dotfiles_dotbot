@@ -1,0 +1,32 @@
+{
+	"caret_style": "wide",
+	"color_scheme": "Packages/Color Scheme - Default/Solarized (Dark).tmTheme",
+	"detect_indentation": false,
+	"draw_indent_guides": true,
+	"draw_white_space": "all",
+	"font_size": 13,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+		"HTML5",
+		"Jade",
+		"LaTeXing",
+		"Theme - Sodarized",
+		"Vintage"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"match_brackets": false,
+	"rulers":
+	[
+		120
+	],
+	"tab_size": 2,
+	"theme": "amCoder.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"use_tab_stops": true,
+	"word_wrap": "false"
+}

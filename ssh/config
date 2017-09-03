@@ -1,0 +1,60 @@
+Host katharina
+	HostName katharinas-air
+	User katharina
+
+Host github.com
+  User git
+  HostName github.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/github_ed25519
+  IdentitiesOnly yes
+
+Host magicmonty.github.com
+	User git
+	HostName github.com
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/github_ed25519
+  IdentitiesOnly yes
+
+Host lambdaphonic.github.com
+  User git
+  HostName github.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/lambdaphonic_ed25519
+  IdentitiesOnly yes
+
+Host pi
+  HostName raspberrypi.local
+  User mg
+  PreferredAuthentications publickey
+
+Host mediacenter
+  HostName 192.168.6.12
+	User xbmc
+	LocalForward 4200 127.0.0.1:4243
+
+Host mediacenter2
+  HostName 192.168.6.12
+  User xbmc
+
+Host mediacenter.fritz.box
+  User xbmc
+  HostName mediacenter.fritz.box
+  PreferredAuthentications publickey
+
+Host bazaar.launchpad.net
+	User magicmonty
+
+Host web
+	HostName blog.pagansoft.de
+	User ssh-1855-mg
+  PreferredAuthentications publickey
+
+Host torsten
+	HostName torstenpahl.de
+	User ssh-143092-mg
+
+Host torstendev
+	HostName 192.168.6.28
+	User mg
+	PreferredAuthentications publickey

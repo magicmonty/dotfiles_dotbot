@@ -30,6 +30,16 @@
     path: emacs/.emacs.d/private/sonic-pi
     force: true
   ~/Brewfile: Brewfile
+  ~/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings: apps/Preferences.sublime-settings
+  ~/Library/Application Support/Spectacle/Shortcuts.json: apps/spectacle.json
+  ~/.config/profanity:
+    path: apps/profanity
+    force: true
+  ~/.sonic-pi/init.rb: sonic-pi/init.rb
+  ~/.sonic-pi/snippets:
+    path: sonic-pi/snippets
+    force: true
+  ~/.ssh/config: ssh/config
 
 - brewfile:
     file: Brewfile
@@ -41,6 +51,9 @@
   - gem install neovim
   - curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
   - fisher
+  - mv ~/.config/fish/functions/copy-fish_greeting.fish ~/.config/fish/functions/fish_greeting.fish
+  - mv ~/.config/fish/functions/copy-fish_mode_prompt.fish ~/.config/fish/functions/fish_mode_prompt.fish
+  - source macos
 
 - clean:
   ~
