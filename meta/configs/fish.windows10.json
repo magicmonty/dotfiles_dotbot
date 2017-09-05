@@ -1,0 +1,64 @@
+[
+  {
+    "clean": [ "~/.config/fisherman", "~/.config/fish" ]
+  },
+  {
+    "link": {
+      "~/.config/fish/abbr.fish": "shells/fish/config/fish/abbr.fish",
+      "~/.config/fish/autoenv.fish": "shells/fish/config/fish/autoenv.fish",
+      "~/.config/fish/config.fish": "shells/fish/config/fish/config.fish",
+      "~/.config/fish/completions/fisher.fish": {
+        "path": "shells/fish/config/fish/completions/fisher.fish",
+        "create": true,
+        "force": true
+      },
+      "~/.config/fish/functions/edit_config_fish.fish": {
+        "path": "shells/fish/config/fish/functions/edit_config_fish.fish",
+        "create": true,
+        "force": true
+      },
+      "~/.config/fish/functions/git.fish": "shells/fish/config/fish/functions/git.fish",
+      "~/.config/fish/functions/gitv.fish": "shells/fish/config/fish/functions/gitv.fish",
+      "~/.config/fish/functions/l.fish": "shells/fish/config/fish/functions/l.fish",
+      "~/.config/fish/functions/la.fish": "shells/fish/config/fish/functions/la.fish",
+      "~/.config/fish/functions/ll.fish": "shells/fish/config/fish/functions/ll.fish",
+      "~/.config/fish/functions/ls.fish": "shells/fish/config/fish/functions/ls.fish",
+      "~/.config/fish/functions/psa.fish": "shells/fish/config/fish/functions/psa.fish",
+      "~/.config/fish/functions/search_history.fish": "shells/fish/config/fish/functions/search_history.fish",
+      "~/.config/fish/fishfile": "shells/fish/config/fish/fishfile.windows10"
+    }
+  },
+  {
+    "shell": [
+      ["fisher update", "Installing fisher plugins"]
+    ]
+  },
+  {
+    "link": {
+      "~/.config/fish/functions/fisher.fish": {
+        "path":"shells/fish/config/fish/functions/fisher.fish",
+        "create": true,
+        "relink": true,
+        "force": true
+      },
+      "~/.config/fish/functions/fish_user_key_bindings.fish": {
+        "path": "shells/fish/config/fish/functions/fish_user_key_bindings.windows10.fish",
+        "create": true,
+        "relink": true,
+        "force": true
+      },
+      "~/.config/fish/functions/fish_greeting.fish": {
+        "path": "shells/fish/config/fish/functions/fish_greeting.fish",
+        "create": true,
+        "relink": true,
+        "force": true
+      },
+      "~/.config/fish/functions/fish_mode_prompt.fish": {
+        "path": "shells/fish/config/fish/functions/fish_mode_prompt.fish",
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  }
+]

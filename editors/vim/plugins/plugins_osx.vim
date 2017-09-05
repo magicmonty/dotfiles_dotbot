@@ -69,7 +69,7 @@ Plug 'junegunn/gv.vim'
 
 " NVim
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim'
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'fszymanski/deoplete-emoji'
 	Plug 'callmekohei/deoplete-fsharp'
 endif

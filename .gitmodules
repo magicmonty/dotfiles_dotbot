@@ -1,7 +1,3 @@
-[submodule "fish"]
-	path = fish
-	url = git@github.com:magicmonty/vcsh-fish.git
-	ignore = dirty
 [submodule "dev"]
 	path = dev
 	url = git@github.com:magicmonty/vcsh-dev-config.git

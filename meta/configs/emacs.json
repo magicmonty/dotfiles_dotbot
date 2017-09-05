@@ -2,8 +2,16 @@
   {
     "link": {
       "~/.spacemacs": "editors/emacs/spacemacs",
-      "~/bin/edit": "editors/emacs/bin/edit",
-      "~/.emacs.d/private/sonic-pi": "editors/emacs/emacs.d/private/sonic-pi"
+      "~/bin/edit": {
+        "path": "editors/emacs/bin/edit",
+        "create": true,
+        "force": true
+      },
+      "~/.emacs.d/private/sonic-pi": {
+        "path": "editors/emacs/emacs.d/private/sonic-pi",
+        "create": true,
+        "force": true
+      }
     }
   }
 ]
