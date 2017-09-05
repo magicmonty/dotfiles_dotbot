@@ -1,0 +1,303 @@
+snippet jvmopts "jvm options for a overtone project"
+  :jvm-opts [
+    "-Xms512m" "-Xmx1g"           ; Minimum and maximum sizes of the heap
+    "-XX:+UseParNewGC"            ; Use the new parallel GC in conjunction with
+    "-XX:+UseConcMarkSweepGC"     ;  the concurrent garbage collector
+    "-XX:+CMSConcurrentMTEnabled" ; Enable multi-threaded concurrent gc work (ParNewGC)
+    "-XX:MaxGCPauseMillis=20"     ; Specify a target of 20ms for max gc pauses
+    "-XX:+CMSIncrementalMode"     ; Do many small GC cycles to minimize pauses
+    "-XX:MaxNewSize=257m"         ; Specify the max and min size of the new
+    "-XX:NewSize=256m"            ;  generation to be small
+    "-XX:+UseTLAB"                ; Uses thread-local object allocation blocks. This
+                                  ;  improves concurrency by reducing contention on
+                                  ;  the shared heap lock.
+    "-XX:MaxTenuringThreshold=0"  ; Makes the full NewSize available to every NewGC
+                                  ;  cycle, and reduces the pause time by not
+                                  ;  evaluating tenured objects. Technically, this
+                                  ;  setting promotes all live objects to the older
+                                        ;  generation, rather than copying them.
+    ]
+endsnippet
+
+snippet nslive "namespace for a live set"
+(ns lambdaphonic.${1:live}
+  (use [overtone.live :refer :all]
+       [lambdaphonic.overtone.helpers]
+       [lambdaphonic.overtone.synths]
+       [lambdaphonic.overtone.samples]
+       [overtone.inst.drum]
+       [overtone.inst.sampled-piano]))
+
+$0
+endsnippet
+
+snippet nsst "namespace for a live set with shadertone"
+(ns lambdaphonic.${1:live}
+  (use [overtone.live :refer :all]
+       [lambdaphonic.overtone.helpers]
+       [lambdaphonic.overtone.synths]
+       [lambdaphonic.overtone.samples]
+       [overtone.inst.drum]
+       [overtone.inst.sampled-piano])
+  (require [shadertone.tone :as t]))
+
+endsnippet
+
+snippet shader "shadertone shader"
+(comment
+($0t/start-fullscreen "resources/${1:electric}.glsl" :textures [:overtone-audio])
+(t/stop)
+)
+endsnippet
+
+snippet markov "simple markov chain"
+(def ${1:root} (atom ${2:60}))
+
+(def ${3:$1-chain} {$2 [${4:58} ${5:55}]
+                  $4 [$5 $2]
+                  $5 [$2 $4]})
+
+(defn select-next-from-$3 []
+  (choose ($3 @$1)))$0
+endsnippet
+
+snippet metro "metronome"
+(def ${1:metro} (metronome ${2:120}))$0
+endsnippet
+
+snippet ll "live loop"
+(defn ${1:name} [metro ps ds]
+  (let [beat (metro)]
+    (at (+ (now) (first ds)) (${2:play} (first ps)))
+    (apply-by (metro (inc beat)) #'$1 [metro (rotate 1 ps) (rotate 1 ds)])))
+
+(comment
+(at (${3:metro} (+ ($3) 2)) ($1 $3 [$4] [$5]))$0
+)
+endsnippet
+
+snippet sll "simple live loop"
+(defn ${1:name} [metro]
+  (let [beat (metro)]
+    (at (now) (${2:play} $3))
+    (apply-by (metro (inc beat)) #'$1 [metro])))
+
+(comment
+(at (${4:metro} (+ ($4) 2)) ($1 $4))$0
+)
+endsnippet
+
+snippet reqst "add shadertone require"
+(require [shadertone.tone :as t])
+endsnippet
+
+snippet run "quantized run"
+$0(dorun
+  (map #(let [b (+ beat %)]
+          (at (metro b) (${1:sampled-piano} (qcosr ${2:@thescale} b ${3:12} ${4:(+ 36 (note @root))} ${5:(choose [3/7 3/2 4/3])}))))
+       ${6:(range 0 1 1/6)}))
+endsnippet
+
+snippet vcosr "cosr for volume"
+(cosr ${1:b} 0.04 0.05 3/7)
+endsnippet
+
+snippet undef "undefines a function"
+ [] nil$0)
+endsnippet
+
+
+snippet moria "Mines of Moria melody"
+(do
+  (def moria1 [:E4  :C4 :A3 :C4 :E4  :C4 :A3 :C4 :E4  :C4 :A3  :C4  :F4 :E4 :D4 :C4])
+  (def moria2 [:D4  :B3 :G3 :B3 :D4  :B3 :G3 :B3 :D4  :B3 :G3  :B3  :E4 :D4 :C4 :B3])
+  (def moria3 [:B3  :C4 :D4 :F4 :E4  :D4 :C4 :A3 :B3  :E3 :F#3 :G#3 :A3 :A3 :A3 :A3])
+  (def moria4 [:A3  :C4 :E4 :C4 :A3  :C4 :E4 :C4 :A3  :C4 :E4  :F4  :E4 :D4 :C4 :B3])
+  (def moria5 [:G#3 :B3 :D4 :B3 :G#3 :B3 :D4 :B3 :G#3 :B3 :D4  :F4  :E4 :D4 :C4 :B3])
+  (def moria6 [:A3  :C4 :E4 :C4 :A3  :C4 :E4 :C4 :A3  :C4 :E4  :G4  :F4 :E4 :D4 :C4])
+  (def moria7 [:B3  :C4 :D4 :F4 :E4  :D4 :C4 :A3 :B3  :E3 :F#3 :G#3 :A3 :A3 :A3 :A3])
+
+  (def bmoria [:E2 :E2 :D2 :D2 :C2 :C2 :B1 :B1 :E2 :E2 :A1 :B1 :E2 :E2 :B1 :B1 :C2 :C2 :A1 :B1])
+  (def bass-line-moria (atom bmoria))
+
+  (def moria (atom  [moria1 moria2 moria1 moria2 moria1 moria3 moria4 moria5 moria6 moria7]))
+  (def moria-current-part (atom (first @moria))))
+endsnippet
+
+snippet temprec "Simple temporal recursion"
+(defn ${1:name} [metro t beat]
+  (at t
+    (let [next-beat (+ beat 1)
+          next-t (+ t (mspb metro))]
+      $0
+      (apply-by next-t #'$1 [metro next-t next-beat]))))
+
+(comment
+($1 metro (atbeat metro 1) 0)
+)
+endsnippet
+
+snippet fullbeatmap "part for a temporal recursion"
+(dorun
+  (map (fn [b n]
+          (at (+ t (mspb metro (+ 1 b)))
+              (do
+                $0)))
+        (range 0 1 ${1:1/4})
+        ${2:notes}))
+endsnippet
+
+snippet electric "shadertone electric.glsl"
+(comment
+(t/start-fullscreen "resources/electric.glsl" :textures [:overtone-audio "resources/lambdaphonic.png"])
+(t/stop)
+)
+endsnippet
+
+snippet beatmap "map over fractions of a beat"
+(beat-map ${1:metro} ${2:t} beat next-beat ${3:0.25}
+  (fn [b]
+    ($0)))
+endsnippet
+
+snippet mtone "Tone synth"
+(comment
+(def mtone (tone :amp 3 :freq (midi->hz (note :E1))))
+(ctl mtone :gate 1)
+)
+endsnippet
+
+snippet at "timed execution"
+(at (+ ${1:t} (mspb ${2:metro} ${3:0.5}))
+    (do
+      ($0)))
+endsnippet
+
+snippet rrotate "reset and rotate"
+(reset! ${1:notes} (rotate ${2:1} @$1))$0
+endsnippet
+
+snippet record "start recording"
+(comment
+(recording-start "/Users/martingondermann/Music/${1:filename}.wav")
+(recording-stop)
+)
+endsnippet
+
+snippet onbeatt "On beat timed"
+(on-beat beat ${1:4} ${2:4} #(do
+                               (at (+ t (mspb metro ${3:0.25}))
+                                 (do
+                                   $0))))
+endsnippet
+
+snippet onbeat "on-beat"
+(on-beat beat ${1:4} ${2:4} #(do
+                               $0))
+endsnippet
+
+snippet defsynth "Synth definition"
+(defsynth ${1:sine} [freq 440 out-bus 0]
+  (let [sig (sin-osc :freq freq)
+        env (env-gen:kr (perc) :action FREE)]
+    (out:ar out-bus (* env sig))))
+endsnippet
+
+snippet nf "Note to freq"
+(midi->hz (note $0))
+endsnippet
+
+snippet ploop "patterned loop"
+(def $1-pattern ${2:(euclid-rhythm 5)})
+
+(defn $1 [m beat durs]
+  (let [next-beat (+ beat (reduce + durs))]
+    (dorun
+     (map
+      (fn [d o]
+        (let [b (+ beat o)]
+          (at (m b)
+              $0)))
+      durs
+      (calc-offsets durs)))
+    (apply-by (m next-beat) #'$1 [m next-beat $1-pattern])))
+
+(comment
+($1 metro (next-bar metro ${3:4}) $1-pattern)
+)
+endsnippet
+
+snippet defblips "blips"
+(comment
+(def x (blips :base (note :G6$0) :spread 20 :amp 0.2))
+(ctl x :amp 0.2)
+(ctl x :spread 20)
+(ctl x :base (note :G3))
+(kill x)
+)
+endsnippet
+
+snippet npat "Note pattern"
+(def $1-pattern
+  (note-pattern
+    (arp :alberti (scale-steps :G4 :dorian 0$0))
+    (euclid-rhythm 11)
+    (euclid-rhythm 16)))
+endsnippet
+
+snippet ploopn "patterned loop with explicit notes"
+(def $1-pattern ${2:(euclid-rhythm 5)})
+(def $1-notes [$3])
+
+(defn $1 [m beat durs notes]
+  (let [next-beat (+ beat (reduce + durs))]
+    (dorun
+     (map
+      (fn [n d o]
+        (let [b (+ beat o)]
+          (at (m b)
+              $0)))
+      notes
+      durs
+      (calc-offsets durs)))
+    (apply-by (m next-beat) #'$1 [m next-beat $1-pattern $1-notes])))
+
+(comment
+($1 metro (next-bar metro ${4:4}) $1-pattern $1-notes)
+)
+endsnippet
+
+snippet ploopnp "patterned loop with note pattern"
+(def $1-pattern
+  (note-pattern
+    (arp :alberti (scale-steps :G4 :dorian 0$0))
+    (euclid-rhythm 11)
+    (euclid-rhythm 16)))
+
+(defn $1 [m beat pattern]
+  (let [next-beat (+ beat (reduce + (map #(% :duration) pattern)))]
+    (dorun
+     (map
+      (fn [p]
+        (let [d (p :duration)
+              o (p :offset)
+              n (p :note)
+              b (+ beat o)]
+          (at (m b)
+              $0)))
+      pattern))
+    (apply-by (m next-beat) #'$1 [m next-beat $1-pattern])))
+
+(comment
+($1 metro (next-bar metro ${3:4}) $1-pattern)
+)
+endsnippet
+
+snippet st "short tone"
+(short-tone (midi->hz ${1:n}) :dur d :nharm 2)
+endsnippet
+
+snippet bno "blipps notes"
+:G6 :F6 :D6 :E6$0
+endsnippet
+

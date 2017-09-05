@@ -1,0 +1,10 @@
+[
+  {
+    "link": {
+      "~/.vim": "editors/vim/vim",
+      "~/.vimrc": "editors/vim/vimrc",
+      "~/.gvimrc": "editors/vim/gvimrc",
+      "~/.vim/plugins.vim": "editors/vim/plugins/plugins_windows10.vim"
+    }
+  }
+]

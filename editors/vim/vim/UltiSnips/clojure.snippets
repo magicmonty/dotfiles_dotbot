@@ -1,0 +1,145 @@
+snippet comm "comm ..."
+(comment
+  $0)
+endsnippet
+
+snippet def "def ..."
+(def $0)
+endsnippet
+
+snippet defm "defm ..."
+(defmethod ${1:multifn} "${2:doc-string}" ${3:dispatch-val} [${4:args}]
+  $0)
+endsnippet
+
+snippet defmm "defmm ..."
+(defmulti ${1:name} "${2:doc-string}" ${0:dispatch-fn})
+endsnippet
+
+snippet defma "defma ..."
+(defmacro ${1:name} "${2:doc-string}" ${0:dispatch-fn})
+endsnippet
+
+snippet defn "defn ..."
+(defn ${1:name} "${2:doc-string}" [${3:arg-list}]
+  $0)
+endsnippet
+
+snippet defp "defp ..."
+(defprotocol ${1:name}
+  $0)
+endsnippet
+
+snippet defr "defr ..."
+(defrecord ${1:name} [${2:fields}]
+  ${3:protocol}
+  $0)
+endsnippet
+
+snippet deft "deft ..."
+(deftest ${1:name}
+  (is (= ${0:assertion})))
+endsnippet
+
+snippet is "is ..."
+(is (= $1 $0))
+endsnippet
+
+snippet defty "defty ..."
+(deftype ${1:Name} [${2:fields}]
+  ${3:Protocol}
+  $0)
+endsnippet
+
+snippet doseq "doseq ..."
+(doseq [${1:elem} ${2:coll}]
+  $0)
+endsnippet
+
+snippet fn "fn ..."
+(fn [${1:arg-list}] $0)
+endsnippet
+
+snippet if "if ..."
+(if ${1:test-expr}
+  ${2:then-expr}
+  ${0:else-expr})
+endsnippet
+
+snippet ifl "if ..."
+(if-let [${1:result} ${2:test-expr}]
+  (${3:then-expr} $1)
+  (${0:else-expr}))
+endsnippet
+
+snippet imp "imp ..."
+(:import [${1:package}])
+  & {:keys [${1:keys}] :or {${0:defaults}}}
+endsnippet
+
+snippet let "let ..."
+(let [${1:name} ${2:expr}]
+  $0)
+endsnippet
+
+snippet letfn "letfn ..."
+(letfn [(${1:name}) [${2:args}]
+  $0)])
+endsnippet
+
+snippet map "map ..."
+(map ${1:func} ${0:coll})
+endsnippet
+
+snippet mapl "mapl ..."
+(map #(${1:lambda}) ${0:coll})
+endsnippet
+
+snippet met "met ..."
+(${1:name} [${2:this} ${3:args}]
+ $0)
+endsnippet
+
+snippet ns "ns ..."
+(ns ${0:name})
+endsnippet
+
+snippet dotimes "dotimes ..."
+(dotimes [_ 10]
+  (time
+    (dotimes [_ ${1:times}]
+             $0)))
+endsnippet
+
+snippet pmethod "pmethod ..."
+(${1:name} [${2:this} ${0:args}])
+endsnippet
+
+snippet refer "refer ..."
+(:refer-clojure :exclude [$0])
+endsnippet
+
+snippet require "require ..."
+(:require [${1:namespace} :as [$0]])
+endsnippet
+
+snippet use "use ..."
+(:use [${1:namespace} :only [$0]])
+endsnippet
+
+snippet print "print ..."
+(println $0)
+endsnippet
+
+snippet reduce "reduce ..."
+(reduce ${1:(fn [p n] ${3})} ${2})
+endsnippet
+
+snippet when "when ..."
+(when ${1:test} ${0:body})
+endsnippet
+
+snippet whenl "when ..."
+(when-let [${1:result} ${2:test}]
+    ${0:body})
+endsnippet

@@ -1,0 +1,18 @@
+[
+  {
+    "link": {
+      "~/.vim": "editors/vim/vim",
+      "~/.vimrc": "editors/vim/vimrc",
+      "~/.gvimrc": "editors/vim/gvimrc",
+      "~/.config/nvim": "editors/vim/config/nvim",
+      "~/.vim/plugins.vim": "editors/vim/plugins/plugins_osx.vim"
+    }
+  },
+  {
+    "shell": [
+      ["pip2 install neovim", "Installing Python 2 NeoVim plugin"],
+      ["pip3 install neovim", "Installing Python 3 NeoVim plugin"],
+      ["gem install neovim", "Installing Ruby NeoVim Gem"]
+    ]
+  }
+]
