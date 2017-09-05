@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Live loop with reverb
+# key: rll
+# binding: direct-keybinding
+# --
+with_fx(:reverb, room: 1.0, mix: 1.0) do |r_fx|
+  live_loop :$1 do
+    $0
+  end
+end
+

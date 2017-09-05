@@ -10,10 +10,6 @@
 	path = tmux
 	url = git@github.com:magicmonty/vcsh-tmux-config.git
 	ignore = dirty
-[submodule "emacs"]
-	path = emacs
-	url = git@github.com:magicmonty/vcsh-emacs.git
-	ignore = dirty
 [submodule "meta/dotbot"]
 	path = meta/dotbot
 	url = https://github.com/anishathalye/dotbot.git
