@@ -1,12 +1,17 @@
 [
   {
     "link": {
-      "~/.Brewfile": "Brewfile"
+      "~/.Brewfile": {
+        "path": "Brewfile",
+        "create": true,
+        "relink": true,
+        "force": true
+      }
     }
   },
   {
     "brewfile": {
-      "global": ""
+      "file": "Brewfile" 
     }
   }
 ]

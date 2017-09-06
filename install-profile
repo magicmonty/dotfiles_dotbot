@@ -26,9 +26,9 @@ done < "${META_DIR}/${PROFILES_DIR}/$1"
 shift
 
 
-"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}"
+"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" --plugin-dir "${META_DIR}/dotbot-brewfile" -c "${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}"
 
 for config in ${CONFIGS} ${@}; do
     echo -e "\nConfigure $config"
-    "${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}"
+    "${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" --plugin-dir "${META_DIR}/dotbot-brewfile" -c "${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}"
 done
