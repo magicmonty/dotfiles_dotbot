@@ -1,0 +1,10 @@
+*~
+.DS_Store
+.fake
+bin
+*.userprefs
+ntest/obj
+obj
+packages
+deploy
+*.log

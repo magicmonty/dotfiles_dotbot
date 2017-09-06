@@ -1,0 +1,8 @@
+[
+  {
+    "link": {
+      "~/.gitconfig": "development/git/gitconfig.np4",
+      "~/.gitignore_global": "development/git/gitignore_global"
+    }
+  }
+]
