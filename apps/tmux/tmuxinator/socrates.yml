@@ -1,0 +1,11 @@
+# ~/.tmuxinator/socrates.yml
+
+name: socrates
+root: ~/src/lambdaphonic/socrates
+
+windows:
+  - editor:
+      layout: 7131,158x43,0,0[158x40,0,0,0,158x2,0,41,1]
+      panes:
+        - $EDITOR src/lambdaphonic/socrates15.clj
+        - lein repl

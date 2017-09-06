@@ -1,0 +1,14 @@
+# ~/.tmuxinator/playground.yml
+
+name: live
+root: ~/src/lambdaphonic/playground
+tmux_options: -f ~/.tmux.live.conf
+windows:
+  - editor:
+      layout: 1ac3,136x28,0,0{105x28,0,0,0,30x28,106,0,2}
+      panes:
+        - /usr/local/bin/vim src/lambdaphonic/playground.clj
+        - profanity
+  - repl:
+      panes:
+        - lein repl

@@ -2,10 +2,6 @@
 	path = dev
 	url = git@github.com:magicmonty/vcsh-dev-config.git
 	ignore = dirty
-[submodule "tmux"]
-	path = tmux
-	url = git@github.com:magicmonty/vcsh-tmux-config.git
-	ignore = dirty
 [submodule "meta/dotbot"]
 	path = meta/dotbot
 	url = https://github.com/anishathalye/dotbot.git
