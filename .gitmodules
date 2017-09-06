@@ -6,3 +6,7 @@
 	path = meta/dotbot-brewfile
 	url = https://github.com/sobolevn/dotbot-brewfile.git
 	ignore = dirty
+[submodule "meta/dotbot_plugin_aptget"]
+	path = meta/dotbot_plugin_aptget
+	url = https://github.com/dein0s/dotbot_plugin_aptget.git
+	ignore = dirty

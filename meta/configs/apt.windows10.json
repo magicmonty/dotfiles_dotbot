@@ -1,0 +1,14 @@
+[
+  {
+    "aptget": {
+      "vim": null,
+      "tmux": null,
+      "git": null,
+      "editorconfig": null,
+      "fish": {
+        "ppa_source": "ppa:fish-shell/release-2",
+        "upgrade": true
+      }
+    }
+  }
+]
