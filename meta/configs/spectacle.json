@@ -1,7 +1,7 @@
 [
   {
     "link": {
-      "~/Library/Application Support/Spectacle/Shortcuts.json": "apps/spectacle.json"
+      "~/Library/Application Support/Spectacle/Shortcuts.json": "apps/spectacle/spectacle.json"
     }
   }
 ]

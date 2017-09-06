@@ -659,13 +659,13 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
 # Install the Gruvbox Dark theme for iTerm
-open "${HOME}/.dotfiles/colors/gruvbox-dark.itermcolors"
+open "${HOME}/.dotfiles/apps/iterm2/gruvbox-dark.itermcolors"
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 # Use config in dotfiles folder for iTerm2 config
-defaults write com.googlecode.iterm2 PrefsCustomFolder -string "${HOME}/.dotfiles/apps"
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "${HOME}/.dotfiles/apps/iterm2"
 
 ###############################################################################
 # Time Machine                                                                #
