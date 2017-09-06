@@ -1,0 +1,12 @@
+[
+  {
+    "link": {
+      "~/.Brewfile": "Brewfile"
+    }
+  },
+  {
+    "brewfile": {
+      "global": ""
+    }
+  }
+]
