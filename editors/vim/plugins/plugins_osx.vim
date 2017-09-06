@@ -33,7 +33,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 if !has('nvim')
 	Plug 'Shougo/neocomplete.vim'
 endif
@@ -57,9 +57,13 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'freitass/todo.txt-vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'dag/vim-fish'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'ryanoasis/vim-devicons'
+Plug 'sheerun/vim-polyglot'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -72,6 +76,9 @@ if has('nvim')
 	Plug 'fszymanski/deoplete-emoji'
   " Plug 'callmekohei/deoplete-fsharp'
 endif
+
+" LaTeX
+Plug 'lervag/vimtex'
 
 " OSX
 if has("unix")

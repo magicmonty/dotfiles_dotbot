@@ -641,6 +641,9 @@ let g:rbpt_colorpairs = [
 " Reload .vimrc on saving
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
+" Configuration for dhruvasagar/vim-table-mode
+" Make markdown compatible tables
+let g:table_mode_corner='|'
 
 
 " Calendar.vim
