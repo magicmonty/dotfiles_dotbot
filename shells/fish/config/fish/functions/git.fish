@@ -21,6 +21,7 @@ abbr -a gco git checkout
 abbr -a gb git branch
 abbr -a gbr git branch
 abbr -a gbrs git branch --all --verbose
+abbr -a gp git push
 
 abbr -a grv git remote --verbose
 
