@@ -16,7 +16,7 @@
     "shortcut_name" : "MoveToUpperRight"
   },
   {
-    "shortcut_key_binding" : "alt+cmd+down",
+    "shortcut_key_binding" : null,
     "shortcut_name" : "MoveToBottomHalf"
   },
   {
@@ -24,7 +24,7 @@
     "shortcut_name" : "MoveToNextDisplay"
   },
   {
-    "shortcut_key_binding" : "alt+cmd+up",
+    "shortcut_key_binding" : null,
     "shortcut_name" : "MoveToTopHalf"
   },
   {
