@@ -19,8 +19,6 @@ Plug 'morhetz/gruvbox'
 
 " .NET
 Plug 'OrangeT/vim-csharp'
-Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do': 'make fsautocomplete' }
-Plug 'OmniSharp/omnisharp-vim', { 'do': 'git submodule update --init --recursive && cd server && msbuild' }
 Plug 'Traap/vim-helptags'
 
 " General
@@ -59,13 +57,6 @@ Plug 'dag/vim-fish'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
-
-" NVim
-if has('nvim')
-	Plug 'Shougo/deoplete.nvim'
-	Plug 'fszymanski/deoplete-emoji'
-	Plug 'callmekohei/deoplete-fsharp'
-endif
 
 call plug#end()
 

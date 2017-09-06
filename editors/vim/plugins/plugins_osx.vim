@@ -24,8 +24,8 @@ Plug 'morhetz/gruvbox'
 
 " .NET
 Plug 'OrangeT/vim-csharp'
-Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do': 'make fsautocomplete' }
-Plug 'OmniSharp/omnisharp-vim', { 'do': 'git submodule update --init --recursive && cd server && xbuild' }
+Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do': '!make fsautocomplete' }
+Plug 'OmniSharp/omnisharp-vim', { 'do': '!git submodule update --init --recursive && cd server && xbuild' }
 Plug 'Traap/vim-helptags'
 
 " General
@@ -58,7 +58,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'SirVer/ultisnips'
 Plug 'freitass/todo.txt-vim'
-Plug 'chaoren/vim-wordmotion'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'dag/vim-fish'
 
@@ -71,11 +70,16 @@ Plug 'junegunn/gv.vim'
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'fszymanski/deoplete-emoji'
-	Plug 'callmekohei/deoplete-fsharp'
+  " Plug 'callmekohei/deoplete-fsharp'
 endif
 
 " OSX
-Plug 'rizzatti/dash.vim'
+if has("unix")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    Plug 'rizzatti/dash.vim'
+  endif
+endif
 
 call plug#end()
 

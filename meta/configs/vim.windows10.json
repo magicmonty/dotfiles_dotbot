@@ -32,6 +32,11 @@
       "~/.gvimrc": "editors/vim/gvimrc",
       "~/.config/nvim": "editors/vim/config/nvim",
       "~/.vim/plugins.vim": "editors/vim/plugins/plugins_windows10.vim"
+    },
+    {
+      "shell": [
+        ["vim -c 'PlugClean!' -c 'PlugInstall' -c 'PlugUpdate' -c 'q' -c 'q'", "Installing vim plugins"]
+      ]
     }
   }
 ]

@@ -38,7 +38,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'SirVer/ultisnips'
 Plug 'freitass/todo.txt-vim'
-Plug 'chaoren/vim-wordmotion'
 Plug 'dag/vim-fish'
 
 " Git
@@ -48,9 +47,8 @@ Plug 'junegunn/gv.vim'
 
 " NVim
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim'
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'fszymanski/deoplete-emoji'
-	Plug 'callmekohei/deoplete-fsharp'
 endif
 
 call plug#end()
