@@ -1,7 +1,12 @@
 [
   {
     "link": {
-      "~/Library/Application Support/Spectacle/Shortcuts.json": "apps/spectacle/spectacle.json"
+      "~/Library/Application Support/Spectacle/Shortcuts.json": {
+        "path": "apps/spectacle/spectacle.json",
+        "create": true,
+        "relink": true,
+        "force": true
+      }
     }
   }
 ]
