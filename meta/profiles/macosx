@@ -1,4 +1,10 @@
 homebrew
+git
+ruby
+node
+go
+dev
+ssh
 vim.osx
 emacs
 fish.osx
@@ -8,10 +14,4 @@ sublime
 tmux.osx
 sonic-pi
 profanity
-ruby
-node
-go
-git
-dev
-ssh
 osx_defaults

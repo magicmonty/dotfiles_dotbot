@@ -1,8 +1,7 @@
 [
   {
-    "link": {
-      "~/.Brewfile": {
-        "path": "Brewfile",
+    "defaults": {
+      "link": {
         "create": true,
         "relink": true,
         "force": true
@@ -10,8 +9,13 @@
     }
   },
   {
+    "link": {
+      "~/.Brewfile": "Brewfile"
+    }
+  },
+  {
     "brewfile": {
-      "file": "Brewfile" 
+      "file": "Brewfile"
     }
   }
 ]

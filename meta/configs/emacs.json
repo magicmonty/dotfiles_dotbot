@@ -1,17 +1,18 @@
 [
   {
-    "link": {
-      "~/.spacemacs": "editors/emacs/spacemacs",
-      "~/bin/edit": {
-        "path": "editors/emacs/bin/edit",
+    "defaults": {
+      "link": {
         "create": true,
-        "force": true
-      },
-      "~/.emacs.d/private/sonic-pi": {
-        "path": "editors/emacs/emacs.d/private/sonic-pi",
-        "create": true,
+        "relink": true,
         "force": true
       }
+    }
+  },
+  {
+    "link": {
+      "~/.spacemacs": "editors/emacs/spacemacs",
+      "~/bin/edit": "editors/emacs/bin/edit",
+      "~/.emacs.d/private/sonic-pi": "editors/emacs/emacs.d/private/sonic-pi"
     }
   }
 ]

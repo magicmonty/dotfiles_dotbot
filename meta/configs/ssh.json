@@ -1,5 +1,14 @@
 [
   {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
     "link": {
       "~/.ssh/config": "apps/ssh/config"
     }

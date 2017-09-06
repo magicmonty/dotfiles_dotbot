@@ -1,6 +1,6 @@
-vim.linux
-fish.linux
-tmux.linux
 ruby
 dev
 git.np4
+vim.linux
+fish.linux
+tmux.linux

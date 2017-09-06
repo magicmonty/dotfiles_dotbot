@@ -1,7 +1,16 @@
 [
   {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
     "shell": [
-      ["gem install tmuxinator", "Install tmuxinator"]
+      ["sudo gem install tmuxinator", "Install tmuxinator"]
     ]
   },
   {
@@ -11,7 +20,7 @@
       "~/.tmuxinator": "apps/tmux/tmuxinator",
       "~/.tmux.conf": "apps/tmux/tmux.conf",
       "~/.tmux.live.conf": "apps/tmux/tmux.live.conf",
-      "~/.tmux/solarized": "tmux/tmux/solarized"
+      "~/.tmux/solarized": "apps/tmux/tmux/solarized"
     }
   }
 ]

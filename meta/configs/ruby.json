@@ -1,5 +1,14 @@
 [
   {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
     "link": {
       "~/.gemrc": "development/ruby/gemrc",
       "~/.ruby-version": "development/ruby/ruby-version"

@@ -1,5 +1,14 @@
 [
   {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
     "link": {
       "~/.sonic-pi/init.rb": "apps/sonic-pi/init.rb",
       "~/.sonic-pi/snippets": "apps/sonic-pi/snippets"
