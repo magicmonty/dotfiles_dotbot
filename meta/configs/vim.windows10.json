@@ -1,9 +1,36 @@
 [
   {
     "link": {
-      "~/.vim": "editors/vim/vim",
+      "~/.vim/UltiSnips": {
+        "path": "editors/vim/vim/UltiSnips",
+        "create": true,
+        "force": true,
+        "relink": true
+      },
+      "~/.vim/autoload/plug.vim" : {
+        "path": "editors/vim/vim/autoload/plug.vim",
+        "create": true,
+        "force": true,
+        "relink": true
+      },
+      "~/.vim/ftplugin/fish.vim" : {
+        "path": "editors/vim/vim/ftplugin/fish.vim",
+        "create": true,
+        "force": true,
+        "relink": true
+      },
+      "~/.vim/insert_matching_spaces.vim": "editors/vim/vim/insert_matching_spaces.vim",
+      "~/.vim/map_line_block_mover_keys.vim": "editors/vim/vim/map_line_block_mover_keys.vim",
+      "~/.vim/map_option_highlighting_keys.vim": "editors/vim/vim/map_option_highlighting_keys.vim",
+      "~/.vim/mkzip.sh": "editors/vim/vim/mkzip.sh",
+      "~/.vim/run-last.vim": "editors/vim/vim/run-last.vim",
+      "~/.vim/set_abbreviations.vim": "editors/vim/vim/set_abbreviations.vim",
+      "~/.vim/toggle_highlights.vim": "editors/vim/vim/toggle_highlights.vim",
+      "~/.vim/update_visual_highlight_color.vim": "editors/vim/vim/update_visual_highlight_color.vim",
+      "~/.vim/vim-fireplace-mappings.vim": "editors/vim/vim/vim-fireplace-mappings.vim",
       "~/.vimrc": "editors/vim/vimrc",
       "~/.gvimrc": "editors/vim/gvimrc",
+      "~/.config/nvim": "editors/vim/config/nvim",
       "~/.vim/plugins.vim": "editors/vim/plugins/plugins_windows10.vim"
     }
   }
