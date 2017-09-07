@@ -46,7 +46,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'SirVer/ultisnips'
 Plug 'freitass/todo.txt-vim'
-Plug 'chaoren/vim-wordmotion'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'dag/vim-fish'
 
