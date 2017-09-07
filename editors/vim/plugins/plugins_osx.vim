@@ -1,14 +1,12 @@
 call plug#begin('~/.vim-plug')
 
 " Blog
-Plug 'mattn/emmet-vim'
 Plug 'vim-scripts/liquid.vim'
 Plug 'vim-scripts/liquidfold.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'parkr/vim-jekyll'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
-Plug 'KabbAmine/vCoolor.vim'
 
 " Clojure
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
@@ -32,13 +30,27 @@ Plug 'Traap/vim-helptags'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'ervandew/supertab'
-Plug 'godlygeek/tabular'
-Plug 'ctrlpvim/ctrlp.vim'
 if !has('nvim')
 	Plug 'Shougo/neocomplete.vim'
+else
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'fszymanski/deoplete-emoji'
+
+  " function! BuildDeopleteFSharp(info)
+    " info is a dictionary with 3 fields
+    " - name:   name of the plugin
+    " - status: 'installed', 'updated', or 'unchanged'
+    " - force:  set on PlugInstall! or PlugUpdate!
+    " if a:info.status == 'installed' || a:info.force
+      " !bash install.bash
+      " :UpdateRemotePlugins
+    " endif
+  " endfunction
+
+  " Plug 'callmekohei/deoplete-fsharp', { 'do': function('BuildDeopleteFSharp') }
 endif
-Plug 'vim-scripts/tComment'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'sickill/vim-pasta'
@@ -47,13 +59,11 @@ Plug 'kana/vim-textobj-user'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'fatih/vim-go'
 Plug 'lambdatoast/elm.vim'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic'
 Plug 'aklt/plantuml-syntax'
 Plug 'tpope/vim-cucumber'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'freitass/todo.txt-vim'
@@ -67,32 +77,14 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
-
-" NVim
-if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	Plug 'fszymanski/deoplete-emoji'
-  " Plug 'callmekohei/deoplete-fsharp'
-endif
 
 " LaTeX
 Plug 'lervag/vimtex'
 
-" OSX
-if has("unix")
-  let s:uname = system("uname")
-  if s:uname == "Darwin\n"
-    Plug 'rizzatti/dash.vim'
-  endif
-endif
-
 call plug#end()
-
-if has('syntax') && has('eval') && !has('nvim')
-  packadd matchit
-endif
 
 if has('nvim')
 	let g:deoplete#enable_smart_case = 1

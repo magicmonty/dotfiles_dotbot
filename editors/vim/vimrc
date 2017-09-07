@@ -429,7 +429,9 @@ if $TERMKIT_HOST_APP=="Cathode"
   let g:gruvbox_underline=0
   let g:gruvbox_undercurl=0
   let g:airline_powerline_fonts = 0
-  set notermguicolors
+  if has('nvim')
+    set notermguicolors
+  endif
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
   endif
@@ -659,6 +661,8 @@ endif
 if has("unix")
   let s:uname = system("uname")
   if s:uname == "Darwin\n"
-    set termguicolors
+    if has("nvim")
+      set termguicolors
+    endif
   endif
 endif
