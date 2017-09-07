@@ -1117,19 +1117,21 @@
 	<key>NSWindow Frame NSColorPanel.modal</key>
 	<string>608 466 224 309 0 0 1440 900 </string>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>364 323 806 94 0 0 1440 900 </string>
+	<string>364 225 806 77 0 0 1440 900 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>3 409 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>370 209 700 622 0 0 1440 900 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 194 606 469 0 0 1440 900 </string>
+	<string>269 343 597 401 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>258 295 796 473 0 0 1440 900 </string>
+	<string>351 316 796 473 0 0 1440 900 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
+	<key>NSWindow Frame com.apple.typography_panel_MonoidNerdFontC-Retina</key>
+	<string>246 214 260 354 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 27 1440 873 0 0 1440 900 </string>
+	<string>195 175 570 452 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 448 650 452 0 0 1440 900 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -1946,7 +1948,7 @@
 			<key>Terminal Type</key>
 			<string>xterm</string>
 			<key>Transparency</key>
-			<real>0.22764189541339874</real>
+			<real>0.0</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
