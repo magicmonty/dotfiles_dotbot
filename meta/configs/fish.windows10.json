@@ -20,10 +20,6 @@
       "~/.config/fish/functions/edit_config_fish.fish": "shells/fish/config/fish/functions/edit_config_fish.fish",
       "~/.config/fish/functions/git.fish": "shells/fish/config/fish/functions/git.fish",
       "~/.config/fish/functions/gitv.fish": "shells/fish/config/fish/functions/gitv.fish",
-      "~/.config/fish/functions/l.fish": "shells/fish/config/fish/functions/l.fish",
-      "~/.config/fish/functions/la.fish": "shells/fish/config/fish/functions/la.fish",
-      "~/.config/fish/functions/ll.fish": "shells/fish/config/fish/functions/ll.fish",
-      "~/.config/fish/functions/ls.fish": "shells/fish/config/fish/functions/ls.fish",
       "~/.config/fish/functions/psa.fish": "shells/fish/config/fish/functions/psa.fish",
       "~/.config/fish/functions/search_history.fish": "shells/fish/config/fish/functions/search_history.fish",
       "~/.config/fish/fishfile": "shells/fish/config/fish/fishfile.windows10"
@@ -31,7 +27,8 @@
   },
   {
     "shell": [
-      ["fisher update", "Installing fisher plugins"]
+      ["mkdir -p ~/bin", "Creating bin folder"],
+      ["fish -c 'fisher update'", "Installing fisher plugins"]
     ]
   },
   {
