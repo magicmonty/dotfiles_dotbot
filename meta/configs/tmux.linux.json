@@ -18,7 +18,7 @@
       "~/bin/battery.sh": "apps/tmux/bin/battery.sh",
       "~/bin/tmux-mem-cpu-load": "apps/tmux/bin/tmux-mem-cpu-load",
       "~/.tmux.conf": "apps/tmux/tmux.conf",
-      "~/.tmux/solarized": "tmux/tmux/solarized"
+      "~/.tmux/solarized": "apps/tmux/tmux/solarized"
     }
   }
 ]
