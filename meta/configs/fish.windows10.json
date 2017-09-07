@@ -30,7 +30,7 @@
   },
   {
     "shell": [
-      ["mkdir -p ~/bin", "Creating bin folder"],
+      ["mkdir -p ~/bin", "Creating bin folder"]
     ]
   }
 ]
