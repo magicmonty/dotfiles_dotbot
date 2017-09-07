@@ -13,7 +13,7 @@
   },
   {
     "link": {
-      "~/.config/fish/abbr.fish": "shells/fish/config/fish/abbr.fish",
+      "~/.config/fish/abbr.fish": "shells/fish/config/fish/abbr.linux.fish",
       "~/.config/fish/autoenv.fish": "shells/fish/config/fish/autoenv.fish",
       "~/.config/fish/config.fish": "shells/fish/config/fish/config.fish",
       "~/.config/fish/completions/fisher.fish": "shells/fish/config/fish/completions/fisher.fish",

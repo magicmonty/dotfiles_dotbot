@@ -5,7 +5,6 @@ set fish_key_bindings fish_vi_key_bindings
 set -gx EDITOR nvim
 
 source ~/.config/fish/abbr.fish
-source ~/.config/fish/autoenv.fish
 
 set -gx PATH $PATH ~/bin
 
