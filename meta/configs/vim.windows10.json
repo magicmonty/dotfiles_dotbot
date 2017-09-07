@@ -25,7 +25,8 @@
       "~/.vimrc": "editors/vim/vimrc",
       "~/.gvimrc": "editors/vim/gvimrc",
       "~/.config/nvim": "editors/vim/config/nvim",
-      "~/.vim/plugins.vim": "editors/vim/plugins/plugins_windows10.vim"
+      "~/.vim/plugins.vim": "editors/vim/plugins/plugins_windows10.vim",
+      "~/.vim/plugins_shared.vim": "editors/vim/plugins/plugins_shared.vim"
     }
   },
   {

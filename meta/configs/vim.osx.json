@@ -25,7 +25,8 @@
       "~/.vimrc": "editors/vim/vimrc",
       "~/.gvimrc": "editors/vim/gvimrc",
       "~/.config/nvim/init.vim": "editors/vim/config/nvim/init.osx.vim",
-      "~/.vim/plugins.vim": "editors/vim/plugins/plugins_osx.vim"
+      "~/.vim/plugins.vim": "editors/vim/plugins/plugins_osx.vim",
+      "~/.vim/plugins_shared.vim": "editors/vim/plugins/plugins_shared.vim"
     }
   },
   {
