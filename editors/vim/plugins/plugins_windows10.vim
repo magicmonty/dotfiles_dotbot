@@ -27,9 +27,6 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
-if !has('nvim')
-	Plug 'Shougo/neocomplete.vim'
-endif
 Plug 'vim-scripts/tComment'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -60,20 +57,4 @@ Plug 'junegunn/gv.vim'
 
 call plug#end()
 
-if has('syntax') && has('eval') && !has('nvim')
-  packadd matchit
-endif
-
-if has('nvim')
-	let g:deoplete#enable_smart_case = 1
-	let g:deoplete#enable_at_startup = 1
-
-	inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-	inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
-	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-	function! s:my_cr_function() abort
-  		return deoplete#close_popup() . "\<CR>"
-	endfunction
-	autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-endif
 
