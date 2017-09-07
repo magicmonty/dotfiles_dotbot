@@ -851,12 +851,12 @@ function fish_prompt -d 'bobthefish, a fish theme optimized for awesome'
   set -l __bobthefish_vagrant_unknown_glyph   '!'    # strange cases
 
   # Git glyphs
-  set -l __bobthefish_git_dirty_glyph      '*'
+  set -l __bobthefish_git_dirty_glyph      "*"
   set -l __bobthefish_git_staged_glyph     '~'
   set -l __bobthefish_git_stashed_glyph    '$'
   set -l __bobthefish_git_untracked_glyph  '…'
-  set -l __bobthefish_git_ahead_glyph      \u2191 # '↑'
-  set -l __bobthefish_git_behind_glyph     \u2193 # '↓'
+  set -l __bobthefish_git_ahead_glyph      '↑' # '↑'
+  set -l __bobthefish_git_behind_glyph     '↓' # '↓'
   set -l __bobthefish_git_plus_glyph       '+'
   set -l __bobthefish_git_minus_glyph      '-'
   set -l __bobthefish_git_plus_minus_glyph '±'
@@ -872,6 +872,16 @@ function fish_prompt -d 'bobthefish, a fish theme optimized for awesome'
 
   # Use prettier Nerd Fonts glyphs
   if [ "$theme_nerd_fonts" = "yes" ]
+    set __bobthefish_git_dirty_glyph      \uF448
+    set __bobthefish_git_staged_glyph     \uF441 # '~'
+    set __bobthefish_git_stashed_glyph    '$'
+    set __bobthefish_git_untracked_glyph  \uF128 # '…'
+    set __bobthefish_git_ahead_glyph      \uF093 # '↑'
+    set __bobthefish_git_behind_glyph     \uF019 # '↓'
+    set __bobthefish_git_plus_glyph       \uF067 # '+'
+    set __bobthefish_git_minus_glyph      \uF068 # '-'
+    set __bobthefish_git_plus_minus_glyph \uF459 # '±'
+
     set __bobthefish_branch_glyph     \uF418
     set __bobthefish_detached_glyph   \uF417
     set __bobthefish_tag_glyph        \uF412
