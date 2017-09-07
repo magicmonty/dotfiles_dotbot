@@ -8,7 +8,7 @@ source ~/.config/fish/abbr.fish
 
 set -gx PATH $PATH ~/bin
 
-set -g theme_nerd_fonts no
+set -g theme_nerd_fonts yes
 set -g theme_color_scheme gruvbox
 set -g theme_display_ruby no
 set -g theme_display_vi yes
