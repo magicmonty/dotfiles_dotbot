@@ -1071,7 +1071,7 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 5</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/.dotfiles/apps</string>
+	<string>~/.dotfiles/images</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSNavPanelExpandedSizeForSaveMode</key>
@@ -1123,7 +1123,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>370 209 700 622 0 0 1440 900 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 343 597 401 0 0 1440 900 </string>
+	<string>173 148 599 459 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>351 316 796 473 0 0 1440 900 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
@@ -1131,7 +1131,7 @@
 	<key>NSWindow Frame com.apple.typography_panel_MonoidNerdFontC-Retina</key>
 	<string>246 214 260 354 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>195 175 570 452 0 0 1440 900 </string>
+	<string>0 4 1440 896 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 448 650 452 0 0 1440 900 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -1377,7 +1377,7 @@
 			<key>Background Image Is Tiled</key>
 			<false/>
 			<key>Background Image Location</key>
-			<string></string>
+      <string>/Users/martingondermann/.dotfiles/images/lambdaphonic.png</string>
 			<key>Badge Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -1392,7 +1392,7 @@
 				<real>0.7928692102432251</real>
 			</dict>
 			<key>Blend</key>
-			<real>1</real>
+			<real>0.46158102964743586</real>
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
@@ -3520,7 +3520,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-09-06T19:49:00Z</date>
+	<date>2017-09-07T19:49:01Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>

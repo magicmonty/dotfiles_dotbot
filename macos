@@ -868,6 +868,11 @@ defaults write com.twitter.twitter-mac HideInBackground -bool true
 defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
 ###############################################################################
+# Set Wallpaper                                                               #
+###############################################################################
+osascript -e 'tell application "Finder" to set desktop picture to POSIX file "~/.dotfiles/images/lambdaphonic.png"'
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 
