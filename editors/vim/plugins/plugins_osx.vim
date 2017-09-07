@@ -49,8 +49,6 @@ Plug 'fatih/vim-go'
 Plug 'lambdatoast/elm.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic'
-Plug 'Shougo/denite.nvim'
-Plug 'rking/ag.vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'tpope/vim-cucumber'
 Plug 'jiangmiao/auto-pairs'
@@ -64,6 +62,8 @@ Plug 'dag/vim-fish'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
 
 " Git
 Plug 'tpope/vim-fugitive'

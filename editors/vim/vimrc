@@ -598,18 +598,22 @@ autocmd FileType elm nnoremap <leader>em :ElmMakeCurrentFile<CR>
 " Disable ex mode
 :map Q <Nop>
 
-" use Denite as file searcher
-try
-  call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-  call denite#custom#source('file_rec', 'matchers', ['matcher_fuzzy'])
-catch
-endtry
+nnoremap <leader>. :NERDTreeToggle<cr>
+nnoremap <leader>/ :NERDTreeFind<cr>
 
-nnoremap <leader>. :Denite file_rec<cr>
+let g:NERDTreeWinSize = '40'
+let g:NERDTreeMapOpenVSplit = 's'
+let g:NERDTreeMapOpenSplit = 'i'
+let g:NERDTreeMapCloseChildren = 'X' " Recursively closes all children of the selected directory.
+let g:NERDTreeMapJumpRoot = 'P'     " Jump to the tree root.
+let g:NERDTreeMapJumpParent = 'p'   " Jump to the parent node of the selected node.
+let g:NERDTreeMapChdir = 'C'        " Make the selected directory node the new tree root
+let g:NERDTreeMapUpdir = 'u'        " Move the tree root up a dir (like doing a 'cd ..').
+let g:NERDTreeMapUpdirKeepOpen = 'U' " Like 'u' but leave old tree root open
+let g:NERDTreeMapToggleHidden = 'I' " Toggles whether hidden files are displayed.
 
-" AG
-nmap ° :Ag <c-r>=expand("<cword>")<cr><cr>
-nnoremap <leader>/ :Ag
+" leave vim if NERDTree is the last buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Setup Rainbow parentheses for clojure
 autocmd BufEnter *.cljs,*.clj,*.cljs.hl setlocal iskeyword+=?,-,*,!,+,/,=,<,>,.,:
