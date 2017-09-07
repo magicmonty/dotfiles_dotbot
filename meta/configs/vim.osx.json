@@ -24,7 +24,7 @@
       "~/.vim/vim-fireplace-mappings.vim": "editors/vim/vim/vim-fireplace-mappings.vim",
       "~/.vimrc": "editors/vim/vimrc",
       "~/.gvimrc": "editors/vim/gvimrc",
-      "~/.config/nvim": "editors/vim/config/nvim",
+      "~/.config/nvim/init.vim": "editors/vim/config/nvim/init.osx.vim",
       "~/.vim/plugins.vim": "editors/vim/plugins/plugins_osx.vim"
     }
   },

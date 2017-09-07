@@ -24,7 +24,7 @@
       "~/.vim/vim-fireplace-mappings.vim": "editors/vim/vim/vim-fireplace-mappings.vim",
       "~/.vimrc": "editors/vim/vimrc",
       "~/.gvimrc": "editors/vim/gvimrc",
-      "~/.config/nvim": "editors/vim/config/nvim",
+      "~/.config/nvim/init.vim": "editors/vim/config/nvim/init.linux.vim",
       "~/.vim/plugins.vim": "editors/vim/plugins/plugins_linux.vim"
     }
   },
@@ -32,7 +32,6 @@
     "shell": [
       ["pip2 install neovim", "Installing Python 2 NeoVim plugin"],
       ["pip3 install neovim", "Installing Python 3 NeoVim plugin"],
-      ["gem install neovim", "Installing Ruby NeoVim Gem"],
       ["nvim -c 'PlugClean!' -c 'PlugInstall' -c 'PlugUpdate' -c 'q' -c 'q'", "Installing vim plugins"]
     ]
   }

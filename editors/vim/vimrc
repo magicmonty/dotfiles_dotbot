@@ -407,8 +407,6 @@ if exists(":RainbowParenthesesToggle")
   au Syntax * RainbowParenthesesLoadBraces
 endif
 
-set termguicolors
-
 let g:airline_theme='gruvbox'
 let g:gruvbox_bold=1
 let g:gruvbox_italic=0
@@ -654,3 +652,9 @@ if &shell =~# 'fish$'
   set shell=sh
 endif
 
+if has("unix")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    set termguicolors
+  endif
+endif
