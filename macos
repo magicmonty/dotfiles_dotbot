@@ -22,6 +22,8 @@ sudo scutil --set HostName "Martins-MBP"
 sudo scutil --set LocalHostName "Martins-MBP"
 # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
 
+sudo cp fonts/Monoid/* /Library/fonts/
+
 # Set standby delay to 24 hours (default is 1 hour)
 # sudo pmset -a standbydelay 86400
 
