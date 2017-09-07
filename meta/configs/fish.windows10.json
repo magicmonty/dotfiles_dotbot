@@ -15,7 +15,7 @@
     "link": {
       "~/.config/fish/abbr.fish": "shells/fish/config/fish/abbr.fish",
       "~/.config/fish/autoenv.fish": "shells/fish/config/fish/autoenv.fish",
-      "~/.config/fish/config.fish": "shells/fish/config/fish/config.fish",
+      "~/.config/fish/config.fish": "shells/fish/config/fish/config.windows10.fish",
       "~/.config/fish/completions/fisher.fish": "shells/fish/config/fish/completions/fisher.fish",
       "~/.config/fish/functions/edit_config_fish.fish": "shells/fish/config/fish/functions/edit_config_fish.fish",
       "~/.config/fish/functions/git.fish": "shells/fish/config/fish/functions/git.fish",
@@ -28,7 +28,7 @@
   {
     "shell": [
       ["mkdir -p ~/bin", "Creating bin folder"],
-      ["fish -c 'fisher update'", "Installing fisher plugins"]
+      ["fish -c 'fisher and fisher update'", "Installing fisher plugins"]
     ]
   },
   {
