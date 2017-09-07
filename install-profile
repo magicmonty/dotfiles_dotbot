@@ -9,10 +9,6 @@ META_DIR="meta"
 CONFIG_DIR="configs"
 PROFILES_DIR="profiles"
 
-PLUGIN_BREW="--plugin-dir \"${META_DIR}/dotbot-brewfile\""
-PLUGIN_APT="--plugin-dir \"${META_DIR}/dotbot_plugin_aptget\""
-PLUGINS="${PLUGIN_BREW} ${PLUGIN_APT}"
-
 DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 
@@ -30,9 +26,9 @@ done < "${META_DIR}/${PROFILES_DIR}/$1"
 shift
 
 
-"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" ${PLUGINS} -c "${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}"
+"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" --plugin-dir "${META_DIR}/dotbot-brewfile" -p "${META_DIR}/dotbot_plugin_aptget/aptget.py" -c "${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}"
 
 for config in ${CONFIGS} ${@}; do
     echo -e "\nConfigure $config"
-    "${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" ${PLUGINS} -c "${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}"
+    "${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" --plugin-dir "${META_DIR}/dotbot-brewfile" -p "${META_DIR}/dotbot_plugin_aptget/aptget.py" -c "${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}"
 done

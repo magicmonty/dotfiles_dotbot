@@ -2,12 +2,10 @@
   {
     "aptget": {
       "neovim": {
-        "ppa_source": "ppa:neovim-ppa/stable",
-        "upgrade": true
+        "ppa_source": "ppa:neovim-ppa/stable"
       },
       "fish": {
-        "ppa_source": "ppa:fish-shell/release-2",
-        "upgrade": true
+        "ppa_source": "ppa:fish-shell/release-2"
       },
       "tmux": null,
       "git": null,
