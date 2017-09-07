@@ -822,10 +822,10 @@ function fish_prompt -d 'bobthefish, a fish theme optimized for awesome'
 
   # Powerline glyphs
   set -l __bobthefish_branch_glyph            \uE0A0
-  set -l __bobthefish_right_black_arrow_glyph \uE0B0
-  set -l __bobthefish_right_arrow_glyph       \uE0B1
-  set -l __bobthefish_left_black_arrow_glyph  \uE0B2
-  set -l __bobthefish_left_arrow_glyph        \uE0B3
+  set -l __bobthefish_right_black_arrow_glyph \uE0B8
+  set -l __bobthefish_right_arrow_glyph       \uE0B9
+  set -l __bobthefish_left_black_arrow_glyph  \uE0BA
+  set -l __bobthefish_left_arrow_glyph        \uE0BB
 
   # Additional glyphs
   set -l __bobthefish_detached_glyph          \u27A6
