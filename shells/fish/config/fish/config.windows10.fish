@@ -13,6 +13,8 @@ set -g theme_color_scheme gruvbox
 set -g theme_display_ruby no
 set -g theme_display_vi yes
 set -g theme_show_exit_status yes
+set -g theme_display_git_untracked yes
+set -g theme_display_git_ahead_verbose yes
 set -g fish_prompt_pwd_dir_length 0
 set -g theme_newline_cursor no
 set -g default_user martingondermann
