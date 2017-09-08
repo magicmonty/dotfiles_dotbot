@@ -1,0 +1,17 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/bin/exa": "apps/misc/linux/exa-linux-x86_64",
+      "~/bin/peco": "apps/misc/linux/peco-0.5.1"
+    }
+  }
+]
