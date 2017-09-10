@@ -21,7 +21,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'sickill/vim-pasta'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'sickill/vim-pasta'
 Plug 'tpope/vim-repeat'
@@ -31,9 +30,12 @@ Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'godlygeek/tabular'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'scrooloose/nerdcommenter'
+Plug 'mhinz/vim-startify'
 
 " Dev
 Plug 'editorconfig/editorconfig-vim'
