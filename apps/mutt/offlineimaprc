@@ -1,0 +1,45 @@
+[general]
+ui = ttyui
+accounts = pagansoft
+pythonfile=~/.mutt/offlineimap.py
+fsync = False
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+[Account pagansoft]
+localrepository = pagansoft-local
+remoterepository = pagansoft-gmail-com
+
+[Repository pagansoft-local]
+type = Maildir
+localfolders = ~/.mail/pagansoft
+nametrans = lambda folder: {'Archive': '[Gmail]/All Mail',
+                            'Drafts': '[Gmail]/Drafts',
+                            'Sent': '[Gmail]/Sent Mail',
+                            'Starred': '[Gmail]/Starred',
+                            'Trash': '[Gmail]/Trash',
+                            }.get(folder, folder)
+
+[Repository pagansoft-gmail-com]
+maxconnections = 1
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = 'pagansoft@gmail.com'
+remotepasseval = get_keychain_pass('pagansoft@gmail.com', 'imap.gmail.com')
+realdelete = no
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+ssl = yes
+nametrans = lambda folder: {
+                            '[Gmail]/All Mail': 'Archive',
+                            '[Gmail]/Drafts': 'Drafts',
+                            '[Gmail]/Sent Mail': 'Sent',
+                            '[Gmail]/Starred': 'Starred',
+                            '[Gmail]/Trash': 'Trash',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['Trash', 'Contacts' ]

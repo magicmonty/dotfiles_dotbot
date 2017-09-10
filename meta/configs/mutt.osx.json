@@ -1,0 +1,27 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "clean": [ "~/.mutt" ]
+  },
+  {
+    "link": {
+      "~/.mutt/colors/gruvbox.muttrc": "apps/mutt/mutt/colors/gruvbox-256.muttrc",
+      "~/.mutt/alias": "apps/mutt/mutt/alias",
+      "~/.mutt/gpg.rc": "apps/mutt/mutt/gpg.rc",
+      "~/.mutt/mailcap": "apps/mutt/mutt/mailcap",
+      "~/.mutt/offlineimap.py": "apps/mutt/mutt/offlineimap.py",
+      "~/.offlineimaprc": "apps/mutt/offlineimaprc",
+      "~/.mutt/view_attachment.sh": "apps/mutt/mutt/view_attachment.sh",
+      "~/.muttrc": "apps/mutt/muttrc"
+    }
+  }
+]
+
