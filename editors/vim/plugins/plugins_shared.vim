@@ -10,6 +10,7 @@ Plug 'terryma/vim-expand-region'
 
 " Colors
 Plug 'morhetz/gruvbox'
+Plug 'easymotion/vim-easymotion'
 
 " General"
 Plug 'Traap/vim-helptags'
