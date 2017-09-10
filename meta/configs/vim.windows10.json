@@ -9,6 +9,9 @@
     }
   },
   {
+    "clean": [ "~/.vim" ]
+  },
+  {
     "link": {
       "~/.vim/UltiSnips": "editors/vim/vim/UltiSnips",
       "~/.vim/autoload/plug.vim" : "editors/vim/vim/autoload/plug.vim",
@@ -16,7 +19,7 @@
       "~/.vim/ftdetect/xaml.vim" : "editors/vim/vim/ftdetect/xaml.vim",
       "~/.vim/insert_matching_spaces.vim": "editors/vim/vim/insert_matching_spaces.vim",
       "~/.vim/map_line_block_mover_keys.vim": "editors/vim/vim/map_line_block_mover_keys.vim",
-      "~/.vim/map_option_highlighting_keys.vim": "editors/vim/vim/map_option_highlighting_keys.vim",
+      "~/.vim/map_highlighting_keys.vim": "editors/vim/vim/map_highlighting_keys.vim",
       "~/.vim/mkzip.sh": "editors/vim/vim/mkzip.sh",
       "~/.vim/run-last.vim": "editors/vim/vim/run-last.vim",
       "~/.vim/set_abbreviations.vim": "editors/vim/vim/set_abbreviations.vim",

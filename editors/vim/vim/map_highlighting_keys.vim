@@ -16,23 +16,23 @@
 
 " Normal mode
 "
-nnoremap    <M-Left>            vh
-nnoremap    <M-Right>           vl
+nnoremap    <S-Left>            vh
+nnoremap    <S-Right>           vl
 
 " Insert mode
 "
-inoremap    <M-Left>            <C-O>vh
-inoremap    <M-Right>           <C-O>vl
+inoremap    <S-Left>            <C-O>vh
+inoremap    <S-Right>           <C-O>vl
 
 " Visual mode
 "
-xnoremap    <M-Left>            h
-xnoremap    <M-Right>           l
+xnoremap    <S-Left>            h
+xnoremap    <S-Right>           l
 
 " Select mode
 "
-snoremap    <M-Left>            <C-O>h
-snoremap    <M-Right>           <C-O>l
+snoremap    <S-Left>            <C-O>h
+snoremap    <S-Right>           <C-O>l
 
 
 "" Option+Up/Down
@@ -44,20 +44,20 @@ snoremap    <M-Right>           <C-O>l
 "
 " Enter Visual mode then move.
 "
-nnoremap    <M-Down>            vgj
-nnoremap    <M-Up>              vgk
+nnoremap    <S-Down>            vgj
+nnoremap    <S-Up>              vgk
 
 " Insert mode
 "
-imap        <M-Up>              <C-O><M-Up>
-imap        <M-Down>            <C-O><M-Down>
+imap        <S-Up>              <C-O><M-Up>
+imap        <S-Down>            <C-O><M-Down>
 
 " Visual mode
 "
 " Just stay in Visual mode.
 "
-xnoremap    <M-Up>              gk
-xnoremap    <M-Down>            gj
+xnoremap    <S-Up>              gk
+xnoremap    <S-Down>            gj
 
 " Select mode
 "
@@ -66,8 +66,8 @@ xnoremap    <M-Down>            gj
 "
 " XXX: Stay in Select mode, or switch to Visual mode?
 "
-snoremap    <M-Down>            <C-O>gj
-snoremap    <M-Up>              <C-O>gk
+snoremap    <S-Down>            <C-O>gj
+snoremap    <S-Up>              <C-O>gk
 
 
 "" Option+Home/End, Option+Command+Left/Right
@@ -76,10 +76,10 @@ snoremap    <M-Up>              <C-O>gk
 "
 " Enter Visual mode then move.
 "
-nnoremap    <expr> <M-Home>     "v" . (&wrap ? "g0" : "0")
-nnoremap    <expr> <M-End>      "v" . (&wrap ? "g$" : "$")
-nmap        <M-D-Left>          <M-Home>
-nmap        <M-D-Right>         <M-End>
+nnoremap    <expr> <S-Home>     "v" . (&wrap ? "g0" : "0")
+nnoremap    <expr> <S-End>      "v" . (&wrap ? "g$" : "$")
+nmap        <S-D-Left>          <S-Home>
+nmap        <S-D-Right>         <S-End>
 
 " Insert mode
 "
@@ -94,14 +94,14 @@ nmap        <M-D-Right>         <M-End>
 "
 " XXX: Factor out common code between this map and imap Shift+Home.
 "
-inoremap    <expr> <M-Home>     "<C-O>" . (&wrap ? "g0" : "0")
+inoremap    <expr> <S-Home>     "<C-O>" . (&wrap ? "g0" : "0")
                                 \ . "<C-O>v"
                                 \ . virtcol('.') . "\|"
                                 \ . "o"
 
-imap        <M-End>             <C-O><M-End>
-imap        <M-D-Left>          <C-O><M-Home>
-imap        <M-D-Right>         <C-O><M-End>
+imap        <S-End>             <C-O><M-End>
+imap        <S-D-Left>          <C-O><M-Home>
+imap        <S-D-Right>         <C-O><M-End>
 
 " Visual mode
 "
@@ -131,23 +131,23 @@ smap        <M-D-Right>         <C-O><M-D-Right>
 
 " Normal mode
 "
-nnoremap    <M-D-Up>            vgg
-nnoremap    <M-D-Down>          vG
+nnoremap    <S-D-Up>            vgg
+nnoremap    <S-D-Down>          vG
 
 " Insert mode
 "
-imap        <M-D-Up>            <C-O><M-D-Up>
-imap        <M-D-Down>          <C-O><M-D-Down>
+imap        <S-D-Up>            <C-O><M-D-Up>
+imap        <S-D-Down>          <C-O><M-D-Down>
 
 " Visual mode
 "
-xnoremap    <M-D-Up>            gg
-xnoremap    <M-D-Down>          G
+xnoremap    <S-D-Up>            gg
+xnoremap    <S-D-Down>          G
 
 " Select mode
 "
-smap        <M-D-Up>            <C-O><M-D-Up>
-smap        <M-D-Down>          <C-O><M-D-Down>
+smap        <S-D-Up>            <C-O><M-D-Up>
+smap        <S-D-Down>          <C-O><M-D-Down>
 
 
 " end map_option_highlighting_keys.vim

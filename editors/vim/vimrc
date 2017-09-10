@@ -270,6 +270,7 @@ vnoremap <S-Tab>  <gv
 " Map Control+Up/Down to move lines and selections up and down.
 "
 runtime map_line_block_mover_keys.vim
+runtime map_highlighting_keys.vim
 runtime vim-fireplace-mappings.vim
 
 " Disable paste-on-middle-click.
