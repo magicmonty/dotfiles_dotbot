@@ -134,7 +134,7 @@ macro index A "!$EDITOR ~/.mutt/aliases\n:source ~/.mutt/aliases\n" "Edit aliase
 macro pager A "!$EDITOR ~/.mutt/aliases\n:source ~/.mutt/aliases\n" "Edit aliases file and reload it"
 
 # Compose View Options -------------------------------
-set realname = "Benjamin Reitzammer" # who am i?
+set realname = "Martin Gondermann"   # who am i?
 set envelope_from                    # which from?
 set sig_dashes                       # dashes before sig
 set edit_headers                     # show headers when composing

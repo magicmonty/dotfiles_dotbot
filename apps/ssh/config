@@ -9,6 +9,11 @@ Host github.com
   IdentityFile ~/.ssh/github_ed25519
   IdentitiesOnly yes
 
+Host git.np4.net
+  User mgondermann
+  HostName git.np4.net
+  PreferredAuthentications publickey
+
 Host magicmonty.github.com
 	User git
 	HostName github.com
