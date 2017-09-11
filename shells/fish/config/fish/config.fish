@@ -13,7 +13,12 @@ set -gx EDITOR nvim
 source ~/.config/fish/abbr.fish
 source ~/.config/fish/autoenv.fish
 
-set -gx PATH $PATH ~/bin
+if [ -e ~/.cargo/bin/ ]
+  set -gx PATH ~/.cargo/bin $PATH
+end 
+if [ -e ~/bin/ ]
+  set -gx PATH ~/bin $PATH
+end 
 
 set -g theme_nerd_fonts yes
 set -g theme_color_scheme gruvbox
