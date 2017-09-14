@@ -1,0 +1,35 @@
+# vi: ft=muttrc
+
+source ~/.muttrc
+
+mailboxes "+familie/INBOX" \
+          "+familie/Drafts" \
+          "+familie/Sent" \
+          "+familie/Trash" \
+          "+familie/Spam"
+
+set header_cache     = ~/.mutt/cache/familie-headers # where to store headers
+set message_cachedir = ~/.mutt/cache/familie-bodies  # where to store bodies
+set spoolfile = "+familie/INBOX"
+set smtp_pass = "`python ~/.mutt/offlineimap.py "familie@gondermanns.de" "sslin.df.eu"`"
+set smtp_url = "smtp://familie\@gondermanns.de@sslout.df.eu:587"
+
+macro index,pager d "<save-message>=familie/Trash<enter>" "Trash"
+
+macro index gi "<change-folder>+familie/INBOX<enter>" "Jump to Inbox"
+macro pager gi "<change-folder>+familie/INBOX<enter>" "Jump to Inbox"
+macro index gs "<change-folder>+familie/Sent<enter>" "Jump to Sent"
+macro pager gs "<change-folder>+familie/Sent<enter>" "Jump to Sent"
+
+
+set from      = "famile@gondermanns.de"
+set record    = "+familie/Sent"
+set postponed = "+familie/Drafts"
+
+
+alias identity_1    Familie Gondermann <familie@gondermanns.de>
+
+macro compose v "<edit-from>^Uidentity_<tab>" "Select from"
+
+macro index F "<shell-escape>offlineimap -a familie<enter>"           "run offlineimap to sync all mail"
+macro index f "<shell-escape>offlineimap -qf INBOX -a familie<enter>" "run offlineimap to sync inbox"

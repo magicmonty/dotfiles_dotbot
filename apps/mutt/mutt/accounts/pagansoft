@@ -1,0 +1,55 @@
+# vi: ft=muttrc
+
+source ~/.muttrc
+
+set pgp_sign_as = 12184323
+set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0x7600BD53 -- -r %r -- %f"
+set pgp_encrypt_sign_command="pgpewrap gpg %?p?--passphrase-fd 0? --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0x7600BD53 -- -r %r -- %f"
+
+set sendmail = "/usr/local/bin/msmtp -a pagansoft"
+set smtp_authenticators = 'gssapi:login'
+
+mailboxes "+pagansoft/INBOX" \
+          "+pagansoft/Important" \
+          "+pagansoft/Starred" \
+          "+pagansoft/Drafts" \
+          "+pagansoft/Archive" \
+          "+pagansoft/Sent" \
+          "+pagansoft/Trash" \
+          "+pagansoft/Spam"
+
+set header_cache     = ~/.mutt/cache/pagansoft-headers # where to store headers
+set message_cachedir = ~/.mutt/cache/pagansoft-bodies  # where to store bodies
+set spoolfile = "+pagansoft/INBOX"
+set smtp_pass = "`python ~/.mutt/offlineimap.py "pagansoft@gmail.com" "imap.gmail.com"`"
+set smtp_url = "smtp://pagansoft\@gmail.com@smtp.gmail.com:587"
+
+macro index,pager y "<save-message>=pagansoft/Archive<enter>" "Archive"
+macro index,pager z "<save-message>=pagansoft/Archive<enter>" "Archive"
+macro index,pager d "<save-message>=pagansoft/Trash<enter>" "Trash"
+
+macro index gi "<change-folder>+pagansoft/INBOX<enter>" "Jump to Inbox"
+macro pager gi "<change-folder>+pagansoft/INBOX<enter>" "Jump to Inbox"
+macro index ga "<change-folder>+pagansoft/Archive<enter>" "Jump to Archive"
+macro pager ga "<change-folder>+pagansoft/Archive<enter>" "Jump to Archive"
+macro index gs "<change-folder>+pagansoft/Sent<enter>" "Jump to Sent"
+macro pager gs "<change-folder>+pagansoft/Sent<enter>" "Jump to Sent"
+macro index gt "<change-folder>+pagansoft/Trash<enter>" "Jump to Trash"
+macro pager gt "<change-folder>+pagansoft/Trash<enter>" "Jump to Trash"
+macro index gw "<change-folder>+pagansoft/Important<enter>" "Jump to Important"
+macro pager gw "<change-folder>+pagansoft/Important<enter>" "Jump to Important"
+
+
+set from      = "magicmonty@pagansoft.de"
+set record    = "+pagansoft/Sent"
+set postponed = "+pagansoft/Drafts"
+
+alternates ebay@gondermanns.de, info@lambdaphonic.de, martin.gondermann@pagansoft.de, pagan@pagansoft.de, shops@pagansoft.de, amazon@gondermanns.de
+
+alias identity_1    Martin Gondermann <magicmonty@pagansoft.de>
+alias identity_2    Martin Gondermann <pagansoft@gmail.com>
+
+macro compose v "<edit-from>^Uidentity_<tab>" "Select from"
+
+macro index F "<shell-escape>offlineimap -a pagansoft<enter>"           "run offlineimap to sync all mail"
+macro index f "<shell-escape>offlineimap -qf INBOX -a pagansoft<enter>" "run offlineimap to sync inbox"

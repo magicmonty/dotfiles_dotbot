@@ -1,0 +1,22 @@
+[general]
+status_path = "~/.vdirsyncer/status"
+
+[pair pagansoft_contacts]
+a = "pagansoft_local"
+b = "pagansoft_remote"
+
+# sync collection "default" from side b (remote) with
+## collection "pagansoft" from side a (local)
+collections = [[ "pagansoft_contacts", "pagansoft", "default" ]]
+conflict_resolution = ["command", "vimdiff"]
+
+[storage pagansoft_local]
+type = "filesystem"
+path = "~/.contacts"
+fileext = ".vcf"
+
+[storage pagansoft_remote]
+type = "google_contacts"
+token_file = "~/.vdirsyncer/google_tokens"
+client_id.fetch = ["command", "python", "/Users/martingondermann/.mutt/offlineimap.py", "client_id", "contacts.google.com"]
+client_secret.fetch = ["command", "python", "/Users/martingondermann/.mutt/offlineimap.py", "client_secret", "contacts.google.com"]

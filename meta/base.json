@@ -13,7 +13,6 @@
   },
   {
     "shell": [
-      "sudo -v",
       ["git submodule update --init --recursive", "Installing submodules"]
     ]
   }

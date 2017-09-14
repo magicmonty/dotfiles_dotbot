@@ -15,10 +15,11 @@ source ~/.config/fish/autoenv.fish
 
 if [ -e ~/.cargo/bin/ ]
   set -gx PATH ~/.cargo/bin $PATH
-end 
+  set -gx MATES_DIR /Users/martingondermann/.contacts/pagansoft
+end
 if [ -e ~/bin/ ]
   set -gx PATH ~/bin $PATH
-end 
+end
 
 set -g theme_nerd_fonts yes
 set -g theme_color_scheme gruvbox

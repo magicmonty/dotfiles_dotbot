@@ -1,6 +1,6 @@
 [general]
 ui = ttyui
-accounts = pagansoft
+accounts = pagansoft, familie
 pythonfile=~/.mutt/offlineimap.py
 fsync = False
 
@@ -14,32 +14,66 @@ footer = "\n"
 
 [Account pagansoft]
 localrepository = pagansoft-local
-remoterepository = pagansoft-gmail-com
+remoterepository = pagansoft-remote
+
+[Repository pagansoft-remote]
+maxconnections = 1
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = pagansoft@gmail.com
+remotepasseval = get_keychain_pass('pagansoft@gmail.com', 'imap.gmail.com')
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+ssl = yes
+nametrans = lambda folder: {
+                            '[Google Mail]/Alle Nachrichten': 'Archive',
+                            '[Google Mail]/Entw&APw-rfe': 'Drafts',
+                            '[Google Mail]/Gesendet': 'Sent',
+                            '[Google Mail]/Markiert': 'Starred',
+                            '[Google Mail]/Papierkorb': 'Trash',
+                            '[Google Mail]/Spam': 'Spam',
+                            '[Google Mail]/Wichtig': 'Important',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder in ['INBOX', '[Google Mail]/Alle Nachrichten', '[Google Mail]/Entw&APw-rfe', '[Google Mail]/Gesendet', '[Google Mail]/Markiert', '[Google Mail]/Papierkorb', '[Google Mail]/Wichtig' ]
 
 [Repository pagansoft-local]
 type = Maildir
 localfolders = ~/.mail/pagansoft
-nametrans = lambda folder: {'Archive': '[Gmail]/All Mail',
-                            'Drafts': '[Gmail]/Drafts',
-                            'Sent': '[Gmail]/Sent Mail',
-                            'Starred': '[Gmail]/Starred',
-                            'Trash': '[Gmail]/Trash',
+nametrans = lambda folder: {'Archive': '[Google Mail]/Alle Nachrichten',
+                            'Drafts': '[Google Mail]/Entw&APw-rfe',
+                            'Sent': '[Google Mail]/Gesendet',
+                            'Starred': '[Google Mail]/Markiert',
+                            'Trash': '[Google Mail]/Papierkorb',
+                            'Spam': '[Google Mail]/Spam',
+                            'Important': '[Google Mail]/Wichtig',
                             }.get(folder, folder)
 
-[Repository pagansoft-gmail-com]
+[Account familie]
+localrepository = familie-local
+remoterepository = familie-remote
+
+[Repository familie-remote]
 maxconnections = 1
 type = IMAP
-remotehost = imap.gmail.com
-remoteuser = 'pagansoft@gmail.com'
-remotepasseval = get_keychain_pass('pagansoft@gmail.com', 'imap.gmail.com')
-realdelete = no
+remotehost = sslin.df.eu
+remoteuser = familie@gondermanns.de
+remotepasseval = get_keychain_pass('familie@gondermanns.de', 'sslin.df.eu')
 sslcacertfile = /usr/local/etc/openssl/cert.pem
 ssl = yes
 nametrans = lambda folder: {
-                            '[Gmail]/All Mail': 'Archive',
-                            '[Gmail]/Drafts': 'Drafts',
-                            '[Gmail]/Sent Mail': 'Sent',
-                            '[Gmail]/Starred': 'Starred',
-                            '[Gmail]/Trash': 'Trash',
-                            }.get(folder, folder)
-folderfilter = lambda folder: folder not in ['Trash', 'Contacts' ]
+                            'INBOX.Drafts': 'Drafts',
+                            'INBOX.Sent': 'Sent',
+                            'INBOX.Trash': 'Trash',
+                            'INBOX.Junk': 'Spam',
+                           }.get(folder, folder)
+folderfilter = lambda folder: folder in ['INBOX', 'INBOX.Drafts', 'INBOX.Sent', 'INBOX.Trash', 'INBOX.Junk']
+
+
+[Repository familie-local]
+type = Maildir
+localfolders = ~/.mail/familie
+nametrans = lambda folder: {
+                            'Drafts': 'INBOX.Drafts',
+                            'Sent': 'INBOX.Sent',
+                            'Trash': 'INBOX.Trash',
+                            'Spam': 'INBOX.Junk'
+                           }.get(folder, folder)

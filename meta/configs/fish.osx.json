@@ -24,6 +24,8 @@
       "~/.config/fish/functions/la.fish": "shells/fish/config/fish/functions/la.fish",
       "~/.config/fish/functions/ll.fish": "shells/fish/config/fish/functions/ll.fish",
       "~/.config/fish/functions/ls.fish": "shells/fish/config/fish/functions/ls.fish",
+      "~/.config/fish/functions/m.fish": "shells/fish/config/fish/functions/m.fish",
+      "~/.config/fish/functions/mail.fish": "shells/fish/config/fish/functions/mail.fish",
       "~/.config/fish/functions/psa.fish": "shells/fish/config/fish/functions/psa.fish",
       "~/.config/fish/functions/search_history.fish": "shells/fish/config/fish/functions/search_history.fish",
       "~/.config/fish/fishfile": "shells/fish/config/fish/fishfile.osx",

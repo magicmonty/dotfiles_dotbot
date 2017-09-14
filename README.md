@@ -39,6 +39,24 @@ For installing single configurations:
 
 You can run these installation commands safely multiple times, if you think that helps with better installation.
 
+### Mutt / MSMTP / offlineimap
+
+For this to work correctly, you have to add the following entries to the login keychain:
+
+| Name                   | Account name        | Source                                                       |
+|------------------------|---------------------|--------------------------------------------------------------|
+| imap.google.com        | pagansoft@gmail.com | Application Passwort (create in https://accounts.google.com) |
+| smtp://smtp.google.com | pagansoft@gmail.com | Application Passwort                                         |
+
+### Mates / vdirsyncer
+
+for the address book to work correctly you have to add the following entries to the login keychain:
+
+| Name                | Account name  | Source                                                                            |
+|---------------------|---------------|-----------------------------------------------------------------------------------|
+| calendar.google.com | client_id     | Client id from project in https://console.developers.google.com (CardDAV API)     |
+| calendar.google.com | client_secret | Client secret from project in https://console.developers.google.com (CardDAV API) |
+
 ## License
 
 This software is hereby released into the public domain. That means you can do

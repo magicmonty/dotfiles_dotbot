@@ -18,9 +18,17 @@
       "~/.mutt/gpg.rc": "apps/mutt/mutt/gpg.rc",
       "~/.mutt/mailcap": "apps/mutt/mutt/mailcap",
       "~/.mutt/offlineimap.py": "apps/mutt/mutt/offlineimap.py",
+      "~/.mutt/contacts-filter.sh": "apps/mutt/mutt/contacts-filter.sh",
+      "~/.mutt/quote-html-message.sh": "apps/mutt/mutt/quote-html-message.sh",
+      "~/.mutt/accounts": "apps/mutt/mutt/accounts",
       "~/.offlineimaprc": "apps/mutt/offlineimaprc",
       "~/.mutt/view_attachment.sh": "apps/mutt/mutt/view_attachment.sh",
-      "~/.muttrc": "apps/mutt/muttrc"
+      "~/.muttrc": "apps/mutt/muttrc",
+      "~/bin/mutt-notmuch-py.py": "apps/notmuch/notmuch-py/mutt-notmuch-py",
+      "~/bin/html2text.py": "apps/mutt/_bin/html2text.py",
+      "~/.notmuch-config": "apps/notmuch/notmuch-config",
+      "~/.vdirsyncer/config": "apps/mutt/vdirsyncer_config",
+      "~/.msmtprc": "apps/mutt/msmtprc"
     }
   }
 ]

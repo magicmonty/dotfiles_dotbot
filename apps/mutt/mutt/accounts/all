@@ -1,0 +1,8 @@
+# vi: ft=muttrc
+
+source ~/.mutt/accounts/pagansoft
+set mbox=~/.mail
+
+set pgp_sign_as = 12184323
+macro index C "<copy-message>?<enter>" "copy a message to a mailbox"
+macro index M "<save-message>?<enter>" "move a message to a mailbox"
