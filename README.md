@@ -90,6 +90,7 @@ meta
       ├── git.np4.json
       ├── go.json
       ├── homebrew.json
+│  │  ├── mutt.osx.json
       ├── node.json
       ├── osx_defaults.json
       ├── profanity.json
@@ -125,6 +126,36 @@ meta
 │  │  ├── Solarized Light.itermcolors
 │  │  ├── com.googlecode.iterm2.plist
 │  │  └── gruvbox-dark.itermcolors
+│  ├── mutt
+│  │  ├── _bin
+│  │  │  └── html2text.py
+│  │  ├── msmtprc
+│  │  ├── mutt
+│  │  │  ├── accounts
+│  │  │  │  ├── all
+│  │  │  │  ├── familie
+│  │  │  │  └── pagansoft
+│  │  │  ├── alias
+│  │  │  ├── colors
+│  │  │  │  ├── gruvbox-16.muttrc
+│  │  │  │  └── gruvbox-256.muttrc
+│  │  │  ├── contacts-filter.sh
+│  │  │  ├── gpg.rc
+│  │  │  ├── mailcap
+│  │  │  ├── offlineimap.py
+│  │  │  ├── quote-html-message.sh
+│  │  │  └── view_attachment.sh
+│  │  ├── muttrc
+│  │  ├── offlineimaprc
+│  │  └── vdirsyncer_config
+│  ├── notmuch
+│  │  ├── notmuch-config
+│  │  └── notmuch-py
+│  │     ├── AUTHORS
+│  │     ├── LICENSE
+│  │     ├── README.md
+│  │     ├── mutt-notmuch-py
+│  │     └── setup.py
 │  ├── profanity
 │  │  ├── icons
 │  │  ├── profrc
@@ -208,11 +239,13 @@ meta
 │  └── vim
 │     ├── config
 │     │  └── nvim
-│     │     └── init.vim
+│     │     ├── init.linux.vim
+│     │     └── init.osx.vim
 │     ├── gvimrc
 │     ├── plugins
 │     │  ├── plugins_linux.vim
 │     │  ├── plugins_osx.vim
+│     │  ├── plugins_shared.vim
 │     │  └── plugins_windows10.vim
 │     ├── vim
 │     │  ├── UltiSnips
@@ -221,6 +254,8 @@ meta
 │     │  │  └── clojure.snippets
 │     │  ├── autoload
 │     │  │  └── plug.vim
+│     │  ├── ftdetect
+│     │  │  └── xaml.vim
 │     │  ├── ftplugin
 │     │  │  └── fish.vim
 │     │  ├── insert_matching_spaces.vim
@@ -233,6 +268,29 @@ meta
 │     │  ├── update_visual_highlight_color.vim
 │     │  └── vim-fireplace-mappings.vim
 │     └── vimrc
+├── fonts
+│  └── Monoid
+│     ├── Monoid Bold Nerd Font Complete.ttf
+│     ├── Monoid Bold Nerd Font Complete Mono.ttf
+│     ├── Monoid Bold Nerd Font Complete Mono Windows Compatible.ttf
+│     ├── Monoid Bold Nerd Font Complete Windows Compatible.ttf
+│     ├── Monoid Italic Nerd Font Complete.ttf
+│     ├── Monoid Italic Nerd Font Complete Mono.ttf
+│     ├── Monoid Italic Nerd Font Complete Mono Windows Compatible.ttf
+│     ├── Monoid Italic Nerd Font Complete Windows Compatible.ttf
+│     ├── Monoid Regular Nerd Font Complete.ttf
+│     ├── Monoid Regular Nerd Font Complete Mono.ttf
+│     ├── Monoid Regular Nerd Font Complete Mono Windows Compatible.ttf
+│     ├── Monoid Regular Nerd Font Complete Windows Compatible.ttf
+│     ├── Monoid Retina Nerd Font Complete.ttf
+│     ├── Monoid Retina Nerd Font Complete Mono.ttf
+│     ├── Monoid Retina Nerd Font Complete Mono Windows Compatible.ttf
+│     └── Monoid Retina Nerd Font Complete Windows Compatible.ttf
+├── images
+│  ├── lambdaphonic.png
+│  ├── man-woman-geek.jpg
+│  ├── sheep-desktop.jpg
+│  └── tron-legacy-wallpaper-08-2588.jpg
 ├── install-profile
 ├── install-standalone
 ├── macos
@@ -241,10 +299,13 @@ meta
       └── config
          └── fish
             ├── abbr.fish
+            ├── abbr.linux.fish
+            ├── abbr.windows10.fish
             ├── autoenv.fish
             ├── completions
             │  └── fisher.fish
             ├── config.fish
+            ├── config.windows10.fish
             ├── fishfile.linux
             ├── fishfile.osx
             ├── fishfile.windows10
@@ -252,6 +313,9 @@ meta
                ├── edit_config_fish.fish
                ├── fish_greeting.fish
                ├── fish_mode_prompt.fish
+               ├── fish_prompt.fish
+               ├── fish_right_prompt.fish
+               ├── fish_title.fish
                ├── fish_user_key_bindings.linux.fish
                ├── fish_user_key_bindings.osx.fish
                ├── fish_user_key_bindings.windows10.fish
@@ -262,6 +326,8 @@ meta
                ├── la.fish
                ├── ll.fish
                ├── ls.fish
+               ├── m.fish
+               ├── mail.fish
                ├── psa.fish
                └── search_history.fish
 
