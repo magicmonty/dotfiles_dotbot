@@ -90,7 +90,7 @@ meta
       ├── git.np4.json
       ├── go.json
       ├── homebrew.json
-│  │  ├── mutt.osx.json
+      ├── mutt.osx.json
       ├── node.json
       ├── osx_defaults.json
       ├── profanity.json
