@@ -43,10 +43,10 @@ You can run these installation commands safely multiple times, if you think that
 
 For this to work correctly, you have to add the following entries to the login keychain:
 
-| Name                   | Account name        | Source                                                       |
-|------------------------|---------------------|--------------------------------------------------------------|
-| imap.google.com        | pagansoft@gmail.com | Application Passwort (create in https://accounts.google.com) |
-| smtp://smtp.google.com | pagansoft@gmail.com | Application Passwort                                         |
+| Name                   | Account name       | Source                                                       |
+|------------------------|--------------------|--------------------------------------------------------------|
+| imap.google.com        | the IMAP user name | Application Passwort (create in https://accounts.google.com) |
+| smtp://smtp.google.com | the SMTP user name | Application Passwort                                         |
 
 ### Mates / vdirsyncer
 
