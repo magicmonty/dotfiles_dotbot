@@ -330,7 +330,15 @@ inoremap <C-U>= <Esc>kyyp^v$r=ja
 
 " Edit user's vimrc and gvimrc in new tabs.
 "
-nnoremap <Leader>ev  :e $MYVIMRC<CR>
+if has("nvim")
+  nnoremap <leader>ev :e ~/.vimrc
+else
+  nnoremap <Leader>ev  :e $MYVIMRC<CR>
+endif
+
+nnoremap <Leader>ep  :e ~/.vim/plugins.vim<CR>
+nnoremap <Leader>eP  :e ~/.vim/plugins_shared.vim<CR>
+
 nnoremap <Leader>lv  :so $MYVIMRC<CR>
 
 " Make page-forward and page-backward work in insert mode.

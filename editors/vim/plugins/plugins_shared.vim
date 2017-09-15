@@ -37,6 +37,9 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'scrooloose/nerdcommenter'
 Plug 'mhinz/vim-startify'
+Plug 'kshenoy/vim-signature'
+Plug 'wellle/targets.vim'
+Plug 'tommcdo/vim-exchange'
 
 " Dev
 Plug 'editorconfig/editorconfig-vim'
