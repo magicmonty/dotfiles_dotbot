@@ -658,11 +658,6 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 " Make markdown compatible tables
 let g:table_mode_corner='|'
 
-
-" Calendar.vim
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-
 if &shell =~# 'fish$'
   set shell=sh
 endif
