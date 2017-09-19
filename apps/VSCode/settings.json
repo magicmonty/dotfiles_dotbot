@@ -9,5 +9,6 @@
     "editor.fontFamily": "Monoid, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "terminal.integrated.fontFamily": "Monoid",
-    "terminal.integrated.fontLigatures": true
+    "terminal.integrated.fontLigatures": true,
+    "workbench.iconTheme": "vscode-great-icons"
 }
