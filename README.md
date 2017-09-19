@@ -320,6 +320,7 @@ meta
                ├── fish_user_key_bindings.osx.fish
                ├── fish_user_key_bindings.windows10.fish
                ├── fisher.fish
+               ├── gls.fish
                ├── git.fish
                ├── gitv.fish
                ├── l.fish

@@ -18,6 +18,7 @@
       "~/.config/fish/config.fish": "shells/fish/config/fish/config.fish",
       "~/.config/fish/completions/fisher.fish": "shells/fish/config/fish/completions/fisher.fish",
       "~/.config/fish/functions/edit_config_fish.fish": "shells/fish/config/fish/functions/edit_config_fish.fish",
+      "~/.config/fish/functions/gls.fish": "shells/fish/config/fish/functions/gls.fish",
       "~/.config/fish/functions/git.fish": "shells/fish/config/fish/functions/git.fish",
       "~/.config/fish/functions/gitv.fish": "shells/fish/config/fish/functions/gitv.fish",
       "~/.config/fish/functions/l.fish": "shells/fish/config/fish/functions/l.fish",

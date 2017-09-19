@@ -16,6 +16,7 @@
       "~/.config/fish/abbr.fish": "shells/fish/config/fish/abbr.windows10.fish",
       "~/.config/fish/config.fish": "shells/fish/config/fish/config.windows10.fish",
       "~/.config/fish/functions/edit_config_fish.fish": "shells/fish/config/fish/functions/edit_config_fish.fish",
+      "~/.config/fish/functions/gls.fish": "shells/fish/config/fish/functions/gls.fish",
       "~/.config/fish/functions/git.fish": "shells/fish/config/fish/functions/git.fish",
       "~/.config/fish/functions/gitv.fish": "shells/fish/config/fish/functions/gitv.fish",
       "~/.config/fish/functions/psa.fish": "shells/fish/config/fish/functions/psa.fish",
