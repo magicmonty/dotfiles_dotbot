@@ -12,7 +12,7 @@ Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'dermusikman/sonicpi.vim'
+Plug 'magicmonty/sonicpi.vim'
 
 " .NET
 Plug 'OrangeT/vim-csharp'

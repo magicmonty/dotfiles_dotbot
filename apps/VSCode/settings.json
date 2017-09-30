@@ -6,9 +6,9 @@
     "FSharp.automaticProjectModification": true,
     "workbench.startupEditor": "newUntitledFile",
     "extensions.ignoreRecommendations": false,
-    "editor.fontFamily": "Monoid, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "Monoid NF, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
-    "terminal.integrated.fontFamily": "Monoid",
+    "terminal.integrated.fontFamily": "Monoid NF",
     "terminal.integrated.fontLigatures": true,
     "workbench.iconTheme": "vscode-great-icons"
 }

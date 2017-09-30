@@ -150,19 +150,6 @@ if has("autocmd") && !exists("autocommands_loaded")
   " Note: See $HOME/.vim/ftplugin and $HOME/.vim/after/ftplugin for
   " most local filetype autocommands and customizations.
   "
-  filetype off
-  filetype plugin indent off
-
-" VimOrganizer stuff
-let g:ft_ignore_pat = '\.org'
-command! OrgCapture :call org#CaptureBuffer()
-command! OrgCaptureFile :call org#OpenCaptureFile()
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-au BufEnter *.org            call org#SetOrgFileType()
-let g:org_todo_setup='TODO NEXT STARTED WAITING | DONE CANCELLED'
-let g:org_tags_alist='{@home(h) @work(w)} {easy(e) hard(d)} {computer(c) phone(p)}'
-
-
   filetype on
   syntax on
   filetype plugin indent on
@@ -331,7 +318,7 @@ inoremap <C-U>= <Esc>kyyp^v$r=ja
 " Edit user's vimrc and gvimrc in new tabs.
 "
 if has("nvim")
-  nnoremap <leader>ev :e ~/.vimrc
+  nnoremap <leader>ev :e ~/.vimrc<CR>
 else
   nnoremap <Leader>ev  :e $MYVIMRC<CR>
 endif
@@ -381,16 +368,12 @@ nnoremap <Leader>zz  :let &scrolloff=999-&scrolloff<CR>
 "
 nnoremap <Leader>w  :set invwrap<BAR>set wrap?<CR>
 
-" Toggle the NERD Tree window
-"
-" nnoremap <Leader>.  :NERDTreeToggle<CR>
-" command! NERDTreeWindowsRightPos let g:NERDTreeWinPos = "right"
-" command! NERDTreeWindowsLeftPos let g:NERDTreeWinPos = "left"
-
 "
 " Make it easy to :Tabularize
 "
 nnoremap <Leader><Tab> <Esc>:Tabularize /
+nmap <leader>aa :Tabularize /\|/l0<cr>
+vmap <leader>aa :Tabularize /\|/l0<cr>
 
 " Make the dot command operate over a Visual range.
 " (Excellent tip from Drew Neil's Vim Masterclass.)
@@ -521,12 +504,6 @@ if &term =~ '256color'
   set t_ut=
 endif
 
-let g:user_emmet_mode='a'
-let g:user_emmet_install_global=0
-autocmd FileType html,css EmmetInstall
-"let g:user_emmet_leader_key='<C-SPC>'
-"
-"
 noremap H 0
 noremap L $
 vmap v <Plug>(expand_region_expand)
@@ -608,6 +585,12 @@ autocmd FileType elm nnoremap <leader>em :ElmMakeCurrentFile<CR>
 
 " Disable ex mode
 :map Q <Nop>
+
+function! PrettyPrintJSON()
+  :%!python -m json.tool
+endfunction
+
+autocmd FileType json nnoremap <leader>pp :call PrettyPrintJSON()<CR>
 
 nnoremap <leader>. :NERDTreeToggle<cr>
 nnoremap <leader>/ :NERDTreeFind<cr>
