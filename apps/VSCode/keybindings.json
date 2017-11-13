@@ -9,5 +9,10 @@
         "key": "shift+alt+7",
         "command": "-fsi.SendLine",
         "when": "editorFocus && !findWidgetVisible && editorLangId == 'fsharp'"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
     }
 ]

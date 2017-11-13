@@ -1,14 +1,12 @@
 // Platzieren Sie Ihre Einstellungen in dieser Datei, um die Standardeinstellungen zu überschreiben.
 {
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Gruvbox Dark (Medium)",
     "FSharp.enableTreeView": true,
-    "FSharp.automaticProjectModification": true,
     "workbench.startupEditor": "newUntitledFile",
     "extensions.ignoreRecommendations": false,
     "editor.fontFamily": "Monoid NF, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "terminal.integrated.fontFamily": "Monoid NF",
-    "terminal.integrated.fontLigatures": true,
-    "workbench.iconTheme": "vscode-great-icons"
+    "workbench.iconTheme": "vscode-great-icons",
+    "workbench.colorTheme": "Gruvbox Dark (Medium)"
 }
