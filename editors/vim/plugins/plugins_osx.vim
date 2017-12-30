@@ -19,6 +19,8 @@ Plug 'OrangeT/vim-csharp'
 Plug 'fsharp/vim-fsharp', { 'for': 'fsharp', 'do': 'make fsautocomplete' }
 Plug 'OmniSharp/omnisharp-vim', { 'do': 'git submodule update --init --recursive && cd server && xbuild' }
 
+Plug 'romainl/Apprentice'
+
 call plug#end()
 
 if has('nvim')

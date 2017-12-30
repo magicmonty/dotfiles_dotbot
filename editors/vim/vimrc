@@ -437,8 +437,9 @@ if $TERMKIT_HOST_APP=="Cathode"
 endif
 
 
-silent! colorscheme gruvbox
-set background=dark
+" silent! colorscheme gruvbox
+silent! colorscheme apprentice
+" set background=dark
 
 """
 """ Local Functions
