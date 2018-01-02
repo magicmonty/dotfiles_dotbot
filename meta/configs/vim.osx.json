@@ -15,6 +15,7 @@
     "link": {
       "~/.vim/UltiSnips": "editors/vim/vim/UltiSnips",
       "~/.vim/autoload/plug.vim" : "editors/vim/vim/autoload/plug.vim",
+      "~/.vim/autoload/airline" : "editors/vim/vim/autoload/airline/",
       "~/.vim/ftplugin/fish.vim" : "editors/vim/vim/ftplugin/fish.vim",
       "~/.vim/ftdetect/xaml.vim" : "editors/vim/vim/ftdetect/xaml.vim",
       "~/.vim/insert_matching_spaces.vim": "editors/vim/vim/insert_matching_spaces.vim",

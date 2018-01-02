@@ -399,13 +399,7 @@ if exists(":RainbowParenthesesToggle")
   au Syntax * RainbowParenthesesLoadBraces
 endif
 
-let g:airline_theme='gruvbox'
-let g:gruvbox_bold=1
-let g:gruvbox_italic=0
-let g:gruvbox_underline=1
-let g:gruvbox_undercurl=1
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_improved_strings=0
+let g:airline_theme='apprentice'
 
 let g:airline#extensions#syntastic#enabled = 1
 
@@ -417,9 +411,6 @@ if $TERMKIT_HOST_APP=="Cathode"
   let g:solarized_bold=0
   let g:solarized_underline=0
   let g:solarized_italic=0
-  let g:gruvbox_bold=0
-  let g:gruvbox_underline=0
-  let g:gruvbox_undercurl=0
   let g:airline_powerline_fonts = 0
   if has('nvim')
     set notermguicolors
@@ -437,9 +428,8 @@ if $TERMKIT_HOST_APP=="Cathode"
 endif
 
 
-" silent! colorscheme gruvbox
 silent! colorscheme apprentice
-" set background=dark
+set background=dark
 
 """
 """ Local Functions
