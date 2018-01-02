@@ -1,3 +1,35 @@
 # Sonic Pi init file
 # Code in here will be evaluated on launch.
 
+def volca_fm(note, sustain: 0.25, vel: 50)
+  midi_cc 41, vel, port: "usb_uno_midi_interface", channel: 1
+  midi note, sustain: sustain, port: "usb_uno_midi_interface", channel: 1
+end
+
+def volca_bass(note, sustain: 0.25, vel: 128)
+  midi note, sustain: sustain, vel: vel, port: "usb_uno_midi_interface", channel: 2
+end
+
+def c1(note, sustain: 1.0, vel: 128)
+  midi note, sustain: sustain, vel: vel, port: "circuit", channel: 1
+end
+
+def c2(note, sustain: 1.0, vel: 128)
+  midi note, sustain: sustain, vel: vel, port: "circuit", channel: 2
+end
+
+def cosr(center, range, cycle)
+  return (Math.cos (vt*cycle))*range + center
+end
+
+def sinr(center, range, cycle)
+  return (Math.sin (vt*cycle))*range + center
+end
+
+def fadeout (max: 1, step: 0.05)
+  return (ramp (range max, 0, step: step, inclusive: true)).flatten
+end
+
+def fadein (max: 1, step: 0.05)
+  return (ramp (range 0, max, step: step, inclusive: true)).flatten
+end
