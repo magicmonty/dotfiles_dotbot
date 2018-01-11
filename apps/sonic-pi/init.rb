@@ -33,3 +33,32 @@ end
 def fadein (max: 1, step: 0.05)
   return (ramp (range 0, max, step: step, inclusive: true)).flatten
 end
+
+def l_spread (num_accents, size)
+  (spread num_accents, size)
+  .chunk_while { |i,j| !j }
+  .map { |ary| ary.map { |a| if a then ary.length else 0 end } }
+  .flatten
+  .map { |i| [ i != 0, i ] }
+  .ring
+end
+
+def v_quant(n, values)
+  values = values.to_a
+  min = values.min
+  max = values.max
+
+  return n if n < min or n > max
+  return n if values.include? n
+
+  min = values.reject { |v| v > n }.last
+  max = values.reject { |v| v < n }.first
+  if (n - min) < (max -n) then
+    return min
+  else
+    return max
+  end
+end
+
+$root = :a4
+$scl = (scale :minor)
