@@ -92,3 +92,7 @@ protocol = https
   # clean
   cleanf = clean -xdf
 
+[fetch]
+	prune = true
+[gui]
+	pruneDuringFetch = true
