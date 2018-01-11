@@ -26,11 +26,11 @@ def sinr(center, range, cycle)
   return (Math.sin (vt*cycle))*range + center
 end
 
-def fadeout (max: 1, step: 0.05)
+def fadeout (max: 1, step: 0.01)
   return (ramp (range max, 0, step: step, inclusive: true)).flatten
 end
 
-def fadein (max: 1, step: 0.05)
+def fadein (max: 1, step: 0.01)
   return (ramp (range 0, max, step: step, inclusive: true)).flatten
 end
 
@@ -58,6 +58,14 @@ def v_quant(n, values)
   else
     return max
   end
+end
+
+def mute
+  set_mixer_control! amp: 0.0
+end
+
+def unmute
+  set_mixer_control! amp: 1.0
 end
 
 $root = :a4
