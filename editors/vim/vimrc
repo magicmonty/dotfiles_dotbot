@@ -647,3 +647,16 @@ endif
 
 let g:sonicpi_command = "sonic-pi-tool eval-stdin"
 let g:sonicpi_keymaps_enabled = 1
+
+if &diff
+  set diffopt+=iwhite " ignore whitespace on diff
+  set cursorline
+  map < ]c
+  map > [c
+  nmap d+ ]c
+  nmap d- [c
+  nmap <leader>+ ]c
+  nmap <leader>- [c
+  nmap <leader>p dp
+  nmap <leader>o do
+endif
