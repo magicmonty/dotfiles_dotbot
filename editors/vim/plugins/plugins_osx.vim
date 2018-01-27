@@ -13,6 +13,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'magicmonty/sonicpi.vim'
+Plug 'rizzatti/dash.vim'
 
 " .NET
 Plug 'OrangeT/vim-csharp'
