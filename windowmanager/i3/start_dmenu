@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/bin/dmenu -fn "Monoid NF:16" -nb "#282828" -nf "#ebdbb2" -sb "#d65d0e" -sf "#ebdbb2" $*

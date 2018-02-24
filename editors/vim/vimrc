@@ -251,8 +251,8 @@ xnoremap Q  gq
 " highlight after changing the indentation). Works for both Visual and Select
 " modes.
 "
-vnoremap <Tab>    >gv
-vnoremap <S-Tab>  <gv
+" vnoremap <Tab>    >gv
+" vnoremap <S-Tab>  <gv
 
 " Map Control+Up/Down to move lines and selections up and down.
 "
@@ -475,9 +475,10 @@ imap <C-@> <C-Space>
 nnoremap <leader><Tab> :tabNext<cr>
 " let g:NERDTreeQuitOnOpen=1
 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" let g:UltiSnipsExpandTrigger="<tab>"
+"l et g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 noremap <leader>bn :bn<cr>
 noremap <leader>bp :bp<cr>
@@ -660,3 +661,6 @@ if &diff
   nmap <leader>p dp
   nmap <leader>o do
 endif
+
+autocmd BufWritePost ~/.dotfiles/scripts/folders,~/.dotfiles/scripts/configs !bash ~/.dotfiles/scripts/shortcuts.sh
+

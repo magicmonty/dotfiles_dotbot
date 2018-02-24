@@ -8,7 +8,7 @@ end
 
 set fish_key_bindings fish_vi_key_bindings
 
-set -gx EDITOR nvim
+set -gx EDITOR vim
 
 source ~/.config/fish/abbr.fish
 source ~/.config/fish/autoenv.fish
@@ -35,3 +35,4 @@ set -g default_user martingondermann
 set -g DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+source ~/.config/fish/shortcuts.fish
