@@ -3,25 +3,45 @@
 
 load_snippets "~/.sonic-pi/snippets", quiet: true
 
-$root = :A
-$octave = 4
-$tonic = :minor
-$progression = :i
+set :root, :A
+set :octave, 4
+set :tonic, :minor
+set :progression, :i
 
 def cur_root
-  note $root, octave: $octave
+  note get(:root), octave: get(:octave)
 end
 
 def cur_scale_bare (num_octaves: 1)
-  scale $tonic, num_octaves: num_octaves
+  scale get(:tonic), num_octaves: num_octaves
 end
 
 def cur_scale (num_octaves: 1)
-  scale cur_root, $tonic, num_octaves: num_octaves
+  scale cur_root, get(:tonic), num_octaves: num_octaves
 end
 
 def cur_chord (number_of_notes: 4)
-  chord_degree $progression, cur_root, $tonic, number_of_notes
+  chord_degree get(:progression), cur_root, get(:tonic), number_of_notes
+end
+
+def arp (arp_type: :up)
+  notes = cur_chord.take(3).ring
+  case arp_type
+  when :up
+    notes
+  when :down
+    notes.reverse
+  when :updown
+    (notes.to_a + notes.drop(1).take(1)).ring
+  when :pingpong
+    (notes.to_a + notes.drop(1).take(1)).ring
+  when :downup
+    (notes.to_a.reverse + notes.drop(1).take(1)).ring
+  when :alberti
+    ring(notes[0], notes[2], notes[1], notes[2])
+  when :random
+    notes.shuffle
+  end
 end
 
 $markov =
@@ -44,13 +64,17 @@ $markov =
     }
   }
 
-def progress_markov
-  if $markov.has_key?($tonic)
-    chain = $markov[$tonic]
-    if chain.has_key?($progression)
-      $progression = chain[$progression].choose
-    end
+def progress(chain)
+  return unless chain
+  prog = get(:progression)
+  if chain.has_key? prog
+    set :progression, chain[prog].choose
   end
+end
+
+def progress_markov
+  return unless $markov.has_key?(get(:tonic))
+  progress $markov[get(:tonic)]
 end
 
 def cosr(center, range, cycle)
