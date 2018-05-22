@@ -2,7 +2,7 @@
 
 options="Lock\nLogout\nSuspend\nHibernate\nReboot\nShutdown"
 
-chosen=$(echo -e "$options" | /usr/bin/dmenu -fn "Monoid NF:16" -nb "#282828" -nf "#ebdbb2" -sb "#d65d0e" -sf "#ebdbb2" -i -l 10 -p "Bitte auswählen:")
+chosen=$(echo -e "$options" | /usr/bin/rofi -i -l 6 -p "" -mesg "Option zum Beenden auswählen:" -dmenu)
 
 lock() {
   /usr/bin/betterlockscreen -l dimblur &

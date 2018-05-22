@@ -1,0 +1,236 @@
+/* vim:ft=css */
+/* ==========================================================================
+   Rofi color theme
+
+   Based on the Gruvbox color scheme for Vim by morhetz
+   https://github.com/morhetz/gruvbox
+
+   File: gruvbox-dark-soft.rasi
+   Desc: Gruvbox dark (soft contrast) color theme for Rofi
+   ========================================================================== */
+
+configuration {
+  display-ssh: "  ";
+  display-run: "ﰌ";
+  display-drun: "ﰌ";
+  display-window: "";
+  display-windowcd: "";
+  display-combi: "";
+  show-icons: true;
+  modi: "windowcd,ssh,drun,combi,emoji";
+  combi-modi: "windowcd,ssh,drun";
+  terminal: "termite";
+  case-sensitive: false;
+}
+
+* {
+    /* Theme settings */
+    highlight: bold italic;
+    scrollbar: true;
+
+    font: "Monoid NF 12";
+    transparent: rgba(40,40,40,0.6);
+
+
+    /* Gruvbox dark colors */
+    gruvbox-dark-bg0-soft:     #32302f;
+    gruvbox-dark-bg1:          #3c3836;
+    gruvbox-dark-bg3:          #665c54;
+    gruvbox-dark-fg0:          #fbf1c7;
+    gruvbox-dark-fg1:          #ebdbb2;
+    gruvbox-dark-red-dark:     #cc241d;
+    gruvbox-dark-red-light:    #fb4934;
+    gruvbox-dark-green-dark:   #98971a;
+    gruvbox-dark-green-light:  #b8bb26;
+    gruvbox-dark-yellow-dark:  #d79921;
+    gruvbox-dark-yellow-light: #fabd2f;
+    gruvbox-dark-blue-dark:    #458588;
+    gruvbox-dark-blue-light:   #83a598;
+    gruvbox-dark-purple-dark:  #b16286;
+    gruvbox-dark-purple-light: #d3869b;
+    gruvbox-dark-aqua-dark:    #689d6a;
+    gruvbox-dark-aqua-light:   #8ec07c;
+    gruvbox-dark-orange-dark:  #d65d0e;
+    gruvbox-dark-orange-light: #fe8019;
+    gruvbox-dark-gray:         #a89984;
+
+    /* Theme colors */
+    background:                  @transparent;
+    background-color:            @background;
+    foreground:                  @gruvbox-dark-fg1;
+    border-color:                @gruvbox-dark-gray;
+    separatorcolor:              @border-color;
+    scrollbar-handle:            @border-color;
+
+    normal-background:           @background;
+    normal-foreground:           @foreground;
+    alternate-normal-background: @background;
+    alternate-normal-foreground: @foreground;
+    selected-normal-background:  @gruvbox-dark-bg3;
+    selected-normal-foreground:  @gruvbox-dark-fg0;
+
+    active-background:           @gruvbox-dark-yellow-dark;
+    active-foreground:           @background;
+    alternate-active-background: @active-background;
+    alternate-active-foreground: @active-foreground;
+    selected-active-background:  @gruvbox-dark-yellow-light;
+    selected-active-foreground:  @active-foreground;
+
+    urgent-background:           @gruvbox-dark-red-dark;
+    urgent-foreground:           @background;
+    alternate-urgent-background: @urgent-background;
+    alternate-urgent-foreground: @urgent-foreground;
+    selected-urgent-background:  @gruvbox-dark-red-light;
+    selected-urgent-foreground:  @urgent-foreground;
+}
+
+
+#window {
+  location:         center;
+  anchor:           center;
+  transparency:     "screenshot";
+  padding:          10px;
+  border:           1;
+  border-radius:    10px;
+  background-color: @transparent;
+  spacing:          0;
+}
+
+#mainbox {
+  border:  0;
+  padding: 0;
+}
+
+#message {
+  padding:      1px;
+  margin: 5px;
+  background: @transparent;
+}
+
+#textbox {
+  background: @transparent;
+  highlight: @highlight;
+  text-color: @foreground;
+  font: "Monoid NF 9";
+}
+
+#listview {
+  border:       0;
+  padding:      2px dash 0 0;
+  border-color: @separatorcolor;
+  spacing:      2px;
+  scrollbar:    @scrollbar;
+}
+
+#element {
+  border:  0;
+  padding: 2px;
+}
+
+#element.normal.normal {
+  background-color: @normal-background;
+  text-color:       @normal-foreground;
+}
+
+#element.normal.urgent {
+  background-color: @urgent-background;
+  text-color:       @urgent-foreground;
+}
+
+#element.normal.active {
+  background-color: @active-background;
+  text-color:       @active-foreground;
+}
+
+#element.selected.normal {
+  background-color: @selected-normal-background;
+  text-color:       @selected-normal-foreground;
+}
+
+#element.selected.urgent {
+  background-color: @selected-urgent-background;
+  text-color:       @selected-urgent-foreground;
+}
+
+#element.selected.active {
+  background-color: @selected-active-background;
+  text-color:       @selected-active-foreground;
+}
+
+#element.alternate.normal {
+  background-color: @alternate-normal-background;
+  text-color:       @alternate-normal-foreground;
+}
+
+#element.alternate.urgent {
+  background-color: @alternate-urgent-background;
+  text-color:       @alternate-urgent-foreground;
+}
+
+#element.alternate.active {
+  background-color: @alternate-active-background;
+  text-color:       @alternate-active-foreground;
+}
+
+#scrollbar {
+  width:        4px;
+  border:       0;
+  handle-color: @scrollbar-handle;
+  handle-width: 8px;
+  padding:      0;
+}
+
+#sidebar {
+  border:       2px 0 0;
+  border-color: @separatorcolor;
+}
+
+#inputbar {
+  spacing:    0px;
+  text-color: @normal-foreground;
+  padding:    2px;
+  children:   [ prompt, textbox-prompt-sep, entry, case-indicator ];
+  background-color: @gruvbox-dark-blue-dark;
+  border-radius: 5px;
+}
+
+#case-indicator {
+  padding:    2px;
+  spacing:    0;
+  text-color: @normal-foreground;
+}
+
+#entry {
+  padding:    2px;
+  spacing:    0;
+  text-color: @normal-foreground;
+}
+
+#prompt {
+  padding:    2px;
+  spacing:    0;
+  text-color: @normal-foreground;
+}
+
+#button {
+  padding:    2px;
+  spacing:    0;
+  text-color: @normal-foreground;
+}
+
+#prompt {
+  text-color: @gruvbox-dark-green-light;
+}
+
+#button.selected {
+  background-color: @selected-normal-background;
+  text-color:       @selected-normal-foreground;
+}
+
+#textbox-prompt-sep {
+  expand:     false;
+  str:        ":";
+  text-color: @gruvbox-dark-green-light;
+  margin:     0 2px 0 0;
+}
+
