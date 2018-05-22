@@ -1,6 +1,7 @@
 # You can add comments to these files with #
 dd	~/Dokumente
 df ~/.dotfiles
+dr ~/Dropbox
 D	~/Downloads
 m	~/Musik
 pp	~/Bilder

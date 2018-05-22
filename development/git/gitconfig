@@ -1,16 +1,17 @@
 [user]
 	email = magicmonty@pagansoft.de
 	name = Martin Gondermann
+
 [core]
-	excludesfile = /Users/martingondermann/.gitignore_global
-	editor = /usr/local/bin/vim
+	excludesfile = ~/.gitignore_global
+	editor = /usr/bin/vim
 
 [difftool "sourcetree"]
-	cmd = /Users/martingondermann/bin/bcomp \"$LOCAL\" \"$REMOTE\"
+	cmd = ~/bin/bcomp \"$LOCAL\" \"$REMOTE\"
 	path = -ro
 
 [mergetool "sourcetree"]
-	cmd = /Users/martingondermann/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	cmd = ~/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
 	trustExitCode = true
 
 [difftool "bc3"]

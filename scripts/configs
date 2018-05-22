@@ -1,6 +1,7 @@
 cff	~/.dotfiles/scripts/folders
 cfc	~/.dotfiles/scripts/configs
 cfv	~/.vimrc
+cfg ~/.gitconfig
 cfr	~/.config/ranger/rc.conf
 cfi	~/.config/i3/config
 cfq	~/.config/qutebrowser/config.py

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-options="Lock\nLogout\nSuspend\nReboot\nShutdown"
+options="Lock\nLogout\nSuspend\nHibernate\nReboot\nShutdown"
 
 chosen=$(echo -e "$options" | /usr/bin/dmenu -fn "Monoid NF:16" -nb "#282828" -nf "#ebdbb2" -sb "#d65d0e" -sf "#ebdbb2" -i -l 10 -p "Bitte auswählen:")
 
@@ -11,7 +11,8 @@ lock() {
 case "$chosen" in
   Lock) lock ;;
   Logout) i3-msg exit ;;
-  Suspend) lock && systemctl suspend ;; 
+  Suspend) systemctl suspend ;; 
+  Hibernate) systemctl hibernate ;;
   Reboot) systemctl reboot ;;
   Shutdown) systemctl poweroff ;;
 esac
