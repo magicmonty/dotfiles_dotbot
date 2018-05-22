@@ -40,6 +40,9 @@ bindsym $mod+Shift+q kill
 # start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id rofi -modi drun -i -l 10 -show drun
 
+# start window switcher
+bindsym $mod+Tab exec --no-startup-id rofi -modi windowcd -show windowcd
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
