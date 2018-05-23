@@ -211,28 +211,6 @@ mode "$mode_gaps_outer" {
 smart_gaps on
 smart_borders on
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar { 
-#	#status_command i3status
-#  status_command /usr/bin/bumblebee-status -m pasink pasource disk nic battery date time -p interval=2.5 time.format="%H:%M" date.format="%a, %d.%m.%Y" disk.path=/home disk.format="{path} {left}" nic.format="{state} {ip}"  nic.exclude="enp0s31f6,lo,wwp0s20f0u6" -t gruvbox-powerline
-#	font pango:Monoid NF 11
-#	position top
-#	separator_symbol " | "
-#	strip_workspace_numbers yes
-        
-#	colors {
-#		background $bg-color
-#	    	separator #665c54
-		#                  border             background         text
-#		focused_workspace  $bg-color          $bg-color          $text-color
-#		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-#		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-#		binding_mode #d65d0e #d65d0e #282828
-#		statusline #ebdbb2
-#	}
-#}
-
 # floating windows
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Kalu"] floating enable
@@ -240,10 +218,10 @@ for_window [class="^.*"] border pixel 3
 for_window [class="Pinentry"] sticky enable
 
 # Gimp
-for_window [title="GIMP Startup"] move workspace $ws5
-for_window [class="Gimp"] move workspace $ws5
-workspace $ws5 gaps inner 0
-workspace $ws5 gaps outer 0
+for_window [title="GIMP Startup"] move workspace 5
+for_window [class="Gimp"] move workspace 5
+workspace 5 gaps inner 0
+workspace 5 gaps outer 0
 for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
 for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
 
@@ -252,6 +230,11 @@ for_window [title="mpvfloat"] floating enable
 for_window [title="mpvfloat"] sticky enable
 for_window [title="mpvfloat"] border enable
 no_focus [title="mpvfloat"]
+
+workspace 2 gaps inner 0
+workspace 2 gaps outer 0
+workspace 2 rename to Dev
+for_window [class="Code"] move workspace 2
 
 # Backlight control
 
