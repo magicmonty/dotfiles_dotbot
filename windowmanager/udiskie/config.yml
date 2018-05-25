@@ -1,0 +1,9 @@
+# Configuration for udiskie
+program_options:
+  udisks_version: 2    # always use version 2 (0 for auto detection)
+  tray:           auto # show tray icon only if there are handled devices
+  menu:           flat # flat or nested menu
+  automount:      true # enable automounting
+  password_cache: 30   # password cache in minutes
+  file_manager:   ranger-open # default is xdg-open
+

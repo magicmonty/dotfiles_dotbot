@@ -308,7 +308,7 @@ exec --no-startup-id mpd
 exec --no-startup-id xbanish -bt 2000
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id "compton -cC --xrender-sync-fence"
-# exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 exec --no-startup-id "xautolock -time 5 -locker '/usr/bin/betterlockscreen -l dimblur' -detectsleep"
 exec --no-startup-id "google-drive-ocamlfuse $HOME/GoogleDrive"
-exec --no-startup-id "udiskie -2ans"
+exec --no-startup-id "udiskie -2ans -f ~/bin/ranger-open"
