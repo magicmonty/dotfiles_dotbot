@@ -83,8 +83,8 @@ font-0 = Monoid NF:pixelsize=12;0
 font-1 = Monoid NF:pixelsize=12;0 
 font-2 = Monoid NF:pixelsize=12;0
 
-modules-left = i3 mpd
-modules-right = volume backlight home wlan battery battery1 date
+modules-left = i3 mpd 
+modules-right = volume backlight home wlan batcomb date
 
 tray-position = right
 tray-padding = 0
@@ -247,6 +247,11 @@ bar-volume-fill-font = 2
 bar-volume-empty = =
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/batcomb]
+type = custom/script
+exec = ~/.config/polybar/battery-combined-udev.sh
+tail = true
 
 [module/battery]
 type = internal/battery

@@ -9,6 +9,11 @@
     }
   },
   {
+    "shell": [
+      "sudo cp windowmanager/polybar/95-battery.rules /etc/udev/rules.d", "Copying udev rules for i3 battery script"
+    ]
+  },
+  {
     "link": {
       "~/.config/compton.conf": "apps/compton.conf",
       "~/.config/dunst": "windowmanager/dunst",
