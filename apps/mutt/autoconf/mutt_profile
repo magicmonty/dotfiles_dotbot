@@ -1,0 +1,20 @@
+# vim: filetype=neomuttrc
+# muttrc file for account $title
+set realname = "$realname"
+set from = "$fulladdr"
+set smtp_url = "smtp://$login@$smtp:$sport/"
+set sendmail = "/usr/bin/msmtp -a $title"
+set folder = "~/.mail/$title"
+set header_cache = ~/.config/mutt/accounts/$title/cache/headers
+set message_cachedir = ~/.config/mutt/accounts/$title/cache/bodies
+set certificate_file = ~/.config/mutt/accounts/$title/certificates
+source "~/.config/mutt/credentials/getmuttpass $title |"
+
+set mbox_type = Maildir
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+bind index,pager gg noop
+bind index,pager g noop
+bind index gg first-entry
+unmailboxes *
