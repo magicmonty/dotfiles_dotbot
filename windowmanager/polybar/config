@@ -84,7 +84,7 @@ font-1 = Monoid NF:pixelsize=12;0
 font-2 = Monoid NF:pixelsize=12;0
 
 modules-left = i3 mpd
-modules-right = volume backlight home wlan battery date
+modules-right = volume backlight home wlan battery battery1 date
 
 tray-position = right
 tray-padding = 0
@@ -105,6 +105,19 @@ label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/i3]
+
+ws-icon-default =  
+ws-icon-0 = "1;1"
+ws-icon-1 = "2:Dev;"
+ws-icon-2 = "3:Music;"
+ws-icon-3 = "4;4"
+ws-icon-4 = "5;5"
+ws-icon-5 = "6;6"
+ws-icon-6 = "7;7"
+ws-icon-7 = "8;8"
+ws-icon-8 = "9;9"
+ws-icon-9 = "10:jack;"
+
 type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
@@ -115,13 +128,13 @@ label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
+label-focused = %icon%
 label-focused-background = ${colors.background-alt}
 label-focused-underline = ${colors.primary}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
+label-unfocused = %icon%
 label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
@@ -265,6 +278,11 @@ animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
+
+[module/battery1]
+inherit = module/battery
+battery = BAT1
+
 
 [settings]
 screenchange-reload = true

@@ -1,0 +1,9 @@
+#!/bin/env sh
+
+if [ "$(synclient -l | grep TouchpadOff | cut -d = -f 2 | cut -b 2)" = "0" ]; then 
+  synclient TouchpadOff=1
+  notify-send -a TouchPad "Touchpad disabled"
+else
+  synclient TouchpadOff=0
+  notify-send -a TouchPad "Touchpad enabled"
+fi

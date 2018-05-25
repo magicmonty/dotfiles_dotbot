@@ -18,6 +18,7 @@ font pango:Monoid NF 11
 
 # thin borders
 hide_edge_borders both
+for_window [class="^.*"] border pixel 3
 
 focus_follows_mouse no
 
@@ -30,6 +31,8 @@ focus_follows_mouse no
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+bindsym $mod+F12 exec $HOME/.config/i3/touchpad-toggle
 
 # start a terminal
 bindsym $mod+Return exec $term
@@ -93,32 +96,44 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+
+set $ws1 "1"
+set $ws2 2:Dev
+set $ws3 3:Music
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10:jack"
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+c exec "i3-msg reload && notify-send -a i3 -u low 'Reloaded'"
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -214,14 +229,13 @@ smart_borders on
 # floating windows
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Kalu"] floating enable
-for_window [class="^.*"] border pixel 3
 for_window [class="Pinentry"] sticky enable
 
 # Gimp
-for_window [title="GIMP Startup"] move workspace 5
-for_window [class="Gimp"] move workspace 5
-workspace 5 gaps inner 0
-workspace 5 gaps outer 0
+for_window [title="GIMP Startup"] move workspace $ws5
+for_window [class="Gimp"] move workspace $ws5
+workspace $ws5 gaps inner 0
+workspace $ws5 gaps outer 0
 for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
 for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
 
@@ -231,10 +245,15 @@ for_window [title="mpvfloat"] sticky enable
 for_window [title="mpvfloat"] border enable
 no_focus [title="mpvfloat"]
 
-workspace 2 gaps inner 0
-workspace 2 gaps outer 0
-workspace 2 rename to Dev
-for_window [class="Code"] move workspace 2
+workspace $ws2 gaps inner 0
+workspace $ws2 gaps outer 0
+for_window [class="Code"] move workspace $ws2
+for_window [class="Sonic Pi"] move workspace $ws3; workspace $ws3
+for_window [class="Sonic Pi" window_type=splash] floating enable, border pixel 0 
+
+workspace $ws10 gaps inner 0
+workspace $ws10 gaps outer 0
+for_window [class="qjackctl"] move workspace $ws10
 
 # Backlight control
 
@@ -285,10 +304,11 @@ exec_always --no-startup-id /usr/bin/betterlockscreen -w
 exec_always --no-startup-id $HOME/.config/polybar/launch
 exec --no-startup-id dunst
 exec --no-startup-id mpd
-# Unclutter makes the mouse invisible after a brief period
-exec --no-startup-id unclutter
+# xbanish makes the mouse invisible after a 2000 ms and while typing
+exec --no-startup-id xbanish -bt 2000
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id "compton -cC --xrender-sync-fence"
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 exec --no-startup-id "xautolock -time 5 -locker '/usr/bin/betterlockscreen -l dimblur' -detectsleep"
 exec --no-startup-id "google-drive-ocamlfuse $HOME/GoogleDrive"
+exec --no-startup-id "udiskie -2ans"
