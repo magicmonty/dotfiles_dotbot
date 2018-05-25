@@ -1,0 +1,19 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/.config/fish/functions/pinst.fish": "shells/fish/config/fish/functions/pinst.fish",
+      "~/.config/fish/functions/puninst.fish": "shells/fish/config/fish/functions/puninst.fish",
+      "~/.config/fish/functions/psearch.fish": "shells/fish/config/fish/functions/psearch.fish",
+      "~/.config/fish/functions/pupd.fish": "shells/fish/config/fish/functions/pupd.fish"
+    }
+  }
+]
