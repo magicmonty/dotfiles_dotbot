@@ -11,7 +11,7 @@ lock() {
 case "$chosen" in
   Lock) lock ;;
   Logout) i3-msg exit ;;
-  Suspend) systemctl suspend ;; 
+  Suspend) systemctl hybrid-sleep ;; 
   Hibernate) systemctl hibernate ;;
   Reboot) systemctl reboot ;;
   Shutdown) systemctl poweroff ;;
