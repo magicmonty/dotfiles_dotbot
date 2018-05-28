@@ -1,0 +1,104 @@
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+
+*foreground: #ebdbb2
+*foreground_bold: #ebdbb2
+*cursor: #a8a19f
+*background: rgba(40, 40, 40, .6)
+
+!! black
+*color0: #282828
+*color8: #928374
+!! red
+*color1: #cc241d
+*color9: #fb4934
+!! green
+*color2: #98971a
+*color10: #b8bb26
+!! yellow
+*color3: #d79921
+*color11: #fabd2f
+!! blue
+*color4: #458588
+*color12: #83a598
+!! magenta
+*color5: #b16286
+*color13: #d3869b
+!! cyan
+*color6: #689d6a
+*color14: #8ec07c
+!! white
+*color7: #a89984
+*color15: #ebdbb2
+
+URxvt.color24:  #076678
+URxvt.color66:  #427b58
+URxvt.color88:  #9d0006
+URxvt.color96:  #8f3f71
+URxvt.color100: #79740e
+URxvt.color108: #8ec07c
+URxvt.color109: #83a598
+URxvt.color130: #af3a03
+URxvt.color136: #b57614
+URxvt.color142: #b8bb26
+URxvt.color167: #fb4934
+URxvt.color175: #d3869b
+URxvt.color208: #fe8019
+URxvt.color214: #fabd2f
+URxvt.color223: #ebdbb2
+URxvt.color228: #f2e5bc
+URxvt.color229: #fbf1c7
+URxvt.color230: #f9f5d7
+URxvt.color234: #1d2021
+URxvt.color235: #282828
+URxvt.color236: #32302f
+URxvt.color237: #3c3836
+URxvt.color239: #504945
+URxvt.color241: #665c54
+URxvt.color243: #7c6f64
+URxvt.color244: #928374
+URxvt.color245: #928374
+URxvt.color246: #a89984
+URxvt.color248: #bdae93
+URxvt.color250: #d5c4a1
+
+URxvt.intensityStyles:	false
+URxvt.background:       [70]#282828
+URxvt.depth:		32
+URxvt*font: 		xft:Monoid NF:size=12
+URxvt.scrollBar:	false
+URxvt.cursorColor:	#ebdbb2
+URxvt.cursorUnderline: false
+URxvt*letterSpace: -1
+
+!! Extensions
+URxvt.perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select
+URxvt.colorUL:		#458588
+!! url-select
+URxvt.keysym.M-u:	perl:url-select:select_next
+URxvt.url-select.launcher: linkhandler
+URxvt.url-select.underline: true
+!! keyboard-select:
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+!! resize-font
+URxvt.resize-font.smaller:	C-Down
+URxvt.resize-font.bigger:	C-Up
+!! Matcher
+URxvt.url-launcher:	linkhandler
+URxvt.matcher.button:	1
+
+rofi.color-enabled:	true
+rofi.color-window:	#000, #000, #000
+rofi.color-normal:	#111, #819396, #222, #008ed4, #ffffff
+rofi.color-active:	#002b37, #008ed4, #003643, #008ed4, #66c6ff
+rofi.color-urgent:	#002b37, #da4281, #003643, #008ed4, #890661
+
+rofi.fake-transparency:	true
+rofi.lines:		3
+rofi.bw:		0
+rofi.opacity:		"10"
+rofi.hide-scrollbar:	true
+rofi.width:		30-1
