@@ -22,7 +22,13 @@
       "~/.config/ranger": "apps/ranger",
       "~/.config/rofi": "windowmanager/rofi",
       "~/.config/termite": "apps/termite",
-      "~/.Xdefaults": "windowsmanager/Xdefaults"
+      "~/.Xdefaults": "windowmanager/Xdefaults",
+      "~/bin/linkhandler": "windowmanager/bindir/linkhandler",
+      "~/bin/camtoggle": "windowmanager/bindir/camtoggle",
+      "~/bin/dmenuhandler": "windowmanager/bindir/dmenuhandler",
+      "~/bin/lmc": "windowmanager/bindir/lmc",
+      "~/bin/ranger-open": "windowmanager/bindir/ranger-open",
+      "~/bin/umpv": "windowmanager/bindir/umpv"
     }
   }
 ]

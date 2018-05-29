@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case "$1" in
+  "up") pamixer --allow-boost -i "$2" ;;
+  "down") pamixer --allow-boost -d "$2" ;;
+  "mute") pamixer --allow-boost -t ;;
+  "truemute") pamixer --allow-boost -m ;;
+  "toggle") mpc toggle ;;
+  "pause") mpc pause ;;
+  "forward") mpc seek +"$2" ;;
+  "back") mpc seek -"$2" ;;
+  "next") mpc next ;;
+  "prev") mpc prev ;;
+  "replay") mpc seek 0% ;;
+esac
+
+exit
