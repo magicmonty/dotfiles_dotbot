@@ -41,6 +41,7 @@ abbr -a wdw git wdw
 abbr -a most-changed git log --format=%n --name-only | grep -v '^$' | sort | uniq -c | sort --numeric-sort --reverse | head -n 50
 
 abbr -a gcleanf git clean -xdf
+abbr -a gpush git push
 
 function git
   # inspired by thoughtbot/dotfiles

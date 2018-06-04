@@ -28,7 +28,8 @@
       "~/bin/dmenuhandler": "windowmanager/bindir/dmenuhandler",
       "~/bin/lmc": "windowmanager/bindir/lmc",
       "~/bin/ranger-open": "windowmanager/bindir/ranger-open",
-      "~/bin/umpv": "windowmanager/bindir/umpv"
+      "~/bin/umpv": "windowmanager/bindir/umpv",
+      "~/.mailcap": "windowmanager/mailcap"
     }
   }
 ]

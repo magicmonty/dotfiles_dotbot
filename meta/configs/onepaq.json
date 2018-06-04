@@ -1,0 +1,24 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/bin/1pc": "apps/onepaq/bindir/1pc",
+      "~/bin/1plist": "apps/onepaq/bindir/1plist",
+      "~/bin/1plock": "apps/onepaq/bindir/1plock",
+      "~/bin/1pmenu": "apps/onepaq/bindir/1pmenu",
+      "~/bin/1pread": "apps/onepaq/bindir/1pread",
+      "~/bin/1pserver": "apps/onepaq/bindir/1pserver",
+      "~/bin/1pstatus": "apps/onepaq/bindir/1pstatus",
+      "~/bin/1punlock": "apps/onepaq/bindir/1punlock",
+      "~/bin/onepaq": "apps/onepaq/bindir/onepaq"
+    }
+  }
+]

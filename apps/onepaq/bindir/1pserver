@@ -1,0 +1,3 @@
+#!/bin/env sh
+
+$HOME/bin/onepaq server -config-path $HOME/.config/onepaq/default.json

@@ -1,0 +1,14 @@
+image/x-imgur-album; feh --scale-down --auto-zoom %s; test=test -n "$DISPLAY"
+image/gif; mpv '%s' --autofit 640x480 --loop=inf; test=test -n "$DISPLAY"
+image/*; feh --scale-down --auto-zoom '%s'; test=test -n "$DISPLAY"
+
+video/x-youtube; mpv --ytdl-format=best '%s' --autofit 640x480; test=test -n "$DISPLAY"
+video/*; mpv '%s' --autofit 640x480 --loop=inf; test=test -n "$DISPLAY"
+
+# Non X-Server commands
+image/x-imgur-album; echo
+image/*; curl -s '%s' | convert -resize 80x80 - jpg:/tmp/rtv.jpg && img2xterm /tmp/rtv.jpg; needsterminal; copiousoutput
+image/*; curl -s '%s' | convert - jpg:/tmp/rtv.jpg && img2txt -f utf8 /tmp/rtv.jpg; needsterminal; copiousoutput
+
+video/x-youtube; mpv -vo drm -quiet '%s'; needsterminal
+video/*; mpv -vo drm -quiet '%s'; needsterminal

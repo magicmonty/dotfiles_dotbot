@@ -9,6 +9,9 @@ end
 set fish_key_bindings fish_vi_key_bindings
 
 set -gx EDITOR vim
+set -gx RTV_EDITOR vim
+set -gx RTV_BROWSER qutebrowser
+set -gx BROWSER qutebrowser
 
 source ~/.config/fish/abbr.fish
 source ~/.config/fish/autoenv.fish

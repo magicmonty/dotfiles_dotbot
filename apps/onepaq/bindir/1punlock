@@ -1,0 +1,17 @@
+#!/bin/env sh
+
+pgrep onepaq >/dev/null 2>/dev/null || $HOME/bin/1pserver &
+
+$HOME/bin/1pstatus >/dev/null 2>/dev/null
+if [ $? = 0 ]; then
+  exit 0
+fi
+
+password=$(rofi -dmenu -l 0 -p "Vault password" -password 2>/dev/null)
+if [ "$password" = "" ]; then
+  notify-send -u critical "No password!"
+  exit 1
+fi
+
+$HOME/bin/1pc -act unlock -pass $password
+exit $?

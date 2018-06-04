@@ -1,0 +1,11 @@
+#!/bin/env sh
+$HOME/bin/1pc -act status >/dev/null 2>/dev/null
+result=$?
+
+if [ $result = 0 ]; then
+  echo unlocked;
+else
+  echo locked 
+fi
+
+exit $result
