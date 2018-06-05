@@ -30,6 +30,7 @@
       "~/bin/ranger-open": "windowmanager/bindir/ranger-open",
       "~/bin/umpv": "windowmanager/bindir/umpv",
       "~/bin/getpocket": "apps/pockyt/getpocket",
+      "~/bin/addpocket": "apps/pockyt/addpocket",
       "~/.mailcap": "windowmanager/mailcap"
     }
   }
