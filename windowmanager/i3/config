@@ -94,6 +94,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 bindsym $mod+p exec ~/bin/1pmenu 
+bindsym $mod+numbersign exec rofi-pass
 
 set $ws1 "1"
 set $ws2 2:Dev
@@ -291,6 +292,7 @@ bindsym $mod+Mod1+s exec --no-startup-id "killall screenkey || screenkey"
 bindsym $mod+w exec "/usr/bin/qutebrowser"
 bindsym $mod+n exec $term -e /usr/bin/ranger
 bindsym $mod+m exec $term -e /usr/bin/ncmpcpp
+bindsym $mod+Mod1+d exec ~/bin/getpocket 
 
 # Autostart apps
 exec_always --no-startup-id /usr/bin/betterlockscreen -w
@@ -302,7 +304,7 @@ exec --no-startup-id xbanish -bt 2000
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id "compton -cC --xrender-sync-fence"
 exec --no-startup-id nm-applet
-exec --no-startup-id "xautolock -time 5 -locker '/usr/bin/betterlockscreen -l dimblur' -detectsleep"
+exec --no-startup-id "xss-lock -- /usr/bin/betterlockscreen -l dimblur"
 exec --no-startup-id "google-drive-ocamlfuse $HOME/GoogleDrive"
 exec --no-startup-id "udiskie -2ans -f ~/bin/ranger-open"
 exec --no-startup-id "1pserver"

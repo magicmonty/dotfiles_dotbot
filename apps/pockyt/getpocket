@@ -1,0 +1,11 @@
+#!/bin/env sh
+
+IFS=$'\n'
+items=($(pockyt get -n 10 | cut -d "|" -f 2-3 | sed -e 's/^[[:space:]]*//'))
+
+selected=$(printf "%s\n" ${items[@]} | cut -d "|" -f 1 | rofi -dmenu -i -sync -l 11 -no-show-icons -p "Last added" -format "i")
+
+if [ "$selected" != "" ]; then
+  url=$(echo "${items[selected]}" | cut -d "|" -f 2 | sed -e 's/^[[:space:]]//')
+  xdg-open $url
+fi

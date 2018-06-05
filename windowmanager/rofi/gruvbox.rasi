@@ -29,8 +29,9 @@ configuration {
     scrollbar: true;
 
     font: "Monoid NF 12";
-    transparent: rgba(40,40,40,0.6);
 
+    transparent: rgba(0, 0, 0, 0);
+    transparent60: rgba(40, 40, 40, 0.95);
 
     /* Gruvbox dark colors */
     gruvbox-dark-bg0-soft:     #32302f;
@@ -89,22 +90,21 @@ configuration {
   location:         center;
   anchor:           center;
   transparency:     "screenshot";
-  padding:          10px;
-  border:           1;
-  border-radius:    10px;
-  background-color: @transparent;
-  spacing:          0;
+  padding:          0px;
+  border:           1px;
+  border-color:     @separatorcolor;
+  background-color: @transparent60;
+  spacing:          0px;
 }
 
 #mainbox {
   border:  0;
-  padding: 0;
 }
 
 #message {
   padding:      1px;
   margin: 5px;
-  background: @transparent;
+  /* background: @transparent; */
 }
 
 #textbox {
@@ -190,8 +190,9 @@ configuration {
   text-color: @normal-foreground;
   padding:    2px;
   children:   [ prompt, textbox-prompt-sep, entry, case-indicator ];
-  background-color: @gruvbox-dark-blue-dark;
-  border-radius: 5px;
+  border-radius: 0px;
+  border: 0 0 1px 0;
+  border-color: @separatorcolor;
 }
 
 #case-indicator {

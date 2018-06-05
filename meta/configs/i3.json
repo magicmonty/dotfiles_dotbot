@@ -29,6 +29,7 @@
       "~/bin/lmc": "windowmanager/bindir/lmc",
       "~/bin/ranger-open": "windowmanager/bindir/ranger-open",
       "~/bin/umpv": "windowmanager/bindir/umpv",
+      "~/bin/getpocket": "apps/pockyt/getpocket",
       "~/.mailcap": "windowmanager/mailcap"
     }
   }
