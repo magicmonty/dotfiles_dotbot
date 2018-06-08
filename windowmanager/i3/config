@@ -94,6 +94,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 bindsym $mod+p exec ~/bin/1pmenu 
+bindsym $mod+Shift+p exec ~/bin/1pswitchvault
 bindsym $mod+numbersign exec rofi-pass
 
 set $ws1 "1"

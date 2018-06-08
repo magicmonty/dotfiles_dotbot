@@ -79,7 +79,7 @@ URxvt.perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select
 URxvt.colorUL:		#458588
 !! url-select
 URxvt.keysym.M-u:	perl:url-select:select_next
-URxvt.url-select.launcher: linkhandler
+URxvt.url-select.launcher: ~/bin/linkhandler
 URxvt.url-select.underline: true
 !! keyboard-select:
 URxvt.keysym.M-Escape: perl:keyboard-select:activate

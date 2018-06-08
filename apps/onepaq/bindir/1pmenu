@@ -2,7 +2,8 @@
 
 items=$($HOME/bin/1plist)
 if [ $? = 0 ]; then
-  item=$(echo -e "$items" | rofi -matching fuzzy -dmenu -p "Select Password")
+ vaultname=$(cat ~/.config/onepaq/current)
+ item=$(echo -e "$items" | rofi -matching fuzzy -dmenu -i -p "$vaultname")
   if [ $? = 0 ]; then
     password=$($HOME/bin/1pread "$item")
     if [ $? = 0 ]; then

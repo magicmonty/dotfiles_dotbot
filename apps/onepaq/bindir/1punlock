@@ -7,7 +7,8 @@ if [ $? = 0 ]; then
   exit 0
 fi
 
-password=$(rofi -dmenu -l 0 -p "Vault password" -password 2>/dev/null)
+vaultname=$(cat ~/.config/onepaq/current)
+password=$(rofi -dmenu -l 0 -p "Password for $vaultname" -password 2>/dev/null)
 if [ "$password" = "" ]; then
   notify-send -u critical "No password!"
   exit 1
