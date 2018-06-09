@@ -96,6 +96,7 @@ bindsym $mod+a focus parent
 bindsym $mod+p exec ~/bin/1pmenu 
 bindsym $mod+Shift+p exec ~/bin/1pswitchvault
 bindsym $mod+numbersign exec rofi-pass
+bindsym $mod+s exec ~/bin/toggle_screensaver
 
 set $ws1 "1"
 set $ws2 2:Dev
@@ -309,3 +310,4 @@ exec --no-startup-id "xss-lock -- /usr/bin/betterlockscreen -l dimblur"
 exec --no-startup-id "google-drive-ocamlfuse $HOME/GoogleDrive"
 exec --no-startup-id "udiskie -2ans -f ~/bin/ranger-open"
 exec --no-startup-id "1pserver"
+exec --no-startup-id "xset s on"

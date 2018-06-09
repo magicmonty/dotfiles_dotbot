@@ -1,0 +1,11 @@
+#!/bin/env sh
+
+timeout=$(xset q | awk '/timeout:/ {print $2}')
+
+if [[ timeout -eq 0 ]]; then
+  xset s on
+  notify-send -u low -a "Screensaver" "Screensaver is now on"
+else
+  xset s off
+  notify-send -u low -a "Screensaver" "Screensaver is now off"
+fi
