@@ -127,8 +127,8 @@ def unmute
   set_mixer_control! amp: 1.0
 end
 
-$volca_port = "usb-midi-gerät"
-$circuit_port = "circuit"
+$volca_port = "usb_uno_midi_interface_midi_1"
+$circuit_port = "circuit_midi_1"
 
 def volca_fm(note, sustain: 0.25, vel: 50)
   midi_cc 41, vel, port: $volca_port, channel: 1
@@ -145,4 +145,12 @@ end
 
 def c2(note, sustain: 1.0, vel: 128)
   midi note, sustain: sustain, vel: vel, port: $circuit_port, channel: 2
+end
+
+def m(note, sustain: 0.25, vel:128)
+  midi note, sustain: sustain, vel: vel, port: $volca_port, channel: 3
+end
+
+def mcc(value) 
+  midi_cc value, port: $volca_port, channel: 3
 end

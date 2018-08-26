@@ -1,0 +1,26 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	1) urxvt -e nmtui-connect ;;
+esac
+
+INTERFACE="${BLOCK_INSTANCE:-wlp4s0}"
+
+[[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]] && echo ﲁ && exit
+
+QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+NAME=$(iwgetid | grep $INTERFACE | cut -d \" -f 2)
+
+echo 說 $NAME - $QUALITY%
+echo 說 $NAME - $QUALITY%
+
+# color
+if [[ $QUALITY -ge 80 ]]; then
+    echo "#98971A"
+elif [[ $QUALITY -lt 80 ]]; then
+    echo "#D79921"
+elif [[ $QUALITY -lt 60 ]]; then
+    echo "#D65D0E"
+elif [[ $QUALITY -lt 40 ]]; then
+    echo "#CC241D"
+fi

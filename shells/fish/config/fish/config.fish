@@ -8,18 +8,28 @@ end
 
 set fish_key_bindings fish_vi_key_bindings
 
-set -gx EDITOR vim
-set -gx RTV_EDITOR vim
-set -gx RTV_BROWSER qutebrowser
-set -gx BROWSER qutebrowser
+set -gx EDITOR /usr/bin/vim
+set -gx RTV_EDITOR /usr/bin/vim
+set -gx RTV_BROWSER /usr/bin/qutebrowser
+set -gx BROWSER /usr/bin/qutebrowser
+set -gx TERMINAL /usr/bin/termite
 
 source ~/.config/fish/abbr.fish
 source ~/.config/fish/autoenv.fish
 
 if [ -e ~/.cargo/bin/ ]
   set -gx PATH ~/.cargo/bin $PATH
-  set -gx MATES_DIR /Users/martingondermann/.contacts/pagansoft
+  set -gx MATES_DIR ~/.contacts/pagansoft
 end
+
+if [ -e /opt/dotnet ]
+  set -gx DOTNET_ROOT /opt/dotnet/
+end
+
+if [ -e ~/.dotnet/tools ]
+  set -gx PATH ~/.dotnet/tools $PATH
+end
+
 if [ -e ~/bin/ ]
   set -gx PATH ~/bin $PATH
 end

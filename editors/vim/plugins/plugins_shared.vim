@@ -77,7 +77,10 @@ if has('nvim')
     " endif
   " endfunction
 
-  " Plug 'callmekohei/deoplete-fsharp', { 'do': function('BuildDeopleteFSharp') }
+  Plug 'callmekohei/deoplete-fsharp', { 'do': function('BuildDeopleteFSharp') }
 else
-	Plug 'Shougo/neocomplete.vim'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
+

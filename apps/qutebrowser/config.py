@@ -15,10 +15,15 @@ config.bind(";O", "hint links fill :open -t -r {hint-url}")
 # Yank link
 config.bind(",y", "hint links yank")
 
+config.bind(",m", "hint links fill :quickmark-add {hint-url} ")
+
 # Add to Pocket
 config.bind(",p", "hint links spawn ~/bin/addpocket {hint-url}")
 config.bind("P", "spawn ~/bin/addpocket {url} ")
 config.bind("gp", ":open https://getpocket.com/a/queue")
 
 config.load_autoconfig()
+
+c.input.insert_mode.auto_leave = True
+c.input.insert_mode.auto_load = True
 

@@ -1,11 +1,12 @@
 # You can add comments to these files with #
 dd	~/Dokumente
-df ~/.dotfiles
+dff ~/.dotfiles
 dr ~/Dropbox
 dl ~/Downloads
 D	~/Downloads
 m	~/Musik
 pp	~/Bilder
+pk ~/Bilder/Korea
 vv	~/Videos
 s	~/.dotfiles/scripts
 cf	~/.config

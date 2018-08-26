@@ -62,7 +62,6 @@ set foldlevelstart=99   " Start with all folds open.
 
 set whichwrap+=<,>,[,]  " Allow left/right arrows to move across lines.
 
-set nomodeline          " Ignore modelines.
 set nojoinspaces        " Don't get fancy with the spaces when joining lines.
 set textwidth=0         " Don't auto-wrap lines except for specific filetypes.
 
@@ -399,7 +398,7 @@ if exists(":RainbowParenthesesToggle")
   au Syntax * RainbowParenthesesLoadBraces
 endif
 
-let g:airline_theme='apprentice'
+let g:airline_theme='gruvbox'
 
 let g:airline#extensions#syntastic#enabled = 1
 
@@ -428,7 +427,7 @@ if $TERMKIT_HOST_APP=="Cathode"
 endif
 
 
-silent! colorscheme apprentice
+silent! colorscheme gruvbox
 set background=dark
 
 """
@@ -465,20 +464,16 @@ function! s:ConfigureWindow()
 
 endfunction
 
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-      \ "\<lt>C-n>" :
-      \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-      \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-      \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
-
 nnoremap <leader><Tab> :tabNext<cr>
 " let g:NERDTreeQuitOnOpen=1
 
-
-" let g:UltiSnipsExpandTrigger="<tab>"
-"l et g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
+let g:UltiSnipsSnippetDirectories = [ "UltiSnips" ]
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader>n"
+let g:UltiSnipsJumpBackwardTrigger="<leader>p"
+let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsUsePythonVersion = 3
 
 noremap <leader>bn :bn<cr>
 noremap <leader>bp :bp<cr>
@@ -494,6 +489,7 @@ if &term =~ '256color'
   " render properly when inside 256-color tmux and GNU screen.
   " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
   set t_ut=
+  hi Normal guibg=NONE ctermbg=NONE
 endif
 
 noremap H 0
@@ -548,6 +544,11 @@ let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
 let g:SuperTabClosePreviewOnPopupClose = 1
+
+autocmd FileType *
+      \ if &omnifunc != '' |
+      \   call SuperTabChain(&omnifunc, "<c-x><c-o>") |
+      \ endif
 
 set completeopt=longest,menuone,preview
 
@@ -664,3 +665,10 @@ endif
 
 autocmd BufWritePost ~/.dotfiles/scripts/folders,~/.dotfiles/scripts/configs !bash ~/.dotfiles/scripts/shortcuts.sh
 
+set pyxversion=3
+set encoding=utf-8
+
+let g:sonicpi_command = 'sonic-pi-tool'
+let g:sonicpi_send = 'eval-stdin'
+let g:sonicpi_stop = 'stop'
+let g:vim_redraw = 1

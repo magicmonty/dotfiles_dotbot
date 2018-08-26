@@ -1,0 +1,15 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	1) /usr/bin/termite -e ncpamixer & disown ;;
+	3) pamixer -t ;;
+	4) pamixer -i 5 ;;
+	5) pamixer -d 5 ;;
+esac
+
+if [[ $(pamixer --get-mute) = "true" ]]; then
+  echo "<span color=\"#928374\"> [mute]</span>"
+else
+  VOLUME=$(pamixer --get-volume)
+  echo 墳 $VOLUME%
+fi

@@ -185,6 +185,8 @@ bar-indicator = |
 bar-fill = -
 bar-empty = -
 
+enable-scroll = true
+
 [module/wlan]
 type = internal/network
 interface = wlp4s0
@@ -218,7 +220,10 @@ format-underline = ${colors.color12}
 label = %date% %time%
 
 [module/volume]
-type = internal/volume
+type = internal/pulseaudio
+; sink=alsa_output.pci-0000_00_1f.3.analog-stereo
+sink=jack_out
+use-ui-max = true
 
 format-volume = <ramp-volume> <bar-volume>
 label-volume = 
@@ -226,6 +231,7 @@ label-volume-foreground = ${root.foreground}
 
 format-muted-foreground = ${colors.foreground-alt}
 label-muted =  muted
+label-muted-foreground = #66
 
 ramp-volume-0 = 奄
 ramp-volume-1 = 奔
