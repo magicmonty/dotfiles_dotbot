@@ -11,16 +11,19 @@ INTERFACE="${BLOCK_INSTANCE:-wlp4s0}"
 QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
 NAME=$(iwgetid | grep $INTERFACE | cut -d \" -f 2)
 
-echo 說 $NAME - $QUALITY%
-echo 說 $NAME - $QUALITY%
+TEXT="說 $NAME - $QUALITY%"
 
 # color
 if [[ $QUALITY -ge 80 ]]; then
-    echo "#98971A"
+    bgcolor="#98971A"
 elif [[ $QUALITY -lt 80 ]]; then
-    echo "#D79921"
+    bgcolor="#D79921"
 elif [[ $QUALITY -lt 60 ]]; then
-    echo "#D65D0E"
+    bgcolor="#D65D0E"
 elif [[ $QUALITY -lt 40 ]]; then
-    echo "#CC241D"
+    bgcolor="#CC241D"
+else
+    bgcolor="#ebdbb2"
 fi
+
+echo "<span background=\"#282828\" color=\"$bgcolor\"></span><span background=\"$bgcolor\"> $TEXT </span>"

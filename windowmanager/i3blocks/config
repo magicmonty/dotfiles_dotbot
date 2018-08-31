@@ -1,5 +1,5 @@
 command=/usr/lib/i3blocks/$BLOCK_NAME
-separator_block_width=15
+separator_block_width=0
 markup=pango
 
 #[record]
@@ -25,37 +25,14 @@ interval=once
 signal=9
 
 [sonicpi]
-label=π
 command=~/bin/i3pi
 signal=8
 interval=once
-
-#[pacman]
-#label=PAC
-#command=~/bin/i3pacman
-#interval=once
-#signal=8
-
-#[torrents]
-#command=~/bin/i3torrent
-#interval=20
-#signal=7
 
 [weather]
 command=~/bin/i3weather
 interval=3600
 signal=9
-
-#[mail]
-#label=MAIL
-#command=~/bin/i3mail
-#interval=180
-#signal=12
-
-[iface]
-label=
-#instance=wlan0
-interval=10
 
 [wifi]
 command=~/bin/i3wifi
@@ -66,8 +43,18 @@ interval=10
 command=~/bin/i3battery
 interval=5
 
+[mail]
+label=
+command=~/bin/i3mail
+interval=180
+signal=12
+
 [time]
-label=
-command=echo $(date '+ %a, %d.%m.%Y  %H:%M')
+command=~/bin/i3time
 interval=30
 
+[pacman]
+label=
+command=~/bin/i3pacman -q -a -b "#928374" -u "#b8bb26"
+interval=3600
+signal=13

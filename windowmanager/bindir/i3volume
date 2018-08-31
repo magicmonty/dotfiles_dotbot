@@ -1,15 +1,19 @@
 #!/bin/bash
 
 case $BLOCK_BUTTON in
-	1) /usr/bin/termite -e ncpamixer & disown ;;
-	3) pamixer -t ;;
-	4) pamixer -i 5 ;;
-	5) pamixer -d 5 ;;
+	1) /usr/bin/termite -e 'alsamixer -c 0' & disown ;;
+	3) amixer -c 0 sset Master toggle >/dev/null 2>&1;;
+	4) amixer -c 0 sset Master 1%+ >/dev/null 2>&1;;
+	5) amixer -c 0 sset Master 1%- >/dev/null 2>&1;;
 esac
 
-if [[ $(pamixer --get-mute) = "true" ]]; then
-  echo "<span color=\"#928374\"> [mute]</span>"
+bgcolor="#b8bb26"
+fgcolor="#282828"
+
+V=$(amixer -c 0 sget Master | grep 'Mono')
+if [[ $(echo $V | sed -e 's/.*\[\(on\|off\)\].*/\1/g') = "off" ]]; then
+  echo "<span color=\"$bgcolor\"></span><span background=\"$bgcolor\" color=\"#98971A\"> [mute]</span>"
 else
-  VOLUME=$(pamixer --get-volume)
-  echo 墳 $VOLUME%
+  VOLUME=$(echo $V | sed -e 's/.*\[\([[:digit:]]\+\)%\].*/\1/gm')
+  echo "<span color=\"$bgcolor\"></span><span background=\"$bgcolor\" color=\"$fgcolor\">墳 $VOLUME%</span>"
 fi

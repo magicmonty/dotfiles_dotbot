@@ -3,6 +3,9 @@ call plug#begin('~/.vim-plug')
 source ~/.vim/plugins_shared.vim
 
 Plug 'dermusikman/sonicpi.vim'
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-classpath'
 
 call plug#end()
 

@@ -6,7 +6,7 @@ if [[ -n $BLOCK_INSTANCE ]]; then
 fi
 
 filter() {
-  sed 2q | tac | sed -e "s/\&/&amp;/g;s/mpd error: \(.*\)/<span color=\"red\">\\1/g;s/volume:.*/<span color=\"gray\" font-style=\"italic\">Not playing/g;s/\[paused\].*/<span color=\"gray\" font_style=\"italic\">/g;s/\[playing\].*/<span>/g" | tr -d '\n' | sed -e "s/$/<\/span>/g"
+  sed 2q | tac | sed -e "s/\&/&amp;/g;s/mpd error: \(.*\)/<span color=\"red\">\\1/g;s/volume:.*/<span color=\"gray\" font-style=\"italic\">Not playing/g;s/\[paused\].*/<span color=\"gray\" font_style=\"italic\">/g;s/\[playing\].*/<span>/g" | tr -d '\n' | sed -e "s/$/<\/span> /g"
 }
 
 case $BLOCK_BUTTON in

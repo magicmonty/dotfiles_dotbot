@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # This script will run offlineimap and check
 # for new email if there is an internet connection.
 #
@@ -7,21 +7,24 @@
 #
 # I have this run as a cronjob every 5 minutes.
 
-export DISPLAY=:0.0
+# export DISPLAY=:0.0
 
 # Checks for internet connection and set notification script.
-# Settings are different for MacOS (Darwin) systems.
-if [ "$(uname)" == "Darwin" ]
-then
-	ping -q -t 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` >/dev/null || exit
-	notify() { osascript -e "display notification \"$2 in $1\" with title \"Youve got Mail\" subtitle \"Account: $account\"" && sleep 2 ;}
-else
-	ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` >/dev/null || exit
-	notify() { pgrep -x dunst && notify-send -i ~/.config/mutt/etc/email.gif "$2 new mail(s) in \`$1\` account." ;}
-fi
+ping -q -w 1 -c 1 `ip r | grep -m 1 default | cut -d ' ' -f 3` >/dev/null || exit
+pgrep -x offlineimap >/dev/null && exit 
+
+notify() { 
+  mpv --really-quiet ~/.config/mutt/etc/notify.opus & 
+  pgrep -x dunst && notify-send -i ~/.config/mutt/etc/email.gif "$2 new mail(s) in \`$1\` account." ;
+}
+
+echo  > ~/.config/mutt/.dl
+pkill -RTMIN+12 i3blocks
 
 # Run offlineimap. You can feed this script different settings.
 offlineimap -o "$@"
+rm -f ~/.config/mutt/.dl
+pkill -RTMIN+12 i3blocks
 
 # Check all accounts/mailboxes for new mail. Notify if there is new content.
 for account in $(ls ~/.mail)
@@ -31,10 +34,9 @@ do
 	if [ "$newcount" -gt "0" ]
 	then
 		notify "$account" "$newcount" & disown
-		mpv --quiet ~/.config/mutt/etc/notify.opus
-		pkill -RTMIN+12 i3blocks # For my i3blocks setup. Updates new mail counter.
 	fi
 done
+notmuch new
 
 #Create a touch file that indicates the time of the last run of mailsync
 touch ~/.config/mutt/etc/mailsynclastrun

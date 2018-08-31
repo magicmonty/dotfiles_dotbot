@@ -36,53 +36,63 @@ battery_max=$(("$battery_max_0 + $battery_max_1"))
 battery_percent=$(("$battery_level * 100"))
 battery_percent=$(("$battery_percent / $battery_max"))
 
-text="$battery_percent %"
+text="$battery_percent % "
 
 if [ "$ac" -eq 1 ]; then
-  icon=""
-  color="#EBDBB2"
+  icon="  "
+  bgcolor="#EBDBB2"
+  color="#282828"
 
-  if [ "$battery_percent" -gt 97 ]; then
-    text=""
-    color="#98971A"
+  if [ "$battery_percent" -gt 88 ]; then
+    icon="  "
+    text="" 
+    bgcolor="#98971A"
+    color="#ebdbb2"
   fi
 else
   if [ "$battery_percent" -gt 95 ]; then
-    icon=""
-    color="#98971A"
-  elif [ "$battery_percent" -gt 89 ]; then
-    icon=""
-    color="#98971A"
+    icon="  "
+    bgcolor="#98971A"
+    color="#ebdbb2"
+  elif [ "$battery_percent" -gt 88 ]; then
+    icon="  "
+    bgcolor="#98971A"
+    color="#ebdbb2"
   elif [ "$battery_percent" -gt 79 ]; then
-    icon=""
-    color="#98971A"
+    icon="  "
+    bgcolor="#98971A"
+    color="#ebdbb2"
   elif [ "$battery_percent" -gt 69 ]; then
-    icon=""
-    color="#EBDBB2"
+    icon="  "
+    bgcolor="#EBDBB2"
   elif [ "$battery_percent" -gt 59 ]; then
-    icon=""
-    color="#EBDBB2"
+    icon="  "
+    bgcolor="#EBDBB2"
   elif [ "$battery_percent" -gt 49 ]; then
-    icon=""
-    color="#D65D0E"
+    icon="  "
+    bgcolor="#D65D0E"
+    color="#ebdbb2"
   elif [ "$battery_percent" -gt 39 ]; then
-    icon=""
-    color="#D65D0E"
+    icon="  "
+    bgcolor="#D65D0E"
+    color="#ebdbb2"
   elif [ "$battery_percent" -gt 29 ]; then
-    icon=""
-    color="#D65D0E"
+    icon="  "
+    bgcolor="#D65D0E"
+    color="#ebdbb2"
   elif [ "$battery_percent" -gt 19 ]; then
-    icon=""
-    color="#D65D0E"
+    icon="  "
+    bgcolor="#D65D0E"
+    color="#ebdbb2"
   elif [ "$battery_percent" -gt 9 ]; then
-    icon=""
-    color="#CC241D"
+    icon="  "
+    bgcolor="#CC241D"
+    color="#ebdbb2"
   else
-    icon=""
-    color="#CC241D"
+    icon="  "
+    bgcolor="#CC241D"
+    color="#ebdbb2"
   fi
 fi
 
-echo "$icon $text"
-echo "$icon $text"
-echo $color
+echo "<span background=\"#d79921\" color=\"$bgcolor\"></span><span background=\"$bgcolor\" color=\"$color\">$icon$text</span>"

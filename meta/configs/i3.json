@@ -18,7 +18,7 @@
       "~/.config/compton.conf": "apps/compton.conf",
       "~/.config/dunst": "windowmanager/dunst",
       "~/.config/i3": "windowmanager/i3",
-      "~/.config/polybar": "windowmanager/polybar",
+      "~/.config/i3blocks": "windowmanager/i3blocks",
       "~/.config/ranger": "apps/ranger",
       "~/.config/rofi": "windowmanager/rofi",
       "~/.config/termite": "apps/termite",
@@ -32,7 +32,20 @@
       "~/bin/getpocket": "apps/pockyt/getpocket",
       "~/bin/addpocket": "apps/pockyt/addpocket",
       "~/bin/toggle_screensaver": "windowmanager/bindir/toggle_screensaver",
-      "~/.mailcap": "windowmanager/mailcap"
+      "~/.mailcap": "windowmanager/mailcap",
+      "~/bin/i3battery": "windowmanager/bindir/i3battery",
+      "~/bin/i3jackd": "windowmanager/bindir/i3jackd",
+      "~/bin/i3mail": "windowmanager/bindir/i3mail",
+      "~/bin/i3mpd": "windowmanager/bindir/i3mpd",
+      "~/bin/i3pacman": "windowmanager/bindir/i3pacman",
+      "~/bin/i3pi": "windowmanager/bindir/i3pi",
+      "~/bin/i3resize": "windowmanager/bindir/i3resize",
+      "~/bin/i3time": "windowmanager/bindir/i3time",
+      "~/bin/i3torrent": "windowmanager/bindir/i3torrent",
+      "~/bin/i3volume": "windowmanager/bindir/i3volume",
+      "~/bin/i3weather": "windowmanager/bindir/i3weather",
+      "~/bin/popweather": "windowmanager/bindir/popweather",
+      "~/bin/i3wifi": "windowmanager/bindir/i3wifi"
     }
   }
 ]
