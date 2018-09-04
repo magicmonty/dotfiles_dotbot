@@ -354,3 +354,4 @@ exec --no-startup-id "xset s on"
 exec --no-startup-id syncthing -no-browser
 exec --no-startup-id "/usr/bin/transmission-daemon -o -y -b -er -c ~/Downloads -T -w ~/Downloads"
 exec --no-startup-id "/usr/bin/onedrive -m"
+exec --no-startup-id "/usr/bin/nextcloud"
