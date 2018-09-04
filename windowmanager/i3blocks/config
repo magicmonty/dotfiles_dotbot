@@ -43,15 +43,15 @@ interval=10
 command=~/bin/i3battery
 interval=5
 
+[time]
+command=~/bin/i3time
+interval=30
+
 [mail]
 label=
 command=~/bin/i3mail
 interval=180
 signal=12
-
-[time]
-command=~/bin/i3time
-interval=30
 
 [pacman]
 label=

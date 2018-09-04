@@ -1,0 +1,26 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "clean": [ "~/.config/mutt" ]
+  },
+  {
+    "link": {
+      "~/.config/mutt/accounts/google.muttrc": "apps/neomutt/accounts/google.muttrc",
+      "~/.config/mutt/etc": "apps/neomutt/etc",
+      "~/.config/mutt/credentials/getmuttpass": "apps/neomutt/credentials/getmuttpass",
+      "~/.config/mutt/credentials/imappwd.py":  "apps/neomutt/credentials/imappwd.py",
+      "~/.config/mutt/muttrc": "apps/neomutt/muttrc",
+      "~/.config/mutt/offlineimaprc": "apps/neomutt/offlineimaprc",
+      "~/.config/mutt/personal.muttrc": "apps/neomutt/personal.muttrc"
+    }
+  }
+]
+

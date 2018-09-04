@@ -266,6 +266,8 @@ for_window [title="shadertone"] floating disable;
 # floating windows
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Kalu"] floating enable
+for_window [class="Cadence"] floating enable
+for_window [title="Minecraft Launcher"] floating enable
 for_window [class="Pinentry"] sticky enable
 
 # Gimp
@@ -277,9 +279,7 @@ for_window [window_role="gimp-dock"] floating disable; move left; resize shrink 
 for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
 
 # Bindings to make the webcam float and stick
-for_window [title="mpvfloat"] floating enable
-for_window [title="mpvfloat"] sticky enable
-for_window [title="mpvfloat"] border enable
+for_window [title="mpvfloat"] floating enable; sticky enable; border enable;
 no_focus [title="mpvfloat"]
 
 workspace $ws2 gaps inner 0
@@ -290,7 +290,7 @@ for_window [class="Sonic Pi" window_type=splash] floating enable, border pixel 0
 
 workspace $ws10 gaps inner 0
 workspace $ws10 gaps outer 0
-for_window [class="qjackctl"] move workspace $ws10
+for_window [class="qjackctl"] floating enable; move workspace $ws10
 
 # Backlight control
 
@@ -337,9 +337,9 @@ bindsym $mod+Mod1+d exec ~/bin/getpocket
 bindsym $mod+Mod1+s exec "syncthing --browser-only"
 
 # Autostart apps
+exec --no-startup-id ~/bin/startjack
 exec_always --no-startup-id /usr/bin/betterlockscreen -w
 exec --no-startup-id dunst
-exec --no-startup-id "/usr/bin/jack_control start"
 exec --no-startup-id mpd
 # xbanish makes the mouse invisible after a 2000 ms and while typing
 exec --no-startup-id xbanish -bt 2000

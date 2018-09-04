@@ -1,0 +1,8 @@
+#!/bin/bash
+/usr/bin/jack_control start
+/usr/bin/jack_control eps realtime true
+/usr/bin/jack_control ds alsa
+/usr/bin/jack_control dps device hw:PCH
+/usr/bin/jack_control dps period 512
+/usr/bin/jack_control dps rate 44100
+pkill -RTMIN+9 i3blocks

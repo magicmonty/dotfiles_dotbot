@@ -2,7 +2,6 @@
 
 CMD=/usr/bin/jack_control
 STATUS="$CMD status"
-START="$CMD start"
 STOP="$CMD stop"
 
 RUNNING=$($STATUS > /dev/null 2>&1 && echo 1 || echo 0)
@@ -10,9 +9,9 @@ RUNNING=$($STATUS > /dev/null 2>&1 && echo 1 || echo 0)
 case $BLOCK_BUTTON in
   1) 
     if [[ $RUNNING -eq 0 ]]; then
-     $START > /dev/null 2>&1
+     ~/bin/startjack > /dev/null 2>&1
     else
-     $STOP > /dev/null 2>&1
+     ~/bin/stopjack > /dev/null 2>&1
     fi
     ;;
   3)

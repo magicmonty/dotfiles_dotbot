@@ -65,9 +65,11 @@ else
   elif [ "$battery_percent" -gt 69 ]; then
     icon="  "
     bgcolor="#EBDBB2"
+    color="#282828"
   elif [ "$battery_percent" -gt 59 ]; then
     icon="  "
     bgcolor="#EBDBB2"
+    color="#282828"
   elif [ "$battery_percent" -gt 49 ]; then
     icon="  "
     bgcolor="#D65D0E"

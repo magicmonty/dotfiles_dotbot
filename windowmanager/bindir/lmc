@@ -5,13 +5,13 @@ case "$1" in
   "down") pamixer --allow-boost -d "$2" ;;
   "mute") pamixer --allow-boost -t ;;
   "truemute") pamixer --allow-boost -m ;;
-  "toggle") mpc toggle ;;
-  "pause") mpc pause ;;
-  "forward") mpc seek +"$2" ;;
-  "back") mpc seek -"$2" ;;
-  "next") mpc next ;;
-  "prev") mpc prev ;;
-  "replay") mpc seek 0% ;;
+  "toggle") mpc toggle && pkill -RTMIN+11 i3blocks ;;
+  "pause") mpc pause && pkill -RTMIN+11 i3blocks ;;
+  "forward") mpc seek +"$2" && pkill -RTMIN+11 i3blocks ;;
+  "back") mpc seek -"$2" && pkill -RTMIN+11 i3blocks ;;
+  "next") mpc next && pkill -RTMIN+11 i3blocks ;;
+  "prev") mpc prev && pkill -RTMIN+11 i3blocks ;;
+  "replay") mpc seek 0% && pkill -RTMIN+11 i3blocks ;;
 esac
 
 exit

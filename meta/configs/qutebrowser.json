@@ -9,14 +9,10 @@
     }
   },
   {
-    "clean": [ "~/.config/qutebrowser" ]
-  },
-  {
     "link": {
+      "~/.config/qutebrowser/autoconfig.yml": "apps/qutebrowser/autoconfig.yml",
       "~/.config/qutebrowser/config.py": "apps/qutebrowser/config.py",
-      "~/.config/qutebrowser/shortcuts.py": "apps/qutebrowser/shortcuts.py",
-      "~/.config/qutebrowser/autoconfig.yml": "apps/qutebrowser/autoconfig.yml"
+      "~/.config/qutebrowser/shortcuts.py": "apps/qutebrowser/shortcuts.py"
     }
   }
 ]
-

@@ -1,0 +1,27 @@
+# vim: filetype=neomuttrc
+# muttrc file for account google
+set realname = "Martin Gondermann"
+set from = "magicmonty@pagansoft.de"
+set smtp_url = "smtp://pagansoft@gmail.com@smtp.gmail.com:465/"
+set sendmail = "/usr/bin/msmtp -a google"
+set folder = "~/.mail/google"
+set header_cache = ~/.config/mutt/accounts/google/cache/headers
+set message_cachedir = ~/.config/mutt/accounts/google/cache/bodies
+set certificate_file = ~/.config/mutt/accounts/google/certificates
+source "~/.config/mutt/credentials/getmuttpass google |"
+
+set mbox_type = Maildir
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+bind index,pager gg noop
+bind index,pager g noop
+bind index gg first-entry
+#unmailboxes *
+mailboxes =google =------------------- "=Freunde" "=Wichtig.Lizenzen" "=Familie.Katharina" "=FindBigMail - Top" "=www.Pfau" "=www.Blog" "=Wichtig.Clueboard" "=Familie.Umzug" "=Wichtig.Rechnungen" "=[Google Mail].Wichtig" "=Wichtig.Lizenzen.Humble Bundle" "=FindBigMail > 5mb" "=Info.magicforum" "=Wichtig.Google Garantie Nexus 4" "=Deleted Messages" "=Allgemein.Unbearbeitet" "=www.torstenpahl" "=Wichtig.SoCraTes 2015" "=Familie.Johannes" "=www.theaterundmehr" "=Wichtig.BuildStuff 2017" "=Firma.Bewerbung TuneUp" "=Firma.Bewerbung" "=Wichtig.Onlinebanking" "=www.domaingo Allgemein" "=Wichtig.Apple" "=Wichtig.Steuer" "=Freunde.Martina" "=[Google Mail].Gesendet" "=Wichtig.Zugangsdaten" "=www.silberlicht" "=Familie" "=[Google Mail].Spam" "=Wichtig.Congstar" "=Allgemein.magicmonty@gmx.net" "=[Google Mail].Alle Nachrichten" "=Wichtig.EMC2012" "=FindBigMail > 1mb" "=RIM" "=Familie.Hochzeit" "=f.forwards" "=[Google Mail].Papierkorb" "=INBOX" "=Bulk.Softwerkskammer" "=Notes" "=[Google Mail].Entw&APw-rfe" "=Wichtig" "=Wichtig.Rechnungen.domain.go" "=Wichtig.Kapellknaben" "=Info.Ebay" "=Wichtig.Crashplan" "=Arbeitsamt" "=[Google Mail].Markiert" "=Wichtig.Rechnung Telekom" "=Wichtig.FISM2018" "=Info"
+macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox."
+macro index,pager gS "<change-folder>=[Google Mail].Spam<enter>" "Go to spam."
+set spoolfile = "+INBOX"
+set record = ""
+set postponed = ""
+set trash = ""
