@@ -13,7 +13,7 @@ set -gx RTV_EDITOR /usr/bin/vim
 set -gx RTV_BROWSER /usr/bin/qutebrowser
 set -gx BROWSER /usr/bin/qutebrowser
 set -gx TERMINAL /usr/bin/termite
-
+set -gx BYOBU_CHARMAP UTF-8
 source ~/.config/fish/abbr.fish
 source ~/.config/fish/autoenv.fish
 
