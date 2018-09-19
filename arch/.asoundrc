@@ -24,3 +24,16 @@ pcm.jackmpd {
       1 system:playback_2
     }
 }
+
+pcm.jackplugmpv { 
+    type plug
+    slave { pcm "jackmpv" }
+}
+
+pcm.jackmpv {
+    type jack
+    playback_ports {
+      0 system:playback_1
+      1 system:playback_2
+    }
+}
