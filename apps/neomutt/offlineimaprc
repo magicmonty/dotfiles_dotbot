@@ -4,6 +4,14 @@ starttls = yes
 ssl = yes
 pythonfile = ~/.config/mutt/credentials/imappwd.py
 
+[mbnames]
+enabled = yes
+filename = ~/.config/mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
 [Account google]
 
 localrepository = google-local
@@ -17,7 +25,17 @@ remotepasseval = mailpasswd("google")
 remotehost = imap.gmail.com
 remoteport = 993
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+folderfilter = lambda foldername: foldername not in ['[Google Mail]/Alle Nachrichten', 'FindBigMail - Top', 'FindBigMail > 1mb', 'FindBigMail > 5mb' , 'f/forwards']
+nametrans = lambda foldername : re.sub ('Entw&APw-rfe', 'Drafts', 
+                                re.sub ('INBOX', 'Posteingang',
+                                foldername))
+ssl_version = tls1_2
+tls_level = tls_secure
 
 [Repository google-local]
 type = Maildir
 localfolders = ~/.mail/google
+nametrans = lambda foldername : re.sub ('Drafts', 'Entw&APw-rfe', 
+                                re.sub ('Posteingang', 'INBOX', 
+                                foldername))
+
