@@ -1,0 +1,150 @@
+// vim:ts=4:sw=4:et
+{
+    // splitv split container with 2 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.6,
+    "type": "con",
+    "nodes": [
+        {
+            // splith split container with 2 children
+            "border": "normal",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.7,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "user_off",
+                    "geometry": {
+                       "height": 504,
+                       "width": 1090,
+                       "x": 1,
+                       "y": 562
+                    },
+                    "name": "Sitzung - JACK Audio Connection Kit",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                       // "class": "^qjackctl$",
+                       // "instance": "^qjackctl$",
+                       // "title": "^Sitzung\\ \\-\\ JACK\\ Audio\\ Connection\\ Kit$",
+                       // "transient_for": "^$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 3,
+                    "floating": "user_off",
+                    "geometry": {
+                       "height": 652,
+                       "width": 817,
+                       "x": 1093,
+                       "y": 23
+                    },
+                    "name": "Verbindungen - JACK Audio Connection Kit",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                       // "class": "^qjackctl$",
+                       // "instance": "^qjackctl$",
+                       // "title": "^Verbindungen\\ \\-\\ JACK\\ Audio\\ Connection\\ Kit$",
+                       // "transient_for": "^$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "user_off",
+            "geometry": {
+               "height": 254,
+               "width": 820,
+               "x": 1094,
+               "y": 823
+            },
+            "name": "Meldungen/Status - JACK Audio Connection Kit",
+            "percent": 0.3,
+            "swallows": [
+               {
+               // "class": "^qjackctl$",
+               // "instance": "^qjackctl$",
+               // "title": "^Meldungen\\/Status\\ \\-\\ JACK\\ Audio\\ Connection\\ Kit$",
+               // "transient_for": "^$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 3,
+    "floating": "user_off",
+    "geometry": {
+       "height": 1052,
+       "width": 957,
+       "x": 963,
+       "y": 31
+    },
+    "name": "Steckfeld - JACK Audio Connection Kit",
+    "percent": 0.4,
+    "swallows": [
+       {
+       // "class": "^qjackctl$",
+       // "instance": "^qjackctl$",
+       // "title": "^Steckfeld\\ \\-\\ JACK\\ Audio\\ Connection\\ Kit$",
+       // "transient_for": "^$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    // floating_con with 1 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": null,
+    "rect": {
+       "height": 106,
+       "width": 569,
+       "x": 292,
+       "y": 193
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "user_on",
+            "geometry": {
+               "height": 100,
+               "width": 563,
+               "x": 2,
+               "y": 31
+            },
+            "name": "JACK Audio Connection Kit [(default)] Steht.",
+            "percent": 1,
+            "swallows": [
+               {
+               // "class": "^qjackctl$",
+               // "instance": "^qjackctl$",
+               // "title": "^JACK\\ Audio\\ Connection\\ Kit\\ \\[\\(default\\)\\]\\ Steht\\.$",
+               // "transient_for": "^$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+/usr/bin/notify-send -a 'Package Update' 'Upgrade started' &
+/usr/bin/neofetch
+/usr/bin/aurman -Syyuv --noedit && /usr/bin/notify-send -a 'Package Update' 'Upgrade completed' || /usr/bin/notify-send -a 'Package Update' -u critical 'Upgrade failed'
+pkill -RTMIN+13 i3blocks

@@ -1,0 +1,73 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": null,
+    "rect": {
+        "height": 1074,
+        "width": 1914,
+        "x": 3,
+        "y": 3
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "user_on",
+            "geometry": {
+                "height": 1074,
+                "width": 1914,
+                "x": 30,
+                "y": 50
+            },
+            "name": "KodeLife",
+            "percent": 1,
+            "swallows": [
+                {
+                    "class": "^KodeLife$"
+                }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": null,
+    "rect": {
+        "height": 1074,
+        "width": 1914,
+        "x": 3,
+        "y": 3
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 0,
+            "floating": "user_on",
+            "geometry": {
+                "height": 1054,
+                "width": 1920,
+                "x": 0,
+                "y": 26
+            },
+            "name": "Sonic Pi",
+            "percent": 1,
+            "swallows": [
+                {
+                    "class": "^Sonic\\ Pi$",
+                    "instance": "^sonic-pi",
+                    "window_type": "normal"
+                }
+            ],
+            "type": "con"
+        }
+    ]
+}
+

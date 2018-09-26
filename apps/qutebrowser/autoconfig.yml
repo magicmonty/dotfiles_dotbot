@@ -6,7 +6,7 @@ settings:
   content.plugins:
     global: true
   downloads.location.directory:
-    global: ~/Downloads
+    global: ~/Musik
   qt.args:
     global:
     - ppapi-widevine-path=/usr/lib/qt/plugins/ppapi/libwidevinecdmadapter.so

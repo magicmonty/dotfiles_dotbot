@@ -1,3 +1,4 @@
 #!/bin/bash
 /usr/bin/jack_control stop
+pkill -9 jackdbus
 pkill -RTMIN+9 i3blocks
