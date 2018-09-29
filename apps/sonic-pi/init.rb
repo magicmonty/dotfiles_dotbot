@@ -1,6 +1,8 @@
 # Sonic Pi init file
 # Code in here will be evaluated on launch.
 
+require "./string_ext.rb"
+
 load_snippets "~/.sonic-pi/snippets", quiet: true
 
 set :root, :A
@@ -119,6 +121,10 @@ def make_ring(length)
   Array.new(length).fill { yield }.ring
 end
 
+def as_bools(s)
+  s.scan(/\w/).map { |v| v == "1" }.ring
+end
+
 def mute
   set_mixer_control! amp: 0.0
 end
@@ -129,6 +135,7 @@ end
 
 $volca_port = "usb_uno_midi_interface_midi_1"
 $circuit_port = "circuit_midi_1"
+
 
 def volca_fm(note, sustain: 0.25, vel: 50)
   midi_cc 41, vel, port: $volca_port, channel: 1
@@ -152,5 +159,5 @@ def m(note, sustain: 0.25, vel:128)
 end
 
 def mcc(value) 
-  midi_cc value, port: $volca_port, channel: 3
+  midi_cc 128, value, port: $volca_port, channel: 3
 end
