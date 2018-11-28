@@ -12,3 +12,5 @@ image/*; curl -s '%s' | convert - jpg:/tmp/rtv.jpg && img2txt -f utf8 /tmp/rtv.j
 
 video/x-youtube; mpv -vo drm -quiet '%s'; needsterminal
 video/*; mpv -vo drm -quiet '%s'; needsterminal
+
+application/pdf; zathura '%s'; test=test -n "$DISPLAY"

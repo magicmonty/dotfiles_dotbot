@@ -19,11 +19,11 @@ bind index,pager g noop
 bind index gg first-entry
 #unmailboxes *
 source ~/.config/mutt/mailboxes
-macro index,pager gi "<change-folder>=google/Posteingang<enter>" "Go to inbox."
-macro index,pager gS "<change-folder>=google/[Google Mail].Spam<enter>" "Go to spam."
-macro index,pager gp "<change-folder>=google/[Google Mail].Papierkorb<enter>" "Go to trash."
-macro index,pager gw "<change-folder>=google/[Google Mail].Wichtig<enter>" "Go to Important."
-set spoolfile = "+google/Posteingang"
-set record = "+google/[Google Mail].Gesendet"
-set postponed = "+google/[Google Mail].Drafts"
-set trash = "+google/[Google Mail].Papierkorb"
+macro index,pager gi "<change-folder>=google/_Posteingang<enter>" "Go to inbox."
+macro index,pager gS "<change-folder>=google/_Spam<enter>" "Go to spam."
+macro index,pager gp "<change-folder>=google/_Papierkorb<enter>" "Go to trash."
+macro index,pager gw "<change-folder>=google/_Wichtig<enter>" "Go to Important."
+set spoolfile = "+google/_Posteingang"
+set record = "+google/_Gesendet"
+set postponed = "+google/_Drafts"
+set trash = "+google/_Papierkorb"

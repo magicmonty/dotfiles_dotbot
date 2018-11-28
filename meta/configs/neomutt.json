@@ -19,7 +19,9 @@
       "~/.config/mutt/credentials/imappwd.py":  "apps/neomutt/credentials/imappwd.py",
       "~/.config/mutt/muttrc": "apps/neomutt/muttrc",
       "~/.offlineimaprc": "apps/neomutt/offlineimaprc",
-      "~/.config/mutt/personal.muttrc": "apps/neomutt/personal.muttrc"
+      "~/.config/mutt/personal.muttrc": "apps/neomutt/personal.muttrc",
+      "~/.local/share/applications/mutt.desktop": "windowmanager/applications/mutt.desktop",
+      "~/bin/mailsync": "apps/neomutt/etc/mailsync.sh"
     }
   }
 ]

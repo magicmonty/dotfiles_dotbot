@@ -6,3 +6,4 @@ vim.linux
 fish.linux
 tmux.linux
 binaries.linux
+zsh

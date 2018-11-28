@@ -1,9 +1,11 @@
 # Sonic Pi init file
 # Code in here will be evaluated on launch.
 
-require "./string_ext.rb"
+require "~/.sonic-pi/string_ext.rb"
 
 load_snippets "~/.sonic-pi/snippets", quiet: true
+$samples = "~/.sonic-pi/samples"
+load_samples $samples
 
 set :root, :A
 set :octave, 4
@@ -80,11 +82,11 @@ def progress_markov
 end
 
 def cosr(center, range, cycle)
-  return (Math.cos (vt*cycle))*range + center
+  return (Math.cos(vt * 1/cycle)) * range + center
 end
 
 def sinr(center, range, cycle)
-  return (Math.sin (vt*cycle))*range + center
+  return (Math.sin(vt * 1/cycle)) * range + center
 end
 
 def fadeout (max: 1, step: 0.01)
@@ -161,3 +163,91 @@ end
 def mcc(value) 
   midi_cc 128, value, port: $volca_port, channel: 3
 end
+
+$kodelife_port = "midi_through_port-0"
+
+def vis(ctrl, value)
+  midi_cc ctrl, val_f: value, channel: 16, port: $kodelife_port
+end
+
+def vis_electric(value)
+  vis 21, value
+end 
+
+def vis_ether(value)
+  vis 22, value
+end
+
+def vis_func(value)
+  vis 23, value
+end
+
+def sample_(*args, &blk)
+  sample(*args.prepend($samples), &blk)
+end
+
+# given a list of cycles calculate a common cycle
+# length so that all cycles complete fully
+# e.g common_cycle [4, 8, 3] => 24 
+def common_cycle(lengths, *args)
+  calcLengths = args.length == 1 ? args[0] : lengths
+  if calcLengths.length == 0 then
+    0
+  elsif calcLengths.length == 1 || calcLengths.uniq.length == 1 then
+    calcLengths[0]
+  else
+    max = calcLengths.max
+    calcLengths = calcLengths.map.with_index { |x, i| x < max ? x + lengths[i] : x }
+    shared_length lengths, calcLengths
+  end
+end
+
+def turing(name, size=8, prob=0)
+  prng = Random.new
+  key = (name.to_s + "_turingbuffer").to_sym
+  buffer = get(key)
+  if not buffer then
+    buffer = Array.new(size) { |i| prng.rand }
+  elsif buffer.length > size
+    buffer = buffer.take size
+  elsif buffer.length < size
+    newbuffer = Array.new(size - buffer.length) { |i| prng.rand }
+    buffer = buffer + newbuffer
+  else
+    head = buffer.first
+    if one_in (prob == 0 ? 0 : 1 / prob) then
+      head = prng.rand
+    end
+
+    buffer = buffer.drop(1).push head
+  end
+
+  set(key, buffer)
+  buffer
+end
+
+def turing_look(name)
+  prng = Random.new
+  key = (name.to_s + "_turingbuffer").to_sym
+  buffer = get(key)
+  if not buffer then
+    buffer = Array.new(8) { |i| prng.rand }
+  end
+
+  set(key, buffer)
+  buffer
+end
+
+def reset_turing(name)
+  key = (name.to_s + "_turingbuffer").to_sym
+  set key, nil
+end
+
+def vscale(value, min=0, max=1, to_min=0, to_max=100)
+  ((to_max.to_f-to_min.to_f)/(max.to_f-min.to_f))*value.to_f + to_min.to_f
+end
+
+def to_scl(value, notes)
+  v_quant(vscale(value, 0, 1, notes.min, notes.max), notes)
+end
+

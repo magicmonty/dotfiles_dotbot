@@ -1,12 +1,12 @@
 cff	~/.dotfiles/scripts/folders
 cfc	~/.dotfiles/scripts/configs
+cfz ~/.zshrc
 cfv	~/.vimrc
 cfg ~/.gitconfig
 cfr	~/.config/ranger/rc.conf
 cfi	~/.config/i3/config
 cfq	~/.config/qutebrowser/config.py
 cft	~/.config/termite/config
-cfp	~/.config/polybar/config
 cfd	~/.Xdefaults
 cfmb	~/.ncmpcpp/bindings
 cfmc	~/.ncmpcpp/config

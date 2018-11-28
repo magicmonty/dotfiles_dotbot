@@ -3,7 +3,7 @@
 #text/html; $BROWSER %s 2>/dev/null & disown; copiousoutput;
 text/html; w3m -I %{charset} -T text/html; copiousoutput;
 
-application/pdf; mv %s %s.pdf && i3 exec mupdf %s.pdf > /dev/null; needsterminal;
+application/pdf; mv %s %s.pdf && i3 exec zathura %s.pdf > /dev/null; needsterminal;
 
 image/*; ~/.config/mutt/etc/muttimage.sh %s ; copiousoutput
 

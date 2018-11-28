@@ -1,19 +1,17 @@
 " Blog
-Plug 'vim-scripts/liquid.vim'
-Plug 'vim-scripts/liquidfold.vim'
+
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
 
 " Clojure
-Plug 'terryma/vim-expand-region'
+" Plug 'terryma/vim-expand-region'
 
 " Colors
 Plug 'morhetz/gruvbox'
-Plug 'romainl/Apprentice'
-Plug 'easymotion/vim-easymotion'
 
 " General"
+Plug 'easymotion/vim-easymotion'
 Plug 'Traap/vim-helptags'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'kien/rainbow_parentheses.vim'
@@ -21,8 +19,6 @@ Plug 'ervandew/supertab'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'sickill/vim-pasta'
 Plug 'tpope/vim-dispatch'
 Plug 'sickill/vim-pasta'
 Plug 'tpope/vim-repeat'
@@ -34,10 +30,10 @@ Plug 'honza/vim-snippets'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'godlygeek/tabular'
 Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
+" Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
+" Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
 Plug 'scrooloose/nerdcommenter'
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 Plug 'kshenoy/vim-signature'
 Plug 'wellle/targets.vim'
 Plug 'tommcdo/vim-exchange'
@@ -63,8 +59,8 @@ Plug 'junegunn/gv.vim'
 
 " Completion
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'fszymanski/deoplete-emoji'
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'fszymanski/deoplete-emoji'
 
   " function! BuildDeopleteFSharp(info)
     " info is a dictionary with 3 fields
@@ -77,7 +73,7 @@ if has('nvim')
     " endif
   " endfunction
 
-  Plug 'callmekohei/deoplete-fsharp', { 'do': function('BuildDeopleteFSharp') }
+  " Plug 'callmekohei/deoplete-fsharp', { 'do': function('BuildDeopleteFSharp') }
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'

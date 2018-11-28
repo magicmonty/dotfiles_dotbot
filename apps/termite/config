@@ -1,36 +1,38 @@
 [options]
 allow_bold = true
-#audible_bell = false
-#clickable_url = true
-#dynamic_title = true
-font =Monoid NF 12
+audible_bell = false
+visible_bell = false
+mouse_autohide = false
+resize_grip = false
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+font=Monoid Nerdfont Mono 12
 #fullscreen = true
 #geometry = 640x480
 #icon_name = terminal
-#mouse_autohide = false
 #scroll_on_output = false
 #scroll_on_keystroke = true
 # Length of the scrollback buffer, 0 disabled the scrollback buffer
 # and setting it to a negative value means "infinite scrollback"
 scrollback_lines = 10000
-#search_wrap = true
-#urgent_on_bell = true
+search_wrap = true
 #hyperlinks = false
 
 # $BROWSER is used by default if set, with xdg-open as a fallback
 #browser = xdg-open
 
 # "system", "on" or "off"
-#cursor_blink = system
+cursor_blink = system
 
 # "block", "underline" or "ibeam"
-#cursor_shape = block
+cursor_shape = block
 
 # Hide links that are no longer valid in url select overlay mode
 #filter_unmatched_urls = true
 
 # Emit escape sequences for extra modified keys
-#modify_other_keys = false
+modify_other_keys = true
 
 # set size hints for the window
 #size_hints = false

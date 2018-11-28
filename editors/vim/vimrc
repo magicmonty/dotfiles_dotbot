@@ -33,12 +33,6 @@ set nowrap              " Don't wrap the display of long lines.
 set linebreak           " Wrap at 'breakat' char vs display edge if 'wrap' on.
 set display=lastline    " Display as much of a window's last line as possible.
 
-set splitright          " Split new vertical windows right of current window.
-set splitbelow          " Split new horizontal windows under current window.
-
-set winminheight=0      " Allow windows to shrink to status line.
-set winminwidth=0       " Allow windows to shrink to vertical separator.
-
 set expandtab           " Insert spaces for <Tab> press; use spaces to indent.
 set smarttab            " Tab respects 'shiftwidth', 'tabstop', 'softtabstop'.
 set tabstop=2           " Set the visible width of tabs.
@@ -113,6 +107,8 @@ if has("unix") " (including OS X)
   " current file if ~/tmp isn't available.
   "
   set directory=~/tmp//,.
+else
+  set directory=$TEMP\\\
 endif
 
 " Update the swap file every 20 characters. I don't like to lose stuff.
@@ -185,11 +181,6 @@ if has("autocmd") && !exists("autocommands_loaded")
   "
   autocmd StdinReadPost * :set buftype=nofile
 
-  " Experiment to force a script to run as late as possible. This is close,
-  " but a few scripts still run after it.
-  "
-  autocmd VimEnter * :source ~/.vim/run-last.vim
-
   augroup vimrcEx
     autocmd!
 
@@ -231,33 +222,11 @@ set mousemodel=popup
 "
 vnoremap <BS> d
 
-" F7 formats the current/highlighted paragraph.
-"
-" XXX: Consider changing this to gwap to maintain logical cursor position.
-"
-nnoremap <F7>   gqap
-inoremap <F7>   <C-O>gqap
-vnoremap <F7>   gq
-
-" Q does the same thing as <F7> (except in Insert mode, of course). I'm
-" retraining myself to use Q instead of a function key, since it's kind
-" of a de facto standard keystroke.
-"
-nnoremap Q  gqap
-xnoremap Q  gq
-
-" Tab/Shift+Tab indent/unindent the highlighted block (and maintain the
-" highlight after changing the indentation). Works for both Visual and Select
-" modes.
-"
-" vnoremap <Tab>    >gv
-" vnoremap <S-Tab>  <gv
-
 " Map Control+Up/Down to move lines and selections up and down.
 "
-runtime map_line_block_mover_keys.vim
-runtime map_highlighting_keys.vim
-runtime vim-fireplace-mappings.vim
+" runtime map_line_block_mover_keys.vim
+" runtime map_highlighting_keys.vim
+" runtime vim-fireplace-mappings.vim
 
 " Disable paste-on-middle-click.
 "
@@ -269,20 +238,6 @@ imap <MiddleMouse>    <Nop>
 imap <2-MiddleMouse>  <Nop>
 imap <3-MiddleMouse>  <Nop>
 imap <4-MiddleMouse>  <Nop>
-
-" Control+Backslash toggles a lot of useful, but visually-noisy, features
-" (like search/match highlighting, 'list', and 'cursorline', etc.). Note the
-" :execute (vs. :call); see ToggleHighlight() for details.
-"
-runtime toggle_highlights.vim
-nnoremap <silent> <C-Bslash>  :execute ToggleHighlights()<CR>
-imap     <silent> <C-BSlash>  <Esc><C-BSlash>a
-vmap     <silent> <C-BSlash>  <Esc><C-BSlash>gv
-
-" Control+Hyphen (yes, I know it says underscore) repeats the character above
-" the cursor.
-"
-inoremap <C-_>  <C-Y>
 
 " Center the display line after searches. (This makes it *much* easier to see
 " the matched line.)
@@ -296,35 +251,17 @@ nnoremap #   #zz
 nnoremap g*  g*zz
 nnoremap g#  g#zz
 
-" Draw lines of dashes or equal signs based on the length of the line
-" immediately above.
-"
-"   k       Move up 1 line
-"   yy      Yank whole line
-"   p       Put line below current line
-"   ^       Move to beginning of line
-"   v$      Visually highlight to end of line
-"   r-      Replace highlighted portion with dashes / equal signs
-"   j       Move down one line
-"   a       Return to Insert mode
-"
-" XXX: Convert this to a function and make the symbol a parameter.
-" XXX: Consider making abbreviations/mappings for ---<CR> and ===<CR>
-"
-inoremap <C-U>- <Esc>kyyp^v$r-ja
-inoremap <C-U>= <Esc>kyyp^v$r=ja
-
 " Edit user's vimrc and gvimrc in new tabs.
-"
 if has("nvim")
-  nnoremap <leader>ev :e ~/.vimrc<CR>
+  nnoremap <leader>ev :tabe ~/.vimrc<CR>
 else
-  nnoremap <Leader>ev  :e $MYVIMRC<CR>
+  nnoremap <Leader>ev :tabe $MYVIMRC<CR>
 endif
 
-nnoremap <Leader>ep  :e ~/.vim/plugins.vim<CR>
-nnoremap <Leader>eP  :e ~/.vim/plugins_shared.vim<CR>
+nnoremap <Leader>ep  :tabe ~/.vim/plugins.vim<CR>
+nnoremap <Leader>eP  :tabe ~/.vim/plugins_shared.vim<CR>
 
+" Reload vimrc
 nnoremap <Leader>lv  :so $MYVIMRC<CR>
 
 " Make page-forward and page-backward work in insert mode.
@@ -332,26 +269,20 @@ nnoremap <Leader>lv  :so $MYVIMRC<CR>
 inoremap <C-F>  <C-O><C-F>
 inoremap <C-B>  <C-O><C-B>
 
-" Make Option+Up/Down work as PageUp and PageDown
+" Make Alt+Up/Down work as PageUp and PageDown
 "
-nnoremap    <M-Up>      <PageUp>
-inoremap    <M-Up>      <PageUp>
-vnoremap    <M-Up>      <PageUp>
-nnoremap    <M-Down>    <PageDown>
-inoremap    <M-Down>    <PageDown>
-vnoremap    <M-Down>    <PageDown>
+nnoremap    [1;3A      <PageUp>
+inoremap    [1;3A      <PageUp>
+vnoremap    [1;3A      <PageUp>
+nnoremap    [1;3B    <PageDown>
+inoremap    [1;3B    <PageDown>
+vnoremap    [1;3B    <PageDown>
 
 " Overload Control+L to clear the search highlight as it's redrawing the screen.
 "
-nnoremap <C-L>  :nohlsearch<CR><C-L>
-inoremap <C-L>  <Esc>:nohlsearch<CR><C-L>a
+nnoremap <C-L> <silent> :nohlsearch<CR><C-L>
+inoremap <C-L> <silent> <Esc>:nohlsearch<CR><C-L>a
 vnoremap <C-L>  <Esc>:nohlsearch<CR><C-L>gv
-
-
-" Insert spaces to match spacing on first previous non-blank line.
-"
-runtime insert_matching_spaces.vim
-inoremap <expr> <S-Tab>  InsertMatchingSpaces()
 
 " Keep the working line in the center of the window. This is a toggle, so you
 " can bounce between centered-working-line scrolling and normal scrolling by
@@ -370,7 +301,6 @@ nnoremap <Leader>w  :set invwrap<BAR>set wrap?<CR>
 "
 " Make it easy to :Tabularize
 "
-nnoremap <Leader><Tab> <Esc>:Tabularize /
 nmap <leader>aa :Tabularize /\|/l0<cr>
 vmap <leader>aa :Tabularize /\|/l0<cr>
 
@@ -399,33 +329,10 @@ if exists(":RainbowParenthesesToggle")
 endif
 
 let g:airline_theme='gruvbox'
-
 let g:airline#extensions#syntastic#enabled = 1
-
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_skip_empty_sections = 1
-
-if $TERMKIT_HOST_APP=="Cathode"
-  let g:solarized_termcolors=256
-  let g:solarized_bold=0
-  let g:solarized_underline=0
-  let g:solarized_italic=0
-  let g:airline_powerline_fonts = 0
-  if has('nvim')
-    set notermguicolors
-  endif
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-  let g:airline_symbols.space = "\ua0"
-  let g:airline_symbols.linenr = "¶"
-  let g:airline_symbols.maxlinenr = ""
-  let g:airline_symbols.branch = ""
-  let g:airline_symbols.paste = "ρ"
-  let g:airline_left_sep = "»"
-  let g:airline_right_sep = "«"
-endif
-
+let g:airline_powerline_fonts = 1
 
 silent! colorscheme gruvbox
 set background=dark
@@ -449,7 +356,7 @@ function! s:ConfigureWindow()
     "
     " XXX: Disabled for now, since it's distracting during demos and classes.
     "
-    "call matchadd('NonText', '\s\+\%#\@<!$')
+    " call matchadd('NonText', '\s\+\%#\@<!$')
 
     " Highlight the usual to-do markers (including my initials and Michele's
     " initials), even if the current syntax highlighting doesn't include them.
@@ -461,11 +368,9 @@ function! s:ConfigureWindow()
     call matchadd('Todo', 'TODO')
     call matchadd('Todo', 'WNO:')
     call matchadd('Todo', 'MRB:')
-
 endfunction
 
 nnoremap <leader><Tab> :tabNext<cr>
-" let g:NERDTreeQuitOnOpen=1
 
 let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories = [ "UltiSnips" ]
@@ -477,9 +382,8 @@ let g:UltiSnipsUsePythonVersion = 3
 
 noremap <leader>bn :bn<cr>
 noremap <leader>bp :bp<cr>
-imap <buffer> <C-e> <Esc><Esc>ms[[cpp`sl
-nmap <buffer> <C-e> ms[[cpp`s
-let g:airline_powerline_fonts = 1
+noremap <leader>bd :bd<cr>
+noremap <leader>bq :bd<cr>
 
 set t_Co=256
 highlight clear SignColumn
@@ -492,34 +396,28 @@ if &term =~ '256color'
   hi Normal guibg=NONE ctermbg=NONE
 endif
 
-noremap H 0
-noremap L $
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 map q: :q
-map <leader>ii :IndentGuidesToggle<cr>
 
 command! SetIndent2Spaces set nopi shiftwidth=2 softtabstop=2
 command! SetIndent4Spaces set nopi shiftwidth=4 softtabstop=4
-command! SetIndentTabs set noet ci pi sts=0 sw=4 ts=4
 
 map <leader>i2 :SetIndent2Spaces<CR>
 map <leader>i4 :SetIndent4Spaces<CR>
-map <leader>it :SetIndentTabs<CR>
 
-nnoremap <leader><space> :noh<cr> " clear highlighted search results
 noremap < <<
 noremap > >>
-noremap <leader>D VGdo<Esc>
-nnoremap <leader>c za " toggle fold
-vnoremap <leader>c za " toggle fold
-map <leader>rn :set relativenumber!<cr>
-map <leader>wr :set wrap!<cr>
-nnoremap <leader>v :vsplit<cr>
-nnoremap <leader>h :hsplit<cr>
-nnoremap <leader>da :Dash<cr>
+
+" toggle folds
+nnoremap <leader>mm za
+vnoremap <leader>mm za
+
+" comment block or line
 map <leader># gcc
+
+" escape insertmode quickly
 inoremap jj <Esc>
 inoremap jk <Esc>
 
@@ -530,7 +428,7 @@ highlight GitGutterDelete ctermfg=darkred
 highlight GitGutterChangeDelete ctermfg=darkyellow
 highlight SignColumn ctermbg=black
 
-map<leader>gg :GitGutterToggle<CR>
+map <leader>gg :GitGutterToggle<CR>
 map <leader>gp :GitGutterPreviewHunk<CR>
 map <leader>gr :GitGutterRevertHunk<CR>
 
@@ -539,21 +437,7 @@ let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=2
 let g:indent_guides_enable_on_vim_startup=1
 
-"Super tab settings - uncomment the next 4 lines
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-let g:SuperTabClosePreviewOnPopupClose = 1
-
-autocmd FileType *
-      \ if &omnifunc != '' |
-      \   call SuperTabChain(&omnifunc, "<c-x><c-o>") |
-      \ endif
-
 set completeopt=longest,menuone,preview
-
-" yy should work with clipboard=unnamedplus
-nnoremap yy "*yy
 
 " C-d duplicates line or visual selection (cursor stays in position in normal and insert mode)
 nmap <C-d> mg""yyp`g:delm g<cr>
@@ -564,13 +448,6 @@ let g:vim_markdown_formatter = 1
 let g:vim_markdown_folding_level = 3
 let g:vim_markdown_folding_disabled = 1
 
-
-" put the swap file in %TEMP%. The extra backslashes cause a unique filename
-if has("unix")
-  set directory=/tmp
-else
-  set directory=$TEMP\\\
-endif
 
 autocmd FileType elm nnoremap <leader>el :ElmEvalLine<CR>
 autocmd FileType elm vnoremap <leader>es :<C-u>ElmEvalSelection<CR>
@@ -647,8 +524,6 @@ if has("unix")
   endif
 endif
 
-let g:sonicpi_command = "sonic-pi-tool eval-stdin"
-let g:sonicpi_keymaps_enabled = 1
 
 if &diff
   set diffopt+=iwhite " ignore whitespace on diff
@@ -671,4 +546,28 @@ set encoding=utf-8
 let g:sonicpi_command = 'sonic-pi-tool'
 let g:sonicpi_send = 'eval-stdin'
 let g:sonicpi_stop = 'stop'
+let g:sonicpi_keymaps_enabled = 1
 let g:vim_redraw = 1
+
+" Split handling
+set splitright          " Split new vertical windows right of current window.
+set splitbelow          " Split new horizontal windows under current window.
+
+set winminheight=0      " Allow windows to shrink to status line.
+set winminwidth=0       " Allow windows to shrink to vertical separator.
+
+nnoremap <silent> <leader>v :vsplit<cr>
+nnoremap <silent> <leader>s :split<cr>
+nnoremap <silent> <leader>o :only<cr>
+nnoremap <silent> <leader>q :q<cr>
+
+nnoremap h <C-W>h
+nnoremap j <C-W>j
+nnoremap k <C-W>k
+nnoremap l <C-W>l
+
+nnoremap H <C-W>H
+nnoremap J <C-W>J
+nnoremap K <C-W>K
+nnoremap L <C-W>L
+

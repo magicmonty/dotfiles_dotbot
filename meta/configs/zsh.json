@@ -1,0 +1,16 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/.zshrc": "shells/zsh/.zshrc"
+    }
+  }
+]

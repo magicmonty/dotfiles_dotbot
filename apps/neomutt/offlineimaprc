@@ -26,16 +26,28 @@ remotehost = imap.gmail.com
 remoteport = 993
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 folderfilter = lambda foldername: foldername not in ['[Google Mail]/Alle Nachrichten', 'FindBigMail - Top', 'FindBigMail > 1mb', 'FindBigMail > 5mb' , 'f/forwards']
-nametrans = lambda foldername : re.sub ('Entw&APw-rfe', 'Drafts', 
-                                re.sub ('INBOX', 'Posteingang',
-                                foldername))
+nametrans = lambda foldername : re.sub ('INBOX', '_Posteingang',
+                                re.sub ('/', '.',
+                                re.sub ('\[Google Mail\]/Entw&APw-rfe', '_Drafts', 
+                                re.sub ('\[Google Mail\]/Papierkorb', '_Papierkorb',
+                                re.sub ('\[Google Mail\]/Spam', '_Spam',
+                                re.sub ('\[Google Mail\]/Wichtig', '_Wichtig',
+                                re.sub ('\[Google Mail\]/Gesendet', '_Gesendet',
+                                re.sub ('\[Google Mail\]/Markiert', '_Markiert',
+                                foldername))))))))
 ssl_version = tls1_2
 tls_level = tls_secure
 
 [Repository google-local]
 type = Maildir
 localfolders = ~/.mail/google
-nametrans = lambda foldername : re.sub ('Drafts', 'Entw&APw-rfe', 
-                                re.sub ('Posteingang', 'INBOX', 
-                                foldername))
+nametrans = lambda foldername : re.sub ('_Posteingang', 'INBOX', 
+                                re.sub ('_Drafts', '[Google Mail]/Entw&APw-rfe', 
+                                re.sub ('_Papierkorb', '[Google Mail]/Papierkorb',
+                                re.sub ('_Spam', '[Google Mail]/Spam',
+                                re.sub ('_Wichtig', '[Google Mail]/Wichtig',
+                                re.sub ('_Gesendet', '[Google Mail]/Gesendet',
+                                re.sub ('_Markiert', '[Google Mail]/Markiert',
+                                re.sub ('\.', '/',
+                                foldername))))))))
 

@@ -1,0 +1,21 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "clean": [ "~/.config/zathura" ]
+  },
+  {
+    "link": {
+      "~/.config/zathura/zathurarc": "apps/zathura/zathurarc",
+      "~/.local/share/applications/mutt.desktop": "windowmanager/applications/zathura.desktop"
+    }
+  }
+]
+

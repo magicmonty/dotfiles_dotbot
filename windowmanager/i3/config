@@ -11,7 +11,8 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $term --no-startup-id termite
+set $alt Mod1
+set $term --no-startup-id /usr/bin/urxvt
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -28,11 +29,12 @@ bar {
     background $bg-color
     statusline $text-color
   }
+  # tray_output none
 }
 
 # thin borders
 hide_edge_borders both
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 1
 
 focus_follows_mouse no
 
@@ -84,25 +86,28 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+Mod1+Left exec --no-startup-id "bash ~/bin/i3resize left"
-bindsym $mod+Mod1+Down exec --no-startup-id "bash ~/bin/i3resize down"
-bindsym $mod+Mod1+Up exec --no-startup-id "bash ~/bin/i3resize up"
-bindsym $mod+Mod1+Right exec --no-startup-id "bash ~/bin/i3resize right"
+bindsym $mod+$alt+Left exec --no-startup-id "bash ~/bin/i3resize left"
+bindsym $mod+$alt+Down exec --no-startup-id "bash ~/bin/i3resize down"
+bindsym $mod+$alt+Up exec --no-startup-id "bash ~/bin/i3resize up"
+bindsym $mod+$alt+Right exec --no-startup-id "bash ~/bin/i3resize right"
 
-bindsym $mod+Mod1+h exec --no-startup-id "bash ~/bin/i3resize left"
-bindsym $mod+Mod1+j exec --no-startup-id "bash ~/bin/i3resize down"
-bindsym $mod+Mod1+k exec --no-startup-id "bash ~/bin/i3resize up"
-bindsym $mod+Mod1+l exec --no-startup-id "bash ~/bin/i3resize right"
+bindsym $mod+$alt+h exec --no-startup-id "bash ~/bin/i3resize left"
+bindsym $mod+$alt+j exec --no-startup-id "bash ~/bin/i3resize down"
+bindsym $mod+$alt+k exec --no-startup-id "bash ~/bin/i3resize up"
+bindsym $mod+$alt+l exec --no-startup-id "bash ~/bin/i3resize right"
+bindsym $mod+$alt+p exec --no-startup-id "/opt/enpass-beta/Enpass6 showassistant"
+bindsym $mod+$alt+m exec --no-startup-id ~/bin/displayctl menu
 
 # toggle split in vertical/horizontal orientation
 bindsym $mod+v split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym $mod+Mod1+f floating enable; border none; move position 0 0; resize set 1920 1080
+bindsym $mod+$alt+f floating enable; border none; move position 0 0; resize set 1920 1080
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+t layout tabbed
 bindsym $mod+Shift+e layout toggle split
 
 bindsym $mod+comma workspace prev
@@ -110,7 +115,7 @@ bindsym $mod+period workspace next
 bindsym $mod+minus workspace back_and_forth
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle; border pixel 3
+bindsym $mod+Shift+space floating toggle; border pixel 1
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -119,7 +124,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+y focus child
 
 bindsym $mod+p exec ~/bin/1pmenu 
 bindsym $mod+Shift+p exec ~/bin/1pswitchvault
@@ -196,7 +201,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $border-color        #b8bb26
+set $border-color        #928374
 set $bg-color            #282828
 set $inactive-bg-color   #1d2021
 set $text-color          #ebdbb2
@@ -211,8 +216,8 @@ client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-col
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $indicator-color
 client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color          $indicator-color
 
-gaps inner 20
-gaps outer 20
+gaps inner 14
+gaps outer -2
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -276,26 +281,18 @@ assign [class="Sonic Pi" window_type=splash] $ws1
 assign [class="qjackctl"] $ws10
 
 # Gimp
-workspace $ws5 gaps inner 0
-workspace $ws5 gaps outer 0
 for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
 for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
 
 # Bindings to make the webcam float and stick
 for_window [title="mpvfloat"] floating enable; sticky enable; border enable;
 no_focus [title="mpvfloat"]
-
-workspace $ws2 gaps inner 0
-workspace $ws2 gaps outer 0
 for_window [class="Sonic Pi" window_type=splash] floating enable, border pixel 0 
-
-workspace $ws10 gaps inner 0
-workspace $ws10 gaps outer 0
 
 # Backlight control
 
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/bin/displayctl bl down
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/bin/displayctl bl up
 
 bindsym XF86Sleep exec systemctl hibernate
 
@@ -325,16 +322,17 @@ bindsym $mod+F8 exec --no-startup-id ~/bin/lmc next
 bindsym $mod+F9 exec --no-startup-id ~/.config/mutt/etc/mailsync.sh 
 
 bindsym XF86ScreenSaver exec --no-startup-id betterlockscreen -l dimblur
-bindsym $mod+Shift+Mod1+k exec --no-startup-id "killall screenkey || screenkey"
+bindsym $mod+Shift+$alt+k exec --no-startup-id "killall screenkey || screenkey"
 
 # App shortcuts
 bindsym $mod+w exec "/usr/bin/qutebrowser"
 bindsym $mod+Shift+w exec "/usr/bin/qutebrowser"
 bindsym $mod+e exec $term -e neomutt
 bindsym $mod+n exec $term -e /usr/bin/ranger
+bindsym $mod+Shift+n exec --no-startup-id networkmanager_dmenu
 bindsym $mod+m exec $term -e /usr/bin/ncmpcpp
-bindsym $mod+Mod1+d exec ~/bin/getpocket 
-bindsym $mod+Mod1+s exec "syncthing --browser-only"
+bindsym $mod+$alt+d exec ~/bin/getpocket 
+bindsym $mod+$alt+s exec "syncthing --browser-only"
 
 # Autostart apps
 exec --no-startup-id ~/bin/startjack
@@ -351,11 +349,12 @@ exec --no-startup-id ~/bin/remaps
 exec --no-startup-id "xset s on"
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id "compton -cC --xrender-sync-fence"
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 exec --no-startup-id "xss-lock --ignore-sleep -- /usr/bin/betterlockscreen -l dimblur"
 exec --no-startup-id "udiskie -2ans -f ~/bin/ranger-open"
+exec --no-startup-id "redshift"
 exec --no-startup-id "1pserver"
 exec --no-startup-id syncthing -no-browser
 exec --no-startup-id "/usr/bin/transmission-daemon -o -y -b -er -c ~/Downloads -T -w ~/Downloads"
 exec --no-startup-id "/usr/bin/onedrive -m"
-exec --no-startup-id "/usr/bin/nextcloud"
+# exec --no-startup-id "/usr/bin/nextcloud"

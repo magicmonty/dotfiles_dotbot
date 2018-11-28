@@ -6,7 +6,7 @@ case "$1" in
   "down") amixer -c 0 sset Master 5%- && pkill -RTMIN+10 i3blocks ;;
   "finedown") amixer -c 0 sset Master 1%- && pkill -RTMIN+10 i3blocks ;;
   "mute") pamixer --allow-boost -t && pkill -RTMIN+10 i3blocks ;;
-  "truemute") pamixer --allow-boost -m && pkill -RTMIN+10 i3block s;;
+  "truemute") pamixer --allow-boost -m && pkill -RTMIN+10 i3block ;;
   "toggle") mpc toggle && pkill -RTMIN+11 i3blocks ;;
   "stop") mpc stop && pkill -RTMIN+11 i3blocks ;;
   "pause") mpc pause && pkill -RTMIN+10 i3blocks ;;

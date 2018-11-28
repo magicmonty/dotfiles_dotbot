@@ -54,7 +54,7 @@ interval=180
 signal=12
 
 [pacman]
-label=
+label= 
 command=~/bin/i3pacman -q -a -b "#928374" -u "#b8bb26"
 interval=3600
 signal=13
