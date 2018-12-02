@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo "<span background=\"#98971A\" color=\"#282828\"></span><span color=\"#ebbdb2\"> $(date '+ %a, %d.%m.%Y  %H:%M') </span>"
+echo "<span color=\"#ebbdb2\"> 📆$(date '+ %a, %d.%m.%Y ⏰ %H:%M') </span>"
 

@@ -8,7 +8,7 @@ markup=pango
 #signal=9
 
 [mpd]
-label=
+label=🎶
 command=~/bin/i3mpd
 interval=once
 signal=11
@@ -48,13 +48,13 @@ command=~/bin/i3time
 interval=30
 
 [mail]
-label=
+label=📬
 command=~/bin/i3mail
 interval=180
 signal=12
 
 [pacman]
-label= 
+label= 🔄
 command=~/bin/i3pacman -q -a -b "#928374" -u "#b8bb26"
 interval=3600
 signal=13

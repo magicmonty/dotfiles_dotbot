@@ -13,7 +13,7 @@ case $BLOCK_BUTTON in
   1) /usr/bin/termite -e ~/bin/popweather & disown ;;
 esac
 
-RAIN=$(cat ~/.weatherreport | sed '16q;d' | sed -e 's/[^m]*m//g' | grep -o "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/ /g")
-TEMP=$(cat ~/.weatherreport | sed '13q;d' | sed -e 's/[^m]*m//g;s/[^0-9]/ /g;s/ /\n/g;/^s*$/d' | grep [0-9] | sort -n | sed -e 1b -e '$!d' | tr '\n' ' ' | awk '{print "   "$1"°C - "$2 "°C"}')
+RAIN=$(cat ~/.weatherreport | sed '16q;d' | sed -e 's/[^m]*m//g' | grep -o "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/ ☔ /g")
+TEMP=$(cat ~/.weatherreport | sed '13q;d' | sed -e 's/[^m]*m//g;s/[^0-9]/ /g;s/ /\n/g;/^s*$/d' | grep [0-9] | sort -n | sed -e 1b -e '$!d' | tr '\n' ' ' | awk '{print " 🌞 "$1"°C - "$2 "°C"}')
 
-echo "<span color=\"$bgcolor\" background=\"#b8bb26\"></span><span background=\"$bgcolor\" color=\"#EBDBB2\"> $RAIN$TEMP </span>"
+echo "$RAIN$TEMP "

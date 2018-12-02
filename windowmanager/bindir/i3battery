@@ -40,61 +40,42 @@ text="$battery_percent % "
 
 if [ "$ac" -eq 1 ]; then
   icon="  "
-  bgcolor="#EBDBB2"
-  color="#282828"
+  color="#EBDBB2"
+  bgcolor="#282828"
 
   if [ "$battery_percent" -gt 88 ]; then
     icon="  "
     text="" 
-    bgcolor="#98971A"
-    color="#ebdbb2"
   fi
 else
   if [ "$battery_percent" -gt 95 ]; then
     icon="  "
-    bgcolor="#98971A"
-    color="#ebdbb2"
   elif [ "$battery_percent" -gt 88 ]; then
     icon="  "
-    bgcolor="#98971A"
-    color="#ebdbb2"
   elif [ "$battery_percent" -gt 79 ]; then
     icon="  "
-    bgcolor="#98971A"
-    color="#ebdbb2"
   elif [ "$battery_percent" -gt 69 ]; then
     icon="  "
-    bgcolor="#EBDBB2"
-    color="#282828"
   elif [ "$battery_percent" -gt 59 ]; then
     icon="  "
-    bgcolor="#EBDBB2"
-    color="#282828"
   elif [ "$battery_percent" -gt 49 ]; then
     icon="  "
-    bgcolor="#D65D0E"
-    color="#ebdbb2"
   elif [ "$battery_percent" -gt 39 ]; then
     icon="  "
-    bgcolor="#D65D0E"
-    color="#ebdbb2"
+    color="#D65D0E"
   elif [ "$battery_percent" -gt 29 ]; then
     icon="  "
-    bgcolor="#D65D0E"
-    color="#ebdbb2"
+    color="#D65D0E"
   elif [ "$battery_percent" -gt 19 ]; then
     icon="  "
-    bgcolor="#D65D0E"
-    color="#ebdbb2"
+    color="#D65D0E"
   elif [ "$battery_percent" -gt 9 ]; then
     icon="  "
-    bgcolor="#CC241D"
-    color="#ebdbb2"
+    color="#CC241D"
   else
     icon="  "
-    bgcolor="#CC241D"
-    color="#ebdbb2"
+    color="#CC241D"
   fi
 fi
 
-echo "<span background=\"#d79921\" color=\"$bgcolor\"></span><span background=\"$bgcolor\" color=\"$color\">$icon$text</span>"
+echo "<span background=\"$bgcolor\" color=\"$color\">$icon$text</span>"

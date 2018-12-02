@@ -86,6 +86,8 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+bindsym $mod+Shift+period exec --no-startup-id "~/bin/dmenuunicode"
+
 bindsym $mod+$alt+Left exec --no-startup-id "bash ~/bin/i3resize left"
 bindsym $mod+$alt+Down exec --no-startup-id "bash ~/bin/i3resize down"
 bindsym $mod+$alt+Up exec --no-startup-id "bash ~/bin/i3resize up"

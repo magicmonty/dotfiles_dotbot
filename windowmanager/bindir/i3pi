@@ -22,8 +22,8 @@ esac
 RUNNING=$($STATUS > /dev/null 2>&1 && echo 1 || echo 0)
 
 if [[ $RUNNING -eq 1 ]]; then
-  echo "<span background=\"#b8bb26\" color=\"#282828\"> π <span color=\"#689d6a\">栗 </span></span>"
+  echo " π <span color=\"#689d6a\">栗 </span>"
 else
-  echo "<span background=\"#b8bb26\" color=\"#282828\"> π <span color=\"#cc241d\">契 </span></span>"
+  echo " π <span color=\"#cc241d\">契 </span>"
 fi
 

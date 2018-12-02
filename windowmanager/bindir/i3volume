@@ -7,13 +7,16 @@ case $BLOCK_BUTTON in
 	5) amixer -c 0 sset Master 1%- >/dev/null 2>&1;;
 esac
 
-bgcolor="#b8bb26"
-fgcolor="#282828"
-
 V=$(amixer -c 0 sget Master | grep 'Mono')
 if [[ $(echo $V | sed -e 's/.*\[\(on\|off\)\].*/\1/g') = "off" ]]; then
-  echo "<span color=\"$bgcolor\"></span><span background=\"$bgcolor\" color=\"#98971A\"> [mute]</span>"
+  echo "🔇 <span color=\"#98971A\">[mute]</span>"
 else
   VOLUME=$(echo $V | sed -e 's/.*\[\([[:digit:]]\+\)%\].*/\1/gm')
-  echo "<span color=\"$bgcolor\"></span><span background=\"$bgcolor\" color=\"$fgcolor\">墳 $VOLUME%</span>"
+  if [[ ${VOLUME} -gt 75 ]]; then
+    echo " 🔊 $VOLUME% "
+  elif [[ ${VOLUME} -gt 25 ]]; then
+    echo " 🔉 $VOLUME% "
+  else
+    echo " 🔈 $VOLUME% "
+  fi
 fi
