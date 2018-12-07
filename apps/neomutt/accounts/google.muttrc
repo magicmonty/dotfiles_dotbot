@@ -5,7 +5,6 @@ set from = "magicmonty@pagansoft.de"
 set smtp_url = "smtp://pagansoft@gmail.com@smtp.gmail.com:465/"
 set sendmail = "/usr/bin/msmtp -a google"
 set folder = "~/.mail/google"
-# set mask = "!^\\.[^.]"
 set header_cache = ~/.config/mutt/accounts/google/cache/headers
 set message_cachedir = ~/.config/mutt/accounts/google/cache/bodies
 set certificate_file = ~/.config/mutt/accounts/google/certificates
@@ -29,3 +28,4 @@ set spoolfile = "+_Posteingang"
 set record = "+_Gesendet"
 set postponed = "+_Drafts"
 set trash = "+_Papierkorb"
+

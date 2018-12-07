@@ -7,19 +7,19 @@
 	editor = /usr/bin/vim
 
 [difftool "sourcetree"]
-	cmd = ~/bin/bcomp \"$LOCAL\" \"$REMOTE\"
+	cmd = /usr/bin/bcompare \"$LOCAL\" \"$REMOTE\"
 	path = -ro
 
 [mergetool "sourcetree"]
-	cmd = ~/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	cmd = /usr/bin/bcompare \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
 	trustExitCode = true
 
 [difftool "bc3"]
-  cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\"
+  cmd = /usr/bin/bcompare \"$LOCAL\" \"$REMOTE\"
   trustExitCode = true
 
 [mergetool "bc3"]
-  cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+  cmd = /usr/bin/bcompare \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
   trustExitCode = true
 
 [credential]
