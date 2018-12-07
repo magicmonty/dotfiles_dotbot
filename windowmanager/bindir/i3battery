@@ -38,16 +38,16 @@ battery_percent=$(("$battery_percent / $battery_max"))
 
 text="$battery_percent % "
 
+color="#EBDBB2"
+bgcolor="#282828"
 if [ "$ac" -eq 1 ]; then
   icon="  "
-  color="#EBDBB2"
-  bgcolor="#282828"
-
   if [ "$battery_percent" -gt 88 ]; then
     icon="  "
     text="" 
   fi
 else
+
   if [ "$battery_percent" -gt 95 ]; then
     icon="  "
   elif [ "$battery_percent" -gt 88 ]; then

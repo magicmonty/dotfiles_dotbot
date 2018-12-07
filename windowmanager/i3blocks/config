@@ -1,5 +1,5 @@
 command=/usr/lib/i3blocks/$BLOCK_NAME
-separator_block_width=0
+separator_block_width=1
 markup=pango
 
 #[record]

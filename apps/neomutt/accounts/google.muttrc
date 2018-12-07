@@ -4,7 +4,8 @@ set realname = "Martin Gondermann"
 set from = "magicmonty@pagansoft.de"
 set smtp_url = "smtp://pagansoft@gmail.com@smtp.gmail.com:465/"
 set sendmail = "/usr/bin/msmtp -a google"
-set folder = "~/.mail"
+set folder = "~/.mail/google"
+# set mask = "!^\\.[^.]"
 set header_cache = ~/.config/mutt/accounts/google/cache/headers
 set message_cachedir = ~/.config/mutt/accounts/google/cache/bodies
 set certificate_file = ~/.config/mutt/accounts/google/certificates
@@ -19,11 +20,12 @@ bind index,pager g noop
 bind index gg first-entry
 #unmailboxes *
 source ~/.config/mutt/mailboxes
-macro index,pager gi "<change-folder>=google/_Posteingang<enter>" "Go to inbox."
-macro index,pager gS "<change-folder>=google/_Spam<enter>" "Go to spam."
-macro index,pager gp "<change-folder>=google/_Papierkorb<enter>" "Go to trash."
-macro index,pager gw "<change-folder>=google/_Wichtig<enter>" "Go to Important."
-set spoolfile = "+google/_Posteingang"
-set record = "+google/_Gesendet"
-set postponed = "+google/_Drafts"
-set trash = "+google/_Papierkorb"
+macro index,pager gi "<change-folder>=_Posteingang<enter>" "Go to inbox."
+macro index,pager gS "<change-folder>=_Spam<enter>" "Go to spam."
+macro index,pager gp "<change-folder>=_Papierkorb<enter>" "Go to trash."
+macro index,pager gw "<change-folder>=Wichtig<enter>" "Go to Important."
+macro index,pager c "<change-folder>?<toggle-mailboxes>" "open a different folder"
+set spoolfile = "+_Posteingang"
+set record = "+_Gesendet"
+set postponed = "+_Drafts"
+set trash = "+_Papierkorb"
