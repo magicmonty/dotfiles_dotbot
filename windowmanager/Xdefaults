@@ -9,6 +9,8 @@ Xft.rgba: rgb
 *cursor: #a8a19f
 *background: #282828
 
+*alpha: 210
+
 !! black
 *color0: #282828
 *color8: #928374

@@ -56,7 +56,7 @@ set include                          # include message in replies
 macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
 
 #sync email
-macro index O "<shell-escape>offlineimap<enter>" "run offlineimap to sync all mail"
+macro index O "<shell-escape>~/bin/mailsync<enter>" "run offlineimap to sync all mail"
 macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
 
 #copy/move dialogs
@@ -73,7 +73,7 @@ set sidebar_width = 30
 set sidebar_short_path
 set sidebar_delim_chars="/."
 set sidebar_folder_indent
-set sidebar_indent_string="  "
+set sidebar_indent_string="··"
 set sidebar_next_new_wrap = yes
 set mail_check_stats
 set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%?S?%S?'

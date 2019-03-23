@@ -1,16 +1,19 @@
 #!/bin/bash
 
+DEVICE=${1-hw:PCH}
+PERIOD=${2-512}
+
 /usr/bin/mpc stop
 
 /usr/bin/jack_control stop
 sleep 1
 /usr/bin/jack_control eps realtime true
 /usr/bin/jack_control ds alsa
-/usr/bin/jack_control dps device hw:PCH
-/usr/bin/jack_control dps capture hw:PCH
-/usr/bin/jack_control dps playback hw:PCH
+/usr/bin/jack_control dps device ${DEVICE}
+/usr/bin/jack_control dps capture ${DEVICE}
+/usr/bin/jack_control dps playback ${DEVICE}
 /usr/bin/jack_control dps nperiods 2
-/usr/bin/jack_control dps period 512
+/usr/bin/jack_control dps period ${PERIOD}
 /usr/bin/jack_control dps rate 48000
 /usr/bin/jack_control start
 

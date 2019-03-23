@@ -10,3 +10,4 @@ config.bind(';pk', 'set downloads.location.directory ~/Bilder/Korea ;; hint link
 config.bind(';vv', 'set downloads.location.directory ~/Videos ;; hint links download')
 config.bind(';s', 'set downloads.location.directory ~/.dotfiles/scripts ;; hint links download')
 config.bind(';cf', 'set downloads.location.directory ~/.config ;; hint links download')
+config.bind(';re', 'set downloads.location.directory ~/Dropbox/Haushalt/Steuer2018/ ;; hint links download')

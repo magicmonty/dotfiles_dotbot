@@ -1,10 +1,10 @@
 #!/bin/sh
 case $BLOCK_BUTTON in
   1) /usr/bin/qutebrowser https://mail.google.com ;;
-  3) /usr/bin/termite -e neomutt ;;
+  3) $TERMINAL -e neomutt && pkill -RTMIN+12 i3blocks;;
 esac
 
-COUNT=$(find ~/.mail -wholename */_Posteingang/new/* | sed -n '$=') 
+COUNT=$(find ~/.mail -type f | grep /new/ | grep -v Papierkorb | grep -v Spam | sed -n '$=') 
 
 if [[ $COUNT -gt 0 ]]; then
   echo "<span color=\"#b8bb26\">$COUNT</span>" $(cat ~/.config/mutt/.dl 2>/dev/null)

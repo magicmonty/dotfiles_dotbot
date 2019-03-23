@@ -1,7 +1,7 @@
 #!/bin/bash
 
 case $BLOCK_BUTTON in
-	1) urxvt -e nmtui-connect ;;
+	1) $TERMINAL -e nmtui-connect ;;
 esac
 
 INTERFACE="${BLOCK_INSTANCE:-wlp4s0}"

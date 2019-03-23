@@ -24,7 +24,7 @@ export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 export BROWSER=/usr/bin/qutebrowser
 export RTV_BROWSER=/usr/bin/qutebrowser
-export TERMINAL=/usr/bin/urxvt
+export TERMINAL=/usr/local/bin/st
 export BYOBU_CHARMAP=UTF-8
 export READER=/usr/bin/zathura
 
