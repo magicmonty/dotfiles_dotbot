@@ -540,7 +540,7 @@ endif
 
 autocmd BufWritePost ~/.dotfiles/scripts/folders,~/.dotfiles/scripts/configs !bash ~/.dotfiles/scripts/shortcuts.sh
 
-set pyxversion=3
+" set pyxversion=3
 set encoding=utf-8
 
 let g:sonicpi_command = 'sonic-pi-tool'
