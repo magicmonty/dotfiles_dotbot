@@ -22,9 +22,6 @@
   cmd = /usr/bin/bcompare \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
   trustExitCode = true
 
-[credential]
-	helper = "netrc -f ~/.netrc.asc -v"
-
 [push]
 	default = current
 

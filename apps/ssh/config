@@ -1,3 +1,6 @@
+Host *
+  IPQoS throughput
+
 Host katharina
 	HostName katharinas-air
 	User katharina
