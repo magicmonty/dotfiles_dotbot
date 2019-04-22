@@ -12,7 +12,7 @@
 
 set $mod Mod4
 set $alt Mod1
-set $term --no-startup-id /usr/local/bin/st
+set $term terminal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -128,7 +128,7 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+y focus child
 
-bindsym $mod+p exec ~/bin/1pmenu 
+bindsym $mod+p exec ~/bin/1pmenu
 bindsym $mod+Shift+p exec ~/bin/1pswitchvault
 bindsym $mod+numbersign exec rofi-pass
 bindsym $mod+s exec ~/bin/toggle_screensaver
@@ -263,7 +263,7 @@ smart_gaps on
 smart_borders on
 
 # Shadertone
-for_window [title="shadertone"] floating disable; 
+for_window [title="shadertone"] floating disable;
 
 # floating windows
 for_window [class="Pavucontrol"] floating enable
@@ -289,7 +289,7 @@ for_window [window_role="gimp-toolbox"] floating disable; move right; resize gro
 # Bindings to make the webcam float and stick
 for_window [title="mpvfloat"] floating enable; sticky enable; border enable;
 no_focus [title="mpvfloat"]
-for_window [class="Sonic Pi" window_type=splash] floating enable, border pixel 0 
+for_window [class="Sonic Pi" window_type=splash] floating enable, border pixel 0
 
 # Backlight control
 
@@ -321,7 +321,7 @@ bindsym $mod+F5 exec --no-startup-id ~/bin/lmc toggle
 bindsym $mod+F6 exec --no-startup-id ~/bin/lmc stop
 bindsym $mod+F7 exec --no-startup-id ~/bin/lmc prev
 bindsym $mod+F8 exec --no-startup-id ~/bin/lmc next
-bindsym $mod+F9 exec --no-startup-id ~/.config/mutt/etc/mailsync.sh 
+bindsym $mod+F9 exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 
 bindsym XF86ScreenSaver exec --no-startup-id betterlockscreen -l dimblur
 bindsym $mod+Shift+$alt+k exec --no-startup-id "killall screenkey || screenkey"
@@ -333,7 +333,7 @@ bindsym $mod+e exec $term -e neomutt
 bindsym $mod+n exec $term -e /usr/bin/ranger
 bindsym $mod+Shift+n exec --no-startup-id networkmanager_dmenu
 bindsym $mod+m exec $term -e /usr/bin/ncmpcpp
-bindsym $mod+$alt+d exec ~/bin/getpocket 
+bindsym $mod+$alt+d exec ~/bin/getpocket
 bindsym $mod+$alt+s exec "syncthing --browser-only"
 
 # Autostart apps
