@@ -1,4 +1,4 @@
 function psearch
-  aurman -Ss $argv
+  yay -Ss $argv
 end
 

@@ -133,19 +133,20 @@ alias gls="git log --graph --oneline --decorate --all --color=always | fzf --ans
 
 # aurman aliases
 pclean() {
-  aurman -Rns $(aurman -Qtdq) 2>/dev/null
+  yay -Yc
+  yay -Rns $(yay -Qtdq) 2>/dev/null
   paccache -r
 }
 
 pupd() {
   notify-send -a 'Package Update' 'Upgrade started'
   neofetch
-  aurman -Syyuv --noconfirm --noedit && notify-send -a 'Package Update' 'Update completed' || notify-send -a 'Package Update' -u critical 'Update failed'
+  yay -Syyuv --noconfirm --noeditmenu && notify-send -a 'Package Update' 'Update completed' || notify-send -a 'Package Update' -u critical 'Update failed'
   pkill -RTMIN+13 i3blocks
 }
-alias pinst='aurman -S'
-alias psearch='aurman -Ss'
-alias puninst='aurman -R'
+alias pinst='yay -S'
+alias psearch='yay -Ss'
+alias puninst='yay -R'
 
 # Theming section
 autoload -U compinit colors zcalc

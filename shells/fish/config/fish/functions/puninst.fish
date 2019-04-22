@@ -1,3 +1,3 @@
 function puninst
-  aurman -R $argv
+  yay -R $argv
 end

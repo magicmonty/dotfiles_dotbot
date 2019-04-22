@@ -1,3 +1,3 @@
 function pinst
-  aurman -S $argv
+  yay -S $argv
 end
