@@ -22,9 +22,9 @@ HISTSIZE=1000
 SAVEHIST=500
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
-export BROWSER=/usr/bin/qutebrowser
-export RTV_BROWSER=/usr/bin/qutebrowser
-export TERMINAL=/usr/local/bin/st
+export BROWSER=/usr/bin/firefox
+export RTV_BROWSER=/usr/bin/firefox
+export TERMINAL=/usr/bin/terminal
 export BYOBU_CHARMAP=UTF-8
 export READER=/usr/bin/zathura
 
@@ -144,7 +144,7 @@ pupd() {
   yay -Syyuv --noconfirm --noeditmenu && notify-send -a 'Package Update' 'Update completed' || notify-send -a 'Package Update' -u critical 'Update failed'
   pkill -RTMIN+13 i3blocks
 }
-alias pinst='yay -S'
+alias pinst='yay --noeditmenu --nodiffmenu --nocleanmenu --answerclean A --needed -S'
 alias psearch='yay -Ss'
 alias puninst='yay -R'
 
