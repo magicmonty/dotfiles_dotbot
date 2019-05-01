@@ -1,4 +1,5 @@
 arch_dependencies
+defaultapps
 ruby
 dev
 git

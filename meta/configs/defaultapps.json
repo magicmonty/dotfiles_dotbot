@@ -1,0 +1,17 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/.defaultapps": "shells/defaultapps",
+      "~/.profile": "shells/profile"
+    }
+  }
+]

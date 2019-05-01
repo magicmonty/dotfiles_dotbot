@@ -1,5 +1,5 @@
-Xft.dpi:       180
-*dpi:          180
+Xft.dpi:       96
+*dpi:          96
 
 Xft.antialias: true
 Xft.hinting:   true
@@ -89,10 +89,10 @@ URxvt.color248: #bdae93
 URxvt.color250: #d5c4a1
 
 Xcursor.theme: xcursor-breeze
-Xcursor.size:                     52
+! Xcursor.size:                     52
 
 ! URxvt.font:                       xft:TerminessTTFNerdFontMono:18
-URxvt.font:                       xft:Monoid Nerd Font Mono:size=9
+URxvt.font:                       xft:Monoid Nerd Font Mono:size=12
 
 ! alternative font settings with 'terminus':
 ! URxvt.font:      -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso10646-1

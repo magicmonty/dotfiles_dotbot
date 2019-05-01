@@ -20,13 +20,8 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 HISTFILE=~/.zhistory
 HISTSIZE=1000
 SAVEHIST=500
-export EDITOR=/usr/bin/vim
-export VISUAL=/usr/bin/vim
-export BROWSER=/usr/bin/firefox
-export RTV_BROWSER=/usr/bin/firefox
-export TERMINAL=/usr/bin/terminal
-export BYOBU_CHARMAP=UTF-8
-export READER=/usr/bin/zathura
+
+source $HOME/.defaultapps
 
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
