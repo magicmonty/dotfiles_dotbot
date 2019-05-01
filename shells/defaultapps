@@ -1,7 +1,8 @@
-export BROWSER=/usr/bin/firefox
+export BROWSER=/usr/bin/qutebrowser
+export RTV_BROWSER=$BROWSER
+export TRUE_BROWSER=$BROWSER
 export TERMINAL=/usr/bin/terminal
 export EDITOR=/usr/bin/vim
-export VISUAL=/usr/bin/vim
-export RTV_BROWSER=/usr/bin/firefox
+export VISUAL=$EDITOR
 export BYOBU_CHARMAP=UTF-8
 export READER=/usr/bin/zathura

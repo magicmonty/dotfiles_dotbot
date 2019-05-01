@@ -22,11 +22,13 @@ hplip
 i3blocks
 jack2
 keybase
+keybase-gui
 libreoffice-fresh
 libreoffice-fresh-de
 minecraft-launcher
 mpc
 mpd
+mpv
 mupdf-gl
 mupdf-tools
 ncmpcpp
@@ -55,3 +57,11 @@ zathura
 clojure
 leiningen
 rlwrap
+syncthing
+xorg-xbacklight
+realtime-privileges
+youtube-dl
+udiskie
+transmission-cli
+xss-lock
+onedrive

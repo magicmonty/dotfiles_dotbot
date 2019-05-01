@@ -57,6 +57,9 @@ XTerm*selectToClipboard: true
 *color7:                          #a89984
 *color15:                         #ebdbb2
 
+*orange_dark:                     #d65d0e
+*orange_light:                    #fe8019
+
 URxvt.color24:  #076678
 URxvt.color66:  #427b58
 URxvt.color88:  #9d0006

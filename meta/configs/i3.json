@@ -60,6 +60,7 @@
       "~/bin/startjack": "windowmanager/bindir/startjack",
       "~/bin/stopjack": "windowmanager/bindir/stopjack",
       "~/bin/toggle_screensaver": "windowmanager/bindir/toggle_screensaver",
+      "~/bin/touchpad_toggle": "windowmanager/bindir/touchpad_toggle",
       "~/bin/umpv": "windowmanager/bindir/umpv",
       "~/.mailcap": "windowmanager/mailcap",
       "~/.local/share/applications/feh.desktop": "windowmanager/applications/feh.desktop"

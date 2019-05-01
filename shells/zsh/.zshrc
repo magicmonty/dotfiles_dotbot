@@ -139,7 +139,7 @@ pupd() {
   yay -Syyuv --noconfirm --noeditmenu && notify-send -a 'Package Update' 'Update completed' || notify-send -a 'Package Update' -u critical 'Update failed'
   pkill -RTMIN+13 i3blocks
 }
-alias pinst='yay --noeditmenu --nodiffmenu --nocleanmenu --answerclean A --needed -S'
+alias pinst='yay --noeditmenu --nodiffmenu --nocleanmenu --answerclean --sudoloop --needed -S'
 alias psearch='yay -Ss'
 alias puninst='yay -R'
 
