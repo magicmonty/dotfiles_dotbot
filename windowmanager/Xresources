@@ -16,6 +16,11 @@ XTerm*faceSize:          11
 XTerm*reverseVideo:      on
 XTerm*selectToClipboard: true
 
+Xautolock.time: 15
+Xautolock.locker: /usr/bin/betterlockscreen -l dimblur
+Xautolock.notify: 5
+Xautolock.notifier: /usr/bin/notify-send "Locking now..."
+
 *background:                      #282828
 *foreground:                      #ebdbb2
 *foreground_bold:                 #ebdbb2

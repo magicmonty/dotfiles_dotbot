@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+echo "Enabling XAutoLock"
+/usr/bin/xautolock -enable
+echo "Locking..."
+/usr/bin/xautolock -locknow

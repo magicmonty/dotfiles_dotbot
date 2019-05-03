@@ -278,7 +278,7 @@ bindsym $mod+F7 exec --no-startup-id ~/bin/lmc prev
 bindsym $mod+F8 exec --no-startup-id ~/bin/lmc next
 bindsym $mod+F9 exec --no-startup-id ~/.config/mutt/etc/mailsync.sh
 
-bindsym XF86ScreenSaver exec --no-startup-id betterlockscreen -l dimblur
+bindsym XF86ScreenSaver exec --no-startup-id xautolock -locknow
 bindsym $mod+Shift+$alt+k exec --no-startup-id "killall screenkey || screenkey"
 
 # Resize window (you can also use the mouse for that)
@@ -317,12 +317,13 @@ exec --no-startup-id ~/bin/xbanish -bt 2000
 exec --no-startup-id ~/bin/remaps
 
 # Enable Screen saver
-exec --no-startup-id "xset +dpms s on"
+exec --no-startup-id "xset dpms 900 900 900"
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id compton -cC --xrender-sync-fence
 exec --no-startup-id nm-applet
-exec --no-startup-id "xss-lock --ignore-sleep -- /usr/bin/betterlockscreen -l dimblur"
+exec --no-startup-id "xautolock -detectsleep"
+# exec --no-startup-id "xss-lock --ignore-sleep -- /usr/bin/betterlockscreen -l dimblur"
 exec --no-startup-id "udiskie -2ans -f ~/bin/vifm-open"
 exec --no-startup-id "syncthing -no-browser"
 exec --no-startup-id "/usr/bin/transmission-daemon -o -y -b -er -c ~/Downloads -T -w ~/Downloads"
@@ -332,7 +333,6 @@ exec --no-startup-id "/opt/enpass/Enpass -minimize"
 exec --no-startup-id "env KEYBASE_AUTOSTART=1 keybase-gui"
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id clipit
-exec --no-startup-id start_conky_maia
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 

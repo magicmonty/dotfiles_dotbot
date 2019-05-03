@@ -121,7 +121,7 @@ alias ggl='git log --graph --oneline --decorate --branches --all'
 alias hsit="git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
 alias wdw='git wdw'
 alias most-changed="git log --format=%n --name-only | grep -v '^$' | sort | uniq -c |--numeric-sort --reverse | head -n 50"
-alias gcleanf='git cleand -xdf'
+alias gcleanf='git cleanf -xdf'
 alias gv='vim -c "GV" -c "tabonly"'
 alias gitv='vim -c "GV" -c "tabonly"'
 alias gls="git log --graph --oneline --decorate --all --color=always | fzf --ansi +s --preview='git show --color=always {2}' --bind='ctrl-d:preview-page-down' --bind='ctrl-u:preview-page-up' --bind='enter:execute:git show --color=always {2} | less -R' --bind='ctrl-x:execute:git checkout {2} .'"

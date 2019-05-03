@@ -3,9 +3,11 @@
 timeout=$(xset q | awk '/timeout:/ {print $2}')
 
 if [[ timeout -eq 0 ]]; then
-  xset +dpms s on
+  xset dpms 900 900 900
+  xautolock -enable
   notify-send -u low -a "Screensaver" "Screensaver is now on"
 else
-  xset -dpms s off
+  xset dpms 0 0 0
+  xautolock -disable
   notify-send -u low -a "Screensaver" "Screensaver is now off"
 fi

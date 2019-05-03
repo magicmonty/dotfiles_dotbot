@@ -11,6 +11,7 @@
   {
     "link": {
       "~/.sonic-pi/init.rb": "apps/sonic-pi/init.rb",
+      "~/.sonic-pi/string_ext.rb": "apps/sonic-pi/string_ext.rb",
       "~/.sonic-pi/snippets": "apps/sonic-pi/snippets",
       "~/.sonic-pi/theme.properties": "apps/sonic-pi/theme.properties"
     }
