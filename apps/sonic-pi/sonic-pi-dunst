@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+killall dunst > /dev/null 2>&1
+/usr/bin/dunst -conf ${HOME}/.config/dunst/sonicpi &
+disown

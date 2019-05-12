@@ -1,13 +1,16 @@
 #!/bin/env sh
 
-timeout=$(xset q | awk '/timeout:/ {print $2}')
-
-if [[ timeout -eq 0 ]]; then
+DISPLAY=:0
+timeout=$(xset q | awk '/DPMS is/ {print $3}')
+if [[ ${timeout} = "Disabled" ]]; then
+  xset s on
   xset dpms 900 900 900
   xautolock -enable
   notify-send -u low -a "Screensaver" "Screensaver is now on"
 else
   xset dpms 0 0 0
+  xset -dpms
+  xset s off
   xautolock -disable
   notify-send -u low -a "Screensaver" "Screensaver is now off"
 fi

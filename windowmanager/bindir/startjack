@@ -1,7 +1,17 @@
 #!/bin/bash
 
-DEVICE=${1-hw:PCH}
-PERIOD=${2-512}
+if (lsusb | grep "Texas Instruments PCM2902 Audio Codec" >/dev/null); then
+  DEVICE=${1-hw:CODEC}
+  PERIOD=${2-128}
+else
+  DEVICE=${1-hw:PCH}
+  PERIOD=${2-512}
+fi
+
+if [[ "${DEVICE}" == "usb" ]]; then
+  DEVICE="hw:CODEC"
+  PERIOD=128
+fi
 
 /usr/bin/mpc stop
 

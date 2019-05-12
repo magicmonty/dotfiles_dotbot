@@ -11,7 +11,7 @@ new_window pixel 1
 new_float normal
 
 # Hide borders
-hide_edge_borders both
+hide_edge_borders smart
 for_window [class="^.*"] border pixel 1
 
 # change borders
@@ -44,10 +44,10 @@ bindsym $mod+Tab exec --no-startup-id rofi -modi windowcd -i -show windowcd
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-#exec --no-startup-id volumeicon
-#bindsym $mod+Ctrl+m exec $term -e 'alsamixer'
-exec --no-startup-id pulseaudio
-exec --no-startup-id pa-applet
+exec --no-startup-id volumeicon
+bindsym $mod+Ctrl+m exec $term -e 'alsamixer'
+exec --no-startup-id pulseaudio --start
+#exec --no-startup-id pa-applet
 
 
 ################################################################################################
@@ -158,13 +158,13 @@ bindsym $mod+period workspace next
 #                 set $ws2 2:
 set $ws1 "1"
 set $ws2 2:Dev
-set $ws3 3:Music
+set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
+set $ws7 "7:SonicPi"
+set $ws8 "8:VCV"
+set $ws9 "9:OBS"
 set $ws10 "10:jack"
 
 # switch to workspace
@@ -207,15 +207,13 @@ bindsym $mod+Shift+c exec "i3-msg reload && notify-send -a i3 -u low 'Reloaded'"
 bindsym $mod+Shift+r exec "i3-msg restart && notify-send -a i3 -u low 'Restarted'"
 
 # Open applications on specific workspaces
-# assign [class="Thunderbird"] $ws1
-# assign [class="Pale moon"] $ws2
-# assign [class="Pcmanfm"] $ws3
-# assign [class="Skype"] $ws5
 assign [title="GIMP Startup"] $ws5
 assign [class="Gimp"] $ws5
 assign [class="Code"] $ws2
-assign [class="Sonic Pi"] $ws3
-assign [class="Sonic Pi" window_type=splash] $ws1
+assign [class="Sonic Pi"] $ws7
+assign [class="Sonic Pi" window_type=splash] $ws7
+assign [title="VCV Rack*"] $ws8
+assign [class="obs"] $ws9
 assign [class="qjackctl"] $ws10
 
 
@@ -323,16 +321,15 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id compton -cC --xrender-sync-fence
 exec --no-startup-id nm-applet
 exec --no-startup-id "xautolock -detectsleep"
-# exec --no-startup-id "xss-lock --ignore-sleep -- /usr/bin/betterlockscreen -l dimblur"
 exec --no-startup-id "udiskie -2ans -f ~/bin/vifm-open"
 exec --no-startup-id "syncthing -no-browser"
 exec --no-startup-id "/usr/bin/transmission-daemon -o -y -b -er -c ~/Downloads -T -w ~/Downloads"
 exec --no-startup-id "/usr/bin/onedrive -m"
 exec --no-startup-id "/usr/bin/dropbox"
 exec --no-startup-id "/opt/enpass/Enpass -minimize"
-exec --no-startup-id "env KEYBASE_AUTOSTART=1 keybase-gui"
+# exec --no-startup-id "env KEYBASE_AUTOSTART=1 keybase-gui"
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id clipit
+#exec --no-startup-id clipit
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -384,26 +381,28 @@ bar {
   #	tray_output eDP1
 
   colors {
-    background $term_background
-    statusline $term_color15
+    background #282828
+    statusline #ebdbb2
   }
 }
 
-set $border_color        $term_color8
-set $bg_color            $term_color0
-set $inactive_bg_color   $term_color234
-set $text_color          $term_color15
-set $inactive_text_color $term_color7
-set $urgent_bg_color     $term_color1
-set $indicator_color     $term_orange_dark
+set $border_color          #d79921
+set $inactive_border_color #928374
+set $bg_color              #282828
+set $inactive_bg_color     #1d2021
+set $text_color            #ebdbb2
+set $inactive_text_color   #a89984
+set $urgent_bg_color       #cc241d
+set $urgent_border_color   #fb4934
+set $indicator_color       #d65d0e
 
 # Theme colors
-# class                   border             background         text     i           indicator        child_border
-  client.focused          $bg_color          $border_color      $text_color          $indicator_color
-  client.focused_inactive $inactive_bg_color $inactive_bg_color $inactive_text_color $indicator_color
-  client.unfocused        $inactive_bg_color $inactive_bg_color $inactive_text_color $indicator_color
-  client.urgent           $urgent_bg_color   $urgent_bg_color   $text_color          $indicator_color
-  client.placeholder      $bg_color          $border_color      $text_color          $indicator_color
+# class                   border                 background         text                 indicator          child_border
+  client.focused          $border_color          $bg_color          $text_color          $indicator_color   $border_color
+  client.focused_inactive $inactive_border_color $inactive_bg_color $inactive_text_color $inactive_bg_color $inactive_border_color
+  client.unfocused        $inactive_border_color $inactive_bg_color $inactive_text_color $inactive_bg_color $inactive_border_color
+  client.urgent           $urgent_border_color   $urgent_bg_color   $text_color          $indicator_color   $urgent_border_color
+  client.placeholder      $border_color          $border_color      $text_color          $indicator_color   $border_color
 
   client.background       $bg_color
 

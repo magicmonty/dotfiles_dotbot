@@ -304,17 +304,12 @@ if [ -e /opt/dotnet ]; then
 fi
 
 if [ -e ~/.cargo/bin ]; then
-  export PATH=~/.cargo/bin:$PATH;
   export MATES_DIR=~/.contacts/pagansoft
 fi
 
 if [ -e ~/.dotnet/tools ]; then
   export PATH=~/.dotnet/tools:$PATH
   export DOTNET_CLI_TELEMETRY_OPTOUT=1
-fi
-
-if [ -e ~/bin ]; then
-  export PATH=~/bin:$PATH
 fi
 
 export DEFAULT_USER=mgondermann

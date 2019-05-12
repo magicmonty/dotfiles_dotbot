@@ -137,7 +137,7 @@ end
 
 $volca_port = "usb_uno_midi_interface_midi_1"
 $circuit_port = "circuit_midi_1"
-
+$hermod = "hermod_midi_1"
 
 def volca_fm(note, sustain: 0.25)
   midi note, sustain: sustain, port: $volca_port, channel: 1
@@ -163,7 +163,7 @@ def m(note, sustain: 0.25, vel:128)
   midi note, sustain: sustain, vel: vel, port: $volca_port, channel: 3
 end
 
-def mcc(value) 
+def mcc(value)
   midi_cc 128, value, port: $volca_port, channel: 3
 end
 
@@ -175,7 +175,7 @@ end
 
 def vis_electric(value)
   vis 21, value
-end 
+end
 
 def vis_ether(value)
   vis 22, value
@@ -191,7 +191,7 @@ end
 
 # given a list of cycles calculate a common cycle
 # length so that all cycles complete fully
-# e.g common_cycle [4, 8, 3] => 24 
+# e.g common_cycle [4, 8, 3] => 24
 def common_cycle(lengths, *args)
   calcLengths = args.length == 1 ? args[0] : lengths
   if calcLengths.length == 0 then
@@ -252,5 +252,12 @@ end
 
 def to_scl(value, notes)
   v_quant(vscale(value, 0, 1, notes.min, notes.max), notes)
+end
+
+def notify(msg)
+  job = fork do
+    exec('notify-send -t 15000 -h string:x-canonical-private-synchronous:sonic-pi-notification "Sonic Pi" "' + msg + '"')
+  end
+  Process.detach job
 end
 

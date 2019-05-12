@@ -1,6 +1,6 @@
 # .notmuch-config - Configuration file for the notmuch mail system
 #
-# For more information about notmuch, see http://notmuchmail.org
+# For more information about notmuch, see https://notmuchmail.org
 
 # Database configuration
 #
@@ -11,7 +11,7 @@
 # configured here named ".notmuch".
 #
 [database]
-path=/Users/martingondermann/.mail
+path=/home/mgondermann/.mail
 
 # User configuration
 #
@@ -31,7 +31,7 @@ path=/Users/martingondermann/.mail
 [user]
 name=Martin Gondermann
 primary_email=magicmonty@pagansoft.de
-other_email=pagansoft@gmail.com
+other_email=pagansoft@gmail.com;martin@gondermanns.de;info@lambdaphonic.de;
 
 # Configuration for "notmuch new"
 #
@@ -48,8 +48,8 @@ other_email=pagansoft@gmail.com
 #		in the mail store.
 #
 [new]
-tags=Sent;Archive;INBOX;Drafts
-ignore=temporary;Trash;Junk
+tags=unread;inbox;Sent;Archive;INBOX;Drafts;Posteingang;
+ignore=temporary;Trash;Junk;Spam;
 
 # Search configuration
 #
@@ -61,7 +61,7 @@ ignore=temporary;Trash;Junk
 #		query will override that exclusion.
 #
 [search]
-exclude_tags=trash;spam;
+exclude_tags=deleted;spam;trash;
 
 # Maildir compatibility configuration
 #
@@ -86,3 +86,15 @@ exclude_tags=trash;spam;
 #
 [maildir]
 synchronize_flags=true
+
+# Cryptography related configuration
+#
+# The following *deprecated* option is currently supported:
+#
+#	gpg_path
+#		binary name or full path to invoke gpg.
+#		NOTE: In a future build, this option will be ignored.
+#		Setting $PATH is a better approach.
+#
+[crypto]
+gpg_path=gpg

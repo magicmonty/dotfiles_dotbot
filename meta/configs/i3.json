@@ -28,7 +28,7 @@
       "~/.config/rofi": "windowmanager/rofi",
       "~/.config/termite": "apps/termite",
       "~/.config/udiskie": "windowmanager/udiskie",
-      "~/.Xdefaults": "windowmanager/Xdefaults",
+      "~/.Xdefaults": "windowmanager/Xresources",
       "~/.Xresources": "windowmanager/Xresources",
       "~/bin/addpocket": "apps/pockyt/addpocket",
       "~/bin/camtoggle": "windowmanager/bindir/camtoggle",
