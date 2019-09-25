@@ -26,10 +26,10 @@
 	default = current
 
 [diff]
-	tool = bc3
+	tool = p4merge
 
 [merge]
-  tool = bc3
+	tool = p4merge
 
 [hub]
 protocol = https
