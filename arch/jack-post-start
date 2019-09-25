@@ -1,0 +1,6 @@
+#!/bin/bash
+/usr/bin/pacmd set-default-sink jack_out
+/usr/bin/pacmd set-default-source jack_in
+if ! $(pgrep mpd); then
+  /usr/bin/mpd
+fi

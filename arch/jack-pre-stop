@@ -1,0 +1,8 @@
+#!/bin/bash
+SINKID=$(LC_ALL=C /usr/bin/pactl list | grep -B 1 "Name: module-jack-sink" | grep Module | sed 's/[^0-9]//g')
+SOURCEID=$(LC_ALL=C /usr/bin/pactl list | grep -B 1 "Name: module-jack-source" | grep Module | sed 's/[^0-9]//g')
+/usr/bin/pactl unload-module $SINKID
+/usr/bin/pactl unload-module $SOURCEID
+pkill mpd > /dev/null 2>&1
+sleep 5
+

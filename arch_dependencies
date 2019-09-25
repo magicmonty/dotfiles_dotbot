@@ -54,6 +54,7 @@ zsh-syntax-highlighting
 zsh-autosuggestions
 zsh-history-substring-search
 zathura
+zathura-pdf-mupdf
 clojure
 leiningen
 rlwrap
@@ -67,3 +68,4 @@ xss-lock
 onedrive
 rust
 chromium-widevine
+texlive-full
