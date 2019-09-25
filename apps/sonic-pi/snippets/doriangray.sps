@@ -1,6 +1,6 @@
 #key: doriangray
-#point_line:31
-#point_index:0
+#point_line:33
+#point_index:2
 # --
 doriangray =
 ["The books that the world calls immoral are books that show the world its own shame.",
@@ -32,5 +32,10 @@ doriangray =
   "I have grown to love secrecy.\nIt seems to be the one thing that can make modern life mysterious or marvelous to us.\nThe commonest thing is delightful if only one hides it.",
   "I love acting.\nIt is so much more real than life.",
   "What does it profit a man if he gain the whole world and lose his own soul?"
-  ]
+  ].ring
 
+live_loop :doriangray, sync: :clock1 do
+  q = doriangray.tick(:q)
+  notify q
+  sleep 0.25
+end

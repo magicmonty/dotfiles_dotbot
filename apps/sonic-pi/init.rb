@@ -89,12 +89,12 @@ def sinr(center, range, cycle)
   return (Math.sin(vt * 1/cycle)) * range + center
 end
 
-def fadeout (max: 1, step: 0.01)
-  return (ramp (range max, 0, step: step, inclusive: true)).flatten
+def fadeout (max: 1, step_size: 0.01)
+  return (ramp (range max, 0, step_size: step_size, inclusive: true)).flatten
 end
 
-def fadein (max: 1, step: 0.01)
-  return (ramp (range 0, max, step: step, inclusive: true)).flatten
+def fadein (max: 1, step_size: 0.01)
+  return (ramp (range 0, max, step_size: step_size, inclusive: true)).flatten
 end
 
 def l_spread (num_accents, size)
@@ -205,49 +205,115 @@ def common_cycle(lengths, *args)
   end
 end
 
-def turing(name, size=8, prob=0)
-  prng = Random.new
-  key = (name.to_s + "_turingbuffer").to_sym
+def turing_key(name)
+  (name.to_s + "_turingbuffer").to_sym
+end
+
+def turing_new!(name, size=8, prob=0)
+  key = turing_key name
   buffer = get(key)
   if not buffer then
-    buffer = Array.new(size) { |i| prng.rand }
-  elsif buffer.length > size
-    buffer = buffer.take size
-  elsif buffer.length < size
-    newbuffer = Array.new(size - buffer.length) { |i| prng.rand }
-    buffer = buffer + newbuffer
+    prng = Random.new
+    buffer = [ Array.new(size) { |i| prng.rand > 0.5 },
+               size,
+               prob ]
+    set(key, buffer)
+  elsif buffer[1] != size
+    turing_size! name, size
+  elsif buffer[2] != prob
+    turing_prob! name, prob
+  end
+end
+
+def turing!(name)
+  key = turing_key name
+  buffer = get(key)
+  if not buffer then
+    turing_new! name
   else
-    head = buffer.first
-    if one_in (prob == 0 ? 0 : 1 / prob) then
-      head = prng.rand
+    prng = Random.new
+    prob = buffer[2]
+
+    oldbools = buffer[0]
+    head = oldbools.first
+
+    if prob == 0 then
+     head = oldbools.first
+    elsif prob == 100
+      head = one_in 2
+    else
+      head = prng.rand(100) <= prob ? !head : head
     end
 
-    buffer = buffer.drop(1).push head
+    newbools = oldbools.drop(1).push head
+    newbuffer = [ newbools, buffer[1], prob ]
+    set key, newbuffer
   end
-
-  set(key, buffer)
-  buffer
 end
 
-def turing_look(name)
-  prng = Random.new
-  key = (name.to_s + "_turingbuffer").to_sym
+def turing_size!(name, size)
+  key = turing_key name
   buffer = get(key)
   if not buffer then
-    buffer = Array.new(8) { |i| prng.rand }
+    turing_new! name, size
+  elsif buffer[1] > size
+    newbuffer = [ buffer[0], size, buffer[2] ]
+    set key, newbuffer
+  elsif buffer[1] < size
+    prng = Random.new
+    newbools = Array.new(size - buffer[1]) { |i| prng.rand > 0.5 }
+    newbuffer = [ buffer[0] + newbools, size, buffer[2] ]
+    set key, newbuffer
   end
-
-  set(key, buffer)
-  buffer
 end
 
-def reset_turing(name)
-  key = (name.to_s + "_turingbuffer").to_sym
+def turing_prob!(name, prob)
+  key = turing_key name
+  buffer = get(key)
+  if not buffer then
+    turing_new! name, 8, prob
+  else
+    newbuffer = [ buffer[0], buffer[1], [100.0, prob].min ]
+    set key, newbuffer
+  end
+end
+
+def turing_probf!(name, prob)
+  turing_prob! name, ([prob, 1.0].min * 100.0)
+end
+
+def turing_bools(name)
+  key = turing_key name
+  buffer = get(key)
+  if not buffer then
+    turing_new! name
+    buffer = get(key)
+  end
+
+  buffer[0].take(buffer[1])
+end
+
+def turing_val(name)
+  b = turing_bools(name).map { |b| b ? 1 : 0 }
+  num = 0
+  [b.length, 8].min.times do |i|
+    num = num << 1 | b[i]
+  end
+
+  num
+end
+
+def turing_reset!(name)
+  key = turing_key name
   set key, nil
 end
 
 def vscale(value, min=0, max=1, to_min=0, to_max=100)
   ((to_max.to_f-to_min.to_f)/(max.to_f-min.to_f))*value.to_f + to_min.to_f
+end
+
+def turing_midi_val(name, notes)
+  v_quant(vscale(turing_val(name), 0, 255, notes.min, notes.max), notes)
 end
 
 def to_scl(value, notes)
@@ -259,5 +325,111 @@ def notify(msg)
     exec('notify-send -t 15000 -h string:x-canonical-private-synchronous:sonic-pi-notification "Sonic Pi" "' + msg + '"')
   end
   Process.detach job
+end
+
+def hermod1(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 1})
+  midi *params, **opts
+end
+def hermod1_trig
+  hermod1 :C4, sustain: 0.1
+end
+def hermod2(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 2})
+  midi *params, **opts
+end
+def hermod2_trig
+  hermod2 :C4, sustain: 0.1
+end
+def hermod3(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 3})
+  midi *params, **opts
+end
+def hermod3_trig
+  hermod3 :C4, sustain: 0.1
+end
+def hermod4(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 4})
+  midi *params, **opts
+end
+def hermod4_trig
+  hermod4 :C4, sustain: 0.1
+end
+def hermod5(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 5})
+  midi *params, **opts
+end
+def hermod5_trig
+  hermod5 :C4, sustain: 0.1
+end
+def hermod6(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 6})
+  midi *params, **opts
+end
+def hermod6_trig
+  hermod6 :C4, sustain: 0.1
+end
+def hermod7(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 7})
+  midi *params, **opts
+end
+def hermod7_trig
+  hermod7 :C4, sustain: 0.1
+end
+def hermod8(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 8})
+  midi *params, **opts
+end
+def hermod8_trig
+  hermod8 :C4, sustain: 0.1
+end
+
+def hermod1_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 1})
+  midi_cc 1, *params, **opts
+end
+def hermod2_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 2})
+  midi_cc 1, *params, **opts
+end
+def hermod3_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 3})
+  midi_cc 1, *params, **opts
+end
+def hermod4_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 4})
+  midi_cc 1, *params, **opts
+end
+def hermod5_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 5})
+  midi_cc 1, *params, **opts
+end
+def hermod6_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 6})
+  midi_cc 1, *params, **opts
+end
+def hermod7_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 7})
+  midi_cc 1, *params, **opts
+end
+def hermod8_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod, channel: 8})
+  midi_cc 1, *params, **opts
 end
 
