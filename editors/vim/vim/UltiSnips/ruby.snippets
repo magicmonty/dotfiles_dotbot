@@ -249,43 +249,43 @@ doriangray =
 		"I have grown to love secrecy.\nIt seems to be the one thing that can make modern life mysterious or marvelous to us.\nThe commonest thing is delightful if only one hides it.",
 		"I love acting.\nIt is so much more real than life.",
 		"What does it profit a man if he gain the whole world and lose his own soul?"
-	]
+	].ring
 $0
 endsnippet
 
-snippet "^midi1" "Circuit Midi Note Synth 1" rbA
+snippet "^\s*midi1" "Circuit Midi Note Synth 1" rbA
 midi ${1:60}, sustain: ${2:0.1}, channel: 1, port: \$port
 $0
 endsnippet
 
-snippet "^midi2" "Circuit Midi Note Synth 2" rbA
+snippet "^\s*midi2" "Circuit Midi Note Synth 2" rbA
 midi ${1:60}, sustain: ${2:0.1}, channel: 2, port: \$port
 $0
 endsnippet
 
-snippet "^midic1" "Circuit Midi CC channel 1" rbA
+snippet "^\s*midic1" "Circuit Midi CC channel 1" rbA
 midi_cc ${1:80}, val_f: ${2:1}, channel: 1, port: \$port
 $0
 endsnippet
 
-snippet "^midic2" "Circuit Midi CC channel 2" rbA
+snippet "^\s*midic2" "Circuit Midi CC channel 2" rbA
 midi_cc ${1:80}, val_f: ${2:1}, channel: 2, port: \$port
 $0
 endsnippet
 
-snippet "^midicd1" "Circuit Midi CC Delay Synth 1" rbA
+snippet "^\s*midicd1" "Circuit Midi CC Delay Synth 1" rbA
 # Delay Synth 1
 midi_cc 111, ${1:0}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^midicd2" "Circuit Midi CC Delay Synth 2" rbA
+snippet "^\s*midicd2" "Circuit Midi CC Delay Synth 2" rbA
 # Delay Synth 2
 midi_cc 112, ${1:0}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^midicf" "Circuit Midi Global Filter" rbA
+snippet "^\s*midicf" "Circuit Midi Global Filter" rbA
 # Global Filter
 midi_cc 74, ${1:65}, channel: 16, port: \$port
 # Resonance
@@ -293,7 +293,7 @@ midi_cc 71, ${1:30}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^midicmix" "Circuit Midi Mixer" rbA
+snippet "^\s*midicmix" "Circuit Midi Mixer" rbA
 live_loop :mixer do
 	# Synth 1
 	midi_cc 12, ${1:54}, channel: 16, port: \$port
@@ -312,32 +312,36 @@ end
 $0
 endsnippet
 
-snippet "^midicr1" "Circuit Midi CC Reverb Synth 1" rbA
+snippet "^\s*midicr1" "Circuit Midi CC Reverb Synth 1" rbA
 # Reverb Synth 1
 midi_cc 88, ${1:64}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^midicr2" "Circuit Midi CC Reverb Synth 2" rbA
+snippet "^\s*midicr2" "Circuit Midi CC Reverb Synth 2" rbA
 # Reverb Synth 2
 midi_cc 89, ${1:64}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^midid1" "Circuit Drum 1" rbA
-midi 60, vel_f: ${0:1.0}, channel: 10, port: \$port
+snippet "^\s*midid1" "Circuit Drum 1" rbA
+# Drum 1 (base drum)
+midi 60, vel_f: ${0:1.0}, channel: 10, port: \$port if spread(4, 16).look
 endsnippet
 
-snippet "^midid2" "Circuit Drum 2" rbA
-midi 62, vel_f: ${0:1.0}, channel: 10, port: \$port
+snippet "^\s*midid2" "Circuit Drum 2" rbA
+# Drum 2 (snare)
+midi 62, vel_f: ${0:1.0}, channel: 10, port: \$port if ".... .... .... ....".bools.look
 endsnippet
 
-snippet "^midid3" "Circuit Drum 3" rbA
-midi 64, vel_f: ${0:1.0}, channel: 10, port: \$port
+snippet "^\s*midid3" "Circuit Drum 3" rbA
+# Drum 3 (closed hats)
+midi 64, vel_f: ${0:1.0}, channel: 10, port: \$port if ".... .... .... ....".bools.look
 endsnippet
 
-snippet "^midid4" "Circuit Drum 4" rbA
-midi 65, vel_f: ${0:1.0}, channel: 10, port: \$port
+snippet "^\s*midid4" "Circuit Drum 4" rbA
+#Drum 4 (open hats)
+midi 65, vel_f: ${0:1.0}, channel: 10, port: \$port if ".... .... .... ....".bools.look
 endsnippet
 
 snippet "^safari" "Safari Drum Loop" rbA
