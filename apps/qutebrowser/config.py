@@ -5,6 +5,8 @@ config.bind("m", "spawn ~/bin/umpv '{url}'")
 
 # open link in MPV
 config.bind(";M", "hint links spawn ~/bin/umpv '{hint-url}'")
+config.bind(";m", "hint links spawn ~/bin/umpv '{hint-url}'")
+config.bind(",m", "hint links spawn ~/bin/umpv '{hint-url}'")
 
 # open link
 config.bind(",o", "hint links fill :open {hint-url}")
@@ -14,8 +16,6 @@ config.bind(";O", "hint links fill :open -t -r {hint-url}")
 
 # Yank link
 config.bind(",y", "hint links yank")
-
-config.bind(",m", "hint links fill :quickmark-add {hint-url} ")
 
 # Add to Pocket
 config.bind(",p", "hint links spawn ~/bin/addpocket {hint-url}")
