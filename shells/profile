@@ -6,6 +6,14 @@ if [[ -e $HOME/.cargo/bin ]]; then
   export PATH=$HOME/.cargo/bin:$PATH
 fi
 
+if [[ -e $HOME/.bin ]]; then
+  export PATH=$HOME/.bin:$PATH
+fi
+
 if [[ -e $HOME/bin ]]; then
   export PATH=$HOME/bin:$PATH
+fi
+
+if [[ -e /usr/local/texlive/2019/bin/x86_64-linux ]]; then
+  export PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH
 fi

@@ -46,7 +46,7 @@ bindsym $mod+Tab exec --no-startup-id rofi -modi windowcd -i -show windowcd
 
 exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec $term -e 'alsamixer'
-exec --no-startup-id pulseaudio --start
+# exec --no-startup-id pulseaudio --start
 #exec --no-startup-id pa-applet
 
 
@@ -99,6 +99,7 @@ bindsym $mod+$alt+k exec --no-startup-id "~/bin/i3resize up"
 bindsym $mod+$alt+l exec --no-startup-id "~/bin/i3resize right"
 
 bindsym $mod+$alt+p exec --no-startup-id "/opt/enpass/Enpass showassistant"
+bindsym $mod+$alt+hash exec --no-startup-id "/opt/enpass/Enpass showassistant"
 bindsym $mod+$alt+m exec --no-startup-id "~/bin/displayctl menu"
 
 bindsym $mod+$alt+Left exec --no-startup-id "~/bin/i3resize left"

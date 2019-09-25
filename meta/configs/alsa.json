@@ -10,7 +10,11 @@
   },
   {
     "link": {
-      "~/.asoundrc": "arch/.asoundrc"
+      "~/.asoundrc": "arch/.asoundrc",
+      "~/bin/jack-pre-start": "arch/jack-pre-start",
+      "~/bin/jack-post-start": "arch/jack-post-start",
+      "~/bin/jack-pre-stop": "arch/jack-pre-stop",
+      "~/bin/jack-post-stop": "arch/jack-post-stop"
     }
   }
 ]

@@ -10,7 +10,7 @@ curl -s wttr.in/$location > ~/.weatherreport
 ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` >/dev/null || exit
 
 case $BLOCK_BUTTON in
-  1) /usr/bin/termite -e ~/bin/popweather & disown ;;
+  1) $TERMINAL -e ~/bin/popweather & disown ;;
 esac
 
 RAIN=$(cat ~/.weatherreport | sed '16q;d' | sed -e 's/[^m]*m//g' | grep -o "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/ ☔ /g")
