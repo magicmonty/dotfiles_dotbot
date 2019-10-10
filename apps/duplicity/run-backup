@@ -2,7 +2,7 @@
 
 VERBOSITY=8
 PASSPHRASE=$(gpg2 --decrypt --quiet $HOME/.duplicity/google.gpg)
-EXCLUDE_IF_PRESENT=".noback"
+EXCLUDE_IF_PRESENT=".nobackup"
 EXCLUDE_FILELIST=$HOME/.duplicity/excludes
 OFFSITE_DEST="gdocs://pagansoft@gmail.com/duplicity"
 OFFSITE_EXCLUDE_FILELIST=$EXCLUDE_FILELIST
@@ -21,6 +21,7 @@ fi
 duplicity \
   --verbosity=$VERBOSITY \
   --allow-source-mismatch \
+  --asynchronous-upload \
   --full-if-older-than=$OFFSITE_FULL_EVERY \
   --exclude-if-present=$OFFSITE_EXCLUDE_IF_PRESENT \
   --exclude-filelist=$OFFSITE_EXCLUDE_FILELIST \
@@ -34,3 +35,6 @@ duplicity \
   --verbosity=$VERBOSITY \
   remove-all-but-n-full ${OFFSITE_KEEP_FULL} \
   --force ${OFFSITE_DEST}
+
+unset PASSPHRASE
+

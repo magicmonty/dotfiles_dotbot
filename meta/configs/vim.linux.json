@@ -28,7 +28,8 @@
       "~/.config/nvim/init.vim": "editors/vim/config/nvim/init.linux.vim",
       "~/.vim/plugins.vim": "editors/vim/plugins/plugins_linux.vim",
       "~/.vim/plugins_shared.vim": "editors/vim/plugins/plugins_shared.vim",
-      "~/.local/share/applications/vim.desktop": "windowmanager/applications/vim.desktop"
+      "~/.local/share/applications/vim.desktop": "windowmanager/applications/vim.desktop",
+      "~/.local/share/applications/text.desktop": "windowmanager/applications/vim.desktop"
     }
   },
   {

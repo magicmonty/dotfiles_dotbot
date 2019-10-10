@@ -21,6 +21,7 @@
       "~/.offlineimaprc": "apps/neomutt/offlineimaprc",
       "~/.config/mutt/personal.muttrc": "apps/neomutt/personal.muttrc",
       "~/.local/share/applications/mutt.desktop": "windowmanager/applications/mutt.desktop",
+      "~/.local/share/applications/mail.desktop": "windowmanager/applications/mutt.desktop",
       "~/bin/mailsync": "apps/neomutt/etc/mailsync.sh",
       "~/.notmuch-config": "apps/notmuch/notmuch-config"
     }
