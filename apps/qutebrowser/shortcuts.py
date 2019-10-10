@@ -4,7 +4,6 @@ config.bind(';dff', 'set downloads.location.directory ~/.dotfiles ;; hint links 
 config.bind(';dr', 'set downloads.location.directory ~/Dropbox ;; hint links download')
 config.bind(';dl', 'set downloads.location.directory ~/Downloads ;; hint links download')
 config.bind(';D', 'set downloads.location.directory ~/Downloads ;; hint links download')
-config.bind(';m', 'set downloads.location.directory ~/Musik ;; hint links download')
 config.bind(';pp', 'set downloads.location.directory ~/Bilder ;; hint links download')
 config.bind(';pk', 'set downloads.location.directory ~/Bilder/Korea ;; hint links download')
 config.bind(';vv', 'set downloads.location.directory ~/Videos ;; hint links download')

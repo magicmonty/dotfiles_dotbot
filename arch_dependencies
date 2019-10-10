@@ -69,3 +69,7 @@ onedrive
 rust
 chromium-widevine
 texlive-full
+gdcm
+duplicity
+python-pydrive
+python2-pydrive

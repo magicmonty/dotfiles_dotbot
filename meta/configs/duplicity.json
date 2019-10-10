@@ -1,0 +1,29 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "clean": [ "~/.duplicity" ]
+  },
+  {
+    "shell": [
+      [ "gpg2 --decrypt --quiet ~/.dotfiles/apps/duplicity/client_secrets.json.gpg > ~/.dotfiles/apps/duplicity/client_secrets.json", "Decrypting client secrets" ]
+    ]
+  },
+  {
+    "link": {
+      "~/.duplicity/credentials": "apps/duplicity/credentials",
+      "~/.duplicity/excludes": "apps/duplicity/excludes",
+      "~/.duplicity/google.gpg": "apps/duplicity/google.gpg",
+      "~/.duplicity/run-backup":  "apps/duplicity/run-backup",
+      "~/.duplicity/client_secrets.json":  "apps/duplicity/client_secrets.json"
+    }
+  }
+]
+
