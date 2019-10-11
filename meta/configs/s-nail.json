@@ -1,0 +1,18 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/.mailrc": "apps/s-nail/mailrc",
+      "~/.netrc.gpg": "apps/s-nail/netrc.gpg"
+    }
+  }
+]
+
