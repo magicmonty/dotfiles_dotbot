@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+gpg2 --encrypt --quiet -r magicmonty@pagansoft.de conf
