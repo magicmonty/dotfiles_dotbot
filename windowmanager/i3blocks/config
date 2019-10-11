@@ -2,10 +2,10 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=1
 markup=pango
 
-#[record]
-#command=cat ~/.recordingicon
-#interval=once
-#signal=9
+[backup]
+command=cat /tmp/backupicon
+interval=once
+signal=14
 
 [mpd]
 label=🎶

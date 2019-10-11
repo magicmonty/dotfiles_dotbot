@@ -1,2 +1,4 @@
 plug.vim.old
 client_secrets.json
+apps/duplicity/conf
+apps/duplicity/gdrive/credentials

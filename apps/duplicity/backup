@@ -1,0 +1,1517 @@
+#!/bin/bash
+#
+###############################################################################
+#  this script is an scduply fork by magicmonty                               #
+#  (c) 2019 by Martin Gondermann (magicmonty)
+#                                                                             #
+#  scduply is the duply fork by SkyCover Company                              #
+#  http://github.com/skycover/scduply/                                        #
+#  (c) 2011 Dmitry Chernyak (scduply)                                         #
+#                                                                             #
+#  duply is a shell front end to duplicity                                    #
+#  http://duply.net or http://ftplicity.sourceforge.net/                      #
+#  (c) 2006 Christiane Ruetten, Heise Zeitschriften Verlag, Germany           #
+#  (c) 2008-2010 Edgar Soldin (changes since version 1.3)                     #
+#                                                                             #
+#  Simplifies the usage by managing settings for each backup job in profiles. #
+#  It supports executing multiple commands in a batch mode to enable single   #
+#  line cron entries, executes pre/post backup scripts and produces HTML      #
+#  reports.                                                                   #
+#  Since version 1.5.0 all duplicity backends are supported. Hence the name   #
+#  changed from ftplicity to duply.                                           #
+###############################################################################
+#  LICENSE:                                                                   #
+#  This program is licensed under GPLv2.                                      #
+#  Please read the accompanying license information in gpl.txt.               #
+###############################################################################
+
+
+# important definitions #######################################################
+
+export PYTHONIOENCODING=utf-8
+ME_LONG="$0"
+ME="$(basename $0)"
+ME_NAME="${ME%%.*}"
+ME_VERSION="1.0.0"
+
+CONF_DIR_NAME='duplicity'
+
+# default config values
+DEFAULT_SOURCE=${HOME}
+DEFAULT_TARGET='_target_'
+DEFAULT_TARGET_USER='_backend_username_'
+DEFAULT_TARGET_PASS='_backend_password_'
+DEFAULT_GPG_KEY='_KEY_ID_'
+DEFAULT_GPG_PW='_GPG_PASSWORD_'
+
+# function definitions ##########################
+function set_config { # sets config vars
+  CONFHOME="${HOME}/.${CONF_DIR_NAME}"
+  ARCHIVE_DIR="${HOME}/.cache/duplicity"
+  LOG_DIR="${CONFHOME}/log"
+
+  # confdir can be delivered as path (must contain /)
+  if [ `echo $PROFILE | grep /` ] ; then
+    CONFHOME=""
+    CONFDIR=$(readlink -f $PROFILE 2>/dev/null || \
+      ( echo $PROFILE|grep -v '^/' 1>/dev/null 2>&1 \
+      && echo $(pwd)/${PROFILE} ) || \
+      echo ${PROFILE})
+    LOG_DIR="$CONFDIR/log"
+  # or DEFAULT in home/.duply folder (NEW)
+  elif [ -d "${CONFHOME}" ]; then
+    CONFDIR="${CONFHOME}/${PROFILE}"
+  # hmm no profile folder there, then use default for error later
+  else
+    CONFDIR="${CONFHOME}/${PROFILE}" # continue, will fail later in main
+  fi
+
+  # remove trailing slash, get profile name etc.
+  CONFDIR="${CONFDIR%/}"
+  NAME="${CONFDIR##*/}"
+  MAINCONF="${CONFHOME}/conf"
+  CONF="$CONFDIR/conf"
+  PRE="$CONFDIR/pre"
+  POST="$CONFDIR/post"
+  EXCLUDE="$CONFDIR/excludes"
+  EXCLUDE_PARAM="--exclude-filelist"
+  KEYFILE="$CONFDIR/gpgkey.asc"
+  SAVED_ENV="$CONFDIR/saved.env"
+  if [ -n "$CONFHOME" ]; then
+    LOG_DIR=$LOG_DIR/$NAME
+  fi
+}
+
+function updateicon {
+  echo "$1" > /tmp/backupicon
+  pkill -RTMIN+14 i3blocks
+}
+
+function version_info { # print version information
+  cat <<END
+  $ME version $ME_VERSION
+END
+}
+
+function usage_info { # print usage information
+
+  cat <<USAGE
+VERSION:
+$(version_info)
+
+DESCRIPTION:
+  SkyCover Duply (scuply) deals as a wrapper for the mighty duplicity magic.
+  It simplifies running duplicity with cron or on command line.
+
+  First time setup:
+    $ME init
+    This writes the general config file in /etc/${CONF_DIR_NAME}/ (if pre-exists)
+    or otherwise in the ~/.${CONF_DIR_NAME}/
+    Edit 'conf' file to setup at least TARGET and GPG_PW
+
+  General usage for specific profile:
+    $ME <profile> <command>[_<command>_...] [<options> ...]
+
+  Non $ME options are passed on to duplicity (see OPTIONS).
+
+  Create profile:
+    $ME <profile> create
+    Fill out at least 'source' and possibly 'exclude' files in the
+    profile's folder
+
+  Backup the single profile:
+    $ME <profile> backup
+
+  Restore the backup to the DESTINATION as it was 4 days ago
+    $ME <profile> restore DESTINATION 4D --file-to-restore some/folder
+
+  Restore subfolder 'some/folder' as it was 4 days ago to the DESTINATION
+    $ME <profile> fetch some/folder DESTINATION 4D
+
+  Backup all profiles at once:
+    $ME bkpall
+    Fill the MAIL_* settings in the global configuration file for receiving the nice reports
+
+GENEGAL COMMANDS:
+  usage:     get usage help text
+  init:      creates a top configuration folder and global config
+             not mandatory - is also invoked upon "create"
+  bkpall:    sequentally execute backup for all profiles
+              if profile has the file "skip", it will be skipped;
+              email the report if MAIL_* settings are globally set.
+
+COMMANDS FOR SPECIFIED PROFILE:
+  create:    creates a configuration profile
+  backup:    backup with pre/post script execution (batch: pre_bkp_post),
+              full - if parameter full_if_older matches
+                     or no earlier backup is found
+              incremental - in all other cases
+  bkp:       as above but without executing pre/post scripts
+  forcedfull:
+             full backup with pre/post script executuin(batch: pre_full_post)
+  full:      force full backup
+  incr:      force incremental backup
+  list [<age>]:
+             list all files in backup (as it was at <age>, default: now)
+  status:    prints backup sets and chains currently in repository
+  verify:    list files changed since latest backup
+  purge [--force]:
+             shows outdated backup archives (older than \$MAX_AGE)
+             [--force, delete these files]
+  purge-full [--force]:
+             shows outdated backups (more than \$MAX_FULL_BACKUPS,
+             the number of 'recent' full backups and associated
+             incrementals to keep)
+             [--force, delete these files]
+  cleanup [--force]:
+             shows broken backup archives (e.g. after unfinished run)
+             [--force, delete these files]
+  restore <target_path> [<age>]:
+             restore the backup to <target_path>
+             [as it was at <age>]
+  fetch <src_path> <target_path> [<age>]:
+             restore single file/folder from backup
+             [as it was at <age>]
+  pre/post:  execute <profile>/$(basename "$PRE") or <profile>/$(basename "$POST") script
+             (for debugging purposes)
+
+OPTIONS:
+  --force:   passed to duplicity (see commands: purge, purge-full, cleanup)
+  --preview: do nothing but print out generated duplicity command lines
+  --in-target PATH: PATH will be added to the end of the target, after the backup's NAME
+
+$(hint_profile)
+
+Some more informations can be found in the manual page of this package.
+
+USAGE
+}
+
+function write_config {
+  local CONFDIR="$1"
+  local CONF="$2"
+
+  mkdir -p "$CONFDIR" || error "Couldn't create config '$CONFDIR'."
+  # create initial config file
+  if [ ! -f "$CONF" ] ; then
+    cat <<EOF >"$CONF"
+# gpg key data (for symmetric encryption comment out GPG_KEY), examples:
+#  GPG_KEY='disabled' - disables encryption alltogether
+#  GPG_KEY='01234567'; GPG_PW='passphrase' - public key encryption
+#  GPG_PW='passphrase' - symmetric encryption using passphrase only
+#GPG_KEY='${DEFAULT_GPG_KEY}'
+#GPG_PW='${DEFAULT_GPG_PW}'
+# gpg options passed from duplicity to gpg process (default='')
+# e.g. "--trust-model pgp|classic|direct|always"
+#   or "--compress-algo=bzip2 --bzip2-compress-level=9"
+#GPG_OPTS=''
+
+# credentials & server address of the backup target (URL-Format)
+# syntax is
+#   scheme://[user:password@]host[:port]/[/]path
+# probably one out of
+#   file:///some_dir
+#   ftp://user[:password]@other.host[:port]/some_dir
+#   hsi://user[:password]@other.host/some_dir
+#   cf+http://container_name
+#   imap://user[:password]@host.com[/from_address_prefix]
+#   imaps://user[:password]@host.com[/from_address_prefix]
+#   rsync://user[:password]@other.host[:port]::/module/some_dir
+#   rsync://user[:password]@other.host[:port]/relative_path
+#   rsync://user[:password]@other.host[:port]//absolute_path
+#   # for the s3 user/password are AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY
+#   s3://[user:password]@host/bucket_name[/prefix]
+#   s3+http://[user:password]@bucket_name[/prefix]
+#   scp://user[:password]@other.host[:port]/some_dir
+#   ssh://user[:password]@other.host[:port]/some_dir
+#   tahoe://alias/directory
+#   webdav://user[:password]@other.host/some_dir
+#   webdavs://user[:password]@other.host/some_dir
+# ATTENTION: characters other than A-Za-z0-9.-_.~ in user,password,path have
+#            to be replaced by their url encoded pendants, see
+#            http://en.wikipedia.org/wiki/Url_encoding
+#            if you define the credentials as TARGET_USER, TARGET_PASS below
+#            duply will url_encode them for you
+#TARGET='${DEFAULT_TARGET}'
+# optionally the username/password can be defined as extra variables
+# setting them here _and_ in TARGET results in an error
+#TARGET_USER='${DEFAULT_TARGET_USER}'
+#TARGET_PASS='${DEFAULT_TARGET_PASS}'
+
+# Time frame for old backups to keep, Used for the "purge" command.
+# see duplicity man page, chapter TIME_FORMATS)
+# defaults to 1M, if not set
+#MAX_AGE=1M
+
+# Number of full backups to keep. Used for the "purge-full" command.
+# See duplicity man page, action "remove-all-but-n-full".
+# defaults to 1, if not set
+#MAX_FULL_BACKUPS=1
+
+
+# verbosity of output (error 0, warning 1-2, notice 3-4, info 5-8, debug 9)
+# default is 4, if not set
+#VERBOSITY=5
+
+# activates duplicity --full-if-older-than option (since duplicity v0.4.4.RC3)
+# forces a full backup if last full backup reaches a specified age, for the
+# format of MAX_FULLBKP_AGE see duplicity man page, chapter TIME_FORMATS
+# Uncomment the following two lines to enable this setting.
+#MAX_FULLBKP_AGE=1M
+
+# sets duplicity --volsize option (available since v0.4.3.RC7)
+# set the size of backup chunks to VOLSIZE MB instead of the default 25MB.
+# VOLSIZE must be number of MB's to set the volume size to.
+# Uncomment the following two lines to enable this setting.
+#VOLSIZE=50
+
+# sets directory where duplicity logs are going
+# default is ~/.${CONF_DIR_NAME}/logs for local installation
+# and /var/log/${CONF_DIR_NAME} for system-wide installation
+# LOG_DIR="/var/log/${CONF_DIR_NAME}/\$NAME"
+
+# autorotate backups
+# sets autorotate option, available values
+# AGE, FULL
+#AUTOPURGE = "FULL"
+
+# mailing settings to send bkpall report and log
+#MAIL_FROM=root
+#MAIL_TO=root
+#MAIL_SUBJECT="${CONF_DIR_NAME} backup results"
+#MAIL_CMD="/usr/sbin/sendmail -i -t"
+# send message if warning or error
+# 0 - only errors, 1 - warnings and errors, 2 - everything
+#MAIL_VERBOSE=2
+EOF
+  fi
+}
+
+function init {
+  if [ -n "$CONFHOME" -a ! -f "$MAINCONF" ]; then
+    write_config "$CONFHOME" "$MAINCONF"
+    # Hints on first usage
+    cat <<EOF
+
+*** The backup was initialized in '$CONFHOME'.
+The initial global config file is '$MAINCONF'.
+
+EOF
+  else
+    echo The backup is already initialized in $CONFHOME
+  fi
+}
+
+function create_config {
+  if [ -n "$CONFHOME" -a ! -f "$MAINCONF" ]; then
+    write_config "$CONFHOME" "$MAINCONF"
+    # Hints on first usage
+    cat <<EOF
+
+*** The backup was initialized in '$CONFHOME'.
+The initial global config file is '$MAINCONF'.
+
+EOF
+  fi
+
+  write_config "$CONFDIR" "$CONF"
+  touch "$EXCLUDE"
+  echo "$DEFAULT_SOURCE" >"$SRCHOLDER"
+  # Hints on first usage
+  cat <<EOF
+
+*** Created profile '$PROFILE'.
+The backup source path is '$SRCHOLDER'.
+The exclude globing list is '$EXCLUDE'.
+The initial config file is '$CONF'.
+
+$(hint_profile)
+
+EOF
+
+}
+
+# used in usage AND create_config
+function hint_profile {
+  cat <<EOF
+IMPORTANT:
+  The profile folder is '$CONFDIR'.
+  Copy the _whole_ profile folder after the first backup to a safe place.
+  It contains everything needed to restore your backups. You will need
+  it if you have to restore the backup from another system (e.g. after a
+  system crash). Keep access to these files restricted as they contain
+  _all_ informations (gpg data, ftp data) to access and modify your backups.
+
+  Repeat this step after _all_ configuration changes. Some configuration
+  options are crucial for restoration.
+
+EOF
+}
+
+function separator {
+  echo "--- $@ ---"
+}
+
+function inform {
+  echo -e "\nINFO:\n\n$@\n"
+}
+
+function warning {
+  echo -e "\nWARNING:\n\n$@\n"
+}
+
+function error_print {
+  echo -e "$@" >&2
+}
+
+function error {
+  error_print "\nSorry. A fatal ERROR occured:\n\n$@\n"
+  exit -1
+}
+
+function error_gpg {
+  error "$@
+
+  Hint:
+
+  Maybe you have not created a gpg key yet (e.g. gpg --gen-key)?
+  Don't forget the used _password_ as you will need it.
+  When done enter the 8 digit id & the password in the profile conf file.
+
+  The key id can be found doing a 'gpg --list-keys'. In the
+  example output below the key id would be FFFFFFFF.
+
+  pub   1024D/FFFFFFFF 2007-12-17
+  uid                  duplicity
+  sub   2048g/899FE27F 2007-12-17
+  "
+}
+
+function error_path {
+  error "$@
+  PATH='$PATH'
+  "
+}
+
+function error_to_string {
+  [ -n "$1" ] && [ "$1" -eq 0 ] && echo "OK" || echo "FAILED 'code $1'"
+}
+
+function duplicity_version_get {
+  DUPL_VERSION=`$DUPLICITY --version 2>&1 | awk '/^duplicity /{printf $2; exit;}'`
+  DUPL_VERSION_VALUE=0
+  DUPL_VERSION_AWK=$(awk -v v="$DUPL_VERSION" 'BEGIN{
+  if (match(v,/[^\.0-9]+[0-9]*$/)){
+    rest=substr(v,RSTART,RLENGTH);v=substr(v,0,RSTART-1);}
+    if (pos=match(rest,/RC([0-9]+)$/)) rc=substr(rest,pos+2)
+      split(v,f,"[. ]"); if(f[1]f[2]f[3]~/^[0-9]+$/) vvalue=f[1]*10000+f[2]*100+f[3]; else vvalue=0
+      print "#"v"_"rest"("rc"):"f[1]"-"f[2]"-"f[3]
+      print "DUPL_VERSION_VALUE=\047"vvalue"\047"
+      print "DUPL_VERSION_RC=\047"rc"\047"
+      print "DUPL_VERSION_SUFFIX=\047"rest"\047"
+    }')
+  eval "$DUPL_VERSION_AWK"
+}
+
+function duplicity_version_check {
+  if [ $DUPL_VERSION_VALUE -eq 0 ]; then
+    inform "duplicity version check failed (please report, this is a bug)"
+  elif [ $DUPL_VERSION_VALUE -le 404 ] && [ ${DUPL_VERSION_RC:-4} -lt 4 ]; then
+    error "The installed version $DUPL_VERSION is incompatible with $ME v$ME_VERSION.
+    You should upgrade your version of duplicity to at least v0.4.4RC4 or
+    use the older ftplicity version 1.1.1 from $ME_WEBSITE."
+  fi
+}
+
+function run_script { # run pre/post scripts
+  SCRIPT="$1"
+  CMD=". ${SCRIPT} 2>&1"
+  if [ -r "$SCRIPT" -a ! -z "$PREVIEW" ] ; then
+    echo "Skipped executing '$CMD' in preview mode"
+  elif [ -r "$SCRIPT" ] ; then
+    echo -n "Running '$SCRIPT' "
+    source "$SCRIPT" 2>&1
+    ERR=$?
+    [ $ERR -eq "0" ] && echo "- OK" || echo "- FAILED (code $ERR)"
+    (exit $ERR)
+  else
+    echo "Skipping n/a script '$SCRIPT'."
+  fi
+}
+
+function duplicity_params_global {
+  # already done? return
+  var_isset 'DUPL_PARAMS_GLOBAL' && return
+
+  # use key only if set in config, else leave it to symmetric encryption
+  [ "$GPG_KEY" == 'disabled' ] && \
+    local DUPL_PARAM_ENC='--no-encryption' \
+    || \
+    local DUPL_PARAM_ENC=${GPG_KEY:+"--encrypt-key '$GPG_KEY' --sign-key '$GPG_KEY'"} && \
+    local DUPL_ARG_ENC=${GPG_PW:+"PASSPHRASE='$GPG_PW'"} && \
+    local GPG_OPTS=${GPG_OPTS:+"--gpg-options '${GPG_OPTS}'"}
+
+  duplicity --help|grep -q -- --help
+  if [ $? -gt 0 ]; then
+    echo "Your version of duplicity doesn't accept '--name' option"
+    echo "Please upgrade"
+    exit 1
+  fi
+  local DUPL_NAME="--name '${NAME}'"
+
+  DUPL_PARAMS_GLOBAL="${DUPL_NAME} ${DUPL_PARAM_ENC} \
+    --verbosity '${VERBOSITY:-4}' \
+    ${GPG_OPTS}"
+
+  DUPL_VARS_GLOBAL="TMPDIR='$TEMP_DIR' \
+    ${DUPL_ARG_ENC}"
+  }
+
+function process_conf { # convert shell variables to the duplicity arguments
+  if [ -n "$MAX_FULLBKP_AGE" ]; then
+    DUPL_PARAMS="$DUPL_PARAMS --full-if-older-than $MAX_FULLBKP_AGE "
+    fi
+    if [ -n "$ARCHIVE_DIR" ]; then
+      DUPL_PARAMS="$DUPL_PARAMS --archive-dir $ARCHIVE_DIR "
+      mkdir -p "$ARCHIVE_DIR"
+    fi
+    if [ -n "$VOLSIZE" ]; then
+      DUPL_PARAMS="$DUPL_PARAMS --volsize $VOLSIZE "
+    fi
+    if [ -n "$EXTRA_DUPL_PARAMS" ]; then
+      DUPL_PARAMS="$DUPL_PARAMS $EXTRA_DUPL_PARAMS "
+    fi
+  }
+
+function send_mail {
+  if [ -n "$MAIL_FROM" -o -n "$MAIL_TO" -o -n "$MAIL_CMD" ]; then
+    get_subject
+    [[ $MAIL_VERBOSE -lt $MAIL_SUBJECT_LEVEL ]] && return
+    TEMP_MAIL=`mktemp $TEMP_DIR/${CONF_DIR_NAME}.mail.XXXXXXXXXX`
+    echo Mailing $TEMP_MAIL
+    hostname=`hostname`
+    boundary=`date +$hostname-${CONF_DIR_NAME}-%Y%m%d%H%M%S%z`
+    cat <<EOF >$TEMP_MAIL
+From: $MAIL_FROM
+To: $MAIL_TO
+Date: `date +"%a, %d %b %Y %T %z"`
+Subject: $MAIL_SUBJECT
+MIME-Version: 1.0
+Content-Type: multipart/mime; boundary=$boundary
+
+--$boundary
+Content-Type: text/html; charset=utf-8
+
+`cat $1`
+
+--$boundary
+Content-Type: text/plain; charset=utf-8
+
+`cat $2`
+
+--$boundary--
+EOF
+    sed -i '/^Copying.*to local cache..$/d;/^[gu]id.*not in range./d' $TEMP_MAIL
+    $MAIL_CMD <$TEMP_MAIL
+    rm $TEMP_MAIL
+  fi
+}
+
+dupl_report_keys="ElapsedTime|SourceFiles|SourceFileSize|NewFiles|NewFileSize|DeletedFiles|ChangedFiles|ChangedFileSize|ChangedDeltaSize|DeltaEntries|RawDeltaSize|TotalDestinationSizeChange|Errors"
+
+function report_html_head {
+  cat <<EOF
+<html><head>
+EOF
+}
+
+function report_html_body {
+  cat <<EOF
+</head>
+<body>
+  <table>
+EOF
+}
+
+function report_html_trail {
+  cat <<EOF
+  </table>
+</body>
+</html>
+EOF
+}
+
+function report_html_css {
+  cat <<EOF
+  <style type=text/css>table { border-spacing: 0px 0px; border-collapse: collapse; border-color: gray; }</style>
+  <style type=text/css>th, td { padding: 0.1em 0.2em; border: 1px solid; border-color: gray; }</style>
+  <style type=text/css>th { text-align: left; }</style>
+  <style type=text/css>td { text-align: center; }</style>
+  <style type=text/css>td.OK { background: #00ff00; } td.FAILED { background: red; } td.WARNING { background: yellow; } td.JOB { font-weight: bold; }</style>
+EOF
+}
+
+function report_html_table {
+  awk '
+  BEGIN{
+  # no STAMP here
+  nkeys=split("JOB|STAMP|PRE|BKP|FULL|POST|TYPE|'"$dupl_report_keys"'|LogWarnings|LogErrors|OtherProblems",keys,"|")
+}
+/^JOB: /{
+profile=$2
+p[i++]=profile
+}
+/^STAMP: /{
+n=split($2,m,".")
+s2=m[n]
+d=substr(s2,1,4)"-"substr(s2,5,2)"-"substr(s2,7,2)" "substr(s2,10,2)":"substr(s2,12,2)":"substr(s2,14,2)" GMT"
+d="date +\"%F %T\" --date=\"" d "\""
+d|getline df
+$2=df
+}
+/[^ ]*: /{
+gsub(":","",$1)
+res[profile,$1]=$2
+}
+END{
+k=1024
+M=k*1024
+G=M*1024
+p[i++]="Summary"
+res["Summary","JOB"]="Summary"
+for(s=1; s<=nkeys; s++){
+  printf("<tr><th>%s</th>", keys[s])
+  sum=0
+  for(j=0; j<i; j++){
+    v=res[p[j],keys[s]]
+    if(j<(i-1)){
+      if(v ~ /^[0-9.]+$/) sum+=v
+      else if((v == "OK")&&!sum) sum=v
+      else if(v == "FAILED") sum=v
+      }else if(sum)v=sum
+    if(keys[s]~/^(New|Changed|Deleted)Files$/)files[p[j]]+=v
+      if(keys[s]~/Size/){
+        if(sprintf("%f",v/G) !~ /^0\./)v=sprintf("%.2f G", v/G)
+        else if(sprintf("%f",v/M) !~ /^0\./)v=sprintf("%.2f M", v/M)
+        else if(sprintf("%f",v/k) !~ /^0\./)v=sprintf("%.2f k", v/k)
+        }
+      style=keys[s]
+      if(s==1)style="JOB"
+      else if(keys[s]~/^(PRE|FULL|BKP|POST)$/)style=v
+      else if((keys[s]=="TotalDestinationSizeChange")&&!files[p[j]])style="WARNING"
+      else if((keys[s]=="Errors")&&v)style="FAILED"
+      else if((keys[s]=="LogWarnings")&&v)style="WARNING"
+      else if((keys[s]=="LogErrors")&&v)style="FAILED"
+      else if((keys[s]=="OtherProblems")&&v)style="FAILED"
+        printf("<td class=%s>%s</td>", style, v)
+      }
+    printf("\n</tr>\n")
+  }
+}
+' $*
+}
+
+# parse backup log
+# produce textual summary
+# syntax: parse_log logfile [log timestamp]
+function parse_log {
+  awk -vstamp="$2" '
+  BEGIN{
+  nkeys=split("JOB|STAMP|PRE|BKP|FULL|POST|TYPE|'"$dupl_report_keys"'|LogWarnings|LogErrors|OtherProblems",keys,"|")
+}
+/^Using profile /{
+split($3, m, "'"'"'")
+profile=m[2]
+nsize=split(profile,n,"/")
+res["JOB"]=n[nsize]
+res["STAMP"]=stamp
+res["LogWarnings"]=0
+res["LogErrors"]=0
+res["TYPE"]="INC"
+stage="NONE"
+}
+/^--- Start running command /{
+stage=$5
+}
+/^--- Finished state /{
+res[stage]=$4
+}
+/^('"$dupl_report_keys"')/{
+res[$1]=$2
+}
+/^Warning/{
+res["LogWarnings"]++
+}
+/^Error/{
+res["LogErrors"]++
+}
+/forcing full backup|running command FULL/{
+res["TYPE"]="FULL"
+}
+END{
+res["LogErrors"]=res["LogErrors"]-res["Errors"]-1
+for(s=1; s<=nkeys; s++){
+  print keys[s] ": " res[keys[s]]
+}
+}
+' $1
+}
+
+function find_last_stamp {
+  ls $ARCHIVE_DIR/$NAME/*.manifest 2>/dev/null|awk -F"." '
+  /duplicity-full/{print $(NF-1)}
+  /duplicity-inc/{print $(NF-3)".to."$(NF-1)}
+  '|sort|tail -1
+}
+
+# If the operation is backup, then we'll save log.gz and status
+#  And we will find timestamp from the last manifest's name
+#  But if there is no manifest or there already was a log for
+#   the last manifest (the backup was failed), so we will write
+#   log.err.gz and status.err with simple datetime
+# For other commands we will save cmdlog-[cmd].gz
+# If something goes wrong and either logfile already exists,
+#  we will copy temporary log as is to the log dir
+function save_log {
+  # Create directory for duplicity logs
+  mkdir -p $LOG_DIR
+  TSTAMP=`TZ="UTC" date +%Y%m%dT%H%M%SZ`
+  if [ "$cmd" = "backup" -o "$cmd" = "bkp" -o "$cmd" = "full" -o "$cmd" = "incr" -o "$cmd" = "forcedfull" ]; then
+    IS_PROBLEM=0
+    # XXX awk -F"." should be regexp, but in fact is real dot. Tested for mawk and gawk.
+    STAMP=`find_last_stamp`
+    if [ -n "$STAMP" ]; then
+      # XXX the programing mistakes are possible in the last log detection
+      # we has remember the log name before the backup and comparing at this time
+      if [ "$STAMP" = "$OLD_STAMP" ]; then
+        echo Warning: The last found manifest stamped with $STAMP was not changed
+      else
+        SUFFIX="ok.$STAMP"
+        LOG_NAME="$LOG_DIR/duplicity-log.$SUFFIX.gz"
+        if [ -f "$LOG_NAME" ]; then
+          echo Warning: The log $LOG_NAME already exists
+          SUFFIX=""
+        fi
+      fi
+    else
+      echo Warning: No stamped manifests found
+      SUFFIX="err.$TSTAMP"
+    fi
+    if [ -z "$SUFFIX" ]; then
+      # XXX suppose there will be no race here :)
+      SUFFIX="err.$TSTAMP"
+      LOG_NAME="$LOG_DIR/duplicity-log.$SUFFIX.gz"
+      IS_PROBLEM=1
+    fi
+    echo Backup SUFFIX is $SUFFIX
+
+    STATUS_NAME="$LOG_DIR/duplicity-status.$SUFFIX"
+    REPORT_NAME="$LOG_DIR/duplicity-report.$SUFFIX"
+    echo produce report in "$REPORT_NAME"
+    parse_log "$TEMP_LOG" "$SUFFIX" >"$REPORT_NAME"
+    echo "OtherProblems: $IS_PROBLEM" >>"$REPORT_NAME"
+    echo "$ERR" >"$STATUS_NAME"
+  else
+    LOG_NAME="$LOG_DIR/duplicity-cmdlog-$cmd.$TSTAMP.gz"
+    if [ -f "$LOG_NAME" ]; then
+      echo Warning: The log $LOG_NAME already exists
+      LOG_NAME=$LOG_DIR/`basename "$TEMP_LOG"`.
+    fi
+  fi
+  echo gzipping "$TEMP_LOG" to "$LOG_NAME"
+  gzip -c "$TEMP_LOG" >"$LOG_NAME"
+  rm "$TEMP_LOG"
+}
+
+function duplify { # the actual wrapper function
+  local PARAMSNOW DUPL_CMD DUPL_PARAMS=${DUPL_PARAMS}
+
+  # put command (with params) first in duplicity parameters
+  for param in "$@" ; do
+    # split cmd from params (everything before splitchar --)
+    if [ "$param" == "--" ] ; then
+      PARAMSNOW=1
+    else
+      [ ! $PARAMSNOW ] && \
+        DUPL_CMD="$DUPL_CMD $param" \
+        || \
+        DUPL_PARAMS="$DUPL_PARAMS $param"
+    fi
+  done
+
+  # init global duplicity parameters same for all tasks
+  duplicity_params_global
+
+  eval ${PREVIEW:+echo \"} ${DUPL_VARS_GLOBAL} ${BACKEND_PARAMS} \
+    $DUPLICITY $DUPL_CMD $DUPL_PARAMS_GLOBAL \
+    $DUPL_PARAMS ${PREVIEW:+\"}
+  }
+
+function secureconf { # secure the configuration dir
+  #PERMS=$(ls -la $(dirname $CONFDIR) | grep -e " $(basename $CONFDIR)\$" | awk '{print $1}')
+  local PERMS="$(ls -la "$CONFDIR/." | awk 'NR==2{print $1}')"
+  if [ "$PERMS" != 'drwx------' ] ; then
+    chmod 700 "$CONFDIR"; local ERR=$?
+    warning "The profile's folder
+    '$CONFDIR'
+    permissions are not safe ($PERMS). Secure them to 700. - ($(error_to_string $ERR))"
+  fi
+}
+
+# params are $1=timeformatstring (default like date output), $2=epoch seconds since 1.1.1970 (default now)
+function date_fix {
+  # gnu date with -d @epoch
+  date=$(date ${2:+-d @$2} ${1:++"$1"} 2> /dev/null) && \
+    echo $date && return
+
+  # date bsd,osx with -r epoch
+  date=$(date ${2:+-r $2} ${1:++"$1"} 2> /dev/null) && \
+    echo $date && return
+
+  # date busybox with -d epoch -D %s
+  date=$(date ${2:+-d $2 -D %s} ${1:++"$1"} 2> /dev/null) && \
+    echo $date && return
+
+  ## some date commands do not support giving a time w/o setting it (irix,solaris,others?)
+  # awk fallback
+  date=$(awk "BEGIN{print strftime(\"${1:-%a %b %d %H:%M:%S %Z %Y}\"${2:+,$2})}" 2> /dev/null) && \
+    echo $date && return
+  # perl fallback
+  date=$(perl  -e "use POSIX qw(strftime);\$date = strftime(\"${1:-%a %b %d %H:%M:%S %Z %Y}\",localtime(${2}));print \"\$date\n\";" 2> /dev/null) && \
+    echo $date && return
+  # error
+  echo "ERROR"
+}
+
+function nsecs {
+  # only 9 digit returns, e.g. not all date(s) deliver nsecs
+  local NSECS=$(date +%N 2> /dev/null | grep -m 1 -e "^[[:digit:]]\{9\}$")
+  echo ${NSECS:-000000000}
+}
+
+function nsecs_to_sec {
+  echo $(($1/1000000000)).$(printf "%03d" $(($1/1000000%1000)) )
+}
+
+function datefull_from_nsecs {
+  date_from_nsecs $1 '%F %T'
+}
+
+function date_from_nsecs {
+  local FORMAT=${2:-%T}
+  local TIME=$(nsecs_to_sec $1)
+  local SECS=${TIME%.*}
+  local DATE=$(date_fix "%T" ${SECS:-0})
+  echo $DATE.${TIME#*.}
+}
+
+function var_isset {
+  if [ -z "$1" ]; then
+    echo "ERROR: function var_isset needs a string as parameter"
+  elif eval "[ \"\${$1}\" == 'not_set' ]" || eval "[ \"\${$1-not_set}\" != 'not_set' ]"; then
+    return 0
+  fi
+  return 1
+}
+
+function get_subject {
+  t_MAIL_SUBJECT=$MAIL_SUBJECT
+  [[ -z "$MAIL_VERBOSE" ]] && MAIL_VERBOSE=2
+  MAIL_SUBJECT_LEVEL=0
+  for i in "FAILED" "WARNING" "OK"; do
+    grep -Eq "^<tr>.*$i.*td>$" $TEMP_REPORT && {
+      MAIL_SUBJECT="$MAIL_SUBJECT: $i"
+      break
+    } || let MAIL_SUBJECT_LEVEL++
+  done
+  unset t_MAIL_SUBJECT
+}
+
+function url_encode {
+  # based on http://www.shelldorado.com/scripts/cmds/urlencode
+  echo $1 | awk 'BEGIN {
+  # We assume an awk implementation that is just plain dumb.
+  # We will convert an character to its ASCII value with the
+  # table ord[], and produce two-digit hexadecimal output
+  # without the printf("%02X") feature.
+
+  EOL = "%0A"		# "end of line" string (encoded)
+  split ("1 2 3 4 5 6 7 8 9 A B C D E F", hextab, " ")
+  hextab [0] = 0
+  for ( i=1; i<=255; ++i ) ord [ sprintf ("%c", i) "" ] = i + 0
+    if ("'"$EncodeEOL"'" == "yes") EncodeEOL = 1; else EncodeEOL = 0
+    }
+  {
+    encoded = ""
+    for ( i=1; i<=length ($0); ++i ) {
+      c = substr ($0, i, 1)
+      if ( c ~ /[a-zA-Z0-9.\-_~]/ ) {
+        encoded = encoded c		# safe character
+      }
+    #			else if ( c == " " ) {
+    #				encoded = encoded "+"	# special handling for space char (only needed for query strings)
+    #			}
+  else {
+    # unsafe character, encode it as a two-digit hex-number
+    lo = ord [c] % 16
+    hi = int (ord [c] / 16);
+    encoded = encoded "%" hextab [hi] hextab [lo]
+  }
+}
+if ( EncodeEOL ) {
+  printf ("%s", encoded EOL)
+} else {
+print encoded
+}
+}
+'
+}
+
+# start of script #######################################################################
+
+# confidentiality first, all we create is only readable by us
+umask 077
+
+# check if ftplicity is there & executable
+[ -n "$ME_LONG" ] && [ -x "$ME_LONG" ] || error "$ME missing. Executable & available in path? ($ME_LONG)"
+
+if [ ${#@} -eq 1 ]; then
+  cmd="${1}"
+else
+  PROFILE="${1}" ; cmd="${2}"
+fi
+
+# deal with command before profile validation calls
+# show requested version
+# OR requested usage info
+# OR create a profile
+# OR fall through
+if [ ${#@} -le 2 ]; then
+  case "$cmd" in
+    version|--version|-v|-V)
+      version_info
+      exit 0
+      ;;
+    usage|--help|-h|-H)
+      set_config
+      usage_info
+      exit 0
+      ;;
+    init)
+      set_config
+      init
+      exit 0
+      ;;
+    create)
+      set_config
+      if [ -d $CONFDIR ]; then
+        error "The profile '$PROFILE' already exists in
+        '$CONFDIR'.
+
+        Hint:
+        If you _really_ want to create a new profile by this name you will
+        have to manually delete the existing profile folder first."
+
+        exit 1
+      else
+        create_config
+        exit 0
+      fi
+      ;;
+    bkpall)
+      export LC_ALL=C
+      set_config
+      if [ -n "$CONFHOME" ]; then
+        if [ -f "$MAINCONF" ]; then
+          . "$MAINCONF"
+        fi
+      fi
+      TEMP_DIR=${TEMP_DIR:-'/tmp'}
+      TEMP_LOG=`mktemp $TEMP_DIR/bkpall.log.XXXXXXXXXX`
+      TEMP_REPORT=`mktemp $TEMP_DIR/bkpall.rep.XXXXXXXXXX`
+      echo Writing log $TEMP_LOG
+      {
+        if [ -n "$CONFHOME" ]; then
+          for i in "$CONFHOME"/*; do
+            if [ -d "$i" -a -f "$i/conf" -a ! -f "$i/skip" ]; then
+              T="${i##*/}"
+              $ME_LONG $T backup
+            fi
+          done
+        fi
+      } 2>&1 | tee -a $TEMP_LOG
+      reports=`awk '/^produce report in /{print $NF}' $TEMP_LOG`
+      echo BKPALL report in $TEMP_REPORT
+      report_html_head >$TEMP_REPORT
+      report_html_css >>$TEMP_REPORT
+      report_html_body >>$TEMP_REPORT
+      report_html_table $reports >>$TEMP_REPORT
+      report_html_trail >>$TEMP_REPORT
+      send_mail $TEMP_REPORT $TEMP_LOG
+      rm $TEMP_LOG $TEMP_REPORT
+      exit 0
+      ;;
+    *)
+      # if we reach here, user either forgot profile or chose wrong profileless command
+      if [ ${#@} -le 1 ]; then
+        error "\
+          Missing or wrong parameters. Only the commands usage, version and create
+          can be called without selecting an existing profile first. '$cmd'
+
+          Hint: Run '$ME usage' to get help."
+      fi
+  esac
+fi
+
+# Hello world
+echo "Start $ME v$ME_VERSION, time is $(date_fix '%F %T')."
+
+# check system environment
+DUPLICITY="$(which duplicity 2>/dev/null)"
+[ -z "$DUPLICITY" ] && error_path "duplicity missing. installed und available in path?"
+# init, exec duplicity version check info
+duplicity_version_get
+duplicity_version_check
+
+[ -z "$(which awk 2>/dev/null)" ] && error_path "awk missing. installed und available in path?"
+
+### read configuration
+set_config
+# check validity
+if [ ! -d "$CONFDIR" ]; then
+  error "Selected profile '$PROFILE' does not resolve to a profile folder in
+  '$CONFDIR'.
+
+  Hints:
+  Use '$ME <name> create' to create a profile first.
+  Use '$ME usage' to get usage help."
+elif [ ! -x "$CONFDIR" ]; then
+  error "\
+    Profile folder in '$CONFDIR' cannot be accessed.
+
+  Hint:
+  Check the filesystem permissions and set directory accessible e.g. 'chmod 700'."
+elif [ ! -f "$CONF" ] ; then
+  error "'$CONF' not found."
+elif [ ! -r "$CONF" ] ; then
+  error "'$CONF' not readable."
+else
+  # pre-read main config if any
+  if [ -n "$CONFHOME" ]; then
+    if [ -f "$MAINCONF" ]; then
+      . "$MAINCONF"
+    fi
+  fi
+  if [ -f "$CONF" ]; then
+    . "$CONF"
+  fi
+  process_conf
+  if [ -f "$SRCHOLDER" ]; then
+    SOURCE="'`head -1 $SRCHOLDER`'"
+  fi
+  KEYFILE="${KEYFILE//.asc/${GPG_KEY:+.$GPG_KEY}.asc}"
+  TEMP_DIR=${TEMP_DIR:-'/tmp'}
+fi
+
+if [ -z "$TEMP_LOG" ]; then
+  TEMP_LOG=`mktemp $TEMP_DIR/${CONF_DIR_NAME}.log.XXXXXXXXXX`
+  export TEMP_LOG
+  echo Writing log $TEMP_LOG
+fi
+
+OLD_STAMP=`find_last_stamp`
+
+{
+  echo "Using profile '$CONFDIR'."
+
+  # secure config dir, if needed w/ warning
+  secureconf
+
+  # split TARGET in handy variables, remove invalid chars ('") to protect script
+  TARGET_SPLIT_URL=$(awk -v target="$TARGET" 'BEGIN { \
+  gsub(/[\047\042]/,"",target); match(target,/^([^\/:]+):\/\//); \
+  prot=substr(target,RSTART,RLENGTH);rest=substr(target,RSTART+RLENGTH); \
+  if (credsavail=match(rest,/^[^@]*@/)){\
+    creds=substr(rest,RSTART,RLENGTH-1);\
+    credcount=split(creds,cred,":");\
+    rest=substr(rest,RLENGTH+1);\
+  }print "TARGET_URL_PROT=\047"prot"\047\n"\
+  "TARGET_URL_HOSTPATH=\047"rest"\047\n"\
+  "TARGET_URL_CREDS=\047"creds"\047\n";\
+  if(credsavail){print "TARGET_URL_USER=\047"cred[1]"\047\n"}\
+    if(credcount>1){print "TARGET_URL_PASS=\047"cred[2]"\047\n"}\
+    }')
+  eval ${TARGET_SPLIT_URL}
+
+  # Add configuration name to the target's hostpath
+  if [ -n "$PROFILE" ]; then
+    TARGET_URL_HOSTPATH="$TARGET_URL_HOSTPATH/$NAME"
+  fi
+
+  # check if backend specific software is in path
+  [ -n "$(echo ${TARGET_URL_PROT} | grep -i -e '^ftp://$')" ] && \
+    [ -z "$(which ncftp 2>/dev/null)" ] && error_path "Protocol 'ftp' needs ncftp. Installed und available in path?"
+
+  # fetch commmand from parameters ########################################################
+  # Hint: cmds is also used to check if authentification info sufficient in the next step
+  cmds="$2"; shift 2
+
+  # translate backup to batch command
+  # check day of week
+
+  cmds=${cmds//forcedfull/pre_full_post}
+  cmds=${cmds//backup/pre_bkp_post}
+  [[ ! -z "$AUTOPURGE" && ( "$cmds" =~ "bkp" || "$cmds" =~ "full" || "$cmds" =~ "incr" ) ]] && cmds=${cmds}_purge-${AUTOPURGE,,}-force
+  if [ -f $CONFDIR/full ];then
+    while read str; do
+      echo $str|grep -E "^[0-9]+:[0-9]$">>/dev/null && {
+        if [ `expr $(date +%V) % $(echo $str|cut -f1 -d:)` -eq 0 ] && [ $(echo $str|cut -f2 -d:) -eq $(date +%w) ]
+        then
+          echo 'force full backup'
+          cmds=${cmds//bkp/full}
+          break
+        fi
+      } || {
+        if [ $(echo $str|grep -E "^[[:digit:]]$") -eq $(date +%w) ];then
+          echo 'force full backup'
+          cmds=${cmds//bkp/full}
+          break
+        fi
+      }
+    done < $CONFDIR/full
+  fi
+
+  # complain if command(s) missing
+  [ -z $cmds ] && error "  No command given.
+
+Hint:
+Use '$ME usage' to get usage help."
+
+  # plausibility check config - VARS & KEY ################################################
+  # check if src, trg, trg pw
+  # auth info sufficient
+  # gpg key, gpg pwd (might be empty) set in config
+  # OR key in local gpg db
+  # OR key can be imported from keyfile
+  # OR fail
+  if [ -z "$SOURCE" ]; then
+    error " Source Path (setting SOURCE) not set $SRCHOLDER file
+    '$CONF'."
+
+  elif [ -z "$TARGET" -o "$TARGET" == "${DEFAULT_TARGET}" ]; then
+    error " Backup Target (setting TARGET) not set or still default value in conf file
+    '$CONF'."
+
+  elif var_isset 'TARGET_USER' && var_isset 'TARGET_URL_USER' && \
+    [ "${TARGET_USER}" != "${TARGET_URL_USER}" ]; then
+    error " TARGET_USER ('${TARGET_USER}') _and_ user in TARGET url ('${TARGET_URL_USER}')
+    are configured with different values. There can be only one.
+
+    Hint: Remove conflicting setting."
+
+  elif var_isset 'TARGET_PASS' && var_isset 'TARGET_URL_PASS' && \
+    [ "${TARGET_PASS}" != "${TARGET_URL_PASS}" ]; then
+    error " TARGET_PASS ('${TARGET_PASS}') _and_ password in TARGET url ('${TARGET_URL_PASS}')
+    are configured with different values. There can be only one.
+
+    Hint: Remove conflicting setting."
+  fi
+
+  # check if authentication information sufficient
+  if ( ( ! var_isset 'TARGET_USER' && ! var_isset 'TARGET_URL_USER' ) && \
+    ( ! var_isset 'TARGET_PASS' && ! var_isset 'TARGET_URL_PASS' ) ); then
+    # ok here some exceptions:
+    #   protocols that do not need passwords
+    #   s3[+http] only needs password for write operations
+    if [ -n "$(echo ${TARGET_URL_PROT} | grep -e '^\(file\|tahoe\|ssh\|scp\)://$')" ]; then
+      : # all is well file/tahoe do not need passwords, ssh/scp might use key auth
+    elif [ -n "$(echo ${TARGET_URL_PROT} | grep -e '^s3\(\+http\)\?://$')" ] && \
+      [ -z "$(echo ${cmds} | grep -e '\(bkp\|incr\|full\|purge\|cleanup\)')" ]; then
+        : # still fine, it's possible to read only access configured buckets anonymously
+    else
+      error " Backup target credentials needed but not set in conf file
+      '$CONF'.
+      Setting TARGET_USER or TARGET_PASS or the corresponding values in TARGET url
+      are missing. Some protocols only might need it for write access to the backup
+      repository (commands: bkp,backup,full,incr,purge) but not for read only access
+      (e.g. verify,list,restore,fetch).
+
+      Hints:
+      Add the credentials (user,password) to the conf file.
+      To force an empty password set TARGET_PASS='' or TARGET='prot://user:@host..'.
+      "
+    fi
+  fi
+
+  # GPG config plausibility check1 (disabled check) #############################
+  if [ "$GPG_KEY" == 'disabled' ]; then
+    : # encryption disabled, all is well
+
+  elif [ -z "${GPG_KEY}${GPG_PW}" ]; then
+    warning "GPG_KEY and GPG_PW are empty or not set in conf file
+    '$CONF'.
+    Will disable encryption for duplicity now.
+
+    Hint:
+    If you really want to use _no_ encryption you can disable this warning by
+      setting GPG_KEY='disabled' in conf file."
+      GPG_KEY='disabled'
+  fi
+
+  # GPG availability check (now we know if gpg is really needed)#################
+  if [ "$GPG_KEY" != 'disabled' ]; then
+    GPG="$(which gpg 2>/dev/null)"
+    [ -z "$GPG" ] && error_path "gpg missing. installed und available in path?"
+    GPG_INFO=`$GPG --version | awk '/^gpg/{v=$1" "$3};/^Home/{print v" ("$0")"}'`
+  fi
+
+  # Output versions info ########################################################
+  echo -e "Using installed duplicity version ${DUPL_VERSION}${GPG_INFO:+, $GPG_INFO}"
+
+  # GPG config plausibility check2 (needs gpg) ##################################
+  if [ "$GPG_KEY" == 'disabled' ]; then
+    : # the following tests are not necessary
+  elif [ "$GPG_KEY" == "${DEFAULT_GPG_KEY}" ] || [ ! -z "$GPG_KEY" ] && [ ! $(echo $GPG_KEY | grep '^[0-9a-fA-F]\{8\}$') ]; then
+    error_gpg "Encryption Key GPG_KEY not set correct (8 digit ID) or still default in conf file
+    '$CONF'."
+  elif [ "${GPG_PW-not_set}" == 'not_set' ] || [ "$GPG_PW" == "${DEFAULT_GPG_PW}" ]; then
+    error_gpg "Encryption Password GPG_PW not set or still default value in conf file
+    '$CONF'."
+  elif [ ! -z "$GPG_KEY" ] && [ $($GPG --list-secret-key $GPG_KEY >/dev/null 2>&1;echo $?) -ne 0 ] ; then
+    echo "Encryption Key '$GPG_KEY' not found."
+
+    # Try autoimport from existing old gpgkey files and new gpgkey.XXX.asc files (since v1.4.2)
+    for file in `ls $CONFDIR/gpgkey $KEYFILE 2>/dev/null`; do
+
+      echo -n -e "\nTry to import from existing keyfile \n'$file'. -> "
+      OUT=`$GPG --batch --import "$file" 2>&1`; ERR=$?
+      [ "$ERR" -eq 0 ] && echo "SUCCESS" || echo "FAILED"
+
+      if [ "$ERR" -ne 0 ]; then
+        echo -e "gpg output:\n$OUT"
+      else
+        echo -e "\nFor $ME to work you have to set the trust level
+        with the command \"trust\" to \"ultimate\" (5) now.
+        Exit the edit mode of gpg with \"quit\".\n"
+        sleep 5
+        $GPG --edit-key $GPG_KEY
+      fi
+    done
+
+    # still no key? failure
+    if [ $($GPG --list-secret-key $GPG_KEY >/dev/null 2>&1;echo $?) -ne 0 ] ; then
+      error_gpg "Key $GPG_KEY cannot be found.$?
+      Doublecheck if the above key is listed by gpg (gpg --list-keys)
+      or available as gpg key file '$(basename $KEYFILE)' or  'gpgkey'
+      in the profile folder."
+    fi
+
+  fi
+
+  # config plausibility check - SPACE ###########################################
+  # is tmp writeable
+  # is tmp big enough
+  if [ ! -d "$TEMP_DIR" ]; then
+    error "Temporary file space '$TEMP_DIR' is not a directory."
+  elif [ ! -w "$TEMP_DIR" ]; then
+    error "Temporary file space '$TEMP_DIR' not writable."
+  fi
+
+  # get volsize, default is 50
+  VOLSIZE=${VOLSIZE:-50}
+  # get free temp space
+  TEMP_FREE="$(df $TEMP_DIR 2>/dev/null | awk 'END{pos=(NF-2);if(pos>0) print $pos;}')"
+  # check for free space or FAIL
+  if [ "$((${TEMP_FREE:-0}-${VOLSIZE:-0}*1024))" -lt 0 ]; then
+    error "Temporary file space '$TEMP_DIR' free space is smaller ($((TEMP_FREE/1024))MB)
+    than one duplicity volume (${VOLSIZE}MB).
+
+    Hint: Free space or change TEMP_DIR setting."
+  fi
+
+  # check for enough async upload space and WARN only
+  if [ $((${TEMP_FREE:-0}-2*${VOLSIZE:-0}*1024)) -lt 0 ]; then
+    warning "Temporary file space '$TEMP_DIR' free space is smaller ($((TEMP_FREE/1024))MB)
+    than two duplicity volumes (2x${VOLSIZE}MB). This can lead to problems when
+    using the --asynchronous-upload option.
+
+    Hint: Free space or change TEMP_DIR setting."
+  fi
+
+  # test - GPG SANITY #####################################################################
+  # if encryption is disabled, skip this whole section
+  if [ "$GPG_KEY" == 'disabled' ]; then
+    echo -e "Test - En/Decryption skipped. (disabled) "
+  else
+
+    function cleanup_gpgtest {
+      echo -en "Cleanup - Delete '${GPG_TEST}_*'"
+      rm ${GPG_TEST}_* 2>/dev/null && echo "(OK)" || echo "(FAILED)"
+    }
+    GPG_TEST="$TEMP_DIR/${ME_NAME}.$$.$(date_fix %s)"
+    # using keys
+    if [ ! -z "$GPG_KEY" ]; then
+      # check encrypting
+      echo -en "Test - Encryption with key $GPG_KEY "
+      OUT=`$GPG -r $GPG_KEY -o ${GPG_TEST}_ENC --batch $GPG_OPTS -e $ME_LONG 2>&1`; ERR=$?
+
+      if [ $ERR == 0 ]; then
+        echo "(OK)"
+      else
+        echo "(FAILED)"; cleanup_gpgtest; error "$OUT
+
+        Hint: On 'no assurance' error try to 'gpg --edit-key $GPG_KEY'
+        and raise the trust level to ultimate.
+        Alternatively set GPG_OPTS='--always-trust' in conf file."
+      fi
+
+      # check decrypting
+      echo -en "Test - Decryption with key $GPG_KEY "
+      OUT=`echo "$GPG_PW" | $GPG --passphrase-fd 0 -r $GPG_KEY -o ${GPG_TEST}_DEC --batch $GPG_OPTS -d ${GPG_TEST}_ENC 2>&1`; ERR=$?
+      if [ $ERR == 0 ]; then
+        echo "(OK)"
+      else
+        echo "(FAILED)"; cleanup_gpgtest; error "$OUT"
+      fi
+    # symmetric only
+    else
+      # check encrypting
+      echo -en "Test - Encryption with passphrase "
+      OUT=`echo "$GPG_PW" | $GPG --passphrase-fd 0 -o ${GPG_TEST}_ENC --batch $GPG_OPTS -c $ME_LONG 2>&1`; ERR=$?
+
+      if [ $ERR == 0 ]; then
+        echo "(OK)"
+      else
+        echo "(FAILED)"; cleanup_gpgtest; error "$OUT"
+      fi
+
+      # check decrypting
+      echo -en "Test - Decryption with passphrase"
+      OUT=`echo "$GPG_PW" | $GPG --passphrase-fd 0 -o ${GPG_TEST}_DEC --batch $GPG_OPTS -d ${GPG_TEST}_ENC 2>&1`; ERR=$?
+      if [ $ERR == 0 ]; then
+        echo "(OK)"
+      else
+        echo "(FAILED)"; cleanup_gpgtest; error "$OUT"
+      fi
+    fi
+
+    # compare original w/ decrypted
+    echo -n "Test - Compare Original w/ Decryption "
+    if [ "$(cat $ME_LONG)" == "$(cat ${GPG_TEST}_DEC)" ]; then
+      echo "(OK)"; cleanup_gpgtest
+    else
+      echo "(FAILED)"; error "This is a major failure.
+      Please report to the author and attach files '${GPG_TEST}_*' and '$ME_LONG'"
+    fi
+
+  fi # end disabled
+
+  # Exclude file is needed, create it if necessary
+  [ -f "$EXCLUDE" ] || touch "$EXCLUDE"
+
+  # Read saved environment to track gpg key changes
+  [ -f $SAVED_ENV ] && . $SAVED_ENV
+  # Save current environment
+  cat <<EOF >$SAVED_ENV
+# This file is automatically created so while you backup the profile
+# you will save security credentials even if they are set in the global config
+
+SAVED_NAME='$NAME'
+SAVED_GPG_KEY='$GPG_KEY'
+SAVED_GPG_PW='$GPG_PW'
+SAVED_TARGET='$TARGET'
+SAVED_TARGET_USER='$TARGET_USER'
+SAVED_TARGET_PASS='$TARGET_PASS'
+EOF
+
+  # export key if not already #############################################################
+  if [ "$GPG_KEY" != 'disabled' ] && [ ! -z "$GPG_KEY" ]; then
+    if [ ! -f "$KEYFILE" -o "$GPG_KEY" != "$SAVED_GPG_KEY" ]; then
+      touch "$KEYFILE" && chmod 0600 "$KEYFILE"
+      $GPG --armor --export $GPG_KEY >>"$KEYFILE"
+      $GPG --armor --export-secret-keys $GPG_KEY >>"$KEYFILE"
+      inform "Backup of used key ($GPG_KEY) did not exist as file
+      '$KEYFILE' .
+      Created it now.
+
+      Hint: You should backup your changed profile folder now."
+    fi
+  fi
+
+
+  # command execution #####################################################################
+
+  # process params
+  for param in "$@" ; do
+    if [ -n "$VALUE_EXP" ]; then
+      eval $VALUE_EXP="$param"
+      VALUE_EXP=''
+    fi
+
+    case "$param" in
+      # enable ftplicity preview mode
+      '--preview')
+        PREVIEW=1
+        ;;
+      '--in-target')
+        VALUE_EXP='IN_TARGET'
+        ;;
+      *)
+        if [ `echo "$param" | grep -e "^-"` ] || \
+          [ `echo "$last_param" | grep -e "^-"` ] ; then
+          # forward parameter[/option pairs] to duplicity
+          dupl_opts["${#dupl_opts[@]}"]=${param}
+        else
+          # anything else must be a parameter (eg. for fetch, ...)
+          ftpl_pars["${#ftpl_pars[@]}"]=${param}
+        fi
+        last_param=${param}
+        ;;
+    esac
+  done
+
+  # Add in-target path to the target's hostpath
+  if [ -n "$IN_TARGET" ]; then
+    TARGET_URL_HOSTPATH="$TARGET_URL_HOSTPATH/$IN_TARGET"
+  fi
+
+  # defined TARGET_USER&PASS vars replace their URL pendants
+  # (double defs already dealt with)
+  var_isset 'TARGET_USER' && TARGET_URL_USER="$TARGET_USER"
+  var_isset 'TARGET_PASS' && TARGET_URL_PASS="$TARGET_PASS"
+
+  # build target backend data depending on protocol
+  case "${TARGET_URL_PROT%%:*}" in
+    's3'|'s3+http')
+      BACKEND_PARAMS="AWS_ACCESS_KEY_ID='${TARGET_URL_USER}' AWS_SECRET_ACCESS_KEY='${TARGET_URL_PASS}'"
+      BACKEND_URL="${TARGET_URL_PROT}${TARGET_URL_HOSTPATH}"
+      ;;
+    'file'|'tahoe'|'cf+hubic')
+      BACKEND_URL="${TARGET_URL_PROT}${TARGET_URL_HOSTPATH}"
+      ;;
+    'rsync')
+      # everything in url (these backends do not support pass in env var)
+      var_isset 'TARGET_URL_USER' && BACKEND_CREDS="$(url_encode ${TARGET_URL_USER})"
+      var_isset 'TARGET_URL_PASS' && BACKEND_CREDS="${BACKEND_CREDS}:$(url_encode ${TARGET_URL_PASS})"
+      var_isset 'BACKEND_CREDS' && BACKEND_CREDS="${BACKEND_CREDS}@"
+      BACKEND_URL="${TARGET_URL_PROT}${BACKEND_CREDS}${TARGET_URL_HOSTPATH}"
+      ;;
+    *)
+      # all protocols with username in url, only username is in url,
+      # pass is env var for security, url_encode username to protect special chars
+      var_isset 'TARGET_URL_USER' && BACKEND_CREDS="$(url_encode ${TARGET_URL_USER})@"
+      # sortout backends way to handle password
+      case "${TARGET_URL_PROT%%:*}" in
+        'imap'|'imaps')
+          BACKEND_PARAMS="IMAP_PASSWORD='${TARGET_URL_PASS}'"
+          ;;
+        *)
+          # ssh backend wants to be told
+          [ -n "$(echo ${TARGET_URL_PROT} | grep -e '^\(ssh\|scp\)://$')" ] && \
+            DUPL_PARAMS="$DUPL_PARAMS --ssh-askpass"
+          BACKEND_PARAMS="FTP_PASSWORD='${TARGET_URL_PASS}'"
+          ;;
+      esac
+      BACKEND_URL="${TARGET_URL_PROT}${BACKEND_CREDS}${TARGET_URL_HOSTPATH}"
+      ;;
+  esac
+  # protect eval from special chars in url (e.g. open ')' in password)
+  BACKEND_URL="'$BACKEND_URL'"
+
+  updateicon "🔄 Backup running... "
+
+  # run cmds of the converted space separated commandlist
+  for cmd in ${cmds//_/ };
+  do
+
+    RUN_START=$(date_fix %s)$(nsecs)
+    echo; separator "Start running command $(echo $cmd|awk '$0=toupper($0)') at $(date_from_nsecs $RUN_START)"
+
+    case "$cmd" in
+      pre|post)
+        [ "$cmd" == 'pre' ] && script=$PRE || script=$POST
+        run_script $script
+        ;;
+      bkp)
+        duplify -- "${dupl_opts[@]}" $EXCLUDE_PARAM "$EXCLUDE" "$SOURCE" "$BACKEND_URL"
+        ;;
+      incr)
+        duplify incr -- "${dupl_opts[@]}" $EXCLUDE_PARAM "$EXCLUDE" "$SOURCE" "$BACKEND_URL"
+        ;;
+      full)
+        duplify full -- "${dupl_opts[@]}" $EXCLUDE_PARAM "$EXCLUDE" "$SOURCE" "$BACKEND_URL"
+        ;;
+      verify)
+        duplify verify -- "${dupl_opts[@]}" $EXCLUDE_PARAM "$EXCLUDE" "$BACKEND_URL" "$SOURCE"
+        ;;
+      list)
+        # time param exists since 0.5.10+
+        TIME="${ftpl_pars[0]:-now}"
+        duplify list-current-files -- -t "$TIME" "${dupl_opts[@]}" "$BACKEND_URL"
+        ;;
+      cleanup)
+        duplify cleanup -- "${dupl_opts[@]}" "$BACKEND_URL"
+        ;;
+      purge)
+        duplify remove-older-than "${MAX_AGE:-1M}" -- "${dupl_opts[@]}" "$BACKEND_URL"
+        ;;
+      purge-full)
+        duplify remove-all-but-n-full "${MAX_FULL_BACKUPS:-1}" -- "${dupl_opts[@]}" "$BACKEND_URL"
+        ;;
+      purge-age-force)
+        duplify remove-older-than "${MAX_AGE:-1M}" -- "${dupl_opts[@]} --force" "$BACKEND_URL"
+        ;;
+      purge-full-force)
+        duplify remove-all-but-n-full "${MAX_FULL_BACKUPS:-1}" -- "${dupl_opts[@]} --force" "$BACKEND_URL"
+        ;;
+      restore)
+        OUT_PATH="${ftpl_pars[0]}"; TIME="${ftpl_pars[1]:-now}";
+        [ -z "$OUT_PATH" ] && error "  Missing parameter target_path for restore.
+
+        Hint:
+        Syntax is -> $ME restore <target_path> [<age>]"
+
+        duplify  -- -t "$TIME" "${dupl_opts[@]}" "$BACKEND_URL" "$OUT_PATH"
+        ;;
+      fetch)
+        IN_PATH="${ftpl_pars[0]}"; OUT_PATH="${ftpl_pars[1]}";
+        TIME="${ftpl_pars[2]:-now}";
+        [ -z "$IN_PATH" -o -z "$OUT_PATH" ] && error "  Missing parameter src_path or target_path for fetch.
+
+        Hint:
+        Syntax is -> $ME fetch <src_path> <target_path> [<age>]"
+
+        # duplicity 0.4.7 doesnt like cmd restore in combination with --file-to-restore
+        duplify -- --restore-time "$TIME" "${dupl_opts[@]}" \
+          --file-to-restore "$IN_PATH" "$BACKEND_URL" "$OUT_PATH"
+        ;;
+      status)
+        duplify collection-status -- "${dupl_opts[@]}" "$BACKEND_URL"
+        ;;
+      *)
+        warning "Unknown command '$cmd'."
+        ;;
+    esac
+
+    CMD_ERR=$?
+    RUN_END=$(date_fix %s)$(nsecs) ; RUNTIME=$(( $RUN_END - $RUN_START ))
+
+    # print message on error; set error code
+    if [ "$CMD_ERR" -ne 0 ]; then
+      error_print "$(datefull_from_nsecs $RUN_END) Task '$(echo $cmd|awk '$0=toupper($0)')' failed with exit code '$CMD_ERR'."
+      FTPL_ERR=1
+    fi
+
+    updateicon ""
+
+    separator "Finished state $(error_to_string $CMD_ERR) at $(date_from_nsecs $RUN_END) - \
+      Runtime $(printf "%02d:%02d:%02d.%03d" $((RUNTIME/1000000000/60/60)) $((RUNTIME/1000000000/60%60)) $((RUNTIME/1000000000%60)) $((RUNTIME/1000000%1000)) )"
+
+    [ "$cmd" = "pre" -a $CMD_ERR -gt 0 ] && exit $CMD_ERR
+
+  done
+} 2>&1 | tee -a $TEMP_LOG
+
+save_log
+
+exit ${FTPL_ERR}

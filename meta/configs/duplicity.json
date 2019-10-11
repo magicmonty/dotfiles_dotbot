@@ -9,20 +9,24 @@
     }
   },
   {
-    "clean": [ "~/.duplicity" ]
+    "clean": [
+      "~/.duplicity",
+      "~/.duplicity/gdrive"
+    ]
   },
   {
     "shell": [
-      [ "gpg2 --decrypt --quiet ~/.dotfiles/apps/duplicity/client_secrets.json.gpg > ~/.dotfiles/apps/duplicity/client_secrets.json", "Decrypting client secrets" ]
+      [ "gpg2 --decrypt --quiet ~/.dotfiles/apps/duplicity/conf.gpg > ~/.dotfiles/apps/duplicity/conf", "Decrypting Configuration" ]
+      [ "gpg2 --decrypt --quiet ~/.dotfiles/apps/duplicity/gdrive/credentials.gpg > ~/.dotfiles/apps/duplicity/gdrive/credentials", "Decrypting Google Drive Credentials" ]
     ]
   },
   {
     "link": {
-      "~/.duplicity/credentials": "apps/duplicity/credentials",
-      "~/.duplicity/excludes": "apps/duplicity/excludes",
-      "~/.duplicity/google.gpg": "apps/duplicity/google.gpg",
-      "~/.duplicity/run-backup":  "apps/duplicity/run-backup",
-      "~/.duplicity/client_secrets.json":  "apps/duplicity/client_secrets.json"
+      "~/.duplicity/conf": "apps/duplicity/conf",
+      "~/.duplicity/gdrive/conf": "apps/duplicity/gdrive/conf",
+      "~/.duplicity/gdrive/credentials": "apps/duplicity/gdrive/credentials",
+      "~/.duplicity/gdrive/excludes": "apps/duplicity/excludes",
+      "~/bin/backup":  "apps/duplicity/backup"
     }
   }
 ]
