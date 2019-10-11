@@ -3,7 +3,7 @@ separator_block_width=1
 markup=pango
 
 [backup]
-command=cat /tmp/backupicon
+command=~/bin/i3backupicon
 interval=once
 signal=14
 

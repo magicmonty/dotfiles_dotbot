@@ -26,6 +26,7 @@
       "~/.duplicity/gdrive/conf": "apps/duplicity/gdrive/conf",
       "~/.duplicity/gdrive/credentials": "apps/duplicity/gdrive/credentials",
       "~/.duplicity/gdrive/excludes": "apps/duplicity/excludes",
+      "~/bin/i3backupicon":  "apps/duplicity/i3backupicon",
       "~/bin/backup":  "apps/duplicity/backup"
     }
   }

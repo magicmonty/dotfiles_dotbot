@@ -22,3 +22,10 @@
 **/Sync
 **/.*
 **/Enpass
+**/target
+**/src/sonic-pi-arch/sonic-pi
+**/src/sonic-pi-arch/pkg
+**/src/sonic-pi-arch/src
+**.pkg.tar.gz
+**/src/vcvrack-bin/src
+**/src/vcvrack-bin/pkg

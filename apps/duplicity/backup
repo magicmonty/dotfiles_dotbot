@@ -35,6 +35,7 @@ ME_NAME="${ME%%.*}"
 ME_VERSION="1.0.0"
 
 CONF_DIR_NAME='duplicity'
+ICON='/tmp/backupicon'
 
 # default config values
 DEFAULT_SOURCE=${HOME}
@@ -83,8 +84,13 @@ function set_config { # sets config vars
 }
 
 function updateicon {
-  echo "$1" > /tmp/backupicon
-  pkill -RTMIN+14 i3blocks
+  if [ "$1" == "" ]; then
+    rm $ICON
+    pkill -RTMIN+14 i3blocks
+  else
+    echo "${1}" > $ICON
+    pkill -RTMIN+14 i3blocks
+  fi
 }
 
 function version_info { # print version information
@@ -892,6 +898,14 @@ if [ ${#@} -le 2 ]; then
       version_info
       exit 0
       ;;
+    noicon)
+      updateicon ""
+      exit 0
+      ;;
+    icon)
+      updateicon "🔄 Backup running... "
+      exit 0
+      ;;
     usage|--help|-h|-H)
       set_config
       usage_info
@@ -965,6 +979,7 @@ fi
 
 # Hello world
 echo "Start $ME v$ME_VERSION, time is $(date_fix '%F %T')."
+updateicon "🔄 Backup running... "
 
 # check system environment
 DUPLICITY="$(which duplicity 2>/dev/null)"
@@ -1418,8 +1433,6 @@ EOF
   # protect eval from special chars in url (e.g. open ')' in password)
   BACKEND_URL="'$BACKEND_URL'"
 
-  updateicon "🔄 Backup running... "
-
   # run cmds of the converted space separated commandlist
   for cmd in ${cmds//_/ };
   do
@@ -1502,7 +1515,6 @@ EOF
       FTPL_ERR=1
     fi
 
-    updateicon ""
 
     separator "Finished state $(error_to_string $CMD_ERR) at $(date_from_nsecs $RUN_END) - \
       Runtime $(printf "%02d:%02d:%02d.%03d" $((RUNTIME/1000000000/60/60)) $((RUNTIME/1000000000/60%60)) $((RUNTIME/1000000000%60)) $((RUNTIME/1000000%1000)) )"
@@ -1513,5 +1525,6 @@ EOF
 } 2>&1 | tee -a $TEMP_LOG
 
 save_log
+updateicon ""
 
 exit ${FTPL_ERR}
