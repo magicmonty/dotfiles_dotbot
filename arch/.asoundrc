@@ -24,15 +24,15 @@ pcm.jackmpd {
     }
 }
 
-pcm.jackplugmpd { 
+pcm.jackplugmpd {
     type plug
     slave { pcm "jackmpd" }
     hint {
-      description "JACK Audio connection kit"
+      description "MPD JACK Audio connection kit"
     }
 }
 
-pcm.jackplugmpv { 
+pcm.jackplugmpv {
     type plug
     slave { pcm "jackmpv" }
 }

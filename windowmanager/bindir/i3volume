@@ -1,13 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env sh
+
+function toggle() {
+  amixer -c 0 set Master toggle >/dev/null 2>&1
+}
 
 case $BLOCK_BUTTON in
-	1) /usr/bin/termite -e 'alsamixer -c 0' & disown ;;
-	3) amixer -c 0 sset Master toggle >/dev/null 2>&1;;
+	1) /usr/bin/urxvt -e 'alsamixer -c 0' & disown ;;
+	3) toggle;;
 	4) amixer -c 0 sset Master 1%+ >/dev/null 2>&1;;
 	5) amixer -c 0 sset Master 1%- >/dev/null 2>&1;;
 esac
 
-V=$(amixer -c 0 sget Master | grep 'Mono')
+V=$(amixer -M -c 0 sget Master | grep 'Mono:')
 if [[ $(echo $V | sed -e 's/.*\[\(on\|off\)\].*/\1/g') = "off" ]]; then
   echo "🔇 <span color=\"#98971A\">[mute]</span>"
 else

@@ -44,8 +44,8 @@ bindsym $mod+Tab exec --no-startup-id rofi -modi windowcd -i -show windowcd
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec $term -e 'alsamixer'
+##  exec --no-startup-id volumeicon
+bindsym $mod+Ctrl+m exec $term -e 'alsamixer -c 0'
 # exec --no-startup-id pulseaudio --start
 #exec --no-startup-id pa-applet
 
@@ -268,6 +268,10 @@ for_window [urgent=latest] focus
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym XF86Sleep exec systemctl hibernate
 
+bindsym XF86AudioRaiseVolume exec $HOME/bin/lmc up
+bindsym XF86AudioLowerVolume exec $HOME/bin/lmc down
+bindsym XF86AudioMute exec $HOME/bin/lmc mute
+
 # Set shut down, restart and locking features
 bindsym $mod+Shift+x exec "~/bin/i3exit"
 
@@ -309,6 +313,7 @@ exec --no-startup-id ~/bin/startjack
 exec --no-startup-id mpd
 exec_always --no-startup-id /usr/bin/betterlockscreen -w
 
+
 # xbanish make the mouse invisible after a timeout of 2000 ms and while typing
 exec --no-startup-id ~/bin/xbanish -bt 2000
 
@@ -333,7 +338,6 @@ exec --no-startup-id xfce4-power-manager
 #exec --no-startup-id clipit
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec --no-startup-id "systemctl --user start duplicati"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -379,8 +383,8 @@ bar {
   separator_symbol " "
 
   ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-  #	tray_output primary
-  #	tray_output eDP1
+  	tray_output primary
+  	tray_output eDP1
 
   colors {
     background #282828
