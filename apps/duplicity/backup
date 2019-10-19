@@ -36,6 +36,7 @@ ME_VERSION="1.0.0"
 
 CONF_DIR_NAME='duplicity'
 ICON='/tmp/backupicon'
+BACKUP_LAST='/tmp/backup_last_run'
 
 # default config values
 DEFAULT_SOURCE=${HOME}
@@ -933,6 +934,17 @@ if [ ${#@} -le 2 ]; then
       fi
       ;;
     bkpall)
+      if [ -f $BACKUP_LAST ]; then
+        TIMESTAMP=$(cat $BACKUP_LAST)
+        NOW=$(date +"%Y%m%d")
+        if [[ $NOW -le $TIMESTAMP ]]; then
+          echo "Backup already run today"
+          exit 0
+        fi
+      fi
+
+      echo $(date +"%Y%m%d") > $BACKUP_LAST
+
       export LC_ALL=C
       set_config
       if [ -n "$CONFHOME" ]; then
@@ -1528,3 +1540,4 @@ save_log
 updateicon ""
 
 exit ${FTPL_ERR}
+

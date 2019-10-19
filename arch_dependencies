@@ -74,3 +74,5 @@ duplicity
 python-pydrive
 python2-pydrive
 s-nail
+networkmanager-l2tp
+libreswan
