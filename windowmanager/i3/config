@@ -215,7 +215,7 @@ assign [class="Sonic Pi"] $ws7
 assign [class="Sonic Pi" window_type=splash] $ws7
 assign [title="VCV Rack*"] $ws8
 assign [class="obs"] $ws9
-assign [class="qjackctl"] $ws10
+assign [class="QjackCtl"] $ws10
 
 
 # Open specific applications in floating mode
@@ -249,7 +249,7 @@ for_window [class="Kalu"] floating enable
 for_window [class="Cadence"] floating enable
 for_window [title="Minecraft Launcher"] floating enable
 for_window [class="Pinentry"] sticky enable
-for_window [class="qjackctl"] floating enable
+for_window [class="QjackCtl" instance="qjackctl"] floating enable
 for_window [class="sonic-pi" window_type=splash] floating enable
 
 # Disable floating mode for specific applications

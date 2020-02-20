@@ -4,7 +4,7 @@ source ~/.vim/plugins.vim
 
 let mapleader=" "
 let g:mapleader=" "
-set showmode            " show the input mode in the footer
+set noshowmode          " Don't show mode, as it is shown by LightLine.vim
 set shortmess+=I        " Don't show the Vim welcome screen.
 set shortmess+=c        " Don't give |ins-completion-menu| messages
 set clipboard=unnamedplus " use system clipboard with * register
@@ -81,6 +81,7 @@ set matchtime=1                 " In tenths of seconds, when showmatch is on
 set wildmenu                    " Use menu for completions
 set wildmode=full
 
+
 if has("win32")
   set grepprg=internal        " Windows findstr.exe just isn't good enough.
 endif
@@ -92,28 +93,31 @@ if has('mouse')
 endif
 
 if has("unix") " (including OS X)
-  set backup
+  if has("nvim")
+    set nobackup
+  else
+    set backup
 
-  " Remove the current directory from the backup directory list.
-  "
-  set backupdir-=.
+    " Remove the current directory from the backup directory list.
+    "
+    set backupdir-=.
 
-  " Save backup files in the current user's ~/tmp directory, or in the
-  " system /tmp directory if that's not possible.
-  "
-  set backupdir^=~/tmp,/tmp
+    " Save backup files in the current user's ~/tmp directory, or in the
+    " system /tmp directory if that's not possible.
+    "
+    set backupdir^=~/tmp,/tmp
 
-  " Try to put swap files in ~/tmp (using the munged full pathname of
-  " the file to ensure uniqueness). Use the same directory as the
-  " current file if ~/tmp isn't available.
-  "
-  set directory=~/tmp//,.
+    " Try to put swap files in ~/tmp (using the munged full pathname of
+    " the file to ensure uniqueness). Use the same directory as the
+    " current file if ~/tmp isn't available.
+    "
+    set directory=~/tmp//,.
+  endif
 else
   set directory=$TEMP\\\
 endif
 
 " Update the swap file every 20 characters. I don't like to lose stuff.
-"
 set updatecount=20
 
 " Switch on syntax highlighting when the terminal has colors, or when running
@@ -126,8 +130,8 @@ set updatecount=20
 " won't get populated.
 "
 if &t_Co > 2 || has("gui_running")
-    let do_syntax_sel_menu=1
-    syntax on
+  let do_syntax_sel_menu=1
+  syntax on
 endif
 
 if has("autocmd") && !exists("autocommands_loaded")
@@ -259,8 +263,7 @@ else
   nnoremap <Leader>ev :tabe $MYVIMRC<CR>
 endif
 
-nnoremap <Leader>ep  :tabe ~/.vim/plugins.vim<CR>
-nnoremap <Leader>eP  :tabe ~/.vim/plugins_shared.vim<CR>
+nnoremap <Leader>ep  :tabe ~/.vim/plugins.vim<CR>:tabe ~/.vim/plugins_shared.vim<CR>
 
 " Reload vimrc
 nnoremap <Leader>lv  :so $MYVIMRC<CR>
@@ -270,20 +273,11 @@ nnoremap <Leader>lv  :so $MYVIMRC<CR>
 inoremap <C-F>  <C-O><C-F>
 inoremap <C-B>  <C-O><C-B>
 
-" Make Alt+Up/Down work as PageUp and PageDown
-"
-nnoremap    [1;3A      <PageUp>
-inoremap    [1;3A      <PageUp>
-vnoremap    [1;3A      <PageUp>
-nnoremap    [1;3B    <PageDown>
-inoremap    [1;3B    <PageDown>
-vnoremap    [1;3B    <PageDown>
-
 " Overload Control+L to clear the search highlight as it's redrawing the screen.
 "
-nnoremap <C-L> <silent> :nohlsearch<CR><C-L>
-inoremap <C-L> <silent> <Esc>:nohlsearch<CR><C-L>a
-vnoremap <C-L>  <Esc>:nohlsearch<CR><C-L>gv
+nnoremap <silent> <C-l> :nohlsearch<CR><C-L>
+inoremap <silent> <C-l> <Esc>:nohlsearch<CR><C-L>a
+vnoremap <silent> <C-l> <Esc>:nohlsearch<CR><C-L>gv
 
 " Keep the working line in the center of the window. This is a toggle, so you
 " can bounce between centered-working-line scrolling and normal scrolling by
@@ -322,6 +316,9 @@ nnoremap <Leader>gd  :Gdiff<CR>
 
 runtime set_abbreviations.vim
 
+silent! colorscheme gruvbox
+set background=dark
+
 if exists(":RainbowParenthesesToggle")
   au VimEnter * RainbowParenthesesToggle
   au Syntax * RainbowParenthesesLoadRound
@@ -329,14 +326,6 @@ if exists(":RainbowParenthesesToggle")
   au Syntax * RainbowParenthesesLoadBraces
 endif
 
-let g:airline_theme='gruvbox'
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_skip_empty_sections = 1
-let g:airline_powerline_fonts = 1
-
-silent! colorscheme gruvbox
-set background=dark
 
 """
 """ Local Functions
@@ -357,39 +346,37 @@ function! s:ConfigureWindow()
     "
     " XXX: Disabled for now, since it's distracting during demos and classes.
     "
-    " call matchadd('NonText', '\s\+\%#\@<!$')
+    call matchadd('NonText', '\s\+\%#\@<!$')
 
-    " Highlight the usual to-do markers (including my initials and Michele's
-    " initials), even if the current syntax highlighting doesn't include them.
+    " Highlight the usual to-do markers
+    " even if the current syntax highlighting doesn't include them.
     "
     call matchadd('Todo', 'XXX')
     call matchadd('Todo', 'BUG')
     call matchadd('Todo', 'HACK')
     call matchadd('Todo', 'FIXME')
     call matchadd('Todo', 'TODO')
-    call matchadd('Todo', 'WNO:')
-    call matchadd('Todo', 'MRB:')
 endfunction
 
-nnoremap <leader><Tab> :tabNext<cr>
+nnoremap <silent> <leader><Tab> :tabNext<cr>
 
 let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories = [ "UltiSnips" ]
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<leader>n"
-let g:UltiSnipsJumpBackwardTrigger="<leader>p"
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsUsePythonVersion = 3
 
+" next buffer
 noremap <leader>bn :bn<cr>
+" previous buffer
 noremap <leader>bp :bp<cr>
+" delete current buffer
 noremap <leader>bd :bd<cr>
 noremap <leader>bq :bd<cr>
 
 set t_Co=256
 highlight clear SignColumn
 
-if &term =~ '256color'
+if (&term =~ '256color') || (&term == 'nvim')
   " disable Background Color Erase (BCE) so that color schemes
   " render properly when inside 256-color tmux and GNU screen.
   " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
@@ -433,26 +420,16 @@ map <leader>gg :GitGutterToggle<CR>
 map <leader>gp :GitGutterPreviewHunk<CR>
 map <leader>gr :GitGutterRevertHunk<CR>
 
-" indent guide plugin
-let g:indent_guides_guide_size=1
-let g:indent_guides_start_level=2
-let g:indent_guides_enable_on_vim_startup=1
-
 set completeopt=longest,menuone,preview
 
 " C-d duplicates line or visual selection (cursor stays in position in normal and insert mode)
-nmap <C-d> mg""yyp`g:delm g<cr>
-imap <C-d> <C-O>mg<C-O>""yy<C-O>p<C-O>`g<C-O>:delm g<cr>
-vmap <C-d> ""y<up>""p
+nmap <silent> <C-d> mg""yy""p`g:delm g<cr>
+imap <silent> <C-d> <C-O>mg<C-O>""yy<C-O>""p<C-O>`g<C-O>:delm g<cr>
+vmap <silent> <C-d> ""y<up>""p
 
 let g:vim_markdown_formatter = 1
 let g:vim_markdown_folding_level = 3
 let g:vim_markdown_folding_disabled = 1
-
-
-autocmd FileType elm nnoremap <leader>el :ElmEvalLine<CR>
-autocmd FileType elm vnoremap <leader>es :<C-u>ElmEvalSelection<CR>
-autocmd FileType elm nnoremap <leader>em :ElmMakeCurrentFile<CR>
 
 " Disable ex mode
 :map Q <Nop>
@@ -478,32 +455,12 @@ let g:NERDTreeMapUpdirKeepOpen = 'U' " Like 'u' but leave old tree root open
 let g:NERDTreeMapToggleHidden = 'I' " Toggles whether hidden files are displayed.
 
 " leave vim if NERDTree is the last buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Setup Rainbow parentheses for clojure
 autocmd BufEnter *.cljs,*.clj,*.cljs.hl setlocal iskeyword+=?,-,*,!,+,/,=,<,>,.,:
 
 autocmd BufEnter *.fish set ft=fish
-
-" Fix Rainbow parentheses for solarized
-let g:rbpt_colorpairs = [
-	\ ['darkyellow',  'RoyalBlue3'],
-	\ ['darkgreen',   'SeaGreen3'],
-	\ ['darkcyan',    'DarkOrchid3'],
-	\ ['Darkblue',    'firebrick3'],
-	\ ['DarkMagenta', 'RoyalBlue3'],
-	\ ['darkred',     'SeaGreen3'],
-	\ ['darkyellow',  'DarkOrchid3'],
-	\ ['darkgreen',   'firebrick3'],
-	\ ['darkcyan',    'RoyalBlue3'],
-	\ ['Darkblue',    'SeaGreen3'],
-	\ ['DarkMagenta', 'DarkOrchid3'],
-	\ ['Darkblue',    'firebrick3'],
-	\ ['darkcyan',    'SeaGreen3'],
-	\ ['darkgreen',   'RoyalBlue3'],
-	\ ['darkyellow',  'DarkOrchid3'],
-	\ ['darkred',     'firebrick3'],
-	\ ]
 
 " Reload .vimrc on saving
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
@@ -524,7 +481,6 @@ if has("unix")
     endif
   endif
 endif
-
 
 if &diff
   set diffopt+=iwhite " ignore whitespace on diff
@@ -573,16 +529,12 @@ nnoremap K <C-W>K
 nnoremap L <C-W>L
 
 
-" smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
-
-" always show signcolumns
-set signcolumn=yes
-
-" use <c-space> to trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 let g:polyglot_disabled = ['latex']
+let g:vimtex_compiler_progname = 'nvr'
+
+" Lightline
+source ~/.vim/lightline.vim
+
+" coc.nvim
+source ~/.vim/coc.vim
 

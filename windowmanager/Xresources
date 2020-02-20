@@ -36,6 +36,8 @@ Xft.rgba: rgb
 *color7: #a89984
 *color15: #ebdbb2
 
+URxvt.imLocale: de_DE.UTF-8
+URxvt.termName: rxvt-unicode
 URxvt.color24:  #076678
 URxvt.color66:  #427b58
 URxvt.color88:  #9d0006

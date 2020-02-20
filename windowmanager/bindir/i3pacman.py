@@ -28,7 +28,7 @@ def create_argparse():
         '-a',
         '--aur',
         action='store_true',
-        help='Include AUR packages. Attn: aurman must be installed'
+        help='Include AUR packages. Attn: yay must be installed'
     )
     parser.add_argument(
         '-q',
@@ -62,9 +62,9 @@ def get_updates():
 def get_aur_updates():
     output = ''
     try:
-        output = check_output(['aurman', '-Qu']).decode('utf-8')
+        output = check_output(['yay', '-Qu']).decode('utf-8')
     except subprocess.CalledProcessError as exc:
-        # aurman exits with 1 and no output if no updates are available.
+        # yay exits with 1 and no output if no updates are available.
         # we ignore this case and go on
         if not (exc.returncode == 1 and not exc.output):
             raise exc

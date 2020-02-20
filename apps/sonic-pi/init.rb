@@ -12,6 +12,29 @@ set :octave, 4
 set :tonic, :minor
 set :progression, :i
 
+$kodelife_port = "midi_through_port-0"
+
+$volca_port = "usb_uno_midi_interface_midi_1"
+$volca_fm_channel = 2
+$volca_bass_channel = 13
+
+$circuit_port = "circuit_midi_1"
+$circuit_synth1_channel = 1
+$circuit_synth2_channel = 2
+$circuit_drum_channel = 10
+
+$hermod_port = "hermod_midi_1"
+$hermod_active_track_channel = 15
+$hermod_drum_tracks_channel = 10
+$hermod_track_1_channel = 1
+$hermod_track_2_channel = $hermod_drum_tracks_channel
+$hermod_track_3_channel = 3
+$hermod_track_4_channel = $hermod_drum_tracks_channel
+$hermod_track_5_channel = $hermod_drum_tracks_channel
+$hermod_track_6_channel = $hermod_drum_tracks_channel
+$hermod_track_7_channel = 7
+$hermod_track_8_channel = 8
+
 def cur_root
   note get(:root), octave: get(:octave)
 end
@@ -134,40 +157,6 @@ end
 def unmute
   set_mixer_control! amp: 1.0
 end
-
-$volca_port = "usb_uno_midi_interface_midi_1"
-$circuit_port = "circuit_midi_1"
-$hermod = "hermod_midi_1"
-
-def volca_fm(note, sustain: 0.25)
-  midi note, sustain: sustain, port: $volca_port, channel: 1
-end
-
-def volca_fm_vel(vel)
-  midi_cc 41, vel, port: $volca_port, channel: 1
-end
-
-def volca_bass(note, sustain: 0.25, vel: 128)
-  midi note, sustain: sustain, vel: vel, port: $volca_port, channel: 2
-end
-
-def c1(note, sustain: 1.0, vel: 128)
-  midi note, sustain: sustain, vel: vel, port: $circuit_port, channel: 1
-end
-
-def c2(note, sustain: 1.0, vel: 128)
-  midi note, sustain: sustain, vel: vel, port: $circuit_port, channel: 2
-end
-
-def m(note, sustain: 0.25, vel:128)
-  midi note, sustain: sustain, vel: vel, port: $volca_port, channel: 3
-end
-
-def mcc(value)
-  midi_cc 128, value, port: $volca_port, channel: 3
-end
-
-$kodelife_port = "midi_through_port-0"
 
 def vis(ctrl, value)
   midi_cc ctrl, val_f: value, channel: 16, port: $kodelife_port
@@ -327,109 +316,219 @@ def notify(msg)
   Process.detach job
 end
 
+# Hermod controls
+def start_hermod
+  midi_start port=$hermod_port
+end
+def stop_hermod
+  midi_stop port=$hermod_port
+end
+
+# Hermod Channel 1
 def hermod1(*args)
   params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 1})
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_1_channel})
   midi *params, **opts
 end
 def hermod1_trig
   hermod1 :C4, sustain: 0.1
 end
+def hermod1_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_1_channel})
+  midi_cc 1, *params, **opts
+end
+
+# Hermod Channel 2
 def hermod2(*args)
   params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 2})
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_2_channel})
   midi *params, **opts
 end
 def hermod2_trig
   hermod2 :C4, sustain: 0.1
 end
+def hermod2_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_2_channel})
+  midi_cc 1, *params, **opts
+end
+
+# Hermod Channel 3
 def hermod3(*args)
   params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 3})
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_3_channel})
   midi *params, **opts
 end
 def hermod3_trig
   hermod3 :C4, sustain: 0.1
 end
+def hermod3_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_3_channel})
+  midi_cc 1, *params, **opts
+end
+
+# Hermod Channel 4
 def hermod4(*args)
   params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 4})
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_4_channel})
   midi *params, **opts
 end
 def hermod4_trig
   hermod4 :C4, sustain: 0.1
 end
+def hermod4_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_4_channel})
+  midi_cc 1, *params, **opts
+end
+
+# Hermod Channel 5
 def hermod5(*args)
   params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 5})
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_5_channel})
   midi *params, **opts
 end
 def hermod5_trig
   hermod5 :C4, sustain: 0.1
 end
+def hermod5_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_5_channel})
+  midi_cc 1, *params, **opts
+end
+
+# Hermod Channel 6
 def hermod6(*args)
   params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 6})
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_6_channel})
   midi *params, **opts
 end
 def hermod6_trig
   hermod6 :C4, sustain: 0.1
 end
+def hermod6_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_6_channel})
+  midi_cc 1, *params, **opts
+end
+
+# Hermod Channel 7
 def hermod7(*args)
   params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 7})
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_7_channel})
   midi *params, **opts
 end
 def hermod7_trig
   hermod7 :C4, sustain: 0.1
 end
+def hermod7_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_7_channel})
+  midi_cc 1, *params, **opts
+end
+
+# Hermod Channel 8
 def hermod8(*args)
   params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 8})
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_8_channel})
   midi *params, **opts
 end
 def hermod8_trig
   hermod8 :C4, sustain: 0.1
 end
-
-def hermod1_cc(*args)
-  params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 1})
-  midi_cc 1, *params, **opts
-end
-def hermod2_cc(*args)
-  params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 2})
-  midi_cc 1, *params, **opts
-end
-def hermod3_cc(*args)
-  params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 3})
-  midi_cc 1, *params, **opts
-end
-def hermod4_cc(*args)
-  params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 4})
-  midi_cc 1, *params, **opts
-end
-def hermod5_cc(*args)
-  params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 5})
-  midi_cc 1, *params, **opts
-end
-def hermod6_cc(*args)
-  params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 6})
-  midi_cc 1, *params, **opts
-end
-def hermod7_cc(*args)
-  params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 7})
-  midi_cc 1, *params, **opts
-end
 def hermod8_cc(*args)
   params, opts = split_params_and_merge_opts_array(args)
-  opts = opts.merge({port: $hermod, channel: 8})
+  opts = opts.merge({port: $hermod_port, channel: $hermod_track_8_channel})
   midi_cc 1, *params, **opts
+end
+
+# Hermod Drum Channels
+def hermod10(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $hermod_port, channel: $hermod_drum_tracks_channel})
+  midi *params, **opts
+end
+def hermod10_bd
+  hermod10 60, sustain: 0.1
+end
+def hermod10_sn
+  hermod10 62, sustain: 0.1
+end
+def hermod10_chh
+  hermod10 64, sustain: 0.1
+end
+def hermod10_ohh
+  hermod10 65, sustain: 0.1
+end
+
+# Volca bass controls
+
+def start_volca_bass
+  midi_start port=$volca_port, channel: $volca_bass_channel
+end
+def stop_volca_bass
+  midi_stop port=$volca_port, channel: $volca_bass_channel
+end
+
+def volca_bass(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $volca_port, channel: $volca_bass_channel})
+  midi *params, **opts
+end
+
+def volca_bass_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $volca_port, channel: $volca_bass_channel})
+  midi_cc *params, **opts
+end
+
+# Volca FM controls
+
+def start_volca_fm
+  midi_start port=$volca_port, channel: $volca_fm_channel
+end
+def stop_volca_fm
+  midi_stop port=$volca_port, channel: $volca_fm_channel
+end
+
+def volca_fm(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $volca_port, channel: $volca_fm_channel})
+  midi *params, **opts
+end
+
+def volca_fm_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $volca_port, channel: $volca_fm_channel})
+  midi_cc *params, **opts
+end
+
+# Circuit controls
+
+def start_circuit
+  midi_start port=$circuit_port
+end
+def stop_circuit
+  midi_stop port=$circuit_port
+end
+
+def circuit_synth1(note, sustain: 1.0, vel: 128)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $circuit_port, channel: $circuit_synth1_channel})
+  midi *params, **opts
+end
+
+def circuit_synth2(note, sustain: 1.0, vel: 128)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $circuit_port, channel: $circuit_synth2_channel})
+  midi *params, **opts
+end
+
+def circuit_cc(*args)
+  params, opts = split_params_and_merge_opts_array(args)
+  opts = opts.merge({port: $circuit_port})
+  midi_cc *params, **opts
 end
 

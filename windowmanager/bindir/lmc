@@ -4,12 +4,30 @@ function amix {
   amixer -c 0 sset Master $1 >/dev/null 2>&1 && pkill -RTMIN+10 i3blocks
 }
 
+function amix_n {
+  amixer -c 0 sset $1 $2 >/dev/null 2>&1
+}
+
+function toggle_mute {
+  amix_n Master toggle
+  ONOFF=$(amixer -c 0 sget Master | grep Mono: | cut -d'[' -f4 | sed -e 's/]//g')
+
+  if [[ $ONOFF = "on" ]]; then
+    amix_n Speaker unmute
+    amix_n Headphone unmute
+  else
+    amix_n Speaker mute
+    amix_n Headphone mute
+  fi
+  pkill -RTMIN+10 i3blocks
+}
+
 case "$1" in
   "up") amix 5%+ ;;
   "fineup") amix 1%+ ;;
   "down") amix 5%- ;;
   "finedown") amix 1%- ;;
-  "mute") amix toggle ;;
+  "mute") toggle_mute ;;
   "truemute") amix mute ;;
   "toggle") mpc toggle && pkill -RTMIN+11 i3blocks ;;
   "stop") mpc stop && pkill -RTMIN+11 i3blocks ;;

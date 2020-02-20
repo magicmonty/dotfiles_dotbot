@@ -26,4 +26,4 @@ config.load_autoconfig()
 
 c.input.insert_mode.auto_leave = True
 c.input.insert_mode.auto_load = True
-
+c.content.proxy = 'system'
