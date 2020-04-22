@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+BT=/usr/bin/bluetoothctl
+NOTIFY="/usr/bin/notify-send Bluetooth"
+
+DEVICES=$($BT paired-devices)
+SELECTION=$(echo $DEVICES | cut -d' ' -f3 | rofi -dmenu -p "Select device to connect")
+DEVICE=$(echo $DEVICES | cut -d' ' -f2 | head -1)
+
+if [ "$($BT show | grep Powered | cut -d' ' -f2)" == "no" ]; then
+  $NOTIFY "Enabling Bluetooth..."
+  $NOTIFY "$($BT power on | tail -1)"
+fi
+
+if [ "$($BT info $DEVICE | grep Connected | cut -d' ' -f2)" == "no" ]; then
+  $NOTIFY "$($BT connect $DEVICE | tail -1)"
+else
+  $NOTIFY "Device ${DEVICE} already connected"
+fi

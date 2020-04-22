@@ -1,0 +1,20 @@
+#!/bin/sh
+
+options="Lock\nLogout\nSuspend\nHibernate\nReboot\nShutdown"
+
+chosen=$(echo -e "$options" | /usr/bin/rofi -i -l 6 -p "" -mesg "Option zum Beenden auswählen:" -dmenu)
+
+lock() {
+  /usr/bin/betterlockscreen -l dimblur &
+}
+
+case "$chosen" in
+  Lock) lock ;;
+  Logout) i3-msg exit ;;
+  Suspend) systemctl hybrid-sleep ;; 
+  Hibernate) systemctl hibernate ;;
+  Reboot) systemctl reboot ;;
+  Shutdown) systemctl poweroff ;;
+esac
+
+exit 0

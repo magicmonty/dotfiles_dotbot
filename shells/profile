@@ -17,3 +17,5 @@ fi
 if [[ -e /usr/local/texlive/2019/bin/x86_64-linux ]]; then
   export PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH
 fi
+
+export SUDO_ASKPASS=$HOME/bin/dmenupass

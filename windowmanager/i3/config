@@ -4,7 +4,7 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $alt Mod1
-set $term --no-startup-id /usr/bin/terminal
+set $term --no-startup-id /usr/bin/alacritty
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 new_window pixel 1
@@ -247,10 +247,10 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="Kalu"] floating enable
 for_window [class="Cadence"] floating enable
-for_window [title="Minecraft Launcher"] floating enable
 for_window [class="Pinentry"] sticky enable
 for_window [class="QjackCtl" instance="qjackctl"] floating enable
 for_window [class="sonic-pi" window_type=splash] floating enable
+for_window [class="minecraft-launcher"] floating disable
 
 # Disable floating mode for specific applications
 for_window [title="shadertone"] floating disable;
@@ -327,7 +327,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id compton -cC --xrender-sync-fence
 exec --no-startup-id nm-applet
 exec --no-startup-id "xautolock -detectsleep"
-exec --no-startup-id "udiskie -2ans -f ~/bin/vifm-open"
+exec --no-startup-id "/usr/bin/udiskie -ans -f /usr/bin/pcmanfm"
 exec --no-startup-id "syncthing -no-browser"
 exec --no-startup-id "/usr/bin/transmission-daemon -o -y -b -er -c ~/Downloads -T -w ~/Downloads"
 exec --no-startup-id "/usr/bin/onedrive -m"

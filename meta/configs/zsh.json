@@ -10,7 +10,8 @@
   },
   {
     "link": {
-      "~/.zshrc": "shells/zsh/.zshrc"
+      "~/.zshrc": "shells/zsh/.zshrc",
+      "~/.zprofile": "shells/.profile"
     }
   }
 ]

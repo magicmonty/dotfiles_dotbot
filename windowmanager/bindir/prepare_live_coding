@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+sonic-pi-dunst
+
+jack_disconnect system:capture_1 KodeLife:in_1
+jack_disconnect system:capture_2 KodeLife:in_2
+
+jack_disconnect system:playback_1 KodeLife:out_1
+jack_disconnect system:playback_2 KodeLife:out_2
+
+jack_connect SuperCollider:out_1 KodeLife:in_1
+jack_connect SuperCollider:out_2 KodeLife:in_2

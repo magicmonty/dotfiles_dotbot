@@ -8,6 +8,8 @@ config_version: 2
 settings:
   content.geolocation:
     http://localhost:8080: true
+  content.notifications:
+    https://resource-pack.com: false
   content.plugins:
     global: true
   content.proxy:
