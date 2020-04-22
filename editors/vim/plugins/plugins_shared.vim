@@ -6,6 +6,7 @@ Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
 
 " Colors
 Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 
 " General"
 Plug 'easymotion/vim-easymotion'

@@ -1,43 +1,114 @@
 Xft.dpi: 96
+*.dpi: 96
 Xft.antialias: true
 Xft.hinting: true
 Xft.hintstyle: hintslight
 Xft.rgba: rgb
+Xft.autohint: false
+Xft.lcdfilter: lcddefault
 
-*foreground: #ebdbb2
-*foreground_bold: #ebdbb2
-*cursor: #a8a19f
-*background: #282828
+XTerm*background: #282828
+XTerm*foreground: #ebdbb2
+XTerm*pointerColor: #ebdbb2
+XTerm*faceName: Fixed
+XTerm*faceSize: 12
+XTerm*reverseVideo: off
+XTerm*selectToClipboard: true
+
+Xautolock.time: 15
+Xautolock.locker: /usr/bin/betterlockscreen -l dimblur
+Xautolock.notify: 5
+Xautolock.notifier: /usr/bin/notify-send "Locking now..."
+
+#define nord0 #2E3440
+#define nord1 #3B4252
+#define nord2 #434C5E
+#define nord3 #4C566A
+#define nord4 #D8DEE9
+#define nord5 #E5E9F0
+#define nord6 #ECEFF4
+#define nord7 #8FBCBB
+#define nord8 #88C0D0
+#define nord9 #81A1C1
+#define nord10 #5E81AC
+#define nord11 #BF616A
+#define nord12 #D08770
+#define nord13 #EBCB8B
+#define nord14 #A3BE8C
+#define nord15 #B48EAD
+
+!! GruvBox
+!! *background:             #282828
+!! *foreground:             #ebdbb2
+!! *foreground_bold:        #ebdbb2
+!! *fading:                 8
+!! *fadeColor:              black
+!! *cursorColor:            #ebdbb2
+!! *pointerColorBackground: #2B2C2B
+!! *pointerColorForeground: #ebdbb2
+!! *cursor:                 #ebdbb2
+
+*foreground: nord4
+*background: nord0
+*cursorColor: nord4
+*fading: 35
+*fadeColor: nord3
+
+Xcursor.theme: xcursor-breeze
 
 *alpha: 210
 
-!! black
-*color0: #282828
-*color8: #928374
-!! red
-*color1: #cc241d
-*color9: #fb4934
-!! green
-*color2: #98971a
-*color10: #b8bb26
-!! yellow
-*color3: #d79921
-*color11: #fabd2f
-!! blue
-*color4: #458588
-*color12: #83a598
-!! magenta
-*color5: #b16286
-*color13: #d3869b
-!! cyan
-*color6: #689d6a
-*color14: #8ec07c
-!! white
-*color7: #a89984
-*color15: #ebdbb2
+!! black dark/light
+!! *color0: #282828
+!! *color8: #928374
+*color0: nord1
+*color8: nord3
 
-URxvt.imLocale: de_DE.UTF-8
-URxvt.termName: rxvt-unicode
+!! red dark/light
+!! *color1: #cc241d
+!! *color9: #fb4934
+*color1: nord11
+*color9: nord11
+
+!! green dark/light
+!! *color2: #98971a
+!! *color10: #b8bb26
+*color2: nord14
+*color10: nord14
+
+!! yellow dark/light
+!! *color3: #d79921
+!! *color11: #fabd2f
+*color3: nord13
+*color11: nord13
+
+!! blue dark/light
+!! *color4: #458588
+!! *color12: #83a598
+*color4: nord9
+*color12: nord9
+
+!! magenta dark/light
+!! *color5: #b16286
+!! *color13: #d3869b
+*color5: nord15
+*color13: nord15
+
+!! cyan dark/light
+!! *color6: #689d6a
+!! *color14: #8ec07c
+*color6: nord8
+*color14: nord7
+
+!! white dark/light
+!! *color7: #a89984
+!! *color15: #ebdbb2
+*color7: nord5
+*color15: nord6
+
+*orange_dark:  #d65d0e
+*orange_light: #fe8019
+
 URxvt.color24:  #076678
 URxvt.color66:  #427b58
 URxvt.color88:  #9d0006
@@ -69,22 +140,49 @@ URxvt.color246: #a89984
 URxvt.color248: #bdae93
 URxvt.color250: #d5c4a1
 
-URxvt.intensityStyles:	false
-URxvt.background:       [70]#282828
-URxvt.depth:		        32
-URxvt.font: 		        xft:Monoid NF:size=12,xft:Noto Color Emoji:size=9
-URxvt.scrollBar:	      false
-URxvt.cursorColor:	    #ebdbb2
-URxvt.cursorUnderline:  false
+URxvt.font: 		            xft:Monoid NF:size=12,xft:Noto Color Emoji:size=9
+URxvt.intensityStyles:	    false
+URxvt.depth:		            32
+URxvt.scrollBar:	          false
+URxvt.mouseWheelScrollPage: true
+URxvt.cursorBlink:	        true
+!! URxvt.background:           [70]#282828
+URxvt.background:           [70]#2e3440
+!! URxvt.foreground:           #ebdbb2
+URxvt.foreground:           nord4
+URxvt.saveLines:            5000
+!! URxvt.cursorColor:	        #ebdbb2
+URxvt.cursorColor:	        nord4
+URxvt.cursorUnderline:      false
 URxvt.letterSpace: -1
+
+! Normal Copy-Paste keybindings without perls
+URxvt.iso14755:               false
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+!Xterm escape codes, word by word movement
+URxvt.keysym.Control-Left:        \033[1;5D
+URxvt.keysym.Shift-Control-Left:  \033[1;6D
+URxvt.keysym.Control-Right:       \033[1;5C
+URxvt.keysym.Shift-Control-Right: \033[1;6C
+URxvt.keysym.Control-Up:          \033[1;5A
+URxvt.keysym.Shift-Control-Up:    \033[1;6A
+URxvt.keysym.Control-Down:        \033[1;5B
+URxvt.keysym.Shift-Control-Down:  \033[1;6B
+
+!! Disable printing
+URxvt.print-pipe: cat > /dev/null
+rxvt.print-pipe: cat > /dev/null
 
 !! Extensions
 URxvt.perl-ext-common:	default,matcher,resize-font,keyboard-select
 URxvt.colorUL:		#458588
 
 !! matcher
-URxvt.url-launcher: linkhandler2
+URxvt.url-launcher: linkhandler
 URxvt.keysym.M-u: matcher:select
+URxvt.matcher.button:	1
 
 
 !! keyboard-select:
@@ -93,8 +191,6 @@ URxvt.keysym.M-Escape: perl:keyboard-select:activate
 !! resize-font
 URxvt.resize-font.smaller:	C-Down
 URxvt.resize-font.bigger:	C-Up
-!! Matcher
-URxvt.matcher.button:	1
 
 ! Special Keys
 ! Normal
@@ -217,14 +313,18 @@ URxvt.keysym.S-M-C-F10:  \033[21;8~
 URxvt.keysym.S-M-C-F11:  \033[23;8~
 URxvt.keysym.S-M-C-F12:  \033[24;8~
 
-rofi.color-window:	#000, #000, #000
-rofi.color-normal:	#111, #819396, #222, #008ed4, #ffffff
-rofi.color-active:	#002b37, #008ed4, #003643, #008ed4, #66c6ff
-rofi.color-urgent:	#002b37, #da4281, #003643, #008ed4, #890661
+!! GruvBox
+!! rofi.color-window:	#000,    #000,    #000
+!! rofi.color-normal:	#111,    #819396, #222,    #008ed4, #ffffff
+!! rofi.color-active:	#002b37, #008ed4, #003643, #008ed4, #66c6ff
+!! rofi.color-urgent:	#002b37, #da4281, #003643, #008ed4, #890661
+
+!! Nord
+rofi.color-window:    nord0,   nord0,   nord0
 
 rofi.fake-transparency:	true
 rofi.lines:		          10
 rofi.bw:		            0
-rofi.opacity:		        "10"
+rofi.opacity:		        10
 rofi.hide-scrollbar:  	true
 rofi.width:		          30-1

@@ -316,8 +316,9 @@ nnoremap <Leader>gd  :Gdiff<CR>
 
 runtime set_abbreviations.vim
 
-silent! colorscheme gruvbox
-set background=dark
+" silent! colorscheme gruvbox
+" set background=dark
+silent! colorscheme nord
 
 if exists(":RainbowParenthesesToggle")
   au VimEnter * RainbowParenthesesToggle

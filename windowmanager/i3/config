@@ -387,20 +387,20 @@ bar {
   	tray_output eDP1
 
   colors {
-    background #282828
-    statusline #ebdbb2
+    background #2e3440
+    statusline #e5e9f0
   }
 }
 
-set $border_color          #d79921
-set $inactive_border_color #928374
-set $bg_color              #282828
-set $inactive_bg_color     #1d2021
-set $text_color            #ebdbb2
-set $inactive_text_color   #a89984
-set $urgent_bg_color       #cc241d
-set $urgent_border_color   #fb4934
-set $indicator_color       #d65d0e
+set $border_color          #88c0d0
+set $inactive_border_color #4c566a
+set $bg_color              #2e344e
+set $inactive_bg_color     #2e344e
+set $text_color            #e5e9f0
+set $inactive_text_color   #d8dee9
+set $urgent_bg_color       #4c566a
+set $urgent_border_color   #d08770
+set $indicator_color       #ebcb8b
 
 # Theme colors
 # class                   border                 background         text                 indicator          child_border
