@@ -312,8 +312,8 @@ if [ -e ~/.dotnet/tools ]; then
   export DOTNET_CLI_TELEMETRY_OPTOUT=1
 fi
 
-if [ -e ~/.gem/ruby/2.6.0/bin ]; then
-  export PATH=~/.gem/ruby/2.6.0/bin:$PATH
+if [ -e ~/.gem/ruby/2.7.0/bin ]; then
+  export PATH=~/.gem/ruby/2.7.0/bin:$PATH
 fi
 
 export DEFAULT_USER=mgondermann
@@ -323,6 +323,7 @@ else
   export TERM=xterm-256color
 fi
 
-if [ -e ~/.gem/ruby/2.6.0/gems/tmuxinator-1.1.0/completion/tmuxinator.zsh ]; then
-  source ~/.gem/ruby/2.6.0/gems/tmuxinator-1.1.0/completion/tmuxinator.zsh
+if [ -e ~/.gem/ruby/2.7.0/gems/tmuxinator-1.1.4/completion/tmuxinator.zsh ]; then
+  source ~/.gem/ruby/2.7.0/gems/tmuxinator-1.1.4/completion/tmuxinator.zsh
+  alias mux='tmuxinator'
 fi
