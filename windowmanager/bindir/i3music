@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+if /usr/bin/mpc status | grep \\\[; then
+  $TERMINAL -e /usr/bin/ncmpcpp
+else
+  /usr/bin/rofi-mpd -a
+  pkill -RTMIN+11 i3blocks
+fi

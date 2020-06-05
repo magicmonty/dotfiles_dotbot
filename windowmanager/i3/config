@@ -4,7 +4,8 @@
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 set $alt Mod1
-set $term --no-startup-id /usr/bin/alacritty
+# set $term --no-startup-id /usr/bin/alacritty
+set $term --no-startup-id /usr/bin/terminal
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 new_window pixel 1
@@ -35,7 +36,8 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id rofi -modi drun -i -l 10 -show drun
+# bindsym $mod+space exec --no-startup-id rofi -modi drun -i -l 10 -show drun
+bindsym $mod+space exec --no-startup-id dmenu_run -fn "Monoid NF" -h 25 -nb \#2e3440 -nf \#d8dee9
 
 # start window switcher
 bindsym $mod+Tab exec --no-startup-id rofi -modi windowcd -i -show windowcd
@@ -57,9 +59,8 @@ bindsym $mod+w exec $BROWSER
 bindsym $mod+Shift+w exec $BROWSER
 bindsym $mod+e exec $term -e neomutt
 bindsym $mod+n exec $term -e ranger
-bindsym $mod+m exec $term -e /usr/bin/ncmpcpp
-bindsym $mod+t exec --no-startup-id pkill compton
-bindsym $mod+Ctrl+t exec --no-startup-id "compton -cC --xrender-sync-fence"
+bindsym $mod+m exec --no-startup-id ~/bin/i3music
+bindsym $mod+t exec --no-startup-id ~/bin/toggle_picom
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+$alt+d exec ~/bin/getpocket
@@ -132,7 +133,7 @@ bindsym $mod+Shift+e layout toggle split
 bindsym $mod+Shift+space floating toggle; border pixel 1
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+$alt+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -324,7 +325,7 @@ exec --no-startup-id ~/bin/remaps
 exec --no-startup-id "xset dpms 900 900 900"
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id compton -cC --xrender-sync-fence
+exec --no-startup-id ~/bin/toggle_picom
 exec --no-startup-id nm-applet
 exec --no-startup-id "xautolock -detectsleep"
 exec --no-startup-id "/usr/bin/udiskie -ans -f /usr/bin/pcmanfm"

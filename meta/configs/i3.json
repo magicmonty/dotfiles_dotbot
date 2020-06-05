@@ -20,7 +20,7 @@
   },
   {
     "link": {
-      "~/.config/compton.conf": "apps/compton.conf",
+      "~/.config/picom.conf": "apps/picom.conf",
       "~/.config/dunst": "windowmanager/dunst",
       "~/.config/i3": "windowmanager/i3",
       "~/.config/i3blocks": "windowmanager/i3blocks",
@@ -42,6 +42,7 @@
       "~/bin/i3jackd": "windowmanager/bindir/i3jackd",
       "~/bin/i3mail": "windowmanager/bindir/i3mail",
       "~/bin/i3mpd": "windowmanager/bindir/i3mpd",
+      "~/bin/i3music": "windowmanager/bindir/i3mpd",
       "~/bin/i3pacman": "windowmanager/bindir/i3pacman",
       "~/bin/i3pacman.py": "windowmanager/bindir/i3pacman.py",
       "~/bin/i3pi": "windowmanager/bindir/i3pi",
@@ -65,6 +66,7 @@
       "~/bin/reset_skyblock": "windowmanager/bindir/reset_skyblock",
       "~/bin/startjack": "windowmanager/bindir/startjack",
       "~/bin/stopjack": "windowmanager/bindir/stopjack",
+      "~/bin/toggle_picom": "windowmanager/bindir/toggle_picom",
       "~/bin/toggle_screensaver": "windowmanager/bindir/toggle_screensaver",
       "~/bin/touchpad_toggle": "windowmanager/bindir/touchpad_toggle",
       "~/bin/umpv": "windowmanager/bindir/umpv",
