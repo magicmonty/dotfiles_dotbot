@@ -43,7 +43,7 @@ Plug 'freitass/todo.txt-vim'
 Plug 'dag/vim-fish'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'sheerun/vim-polyglot'
-Plug 'lervag/vimtex'
+" Plug 'lervag/vimtex'
 
 " Git
 Plug 'tpope/vim-fugitive'
