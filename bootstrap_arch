@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+echo "Before running, ensure git is installed and the bootstrapping script is in the home directory"
+echo "Also install your GPG keys first."
+echo " "
+
+sudo pacman --noconfirm -S --needed openssh git gnupg keybase kbfs
+
+if [[ -e ~/.ssh/id_ecdsa.pub ]]; then
+  echo "SSH Key exists already."
+  echo " "
+else
+  ssh-keygen -t ecdsa -b 521
+fi
+
+echo " "
+echo "Add this public key to your GitHub repository before continuing"
+echo " "
+cat ~/.ssh/id_ecdsa.pub
+echo " "
+echo "Press [ENTER] to continue"
+read y
+echo " "
+
+# Pull down dotfiles from GitHub
+cd ~
+if [[ -e ~/.dotfiles ]]; then
+  echo "Dotfiles directory exists"
+else
+  echo "Cloning dotfiles..."
+  git clone git@github.com:magicmonty/dotfiles_dotbot .dotfiles
+fi
+echo " "
+
+# Setup YAY (AUR Helper)
+if which yay > /dev/null 2>&1; then
+  echo "yay is already installed"
+else
+  echo "installing yay..."
+  mkdir -p ~/.config
+  cd ~/.config
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+fi
+
+cd ~/.dotfiles
+./install-profile linux.arch
+
+

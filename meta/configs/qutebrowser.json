@@ -13,6 +13,7 @@
       "~/.config/qutebrowser/autoconfig.yml": "apps/qutebrowser/autoconfig.yml",
       "~/.config/qutebrowser/config.py": "apps/qutebrowser/config.py",
       "~/.config/qutebrowser/shortcuts.py": "apps/qutebrowser/shortcuts.py",
+      "~/.config/qutebrowser/quickmarks": "apps/qutebrowser/quickmarks",
       "~/.local/share/applications/surf.desktop": "windowmanager/applications/qutebrowser.desktop"
     }
   }

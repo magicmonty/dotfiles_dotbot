@@ -2,7 +2,10 @@ bash-completion
 i3lock-color
 betterlockscreen
 neovim
+python
+python2
 python-pip
+python2-pip
 firefox
 qutebrowser
 ranger
@@ -20,6 +23,7 @@ i3blocks
 jack2
 keybase
 keybase-gui
+kbfs
 libreoffice-fresh
 libreoffice-fresh-de
 minecraft-launcher
@@ -72,7 +76,11 @@ python2-pydrive
 s-nail
 networkmanager-l2tp
 libreswan
+ruby
+rubygems
 ruby-rake
 ruby-rake-compiler
+ruby-bundler
 inkscape
 droidcam-dkms
+yarn

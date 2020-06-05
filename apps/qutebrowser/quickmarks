@@ -1,0 +1,11 @@
+sendtokindle javascript:var%20l%20=%20window.location;function%20$klipme_install()%7Bif(window.MooTools%20%7C%7C%20window.Prototype)%7Balert(Sorry,%20some%20JavaScript%20in%20the%20page%20is%20not%20compatible%20with%20this%20Bookmarklet.%20We%20will%20improve%20this%20later.%20Thanks.);return;%7Dvar%20d%20=%20document;try%20%7Bif%20(!d.body)%20throw%20(0);var%20s%20=%20d.createElement(script);s.setAttribute(id,%20klipme_loader);s.setAttribute(type,%20text/javascript);s.setAttribute(charset,%20utf-8);s.setAttribute(src,%20http://www.klip.me/sendtokindle/bookmarklet?key=1646943c8480137&v=3.1.0.260&t=%20+%20(new%20Date().getTime()));d.body.appendChild(s);%7D%20catch%20(e)%20%7Balert(Please%20wait%20until%20the%20page%20has%20loaded.);d.getElementById(klipme_loader).destroy%20();%7D%7Dif%20(l.host.indexOf(klip.me)%3E=0%20%7C%7C%20(l.protocol!=http:%20&&%20l.protocol!=https:))%20l.href=http://www.klip.me/sendtokindle/options?key=1646943c8480137&v=3.1.0.260&url=%20+%20encodeURIComponent(l.href);else%20if%20(document.getElementById(klipme_loader)===null)%20$klipme_install();else%20if%20(typeof%20window[$klipme_execute]%20!==%20undefined)%20window[$klipme_execute]%20();
+notation https://speedcube.de/notation.php
+yt https://www.youtube.com
+mail https://mail.google.com
+cal https://calendar.google.com
+maps https://maps.google.com
+ama https://www.amazon.de
+drive https://drive.google.com
+todo https://todoist.com
+otr https://onlinetvrecorder.com
+mc https://mc.ggservers.com/server/79680
