@@ -1,8 +1,8 @@
 export BROWSER=/usr/bin/qutebrowser
 export RTV_BROWSER=$BROWSER
 export TRUEBROWSER=$BROWSER
-# export TERMINAL=/usr/bin/terminal
-export TERMINAL=/usr/bin/alacritty
+export TERMINAL=/usr/bin/terminal
+# export TERMINAL=/usr/bin/alacritty
 export EDITOR=/usr/bin/vim
 export VISUAL=$EDITOR
 export BYOBU_CHARMAP=UTF-8
