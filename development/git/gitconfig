@@ -4,7 +4,7 @@
 
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = /usr/bin/vim
+	editor = /usr/bin/nvim
 
 [difftool "sourcetree"]
 	cmd = /usr/bin/bcompare \"$LOCAL\" \"$REMOTE\"

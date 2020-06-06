@@ -128,7 +128,8 @@ alias gls="git log --graph --oneline --decorate --all --color=always | fzf --ans
 
 # aurman aliases
 pclean() {
-  yay -Yc
+  sudo pacman -Sc
+  yay -Sc
   yay -Rns $(yay -Qtdq) 2>/dev/null
   paccache -r
 }
