@@ -1,7 +1,7 @@
 [
   {
     "shell": [
-      ["gpg --recv-keys FC918B335044912E", "Installing public Dropbox key"],
+      ["gpg --keyserver keys.gnupg.net --recv-keys FC918B335044912E", "Installing public Dropbox key"],
       {
         "command": "yay --sudoloop --nodiffmenu --noeditmenu --noupgrademenu --nocleanmenu --noredownload --norebuild --useask --needed -S `cat ~/.dotfiles/arch_dependencies | grep -v '#'`",
         "description": "Installing needed tools for Arch via yay",
