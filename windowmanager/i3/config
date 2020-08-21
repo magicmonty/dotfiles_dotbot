@@ -5,7 +5,7 @@
 set $mod Mod4
 set $alt Mod1
 # set $term --no-startup-id /usr/bin/alacritty
-set $term --no-startup-id /usr/bin/terminal
+set $term --no-startup-id $HOME/bin/terminal
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 new_window pixel 1
@@ -61,7 +61,7 @@ bindsym $mod+e exec $term -e neomutt
 bindsym $mod+n exec $term -e ranger
 bindsym $mod+m exec --no-startup-id ~/bin/i3music
 bindsym $mod+t exec --no-startup-id ~/bin/toggle_picom
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+# bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+$alt+d exec ~/bin/getpocket
 bindsym $mod+$alt+s exec "syncthing --browser-only"
@@ -316,7 +316,7 @@ exec_always --no-startup-id /usr/bin/betterlockscreen -w
 
 
 # xbanish make the mouse invisible after a timeout of 2000 ms and while typing
-exec --no-startup-id ~/bin/xbanish -bt 2000
+exec --no-startup-id /usr/bin/xbanish -bt 2000
 
 # Remap Caps-Lock
 exec --no-startup-id ~/bin/remaps

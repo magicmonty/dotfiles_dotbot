@@ -1,7 +1,7 @@
 export BROWSER=/usr/bin/qutebrowser
 export RTV_BROWSER=$BROWSER
 export TRUEBROWSER=$BROWSER
-export TERMINAL=/usr/bin/terminal
+export TERMINAL=$HOME/bin/terminal
 # export TERMINAL=/usr/bin/alacritty
 export EDITOR=/usr/bin/nvim
 export VISUAL=$EDITOR

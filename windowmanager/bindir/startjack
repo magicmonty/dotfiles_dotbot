@@ -27,4 +27,8 @@ sleep 1
 /usr/bin/jack_control dps rate 48000
 /usr/bin/jack_control start
 
+cd ${HOME}/.config/mpv
+rm config
+ln -s config.jack config
+
 pkill -RTMIN+9 i3blocks

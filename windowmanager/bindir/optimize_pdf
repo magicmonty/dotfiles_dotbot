@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+filename=$(basename -- "$1")
+extension="${filename##*.}"
+filename="${filename%.*}"
+outname=${filename}-opt.pdf
+
+/usr/bin/gs \
+  -dNOPAUSE \
+  -dBATCH \
+  -dQUIET \
+  -sDEVICE=pdfwrite \
+  -dCompatibilityLevel=1.4 \
+  -dPDFSETTINGS=/screen \
+  -dMonoImageResolution=100 \
+  -dColorImageResolution=100 \
+  -dGrayImageResolution=100 \
+  -dDownsampleColorImages=true \
+  -dDownsampleGrayImages=true \
+  -dDownsampleMonoImages=true \
+  -dEmbedAllFonts=false \
+  -dSubsetFonts=true \
+  -dConvertCMYKImagesToRGB=true \
+  -dCompressFonts=true \
+  -dDetectDuplicateImages=true \
+  -sOutputFile=${outname} \
+  ${1}
+

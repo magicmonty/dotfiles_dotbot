@@ -140,6 +140,7 @@ pupd() {
   yay -Syyuv --noconfirm --noeditmenu && notify-send -a 'Package Update' 'Update completed' || notify-send -a 'Package Update' -u critical 'Update failed'
   pkill -RTMIN+13 i3blocks
 }
+alias hc='herbstclient'
 alias pinst='yay --noeditmenu --nodiffmenu --nocleanmenu --answerclean --sudoloop --needed -S'
 alias psearch='yay -Ss'
 alias puninst='yay -R'
@@ -328,3 +329,5 @@ if [ -e ~/.gem/ruby/2.7.0/gems/tmuxinator-1.1.4/completion/tmuxinator.zsh ]; the
   source ~/.gem/ruby/2.7.0/gems/tmuxinator-1.1.4/completion/tmuxinator.zsh
   alias mux='tmuxinator'
 fi
+
+source /home/mgondermann/.config/broot/launcher/bash/br

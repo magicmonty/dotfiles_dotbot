@@ -12,5 +12,6 @@ setxkbmap -option caps:super
 #setxkbmap -option caps:super
 
 # But when it is pressed only once, treat it as escape.
-xcape -e 'Super_L=Escape'
+pgrep xcape >/dev/null || xcape -e 'Super_L=Escape'
+
 

@@ -1,4 +1,9 @@
 #!/bin/bash
 /usr/bin/jack_control stop
 pkill -9 jackdbus
+
+cd ${HOME}/.config/mpv
+rm config
+ln -s config.pulse config
+
 pkill -RTMIN+9 i3blocks
