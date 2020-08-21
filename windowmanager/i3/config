@@ -27,7 +27,7 @@ font pango:Monoid Nerd Font 11
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
-bindsym $mod+F12 exec $HOME/bin/touchpad-toggle
+bindsym $mod+F12 exec $HOME/bin/touchpad_toggle
 
 # start a terminal
 bindsym $mod+Return exec $term
