@@ -11,7 +11,19 @@
   {
     "link": {
       "~/.zshrc": "shells/zsh/.zshrc",
-      "~/.zprofile": "shells/.profile"
+      "~/.zprofile": "shells/profile"
     }
+  },
+  {
+    "shell": [
+      {
+        "command": "chsh -s /usr/bin/zsh",
+        "description": "Making ZSH the default shell",
+        "stdin": true,
+        "stdout": true,
+        "stderr": true
+      },
+      ["~/.dotfiles/scripts/shortcuts.sh", "Create shortcuts"]
+    ]
   }
 ]

@@ -66,23 +66,21 @@ youtube-dl
 udiskie
 transmission-cli
 xss-lock
-onedrive
+onedrive-abraunegg
 rust
 chromium-widevine
-gdcm
+#gdcm
 duplicity
 python-pydrive
-python2-pydrive
 s-nail
-networkmanager-l2tp
-libreswan
+# networkmanager-l2tp
+# libreswan
 ruby
 rubygems
 ruby-rake
 ruby-rake-compiler
 ruby-bundler
 inkscape
-droidcam-dkms
 yarn
 xcape
 slop

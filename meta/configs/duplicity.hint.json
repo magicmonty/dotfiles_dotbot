@@ -1,0 +1,8 @@
+[
+  {
+    "shell": [
+      [ "echo 'You may also want to install the duplicity config as standalone after adding your GPG keys'", "" ]
+    ]
+  }
+]
+

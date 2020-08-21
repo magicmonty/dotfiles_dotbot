@@ -16,7 +16,7 @@
   },
   {
     "shell": [
-      [ "gpg2 --decrypt --quiet ~/.dotfiles/apps/duplicity/conf.gpg > ~/.dotfiles/apps/duplicity/conf", "Decrypting Configuration" ]
+      [ "gpg2 --decrypt --quiet ~/.dotfiles/apps/duplicity/conf.gpg > ~/.dotfiles/apps/duplicity/conf", "Decrypting Configuration" ],
       [ "gpg2 --decrypt --quiet ~/.dotfiles/apps/duplicity/gdrive/credentials.gpg > ~/.dotfiles/apps/duplicity/gdrive/credentials", "Decrypting Google Drive Credentials" ]
     ]
   },
