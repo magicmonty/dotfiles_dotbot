@@ -2,6 +2,7 @@
   {
     "shell": [
       ["gpg --keyserver keys.gnupg.net --recv-keys FC918B335044912E", "Installing public Dropbox key"],
+      ["chmod +x ~/.dotfiles/arch/install-yay", "Making yay installation script executable"],
       ["~/.dotfiles/arch/install-yay", "Installing yay"],
       {
         "command": "yay --sudoloop --nodiffmenu --noeditmenu --noupgrademenu --nocleanmenu --noredownload --norebuild --useask --needed -S `cat ~/.dotfiles/arch_dependencies | grep -v '#'`",
