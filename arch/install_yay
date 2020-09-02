@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+if [[ -f "/usr/bin/yay" ]]; then
+  echo "YAY is already installed"
+  exit 0
+fi
+
+sudo pacman -S --neded base-devel
+mkdir -p /tmp/yay
+git clone https://aur.archlinux.org/yay.git /tmp/yay
+cd /tmp/yay
+makepkg -si
