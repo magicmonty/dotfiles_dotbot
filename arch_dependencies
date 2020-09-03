@@ -86,3 +86,8 @@ xcape
 slop
 screenkey
 ttf-font-awesome
+texlive-core
+texlive-pstricks
+texlive-latexextra
+texlive-bin
+tllocalmgr-git

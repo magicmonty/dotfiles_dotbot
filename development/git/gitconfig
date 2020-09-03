@@ -94,3 +94,6 @@ protocol = https
 	prune = true
 [gui]
 	pruneDuringFetch = true
+[pull]
+	rebase = true
+	ff = only

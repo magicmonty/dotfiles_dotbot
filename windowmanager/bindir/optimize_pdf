@@ -17,11 +17,11 @@ outname=${filename}-opt.pdf
   -dDownsampleColorImages=true \
   -dDownsampleGrayImages=true \
   -dDownsampleMonoImages=true \
-  -dEmbedAllFonts=false \
   -dSubsetFonts=true \
   -dConvertCMYKImagesToRGB=true \
   -dCompressFonts=true \
   -dDetectDuplicateImages=true \
-  -sOutputFile=${outname} \
-  ${1}
+  -sOutputFile="${outname}" \
+  "${1}"
 
+  # -dEmbedAllFonts=false \
