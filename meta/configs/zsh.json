@@ -26,5 +26,10 @@
       "~/.zshrc": "shells/zsh/.zshrc",
       "~/.zprofile": "shells/profile"
     }
+  },
+  {
+    "shell": [
+      ["broot --install", "linking Broot" ]
+    ]
   }
 ]
