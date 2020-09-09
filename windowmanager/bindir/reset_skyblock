@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 cd ~/.minecraft/backups
-BACKUP=$(ls | sort -r | rofi -dmenu)
-rm -rf ../saves/Skyblock
+BACKUP=$(ls *116* | sort -r | rofi -dmenu)
+rm -rf ../saves/Skyblock116
 unzip $BACKUP
-mv Skyblock ../saves
+mv Skyblock116 ../saves
