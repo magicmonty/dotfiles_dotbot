@@ -5,7 +5,7 @@ if (cat /etc/passwd | grep $USER | grep /usr/bin/zsh); then
   echo "ZSH is already the default shell"
 else
   chsh -s /usr/bin/zsh
-end
+fi
 
 if [[ -d ~/.oh-my-zsh ]]; then
   echo "Oh My Zsh is already installed"
