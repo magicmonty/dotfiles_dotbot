@@ -9,12 +9,6 @@
     }
   },
   {
-    "link": {
-      "~/.zshrc": "shells/zsh/.zshrc",
-      "~/.zprofile": "shells/profile"
-    }
-  },
-  {
     "shell": [
       {
         "command": "chsh -s /usr/bin/zsh",
@@ -32,5 +26,11 @@
       },
       ["~/.dotfiles/scripts/shortcuts.sh", "Create shortcuts"]
     ]
+  },
+  {
+    "link": {
+      "~/.zshrc": "shells/zsh/.zshrc",
+      "~/.zprofile": "shells/profile"
+    }
   }
 ]
