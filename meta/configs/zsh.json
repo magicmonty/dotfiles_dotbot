@@ -10,16 +10,10 @@
   },
   {
     "shell": [
+      ["chmod +x ~/.dotfiles/arch/set_zsh", "making set_zsh executable" ],
       {
-        "command": "chsh -s /usr/bin/zsh",
-        "description": "Making ZSH the default shell",
-        "stdin": true,
-        "stdout": true,
-        "stderr": true
-      },
-      {
-        "command": "sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"",
-        "description": "Install OhMyZsh",
+        "command": "~/.dotfiles/arch/set_zsh",
+        "description": "Making ZSH the default shell and install Oh My Zsh",
         "stdin": true,
         "stdout": true,
         "stderr": true
