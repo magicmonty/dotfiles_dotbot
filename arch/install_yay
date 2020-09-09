@@ -4,7 +4,8 @@ if [[ -f "/usr/bin/yay" ]]; then
   exit 0
 fi
 
-sudo pacman -S --neded base-devel
+sudo pacman -S --needed base-devel
+rm -rf /tmp/yay
 mkdir -p /tmp/yay
 git clone https://aur.archlinux.org/yay.git /tmp/yay
 cd /tmp/yay
