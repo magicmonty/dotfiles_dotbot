@@ -93,3 +93,5 @@ texlive-fontsextra
 texlive-bin
 tllocalmgr-git
 man
+broot
+terminus-font
