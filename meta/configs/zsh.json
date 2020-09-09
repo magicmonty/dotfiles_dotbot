@@ -23,6 +23,13 @@
         "stdout": true,
         "stderr": true
       },
+      {
+        "command": 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"',
+        "description": "Install OhMyZsh",
+        "stdin": true,
+        "stdout": true,
+        "stderr": true
+      },
       ["~/.dotfiles/scripts/shortcuts.sh", "Create shortcuts"]
     ]
   }
