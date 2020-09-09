@@ -89,6 +89,6 @@ ttf-font-awesome
 texlive-core
 texlive-pstricks
 texlive-latexextra
-textlive-fontsextra
+texlive-fontsextra
 texlive-bin
 tllocalmgr-git
