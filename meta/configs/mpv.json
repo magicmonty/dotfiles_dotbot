@@ -1,0 +1,22 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "clean": [ "~/.config/mpd" ]
+  },
+  {
+    "link": {
+      "~/.config/mpv/config.jack": "apps/mpv/config.jack",
+      "~/.config/mpv/config": "apps/mpv/config.jack",
+      "~/.config/mpv/config.pulse": "apps/mpv/config.pulse",
+      "~/.config/mpv/input.conf": "apps/mpv/input.conf"
+    }
+  }
+]

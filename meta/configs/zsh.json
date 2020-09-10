@@ -10,7 +10,6 @@
   },
   {
     "shell": [
-      ["chmod +x ~/.dotfiles/arch/set_zsh", "making set_zsh executable" ],
       {
         "command": "~/.dotfiles/arch/set_zsh",
         "description": "Making ZSH the default shell and install Oh My Zsh",

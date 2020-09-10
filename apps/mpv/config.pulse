@@ -1,0 +1,6 @@
+# Start in fullscreen mode by default
+fs=yes
+
+# audio-device=jack
+
+stop-screensaver=yes

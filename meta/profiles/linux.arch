@@ -6,6 +6,7 @@ git
 vim.linux
 tmux.linux
 mpd
+mpv
 alsa
 neomutt
 i3
