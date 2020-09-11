@@ -9,7 +9,6 @@ firefox
 qutebrowser
 ranger
 visual-studio-code-bin
-nerd-fonts-monoid
 nerd-fonts-terminus
 dropbox
 enpass-bin
@@ -102,3 +101,6 @@ i3-gaps
 i3blocks
 i3exit
 i3lock-color
+bc
+picom
+adapta-maia-theme
