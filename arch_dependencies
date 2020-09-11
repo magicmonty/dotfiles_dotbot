@@ -104,3 +104,16 @@ i3lock-color
 bc
 picom
 adapta-maia-theme
+gnome-backgrounds
+gnome-control-center
+gnome-keyring
+gnome-shell-extensions
+gvfs
+gvfs-avc
+gvfs-goa
+gvfs-google
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
+nautilus
+xdg-user-dirs-gtk

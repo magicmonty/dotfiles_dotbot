@@ -81,7 +81,13 @@
       "~/.local/share/applications/feh.desktop": "windowmanager/applications/feh.desktop",
       "~/.local/share/applications/img.desktop": "windowmanager/applications/feh.desktop",
       "~/.local/share/applications/torrent.desktop": "windowmanager/applications/torrent.desktop",
-      "~/.config/mimeapps.list": "windowmanager/mimeapps.list"
+      "~/.config/mimeapps.list": "windowmanager/mimeapps.list",
+      "~/.fonts": "fonts"
     }
+  },
+  {
+    "shell": [
+      [ "sudo fc-cache -f", "Updating font cache" ]
+    ]
   }
 ]
