@@ -42,7 +42,7 @@
       ["pip3 install --user neovim-remote", "Installing Python 3 NeoVim Remote plugin"],
       ["yarn global add neovim", "Installing NodeJS NeoVim plugin"],
       {
-        "command": "vim -c 'PlugClean!' -c 'PlugInstall' -c 'PlugUpdate' -c 'q' -c 'q'",
+        "command": "vim -c 'PlugClean!' -c 'PlugInstall' -c 'PlugUpdate' -c 'q' -c 'q' -c 'q'",
         "description": "Installing vim plugins",
         "stdin": true,
         "stdout": true,
