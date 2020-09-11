@@ -117,3 +117,4 @@ gvfs-nfs
 gvfs-smb
 nautilus
 xdg-user-dirs-gtk
+dmenu2
