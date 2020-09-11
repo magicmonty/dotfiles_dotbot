@@ -118,3 +118,7 @@ gvfs-smb
 nautilus
 xdg-user-dirs-gtk
 dmenu2
+polkit-gnome
+polkit-qt5
+paccache-hook
+ubuntu-wallpapers
