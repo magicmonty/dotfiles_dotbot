@@ -3,6 +3,7 @@ betterlockscreen
 chromium-widevine
 dmenu2
 feh
+firefox
 gnome-control-center
 gnome-keyring
 gnome-shell-extensions
@@ -38,6 +39,7 @@ polkit-gnome
 polkit-qt5
 pulseaudio-jack
 qjackctl
+qutebrowser
 terminus-font
 ubuntu-wallpapers
 udiskie
