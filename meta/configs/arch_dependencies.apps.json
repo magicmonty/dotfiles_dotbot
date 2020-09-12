@@ -10,8 +10,8 @@
         "stderr": true
       },
       {
-        "command": "yay --sudoloop --nodiffmenu --noeditmenu --noupgrademenu --nocleanmenu --noredownload --norebuild --useask --needed -S `cat ~/.dotfiles/arch_dependencies | grep -v '#'`",
-        "description": "Installing needed tools for Arch via yay",
+        "command": "yay --sudoloop --nodiffmenu --noeditmenu --noupgrademenu --nocleanmenu --noredownload --norebuild --useask --needed -S `cat ~/.dotfiles/arch_dependencies.apps | grep -v '#'`",
+        "description": "Installing apps for Arch via yay",
         "stdin": true,
         "stdout": true,
         "stderr": true

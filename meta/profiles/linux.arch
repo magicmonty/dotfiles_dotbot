@@ -1,4 +1,5 @@
-arch_dependencies
+arch_dependencies.base
+arch_dependencies.desktop
 defaultapps
 ruby
 dev
