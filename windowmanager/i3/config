@@ -310,35 +310,7 @@ mode "resize" {
 }
 
 # Autostart applications
-exec --no-startup-id ~/bin/startjack
-exec --no-startup-id mpd
-exec_always --no-startup-id /usr/bin/betterlockscreen -w
-
-
-# xbanish make the mouse invisible after a timeout of 2000 ms and while typing
-exec --no-startup-id /usr/bin/xbanish -bt 2000
-
-# Remap Caps-Lock
-exec --no-startup-id ~/bin/remaps
-
-# Enable Screen saver
-exec --no-startup-id "xset dpms 900 900 900"
-
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id ~/bin/toggle_picom
-exec --no-startup-id nm-applet
-exec --no-startup-id "xautolock -detectsleep"
-exec --no-startup-id "/usr/bin/udiskie -ans -f /usr/bin/pcmanfm"
-exec --no-startup-id "syncthing -no-browser"
-exec --no-startup-id "/usr/bin/transmission-daemon -o -y -b -er -c ~/Downloads -T -w ~/Downloads"
-exec --no-startup-id "/usr/bin/onedrive -m"
-exec --no-startup-id "/usr/bin/dropbox"
-exec --no-startup-id "/opt/enpass/Enpass -minimize"
-# exec --no-startup-id "env KEYBASE_AUTOSTART=1 keybase-gui"
-exec --no-startup-id xfce4-power-manager
-#exec --no-startup-id clipit
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id ~/.config/i3/autostart.sh
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
