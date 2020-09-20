@@ -306,6 +306,10 @@ if [ -e /opt/dotnet ]; then
   export DOTNET_ROOT=/opt/dotnet
 fi
 
+if [ -e ~/.yarn/bin ]; then
+  export PATH=~/.yarn/bin:$PATH
+fi
+
 if [ -e ~/.cargo/bin ]; then
   export MATES_DIR=~/.contacts/pagansoft
 fi
