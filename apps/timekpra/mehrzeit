@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+NAME=$(basename $0)
+COMMAND="$1"
+ARG="$2"
+
+if [[ "${NAME}" == "" || "${NAME}" == "mehrzeit" || "${COMMAND}" == "" || "${ARG}" == "" ]]; then
+  echo Name, Zeiteinheit oder Argument nicht gegeben!.
+  echo
+  echo Bitte eines der folgende Kommandos benutzen:
+  echo   - jakob viertelstunde mehr
+  echo   - jakob viertelstunde weniger
+  echo   - jakob halbestunde mehr
+  echo   - jakob halbestunde weniger
+  echo   - jakob stunde mehr
+  echo   - jakob stunde weniger
+  echo   - klarissa viertelstunde mehr
+  echo   - klarissa viertelstunde weniger
+  echo   - klarissa halbestunde mehr
+  echo   - klarissa halbestunde weniger
+  echo   - klarissa stunde mehr
+  echo   - klarissa stunde weniger
+  exit 1
+fi
+
+ssh laptop-${NAME} "~/bin/${COMMAND} ${ARG}"
+

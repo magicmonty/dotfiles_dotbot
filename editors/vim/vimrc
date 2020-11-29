@@ -530,7 +530,6 @@ nnoremap K <C-W>K
 nnoremap L <C-W>L
 
 
-let g:polyglot_disabled = ['latex']
 let g:vimtex_compiler_progname = 'nvr'
 
 " Lightline

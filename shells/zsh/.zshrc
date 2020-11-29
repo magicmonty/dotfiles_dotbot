@@ -79,11 +79,14 @@ alias df='df -h'                                                # Human-readable
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
 alias vi='nvim'
+alias v='nvim'
 alias ls='exa'
 alias la='exa -glah --git --color-scale'
 alias ll='exa -glh --git --color-scale'
 alias l='exa -lh --git --color-scale'
 alias c.='code .'
+alias e='emacsclient -nt'
+alias ec='emacsclient -nc'
 
 ## Git aliases
 alias g='git'
@@ -306,10 +309,6 @@ if [ -e /opt/dotnet ]; then
   export DOTNET_ROOT=/opt/dotnet
 fi
 
-if [ -e ~/.yarn/bin ]; then
-  export PATH=~/.yarn/bin:$PATH
-fi
-
 if [ -e ~/.cargo/bin ]; then
   export MATES_DIR=~/.contacts/pagansoft
 fi
@@ -319,9 +318,6 @@ if [ -e ~/.dotnet/tools ]; then
   export DOTNET_CLI_TELEMETRY_OPTOUT=1
 fi
 
-if [ -e ~/.gem/ruby/2.7.0/bin ]; then
-  export PATH=~/.gem/ruby/2.7.0/bin:$PATH
-fi
 
 export DEFAULT_USER=mgondermann
 if [ -e "$TMUX" ]; then

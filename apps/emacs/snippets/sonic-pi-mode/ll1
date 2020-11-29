@@ -1,0 +1,6 @@
+# key: ll1
+# name: Live loop on Beat 1
+# --
+live_loop :$1, sync: :clock1 do
+	$0
+end

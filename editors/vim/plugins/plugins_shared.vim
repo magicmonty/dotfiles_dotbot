@@ -42,6 +42,8 @@ Plug 'lambdatoast/elm.vim'
 Plug 'freitass/todo.txt-vim'
 Plug 'dag/vim-fish'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+
+let g:polyglot_disabled = ['latex']
 Plug 'sheerun/vim-polyglot'
 " Plug 'lervag/vimtex'
 

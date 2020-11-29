@@ -1,0 +1,6 @@
+# key: midicd1
+# name: Circuit Midi CC Delay Synth 1
+# --
+# Delay Synth 1
+midi_cc 111, ${1:0}, channel: 16, port: \$port
+$0

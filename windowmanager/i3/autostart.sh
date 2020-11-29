@@ -36,4 +36,3 @@ pgrep onedrive > /dev/null || onedrive -m &
 pgrep dropbox > /dev/null || dropbox &
 pgrep Enpass > /dev/null || /opt/enpass/Enpass -minimize
 pgrep xfce4-power-man > /dev/null || xfce4-power-manager
-

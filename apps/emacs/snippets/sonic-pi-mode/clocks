@@ -1,0 +1,9 @@
+# key: clocks
+# name: Clocks setup for SonicPi
+# --
+live_loop :clocks, auto_cue: false do
+	cue ("clock" + (tick % 8).to_s).to_sym
+	sleep 1
+end
+
+$0

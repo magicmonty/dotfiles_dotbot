@@ -3,5 +3,5 @@
 if pgrep picom; then
   pkill picom
 else
-  picom -cC --xrender-sync-fence & disown
+  picom -cC --experimental-backends & disown
 fi

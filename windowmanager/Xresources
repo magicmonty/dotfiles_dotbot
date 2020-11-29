@@ -56,7 +56,7 @@ Xautolock.notifier: /usr/bin/notify-send "Locking now..."
 
 Xcursor.theme: xcursor-breeze
 
-*alpha: 210
+*alpha: 82
 
 !! black dark/light
 !! *color0: #282828

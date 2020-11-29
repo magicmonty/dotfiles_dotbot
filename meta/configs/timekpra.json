@@ -1,0 +1,17 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/bin/jakob": "apps/timekpra/mehrzeit",
+      "~/bin/klarissa": "apps/timekpra/mehrzeit"
+    }
+  }
+]

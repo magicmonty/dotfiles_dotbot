@@ -2,8 +2,10 @@ adapta-gtk-theme
 betterlockscreen
 chromium-widevine
 dmenu2
+easytag
 feh
 firefox
+freac
 gnome-control-center
 gnome-keyring
 gnome-shell-extensions
@@ -46,6 +48,7 @@ udiskie
 urxvt-font-size-git
 urxvt-resize-font-git
 urxvt-perls
+whipper
 xbanish-timeout-git
 xcape
 xclip

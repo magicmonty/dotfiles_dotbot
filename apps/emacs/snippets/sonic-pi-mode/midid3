@@ -1,0 +1,5 @@
+# key: midid3
+# name: Circuit Drum 3
+# --
+# Drum 3 (closed hats)
+midi 64, vel_f: ${0:1.0}, channel: 10, port: \$port if ".... .... .... ....".bools.look

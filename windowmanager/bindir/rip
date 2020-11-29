@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+mkdir -p ${HOME}/Musik/Ripped/flac
+whipper cd rip -p --output-directory="${HOME}/Musik/Ripped/flac" --disc-template "%A"/"%d" --track-template "%A"/"%d"/"%t - %n"
+

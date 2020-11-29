@@ -1,0 +1,6 @@
+# key: midicr1
+# name: Circuit Midi CC Reverb Synth 1
+# --
+# Reverb Synth 1
+midi_cc 88, ${1:64}, channel: 16, port: \$port
+$0

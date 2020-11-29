@@ -1,0 +1,5 @@
+# key: midi2
+# name: Circuit Midi Note Synth 2
+# --
+midi ${1:60}, sustain: ${2:0.1}, channel: 2, port: \$port
+$0

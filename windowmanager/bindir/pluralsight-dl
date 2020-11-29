@@ -1,0 +1,13 @@
+#!/bin/bash
+for i in "$@"; do
+    youtube-dl \
+        --username ${PLURALSIGHT_USERNAME} \
+        --password ${PLURALSIGHT_PASSWORD} \
+        "$i" \
+        -o "${HOME}/Videos/PluralSight/%(playlist)s/%(chapter_number)02d - %(chapter)s/%(playlist_index)02d - %(title)s.%(ext)s" \
+        --sleep-interval 35 \
+        --max-sleep-interval 120 \
+        --sub-lang en \
+        --sub-format srt \
+        --write-sub
+done

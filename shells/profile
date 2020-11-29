@@ -2,6 +2,10 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 source $HOME/.defaultapps
 
+if [[ -e $HOME/.yarn/bin ]]; then
+  export PATH=$HOME/.yarn/bin:$PATH
+fi
+
 if [[ -e $HOME/.cargo/bin ]]; then
   export PATH=$HOME/.cargo/bin:$PATH
 fi
@@ -16,6 +20,14 @@ fi
 
 if [[ -e /usr/local/texlive/2019/bin/x86_64-linux ]]; then
   export PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH
+fi
+
+if [[ -e $HOME/.emacs.d/bin ]]; then
+  export PATH=$HOME/.emacs.d/bin:$PATH
+fi
+
+if [[ -e $HOME/.gem/ruby/2.7.0/bin ]]; then
+  export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
 fi
 
 export SUDO_ASKPASS=$HOME/bin/dmenupass

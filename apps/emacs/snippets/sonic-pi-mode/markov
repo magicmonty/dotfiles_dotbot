@@ -1,0 +1,10 @@
+# key: markov
+# name: Simple Markov chain setup
+# --
+chain = {
+	:i => [ :iv ],
+	:iv => [ :v ],
+	:v => [ :i ]
+}
+
+$0

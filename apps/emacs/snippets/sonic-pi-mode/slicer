@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Slicer 
+# key: slicer
+# --
+with_fx(:slicer, phase: 0.25, probability: 0) do
+  $0
+end
