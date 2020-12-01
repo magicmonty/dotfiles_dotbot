@@ -1,0 +1,23 @@
+#!/bin/bash
+
+CMD=~/.cargo/bin/sonic-pi-tool
+STATUS="$CMD check"
+START="$CMD start-server"
+STOP="pkill -9 -f /opt/sonic-pi"
+
+RUNNING=$($STATUS > /dev/null 2>&1 && echo 1 || echo 0)
+
+if [[ $RUNNING -eq 0 ]]; then
+  $START > /dev/null 2>&1 & disown
+  sleep 1
+else
+  $STOP > /dev/null 2>&1
+  pkill -9 scsynth > /dev/null 2>&1
+fi
+
+if pgrep dwmblocks > /dev/null; then
+  pkill -RTMIN+8 dwmblocks
+else
+  pkill -RTMIN+8 i3blocks
+fi
+

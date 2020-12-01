@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CMD=~/.cargo/bin/sonic-pi-tool
+STATUS="$CMD check"
+
+if ~/.cargo/bin/sonic-pi-tool check >/dev/null; then
+  echo " ▶️  "
+else
+  echo " ⏹️  "
+fi
+

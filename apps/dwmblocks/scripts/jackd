@@ -1,0 +1,14 @@
+#!/bin/bash
+
+CMD=/usr/bin/jack_control
+STATUS="$CMD status"
+STOP="$CMD stop"
+
+RUNNING=$($STATUS > /dev/null 2>&1 && echo 1 || echo 0)
+
+if [[ $RUNNING -eq 1 ]]; then
+  echo " ▶️  "
+else
+  echo " ⏹️  "
+fi
+

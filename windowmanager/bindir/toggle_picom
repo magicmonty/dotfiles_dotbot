@@ -3,5 +3,9 @@
 if pgrep picom; then
   pkill picom
 else
-  picom -cC --experimental-backends & disown
+  if pgrep dwm > /dev/null; then
+    picom -CG --experimental-backends & disown
+  else
+    picom -cC --experimental-backends & disown
+  fi
 fi

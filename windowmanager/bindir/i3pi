@@ -8,14 +8,8 @@ STOP="pkill -9 -f /opt/sonic-pi"
 RUNNING=$($STATUS > /dev/null 2>&1 && echo 1 || echo 0)
 
 case $BLOCK_BUTTON in
-  1) 
-    if [[ $RUNNING -eq 0 ]]; then
-     $START > /dev/null 2>&1 & disown
-     sleep 1
-    else
-     $STOP > /dev/null 2>&1
-     pkill -9 scsynth > /dev/null 2>&1
-    fi
+  1)
+    toggle_pi
     ;;
 esac
 

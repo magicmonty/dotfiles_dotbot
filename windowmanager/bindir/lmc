@@ -1,11 +1,21 @@
 #!/bin/bash
 
+function refresh_bar {
+  if pgrep i3blocks > /dev/null; then
+    pkill -RTMIN+$1 i3blocks
+  else
+    pkill -RTMIN+$1 dwmblocks
+  fi
+}
+
 function amix {
   amixer -c 0 sset Master $1 >/dev/null 2>&1 && pkill -RTMIN+10 i3blocks
+  refresh_bar 10
 }
 
 function amix_n {
   amixer -c 0 sset $1 $2 >/dev/null 2>&1
+  refresh_bar 10
 }
 
 function toggle_mute {
@@ -19,24 +29,25 @@ function toggle_mute {
     amix_n Speaker mute
     amix_n Headphone mute
   fi
-  pkill -RTMIN+10 i3blocks
+  refresh_bar 10
 }
 
+
 case "$1" in
-  "up") amix 5%+ ;;
+  "up") amix 5%+;;
   "fineup") amix 1%+ ;;
   "down") amix 5%- ;;
   "finedown") amix 1%- ;;
   "mute") toggle_mute ;;
   "truemute") amix mute ;;
-  "toggle") mpc toggle && pkill -RTMIN+11 i3blocks ;;
-  "stop") mpc stop && pkill -RTMIN+11 i3blocks ;;
-  "pause") mpc pause && pkill -RTMIN+10 i3blocks ;;
-  "forward") mpc seek +"$2" && pkill -RTMIN+11 i3blocks ;;
-  "back") mpc seek -"$2" && pkill -RTMIN+11 i3blocks ;;
-  "next") mpc next && pkill -RTMIN+11 i3blocks ;;
-  "prev") mpc prev && pkill -RTMIN+11 i3blocks ;;
-  "replay") mpc seek 0% && pkill -RTMIN+11 i3blocks ;;
+  "toggle") mpc toggle && refresh_bar 11 ;;
+  "stop") mpc stop && refresh_bar 11 ;;
+  "pause") mpc pause && refresh_bar 11 ;;
+  "forward") mpc seek +"$2" && refresh_bar 11 ;;
+  "back") mpc seek -"$2" && refresh_bar 11 ;;
+  "next") mpc next && refresh_bar 11 ;;
+  "prev") mpc prev && refresh_bar 11 ;;
+  "replay") mpc seek 0% && refresh_bar 11 ;;
 esac
 
 exit

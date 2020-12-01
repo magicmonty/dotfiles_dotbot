@@ -1,0 +1,12 @@
+#!/bin/bash
+
+INTERFACE="${BLOCK_INSTANCE:-wlp4s0}"
+
+[[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]] && echo ﲁ && exit
+
+QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+NAME=$(iwgetid | grep $INTERFACE | cut -d \" -f 2)
+
+TEXT="📶 $NAME - $QUALITY%"
+
+echo " $TEXT "

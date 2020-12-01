@@ -14,4 +14,8 @@ sleep 1
 /usr/bin/jack_control dps rate 48000
 /usr/bin/jack_control start
 
-pkill -RTMIN+9 i3blocks
+if pgrep dwmblocks; then
+  pkill -RTMIN+9 dwmblocks
+else
+  pkill -RTMIN+9 i3blocks
+fi

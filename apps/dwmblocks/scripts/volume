@@ -1,0 +1,9 @@
+#!/bin/bash 
+
+V=$(amixer -M -c 0 sget Master | grep 'Mono:')
+if [[ $(echo $V | sed -e 's/.*\[\(on\|off\)\].*/\1/g') = "off" ]]; then
+  echo "muted "
+else
+  vol="$(amixer -c 0 get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
+  echo "${vol}% volume "
+fi

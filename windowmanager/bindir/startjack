@@ -31,4 +31,8 @@ cd ${HOME}/.config/mpv
 rm config
 ln -s config.jack config
 
-pkill -RTMIN+9 i3blocks
+if pgrep dwmblocks > /dev/null; then
+  pkill -RTMIN+9 dwmblocks
+else
+  pkill -RTMIN+9 i3blocks
+fi

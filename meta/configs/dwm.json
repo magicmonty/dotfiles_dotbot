@@ -9,24 +9,13 @@
     }
   },
   {
-    "shell": [
-      {
-        "command": "sudo cp ~/.dotfiles/windowmanager/polybar/95-battery.rules /etc/udev/rules.d/",
-        "description": "Copying udev rules for i3 battery script",
-        "stdout": true,
-        "stderr": true
-      }
-    ]
-  },
-  {
     "link": {
+      "~/.config/dwm/autostart.sh": "windowmanager/dwm/autostart.sh",
       "~/.config/picom.conf": "apps/picom.conf",
       "~/.config/dunst": "windowmanager/dunst",
-      "~/.config/i3": "windowmanager/i3",
-      "~/.config/i3blocks": "windowmanager/i3blocks",
+      "~/.config/dwmblocks": "apps/dwmblocks",
       "~/.config/ranger": "apps/ranger",
       "~/.config/rofi": "windowmanager/rofi",
-      "~/.config/termite": "apps/termite",
       "~/.config/udiskie": "windowmanager/udiskie",
       "~/.Xdefaults": "windowmanager/Xresources",
       "~/.Xresources": "windowmanager/Xresources",
@@ -37,21 +26,7 @@
       "~/bin/dmenupass": "windowmanager/bindir/dmenupass",
       "~/bin/getpocket": "apps/pockyt/getpocket",
       "~/bin/i3_bluetooth": "windowmanager/bindir/i3_bluetooth",
-      "~/bin/i3battery": "windowmanager/bindir/i3battery",
-      "~/bin/i3exit": "windowmanager/bindir/i3exit",
-      "~/bin/i3jackd": "windowmanager/bindir/i3jackd",
-      "~/bin/i3mail": "windowmanager/bindir/i3mail",
-      "~/bin/i3mpd": "windowmanager/bindir/i3mpd",
-      "~/bin/i3music": "windowmanager/bindir/i3mpd",
-      "~/bin/i3pacman": "windowmanager/bindir/i3pacman",
-      "~/bin/i3pacman.py": "windowmanager/bindir/i3pacman.py",
-      "~/bin/i3pi": "windowmanager/bindir/i3pi",
-      "~/bin/i3resize": "windowmanager/bindir/i3resize",
-      "~/bin/i3time": "windowmanager/bindir/i3time",
-      "~/bin/i3torrent": "windowmanager/bindir/i3torrent",
-      "~/bin/i3volume": "windowmanager/bindir/i3volume",
-      "~/bin/i3weather": "windowmanager/bindir/i3weather",
-      "~/bin/i3wifi": "windowmanager/bindir/i3wifi",
+      "~/bin/dwmexit": "windowmanager/bindir/i3exit",
       "~/bin/jack-post-start": "arch/jack-post-start",
       "~/bin/jack-post-stop": "arch/jack-post-stop",
       "~/bin/jack-pre-start": "arch/jack-pre-start",
@@ -73,8 +48,8 @@
       "~/bin/startjack": "windowmanager/bindir/startjack",
       "~/bin/stopjack": "windowmanager/bindir/stopjack",
       "~/bin/terminal": "windowmanager/bindir/terminal",
-      "~/bin/toggle_pi": "windowmanager/bindir/toggle_pi",
       "~/bin/toggle_picom": "windowmanager/bindir/toggle_picom",
+      "~/bin/toggle_pi": "windowmanager/bindir/toggle_pi",
       "~/bin/toggle_screensaver": "windowmanager/bindir/toggle_screensaver",
       "~/bin/touchpad_toggle": "windowmanager/bindir/touchpad_toggle",
       "~/bin/umpv": "windowmanager/bindir/umpv",
