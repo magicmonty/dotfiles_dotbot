@@ -6,6 +6,10 @@ else
   if pgrep dwm > /dev/null; then
     picom -CG --experimental-backends & disown
   else
-    picom -cC --experimental-backends & disown
+    if pgrep xmonad > /dev/null; then
+      picom -CG --experimental-backends & disown
+    else
+      picom -cC --experimental-backends & disown
+    fi
   fi
 fi

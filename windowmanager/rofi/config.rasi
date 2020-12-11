@@ -1,0 +1,21 @@
+configuration {
+	modi: "windowcd,ssh,drun,combi,emoji";
+	width: 30;
+	lines: 10;
+	bw: 0;
+	show-icons: true;
+	terminal: "alacritty";
+	case-sensitive: false;
+	combi-modi: "run,drun";
+	hide-scrollbar: true;
+	fake-transparency: false;
+	dpi: 96;
+	theme: "~/.config/rofi/nord.rasi";
+	color-window: "#2E3440, #2E3440, #2E3440";
+	display-window: "";
+	display-windowcd: "";
+	display-run: "ﰌ";
+	display-ssh: "  ";
+	display-drun: "ﰌ";
+	display-combi: "RUN";
+}

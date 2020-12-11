@@ -87,6 +87,7 @@ alias l='exa -lh --git --color-scale'
 alias c.='code .'
 alias e='emacsclient -nt'
 alias ec='emacsclient -nc'
+alias vimdiff='nvim -d'
 
 ## Git aliases
 alias g='git'
