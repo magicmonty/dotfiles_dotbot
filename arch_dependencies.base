@@ -8,9 +8,12 @@ fzf
 go
 leiningen
 man
+nerd-fonts-mononoki
 neofetch
 neovim
+noto-fonts
 noto-fonts-emoji
+otf-font-awesome
 paccache-hook
 python
 python-pip
@@ -28,6 +31,8 @@ rust
 s-nail
 slop
 ttf-font-awesome
+ttf-inconsolata
+ttf-joypixels
 yarn
 zsh-autosuggestions
 zsh-completions
