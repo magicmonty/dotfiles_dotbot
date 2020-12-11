@@ -14,6 +14,8 @@
       "~/.xmonad/xmonad.hs": "windowmanager/xmonad/xmonad.hs",
       "~/.xmonad/xmonadctl.hs": "windowmanager/xmonad/xmonadctl.hs",
       "~/.xmonad/xmobar": "windowmanager/xmonad/xmobar",
+      "~/.xmonad/xmobar/xmobarrc2": "windowmanager/xmonad/xmobar/xmobarrc1",
+      "~/.xmonad/xmobar/xmobarrc3": "windowmanager/xmonad/xmobar/xmobarrc1",
       "~/.xmonad/xpm": "windowmanager/xmonad/xpm",
       "~/bin/xmonadctl": "windowmanager/xmonad/bin/xmonadctl",
       "~/bin/xmonadexit": "windowmanager/xmonad/bin/xmonadexit",
