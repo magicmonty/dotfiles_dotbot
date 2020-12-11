@@ -1,0 +1,74 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/.xmonad/autostart.sh": "windowmanager/xmonad/autostart.sh",
+      "~/.xmonad/xmonad.hs": "windowmanager/xmonad/xmonad.hs",
+      "~/.xmonad/xmonadctl.hs": "windowmanager/xmonad/xmonadctl.hs",
+      "~/.xmonad/xmobar": "windowmanager/xmonad/xmobar",
+      "~/.xmonad/xpm": "windowmanager/xmonad/xpm",
+      "~/bin/xmonadctl": "windowmanager/xmonad/bin/xmonadctl",
+      "~/bin/xmonadexit": "windowmanager/xmonad/bin/xmonadexit",
+      "~/.config/picom.conf": "apps/picom.conf",
+      "~/.config/dunst": "windowmanager/dunst",
+      "~/.config/ranger": "apps/ranger",
+      "~/.config/rofi": "windowmanager/rofi",
+      "~/.config/udiskie": "windowmanager/udiskie",
+      "~/.Xdefaults": "windowmanager/Xresources",
+      "~/.Xresources": "windowmanager/Xresources",
+      "~/bin/addpocket": "apps/pockyt/addpocket",
+      "~/bin/camtoggle": "windowmanager/bindir/camtoggle",
+      "~/bin/displayctl": "windowmanager/bindir/displayctl",
+      "~/bin/dmenuhandler": "windowmanager/bindir/dmenuhandler",
+      "~/bin/dmenupass": "windowmanager/bindir/dmenupass",
+      "~/bin/getpocket": "apps/pockyt/getpocket",
+      "~/bin/i3_bluetooth": "windowmanager/bindir/i3_bluetooth",
+      "~/bin/jack-post-start": "arch/jack-post-start",
+      "~/bin/jack-post-stop": "arch/jack-post-stop",
+      "~/bin/jack-pre-start": "arch/jack-pre-start",
+      "~/bin/jack-pre-stop": "arch/jack-pre-stop",
+      "~/bin/launcher": "windowmanager/bindir/launcher",
+      "~/bin/linkhandler": "windowmanager/bindir/linkhandler",
+      "~/bin/livejack": "windowmanager/bindir/livejack",
+      "~/bin/lmc": "windowmanager/bindir/lmc",
+      "~/bin/notify_me": "windowmanager/bindir/notify_me",
+      "~/bin/opout": "windowmanager/bindir/opout",
+      "~/bin/optimize_pdf": "windowmanager/bindir/optimize_pdf",
+      "~/bin/pacupdate": "windowmanager/bindir/pacupdate",
+      "~/bin/popweather": "windowmanager/bindir/popweather",
+      "~/bin/prepare_live_coding": "windowmanager/bindir/prepare_live_coding",
+      "~/bin/ranger-open": "windowmanager/bindir/ranger-open",
+      "~/bin/remaps": "windowmanager/bindir/remaps",
+      "~/bin/reset_skyblock": "windowmanager/bindir/reset_skyblock",
+      "~/bin/showclip": "windowmanager/bindir/showclip",
+      "~/bin/startjack": "windowmanager/bindir/startjack",
+      "~/bin/stopjack": "windowmanager/bindir/stopjack",
+      "~/bin/terminal": "windowmanager/bindir/terminal",
+      "~/bin/toggle_picom": "windowmanager/bindir/toggle_picom",
+      "~/bin/toggle_pi": "windowmanager/bindir/toggle_pi",
+      "~/bin/toggle_screensaver": "windowmanager/bindir/toggle_screensaver",
+      "~/bin/touchpad_toggle": "windowmanager/bindir/touchpad_toggle",
+      "~/bin/umpv": "windowmanager/bindir/umpv",
+      "~/.mailcap": "windowmanager/mailcap",
+      "~/.local/share/applications/feh.desktop": "windowmanager/applications/feh.desktop",
+      "~/.local/share/applications/img.desktop": "windowmanager/applications/feh.desktop",
+      "~/.local/share/applications/torrent.desktop": "windowmanager/applications/torrent.desktop",
+      "~/.config/mimeapps.list": "windowmanager/mimeapps.list",
+      "~/.fonts": "fonts"
+    }
+  },
+  {
+    "shell": [
+      [ "sudo fc-cache -f", "Updating font cache" ],
+      [ "xmonad --recompile", "Rebuilding XMonad configuration" ]
+    ]
+  }
+]

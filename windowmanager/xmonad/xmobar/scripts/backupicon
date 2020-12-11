@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+cat /tmp/backupicon 2>/dev/null || echo ""

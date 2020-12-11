@@ -1,0 +1,28 @@
+#!/bin/bash
+# This script asks for a host and a password and opens a RDP connection
+# to the selected host
+
+# File with lines in the form
+# <hostname>,<displayname>
+# The display names should be unique
+CONFIG=${HOME}/.config/rdp/hostnames
+
+USER=mgondermann
+
+# Ask for host
+HOST_DISPLAYNAME=$(sed -e "s/.*,//" "${CONFIG}" | rofi -dmenu -l 10 -p "Host")
+HOSTNAME=$(grep "${HOST_DISPLAYNAME}" "${CONFIG}" | sed -e "s/,.*//")
+
+# If then display name was not found use the entered value as host name
+if [[ "$HOSTNAME" == "" ]]; then
+  HOSTNAME=$HOST_DISPLAYNAME
+fi
+
+# Ask for Password
+PASS=$(rofi -dmenu -p "Password" -l 0 -mesg "for ${HOSTNAME}" -password)
+
+if [[ "${PASS}" == "" ]]; then
+  exit 1
+fi
+
+xfreerdp /multimon /u:"${USER}" /p:"${PASS}" /v:"${HOSTNAME}" +clipboard +fonts /bpp:16 /network:auto /gdi:hw /audio-mode:2 /gfx:AVC444 /floatbar:sticky:off,default:visible,show:always /scale-desktop:125 /scale-device:100

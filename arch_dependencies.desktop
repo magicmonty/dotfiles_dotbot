@@ -55,6 +55,9 @@ xclip
 xdg-user-dirs-gtk
 xfce4-notifyd
 xfce4-power-manager
+xmobar-git
+xmonad
+xmonad-contrib
 xorg
 xorg-xbacklight
 xorg-xinit

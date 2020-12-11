@@ -1,0 +1,11 @@
+#!/bin/bash
+
+filter() {
+  sed 2q | sed -e "s/\&/&amp;/g;s/MPD error: .*//g;s/\(\[paused\]\).*/ \\1/g;s/\[playing\].*//g" | paste -sd "" - | sed -e "s/^/$1 /g" | sed -e "s/$/ /g"
+}
+
+if (mpc status | sed 2q | grep -e playing > /dev/null 2>&1); then
+  mpc status 2>&1 | filter '<fn=2>\x25B6</fn>'
+elif (mpc status | sed 2q | grep -e paused > /dev/null 2>&1); then
+  mpc status 2>&1 | filter '<fn=2>\23f8</fn>'
+fi

@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=RDP Arbeit
+Exec=/home/mgondermann/bin/rdp
+Path=/home/mgondermann
