@@ -7,6 +7,6 @@ INTERFACE="${BLOCK_INSTANCE:-wlp4s0}"
 QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
 NAME=$(iwgetid | grep $INTERFACE | cut -d \" -f 2)
 
-TEXT="<fn=2>📶</fn> $NAME - $QUALITY%"
+TEXT="<box type=Top mt=2 width=2><fn=4></fn> $NAME - $QUALITY%</box>"
 
 echo " $TEXT "

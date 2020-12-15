@@ -18,8 +18,8 @@ fix_xcursors
 echo "Updating keyboard mappings..."
 ~/bin/remaps
 
-#echo "Configuring screensaver..."
- Enable Screen saver
+# Enable Screen saver
+echo "Configuring screensaver..."
 xset dpms 900 900 900
 (pgrep xautolock > /dev/null) || (xautolock -detectsleep &)
 
@@ -27,7 +27,7 @@ xset dpms 900 900 900
 (pgrep picom > /dev/null && echo "Picom already running") || (echo "Starting Picom";~/bin/toggle_picom)
 
 echo "Starting background applications"
-(pgrep trayer > /dev/null) || (trayer --edge top --align right --widthtype request --padding 5 --margin 0 --iconspacing 5 --SetDockType true --SetPartialStrut true --expand true --monitor 0 --transparent true --alpha 0 --tint 0x2e3440 --height 26 &)
+(pgrep trayer > /dev/null) || (trayer --edge top --align right --widthtype request --padding 5 --margin 2 --iconspacing 5 --SetDockType true --SetPartialStrut true --monitor 0 --transparent true --alpha 0 --tint 0x2e3440 --height 24 --distance 4 &)
 (pgrep nm-applet > /dev/null) || (nm-applet &)
 (pgrep udiskie > /dev/null) || (udiskie -ans -f /usr/bin/pcmanfm &)
 ## pgrep syncthing > /dev/null || syncthing -no-browser &

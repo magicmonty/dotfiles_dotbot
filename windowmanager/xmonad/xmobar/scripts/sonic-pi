@@ -4,8 +4,8 @@ CMD=~/.cargo/bin/sonic-pi-tool
 STATUS="$CMD check"
 
 if ~/.cargo/bin/sonic-pi-tool check >/dev/null; then
-  echo "<fn=2><action=/home/mgondermann/bin/toggle_pi>▶️</action></fn>"
+  echo "<fn=3>π</fn> <fc=#a3be8c><fn=4><action=/home/mgondermann/bin/toggle_pi></action></fn></fc>"
 else
-  echo "<fn=2><action=/home/mgondermann/bin/toggle_pi>⏹️</action></fn>"
+  echo "<fn=3>π</fn> <fc=#bf616a><fn=4><action=/home/mgondermann/bin/toggle_pi></action></fn></fc>"
 fi
 

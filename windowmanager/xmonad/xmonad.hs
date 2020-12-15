@@ -206,7 +206,7 @@ mySpacing' i = spacingRaw True (Border i i i i) True (Border i i i i) True
 tall     = renamed [Replace "tall"]
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
-           -- $ subLayout [] (smartBorders Simplest)
+           $ smartBorders
            $ subLayout [] Simplest
            $ limitWindows 12
            -- $ layoutHintsWithPlacement (1.0, 0.0)
@@ -215,12 +215,14 @@ tall     = renamed [Replace "tall"]
 monocle  = renamed [Replace "monocle"]
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
-           $ subLayout [] (smartBorders Simplest)
+           $ noBorders
+           $ subLayout [] Simplest
            $ limitWindows 20 Full
 grid     = renamed [Replace "grid"]
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
            $ subLayout [] Simplest
+           $ smartBorders
            $ limitWindows 12
            $ mySpacing' 4
            $ mkToggle (single MIRROR)
@@ -253,14 +255,23 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
 --------------------------------------------------------------------------------
 
 wsGen = "\x1f5a5"
+wsGenA = "\xf26c"
 wsWeb = "\x1f30D"
+wsWebA = "\xf0ac"
 wsWrite = "\x1f58c"
+wsWriteA = "\xf305"
 wsDoc = "\x1f4c2"
+wsDocA = "\xf07c"
 wsBox = "\x1f4e6"
+wsBoxA = "\xf49e"
 wsCom = "\x1f4ac"
+wsComA = "\xf4ad"
 wsAudio = "\x1f3b9"
+wsAudioA = "\xf3c9"
 wsVideo = "\x1f37f"
+wsVideoA = "\xf03d"
 wsGraphics = "\x1f5bc"
+wsGraphicsA = "\xf302"
 
 xmobarEscape :: String -> String
 xmobarEscape = concatMap doubleLts
@@ -270,9 +281,10 @@ xmobarEscape = concatMap doubleLts
 
 myWorkspaces :: [String]
 myWorkspaces = clickable . (map xmobarEscape)
-               $ [wsGen, wsWeb, wsWrite, wsDoc, wsBox, wsCom, wsAudio, wsVideo, wsGraphics]
+               $ [wsGenA, wsWebA, wsWriteA, wsDocA, wsBoxA, wsComA, wsAudioA, wsVideoA, wsGraphicsA]
+               -- $ [wsGen, wsWeb, wsWrite, wsDoc, wsBox, wsCom, wsAudio, wsVideo, wsGraphics]
   where
-    clickable l = [ "<action=xdotool key super+" ++ show(n) ++ "><fn=2>" ++ ws ++ "</fn></action>" |
+    clickable l = [ "<action=xdotool key super+" ++ show(n) ++ "><fn=4>" ++ ws ++ "</fn></action>" |
                   (i,ws) <- zip [1..9] l,
                   let n = i ]
 
@@ -438,10 +450,10 @@ xmobarScreen :: Int -> IO Handle
 xmobarScreen n = spawnPipe ("xmobar -x " ++ show(n) ++ " ~/.xmonad/xmobar/xmobarrc" ++ show(n))
 
 myPP :: PP
-myPP = xmobarPP { ppCurrent = wrap "<box type=VBoth color=#a3be8c>" "</box>"              -- Current workspace in xmobar
-                , ppVisible = wrap "<box type=Bottom color=#a3be8c>" "</box>"  -- Visible but not current workspace
-                , ppHidden =  wrap "<box type=Bottom color=#82AAFF>" "</box>"   -- Hidden workspaces in xmobar
-                , ppHiddenNoWindows = xmobarColor "#c792ea" ""              -- Hidden workspaces (no windows)
+myPP = xmobarPP { ppCurrent = xmobarColor "#88c0d0" "" . wrap "<box type=VBoth color=#a3be8c>" "</box>"              -- Current workspace in xmobar
+                , ppVisible = xmobarColor "#81a1c1" "" . wrap "<box type=Bottom color=#a3be8c>" "</box>"  -- Visible but not current workspace
+                , ppHidden = xmobarColor "#d8dee9" "" . wrap "<box type=Bottom color=#82AAFF>" "</box>"   -- Hidden workspaces in xmobar
+                , ppHiddenNoWindows = xmobarColor "#4c566a" ""              -- Hidden workspaces (no windows)
                 , ppSep =  " <fc=#666666><fn=1>|</fn></fc> "          -- Separators in xmobar
                 , ppUrgent = xmobarColor "#d08770" "" . wrap "!" "!"  -- Urgent workspace
                 , ppOrder  = \(ws:l:t:ex) -> [ws,l]

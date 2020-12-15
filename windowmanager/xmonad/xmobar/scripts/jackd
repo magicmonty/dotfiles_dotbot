@@ -7,8 +7,8 @@ STOP="$CMD stop"
 RUNNING=$($STATUS > /dev/null 2>&1 && echo 1 || echo 0)
 
 if [[ $RUNNING -eq 1 ]]; then
-  echo ' <fn=2><action=/home/mgondermann/bin/stopjack>▶️</action></fn>'
+  echo '<fn=4> <fc=#83be8c><action=/home/mgondermann/bin/stopjack></action></fc></fn>'
 else
-  echo ' <fn=2><action=/home/mgondermann/bin/startjack>⏹️</action></fn>'
+  echo '<fn=4> <fc=#bf616a><action=/home/mgondermann/bin/startjack></action></fc></fn>'
 fi
 

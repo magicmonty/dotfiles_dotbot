@@ -1,22 +1,21 @@
 -- http://projects.haskell.org/xmobar/
 -- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
--- you can find weather location codes here: http://weather.noaa.gov/index.html
 
 Config { font    = "xft:Monoid NF:size=11:antialias=true:hinting=true"
-       , additionalFonts = [ "xft:Mononoki NF:pixelsize=11:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:Mononoki Nerd Font:pixelsize=11:antialias=true:hinting=true"
                            , "xft:Noto Color Emoji:size=10:antialias=true:autohint=true"
                            , "xft:Monoid NF:weight=bold:pixelsize=16:antialias=true:hinting=true"
+                           , "xft:Font Awesome 5 Free:style=solid:pixelsize=16:antialias=true:hinting=true"
                            ]
        , bgColor = "#2e3440"
        , fgColor = "#d8dee9"
-       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
+       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 32 }
        , lowerOnStart = True
        , hideOnStart = False
        , allDesktops = True
        , persistent = True
        , iconRoot = "/home/mgondermann/.xmonad/xpm/"  -- default: "."
-       , commands = [Run Date "<fn=2>\x1f4c5</fn> %b %d.%m.%Y <fn=2>\x23f0</fn> %H:%M" "date" 50
-                    , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/sep" [] "sep" -1
+       , commands = [ Run Date "<fn=4>\xf073</fn> %b %d.%m.%Y <fn=4>\xf017</fn> %H:%M" "date" 50
                       -- Runs custom script to check for pacman updates.
                     , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/pacupdate" [] "pacupdate" 36000
                       -- Script that dynamically adjusts xmobar padding depending on number of trayer icons.
@@ -27,14 +26,16 @@ Config { font    = "xft:Monoid NF:size=11:antialias=true:hinting=true"
                     , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/sonic-pi" [] "sonicpi" 100
                     , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/wifi" [] "wifi" 200
                     , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/battery" [] "battery" 300
-                    , Run Volume "default" "Master" ["-t", "<status> <volume>% "
+                    , Run Volume "default" "Master" ["-t", "<status> <volume>%"
                                                     , "--"
-                                                    , "-O", "<fn=2>\x1f50a</fn>"
-                                                    , "-o", "<fn=2>\x1f507</fn>"
+                                                    , "-O", "<fn=4>\xf028</fn>"
+                                                    , "-C", "#a3be8c"
+                                                    , "-o", "<fn=4>\xf6a9</fn>"
+                                                    , "-c", "#bf616a"
                                                     ] 5
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{ <fn=2>🎤</fn>%jackd%<fc=#a3be8c><fn=3>π</fn></fc> %sonicpi%%sep% %default:Master%%sep%%wifi%%sep% %battery%%sep% <fn=2>📦</fn> %pacupdate% %sep% %date% %sep%%trayerpad%"
+       , template = " %UnsafeStdinReader% }{ <box type=Top color=#ebcb8b mt=2 width=2>%jackd%  %sonicpi%  %default:Master%</box> %wifi% %battery% <box type=Top color=#b48ead mt=2 width=2><fc=#b48ead><fn=4></fn> %pacupdate%</fc></box> <box type=Top color=#88c0d0 mt=2 width=2><fc=#88c0d0>%date%</fc></box> <box type=Top mt=2 width=2>%trayerpad%</box>"
        }
