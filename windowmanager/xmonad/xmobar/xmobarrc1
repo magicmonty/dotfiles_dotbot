@@ -15,9 +15,7 @@ Config { font    = "xft:Monoid NF:size=11:antialias=true:hinting=true"
        , allDesktops = True
        , persistent = True
        , iconRoot = "/home/mgondermann/.xmonad/xpm/"  -- default: "."
-       , commands = [ Run Date "<fn=4>\xf073</fn> %b %d.%m.%Y <fn=4>\xf017</fn> %H:%M" "date" 50
-                      -- Runs custom script to check for pacman updates.
-                    , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/pacupdate" [] "pacupdate" 36000
+       , commands = [ Run Date "<fn=4>\xf073</fn> %a %d.%m.%Y <fn=4>\xf017</fn> %H:%M" "date" 50
                       -- Prints out the left side items such as workspaces, layout, etc.
                       -- The workspaces are 'clickable' in my.xmonads.
                     , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/jackd" [] "jackd" 100
@@ -35,5 +33,5 @@ Config { font    = "xft:Monoid NF:size=11:antialias=true:hinting=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{ <box type=Top color=#ebcb8b mt=2 width=2>%jackd%  %sonicpi%  %default:Master%</box> %wifi% %battery% <box type=Top color=#b48ead mt=2 width=2><fc=#88c0d0>%date%</fc></box> "
+       , template = " %UnsafeStdinReader% }{ <box type=Top color=#ebcb8b mt=2 width=2><fc=#ebcb8b>%jackd%  %sonicpi%  %default:Master%</fc></box> %wifi% %battery% <box type=Top color=#b48ead mt=2 width=2><fc=#88c0d0>%date%</fc></box> "
        }

@@ -1,3 +1,5 @@
 #!/bin/bash
 cupd=$(checkupdates | wc -l)
-echo "$cupd"
+if [[ cupd -gt 0 ]]; then
+  echo " <box type=Top color=#b48ead mt=2 width=2><fc=#b48ead><fn=4></fn> $cupd</fc></box>"
+fi

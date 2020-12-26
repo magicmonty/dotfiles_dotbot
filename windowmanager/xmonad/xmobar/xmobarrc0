@@ -15,9 +15,9 @@ Config { font    = "xft:Monoid NF:size=11:antialias=true:hinting=true"
        , allDesktops = True
        , persistent = True
        , iconRoot = "/home/mgondermann/.xmonad/xpm/"  -- default: "."
-       , commands = [ Run Date "<fn=4>\xf073</fn> %b %d.%m.%Y <fn=4>\xf017</fn> %H:%M" "date" 50
+       , commands = [ Run Date "<fn=4>\xf073</fn> %a %d.%m.%Y <fn=4>\xf017</fn> %H:%M" "date" 50
                       -- Runs custom script to check for pacman updates.
-                    , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/pacupdate" [] "pacupdate" 36000
+                    , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/pacupdate" [] "pacupdate" 6000
                       -- Script that dynamically adjusts xmobar padding depending on number of trayer icons.
                     , Run Com "/home/mgondermann/.xmonad/xmobar/scripts/trayer-padding-icon" [] "trayerpad" 20
                       -- Prints out the left side items such as workspaces, layout, etc.
@@ -37,5 +37,5 @@ Config { font    = "xft:Monoid NF:size=11:antialias=true:hinting=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{ <box type=Top color=#ebcb8b mt=2 width=2>%jackd%  %sonicpi%  %default:Master%</box> %wifi% %battery% <box type=Top color=#b48ead mt=2 width=2><fc=#b48ead><fn=4></fn> %pacupdate%</fc></box> <box type=Top color=#88c0d0 mt=2 width=2><fc=#88c0d0>%date%</fc></box> <box type=Top mt=2 width=2>%trayerpad%</box>"
+       , template = " %UnsafeStdinReader% }{ <box type=Top color=#ebcb8b mt=2 width=2><fc=#ebcb8b>%jackd%  %sonicpi%  %default:Master%</fc></box> %wifi% %battery%%pacupdate% <box type=Top color=#88c0d0 mt=2 width=2><fc=#88c0d0>%date%</fc></box> <box type=Top mt=2 width=2>%trayerpad%</box>"
        }

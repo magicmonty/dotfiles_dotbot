@@ -12,7 +12,7 @@ echo "Updating cursor theme"
 fix_xcursors
 
 # xbanish make the mouse invisible after a timeout of 2000 ms and while typing
-(pgrep xbanish > /dev/null && echo "xbanish already running") || (echo "starting xbanish";xbanish -bt 2000)
+# (pgrep xbanish > /dev/null && echo "xbanish already running") || (echo "starting xbanish";xbanish -bt 2000)
 
 # Remap Caps-Lock
 echo "Updating keyboard mappings..."
