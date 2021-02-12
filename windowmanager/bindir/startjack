@@ -36,3 +36,4 @@ if pgrep dwmblocks > /dev/null; then
 else
   pkill -RTMIN+9 i3blocks
 fi
+ exit 0

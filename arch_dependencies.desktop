@@ -21,6 +21,7 @@ i3blocks
 i3exit
 i3lock-color
 jack2
+jack2-dbus
 lightdm
 lightdm-settings
 lightdm-slick-greeter

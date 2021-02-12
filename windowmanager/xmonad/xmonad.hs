@@ -450,9 +450,9 @@ xmobarScreen :: Int -> IO Handle
 xmobarScreen n = spawnPipe ("xmobar -x " ++ show(n) ++ " ~/.xmonad/xmobar/xmobarrc" ++ show(n))
 
 myPP :: PP
-myPP = xmobarPP { ppCurrent = xmobarColor "#88c0d0" "" . wrap "<box type=VBoth color=#a3be8c>" "</box>"              -- Current workspace in xmobar
-                , ppVisible = xmobarColor "#81a1c1" "" . wrap "<box type=Bottom color=#a3be8c>" "</box>"  -- Visible but not current workspace
-                , ppHidden = xmobarColor "#d8dee9" "" . wrap "<box type=Bottom color=#82AAFF>" "</box>"   -- Hidden workspaces in xmobar
+myPP = xmobarPP { ppCurrent = xmobarColor "#88c0d0" "" . wrap "<box type=VBoth color=#a3be8c width=2 mt=2 mb=3>" "</box>"              -- Current workspace in xmobar
+                , ppVisible = xmobarColor "#81a1c1" "" . wrap "<box type=Bottom color=#a3be8c width=2 mt=2 mb=3>" "</box>"  -- Visible but not current workspace
+                , ppHidden = xmobarColor "#d8dee9" "" . wrap "<box type=Bottom color=#82AAFF width=2 mt=2 mb=3>" "</box>"   -- Hidden workspaces in xmobar
                 , ppHiddenNoWindows = xmobarColor "#4c566a" ""              -- Hidden workspaces (no windows)
                 , ppSep =  " <fc=#666666><fn=1>|</fn></fc> "          -- Separators in xmobar
                 , ppUrgent = xmobarColor "#d08770" "" . wrap "!" "!"  -- Urgent workspace
