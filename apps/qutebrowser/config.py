@@ -4,9 +4,9 @@ config.source('shortcuts.py')
 config.bind("m", "spawn ~/bin/umpv '{url}'")
 
 # open link in MPV
-config.bind(";M", "hint links spawn ~/bin/umpv '{hint-url}'")
-config.bind(";m", "hint links spawn ~/bin/umpv '{hint-url}'")
-config.bind(",m", "hint links spawn ~/bin/umpv '{hint-url}'")
+config.bind(";M", "hint links spawn ~/bin/pumpv '{hint-url}'")
+config.bind(";m", "hint links spawn ~/bin/pumpv '{hint-url}'")
+config.bind(",m", "hint links spawn ~/bin/pumpv '{hint-url}'")
 
 # open link
 config.bind(",o", "hint links fill :open {hint-url}")
