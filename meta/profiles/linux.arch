@@ -4,7 +4,6 @@ defaultapps
 ruby
 dev
 git
-vim.linux
 tmux.linux
 mpd
 mpv
@@ -20,3 +19,4 @@ s-nail
 ssh
 duplicity.hint
 timekpra
+vim.linux
