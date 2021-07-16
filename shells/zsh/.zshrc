@@ -235,3 +235,7 @@ source /home/mgondermann/.config/broot/launcher/bash/br
 if [ -e $(which oh-my-posh) ]; then
   eval "$(oh-my-posh --init --shell zsh --config ~/.poshtheme.omp.json)"
 fi
+
+if [ -e $(which bat) ]; then
+  alias cat=bat
+fi
