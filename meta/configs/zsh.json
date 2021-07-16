@@ -24,6 +24,7 @@
     "link": {
       "~/.zshrc": "shells/zsh/.zshrc",
       "~/.zprofile": "shells/profile"
+      "~/.poshtheme.omp.json": "shells/.poshtheme.omp.json"
     }
   },
   {

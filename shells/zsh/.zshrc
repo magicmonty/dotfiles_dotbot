@@ -232,4 +232,6 @@ fi
 
 source /home/mgondermann/.config/broot/launcher/bash/br
 
-eval "$(oh-my-posh --init --shell zsh --config ~/.poshtheme.omp.json)"
+if [ -e $(which oh-my-posh) ]; then
+  eval "$(oh-my-posh --init --shell zsh --config ~/.poshtheme.omp.json)"
+fi
