@@ -3,8 +3,8 @@
 echo "Setting wallpaper..."
 betterlockscreen -w
 
-echo "Starting jackd..."
-~/bin/startjack
+# echo "Starting jackd..."
+# ~/bin/startjack
 
 (pgrep mpd > /dev/null && echo "MPD already running") || (echo "Starting mpd..."; mpd &)
 

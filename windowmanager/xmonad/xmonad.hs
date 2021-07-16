@@ -300,6 +300,7 @@ myManageHook = composeAll
      , className =? "vlc"                     --> doShift ( myWorkspaces !! 7 )
      , className =? "Gimp"                    --> doShift ( myWorkspaces !! 8 )
      , className =? "Gimp"                    --> doFloat
+     , className =? "blueman-manager"         --> doFloat
      , className =? "QjackCtl"                --> doFloat
      , className =? "xfreerdp"                --> doFullFloat
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
