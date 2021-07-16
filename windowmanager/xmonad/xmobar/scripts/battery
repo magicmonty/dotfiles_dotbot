@@ -4,6 +4,10 @@ path_ac="/sys/class/power_supply/AC"
 path_battery_0="/sys/class/power_supply/BAT0"
 path_battery_1="/sys/class/power_supply/BAT1"
 
+if [ ! -e $path_ac ]; then
+  exit 0
+fi
+
 ac=0
 battery_level_0=0
 battery_level_1=0

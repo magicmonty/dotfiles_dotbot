@@ -19,4 +19,4 @@ s-nail
 ssh
 duplicity.hint
 timekpra
-vim.linux
+nvim.linux

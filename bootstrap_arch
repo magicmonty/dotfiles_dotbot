@@ -4,7 +4,7 @@ echo "Before running, ensure git is installed and the bootstrapping script is in
 echo "Also install your GPG keys first."
 echo " "
 
-sudo pacman --noconfirm -S --needed openssh git gnupg keybase kbfs
+sudo pacman --noconfirm -S --needed openssh git gnupg keybase kbfs base-devel python3
 
 if [[ -e ~/.ssh/id_ecdsa.pub ]]; then
   echo "SSH Key exists already."
@@ -37,11 +37,13 @@ if which yay > /dev/null 2>&1; then
   echo "yay is already installed"
 else
   echo "installing yay..."
-  mkdir -p ~/.config
-  cd ~/.config
+  mkdir -p ~/.tmp
+  cd ~/.tmp
   git clone https://aur.archlinux.org/yay.git
   cd yay
   makepkg -si
+  cd ~
+  rm -rf ~/.tmp
 fi
 
 cd ~/.dotfiles

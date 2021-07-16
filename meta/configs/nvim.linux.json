@@ -1,0 +1,41 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "clean": [ "~/.config/nvim" ]
+  },
+  {
+    "link": {
+      "~/.config/nvim/lua": "editors/nvim/lua",
+      "~/.config/nvim/after": "editors/nvim/after",
+      "~/.config/nvim/ginit.vim": "editors/nvim/ginit.vim",
+      "~/.config/nvim/init.lua": "editors/nvim/init.lua",
+      "~/.config/nvim/UltiSnips": "editors/vim/vim/UltiSnips",
+      "~/.config/nvim/autoload/plug.vim" : "editors/nvim/autoload/plug.vim",
+      "~/.local/share/applications/vim.desktop": "windowmanager/applications/vim.desktop",
+      "~/.local/share/applications/text.desktop": "windowmanager/applications/vim.desktop"
+    }
+  },
+  {
+    "shell": [
+      ["pip2 install --user neovim", "Installing Python 2 NeoVim plugin"],
+      ["pip3 install --user neovim", "Installing Python 3 NeoVim plugin"],
+      ["pip3 install --user neovim-remote", "Installing Python 3 NeoVim Remote plugin"],
+      ["yarn global add neovim", "Installing NodeJS NeoVim plugin"],
+      {
+        "command": "nvim -c 'PlugClean!' -c 'PlugInstall' -c 'PlugUpdate' -c 'q' -c 'q' -c 'q'",
+        "description": "Installing vim plugins",
+        "stdin": true,
+        "stdout": true,
+        "stderr": true
+      }
+    ]
+  }
+]

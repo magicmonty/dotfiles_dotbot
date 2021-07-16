@@ -8,19 +8,28 @@
       }
     }
   },
+  { "shell": [
+      {
+        "command": "~/.dotfiles/windowmanager/xmonad/build_xmonadctl.sh",
+        "description": "Compiling xmonadctl...",
+        "stdin": true,
+        "stdout": true,
+        "stderr": true
+      }
+    ]
+  },
   {
     "link": {
       "~/.xmonad/autostart.sh": "windowmanager/xmonad/autostart.sh",
       "~/.xmonad/xmonad.hs": "windowmanager/xmonad/xmonad.hs",
-      "~/.xmonad/xmonadctl.hs": "windowmanager/xmonad/xmonadctl.hs",
       "~/.xmonad/xmobar/scripts": "windowmanager/xmonad/xmobar/scripts",
       "~/.xmonad/xmobar/xmobarrc0": "windowmanager/xmonad/xmobar/xmobarrc0",
       "~/.xmonad/xmobar/xmobarrc1": "windowmanager/xmonad/xmobar/xmobarrc1",
       "~/.xmonad/xmobar/xmobarrc2": "windowmanager/xmonad/xmobar/xmobarrc1",
       "~/.xmonad/xmobar/xmobarrc3": "windowmanager/xmonad/xmobar/xmobarrc1",
       "~/.xmonad/xpm": "windowmanager/xmonad/xpm",
-      "~/bin/xmonadctl": "windowmanager/xmonad/bin/xmonadctl",
       "~/bin/xmonadexit": "windowmanager/xmonad/bin/xmonadexit",
+      "~/bin/xmonadctl": "windowmanager/xmonad/xmonadctl",
       "~/.config/picom.conf": "apps/picom.conf",
       "~/.config/dunst": "windowmanager/dunst",
       "~/.config/ranger": "apps/ranger",

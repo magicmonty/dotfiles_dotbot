@@ -3,7 +3,7 @@ apt.linux
 ruby
 dev
 git.np4
-vim.linux
+nvim.linux
 fish.linux
 tmux.linux
 binaries.linux
