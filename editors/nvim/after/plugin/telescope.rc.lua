@@ -21,10 +21,13 @@ telescope.setup {
   }
 }
 
+require("telescope").load_extension("ultisnips")
+
 local opts = { silent = true, noremap = true }
 map("n", "<leader>ff", ":lua require('telescope.builtin').find_files()<cr>", opts)
 map("n", "<leader>fb", ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", opts)
 map("n", "<leader>fh", ":lua require('telescope.builtin').help_tags()<cr>", opts)
+map("n", "<leader>fs", ":lua require('telescope').extensions.ultisnips.ultisnips()<cr>", opts)
 map("n", "<leader>bb", ":lua require('telescope.builtin').buffers()<cr>", opts)
 map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
 map("n", "<leader>en", ":lua require('magicmonty.telescope').search_config()<cr>", opts)

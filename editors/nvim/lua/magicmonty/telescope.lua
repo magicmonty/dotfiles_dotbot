@@ -3,7 +3,8 @@ local exports = {}
 
 exports.search_config = function()
   local opts = {
-    cwd = '~/.config/nvim',
+    cwd = '~/.dotfiles/editors/nvim',
+    prompt_title = "NVIM Config",
     path_display = {
       'absolute'
     }
@@ -12,4 +13,4 @@ exports.search_config = function()
   require('telescope.builtin').find_files(opts)
 end
 
-return exports 
+return exports

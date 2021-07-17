@@ -33,14 +33,20 @@ Plug 'tpope/vim-commentary'
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
-Plug 'nvim-lua/completion-nvim'
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+Plug 'hrsh7th/nvim-compe'
+
+-- Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 
 -- Telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'fhill2/telescope-ultisnips.nvim'
 
 Plug('groenewege/vim-less', { ['for'] = 'less' })
 

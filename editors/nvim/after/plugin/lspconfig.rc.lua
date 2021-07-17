@@ -5,7 +5,7 @@ if (not status) then return end
 local protocol = require'vim.lsp.protocol'
 local augroup = require("vim_ext").augroup
 
--- Use an on_attach function to only map the following keys 
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -41,8 +41,6 @@ local on_attach = function(client, bufnr)
     augroup("Format", { { "BufWritePre", "<buffer>", "lua vim.lsp.buf.formatting_seq_sync()" } }, true)
   end
 
-  require'completion'.on_attach(client, bufnr)
-
   --protocol.SymbolKind = { }
   protocol.CompletionItemKind = {
     '', -- Text
@@ -73,9 +71,48 @@ local on_attach = function(client, bufnr)
   }
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits'
+  }
+}
+
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
 }
 
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
 
+nvim_lsp.sumneko_lua.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "lua-language-server" },
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+        path = runtime_path
+      },
+      diagnostics = {
+        -- get the server to recognize the vim global
+        globals = { "vim" }
+      },
+      workspace = {
+        -- make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true)
+      },
+      -- do not send telemetry data
+      telemetry = {
+        enable = false
+      }
+    }
+  }
+}
