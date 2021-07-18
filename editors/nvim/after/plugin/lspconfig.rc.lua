@@ -18,59 +18,66 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  --buf_set_keymap('n', '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', opts)
+  buf_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', opts)
+  buf_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', opts)
+  buf_set_keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<cr>', opts)
+  buf_set_keymap('n', '<leader>wr', ':lua vim.lsp.buf.remove_workspace_folder()<cr>', opts)
+  buf_set_keymap('n', '<leader>wl', ':lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>', opts)
+  buf_set_keymap('n', '<leader>D', ':lua vim.lsp.buf.type_definition()<cr>', opts)
+  buf_set_keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<cr>', opts)
+  buf_set_keymap('n', '<leader>ca', ':lua require("telescope.builtin").lsp_code_actions()<cr>', opts)
+  buf_set_keymap('n', 'gr', ':lua require("telescope.builtin").lsp_references()<cr>', opts)
+  buf_set_keymap('n', '<leader>e', ':lua vim.lsp.diagnostic.show_line_diagnostics()<cr>', opts)
+  buf_set_keymap('n', '<S-C-j>', ':lua vim.lsp.diagnostic.goto_next()<cr>', opts)
+  buf_set_keymap('n', '<leader>q', ':lua require("telescope.builtin").lsp_document_diagnostics()<cr>', opts)
+  buf_set_keymap("n", "<leader>f", ":lua vim.lsp.buf.formatting()<cr>", opts)
 
-  -- formatting
+  -- automatic formatting on save
   if client.resolved_capabilities.document_formatting then
-    augroup("Format", { { "BufWritePre", "<buffer>", "lua vim.lsp.buf.formatting_seq_sync()" } }, true)
+    vim.cmd [[augroup Format]]
+    vim.cmd [[autocmd!]]
+    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+    vim.cmd [[augroup END]]
   end
 
   --protocol.SymbolKind = { }
-  protocol.CompletionItemKind = {
-    '', -- Text
-    '', -- Method
-    '', -- Function
-    '', -- Constructor
-    '', -- Field
-    '', -- Variable
-    '', -- Class
-    'ﰮ', -- Interface
-    '', -- Module
-    '', -- Property
-    '', -- Unit
-    '', -- Value
-    '', -- Enum
-    '', -- Keyword
-    '﬌', -- Snippet
-    '', -- Color
-    '', -- File
-    '', -- Reference
-    '', -- Folder
-    '', -- EnumMember
-    '', -- Constant
-    '', -- Struct
-    '', -- Event
-    'ﬦ', -- Operator
-    '', -- TypeParameter
+  local M = {}
+  M.icons = {
+    Text = ' Text',
+    Method = ' Method',
+    Function = ' Function',
+    Constructor = ' Constructor',
+    Field = ' Field',
+    Variable = ' Variable',
+    Class = ' Class',
+    Interface = 'I Interface',
+    Module = ' Module',
+    Property = ' Property',
+    Unit = ' Unit',
+    Value = ' Value',
+    Enum = ' Enum',
+    Keyword = ' Keyword',
+    Snippet = '﬌ Snippet',
+    Color = ' Color',
+    File = ' File',
+    Reference = ' Reference',
+    Folder = ' Folder',
+    EnumMember = ' EnumMember',
+    Constant = ' Constant',
+    Struct = ' Struct',
+    Event = ' Event',
+    Operator = 'ﬦ Operator',
+    TypeParameter = ' TypeParameter',
   }
+
+  local kinds = vim.lsp.protocol.CompletionItemKind
+  for i, kind in ipairs(kinds) do
+    kinds[i] = M.icons[kind] or kind
+  end
 end
 
+-- Adds UltiSnips support
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -81,12 +88,14 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
+-- Typescript support
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
 }
 
+-- Lua support
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -115,4 +124,15 @@ nvim_lsp.sumneko_lua.setup {
       }
     }
   }
+}
+
+-- C# support
+local pid = vim.fn.getpid()
+local omnisharp_bin = "/usr/bin/omnisharp"
+
+nvim_lsp.omnisharp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) };
+  filetypes = { "cs" }
 }
