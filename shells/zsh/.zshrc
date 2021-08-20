@@ -239,3 +239,7 @@ fi
 if [ -e $(which bat) ]; then
   alias cat=bat
 fi
+
+if [ -e ${HOME}/.gem/ruby/3.0.0/bin ]; then
+  export PATH=${HOME}/.gem/ruby/3.0.0/bin:$PATH
+fi
