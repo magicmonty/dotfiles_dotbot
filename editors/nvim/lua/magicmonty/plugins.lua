@@ -33,8 +33,12 @@ Plug 'tpope/vim-commentary'
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 Plug 'hrsh7th/nvim-compe'
+
+-- Treesitter
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+Plug('nvim-treesitter/nvim-treesitter-refactor')
+Plug('p00f/nvim-ts-rainbow')
 
 -- Snippets
 Plug 'SirVer/ultisnips'

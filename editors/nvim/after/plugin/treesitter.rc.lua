@@ -11,6 +11,15 @@ treesitterConfigs.setup {
     enable = false,
     disable = {},
   },
+  refactor = {
+    highlight_definitions = { enable = true },
+    highlight_current_scope = { enable = true }
+  },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = 1000
+  },
   ensure_installed = {
     "toml",
     "yaml",

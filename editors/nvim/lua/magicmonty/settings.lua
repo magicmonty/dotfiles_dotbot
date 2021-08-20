@@ -12,6 +12,7 @@ vim.g.mapleader = " "
 
 vim_ext.init_autocmd()
 
+opt.guifont = "Monoid NF:h16"
 opt.compatible = false
 opt.number = true
 opt.relativenumber = true
@@ -95,3 +96,5 @@ opt.mouse = "a"
 opt.splitright = true -- Split new vertical windows right of current window.
 opt.splitbelow= true -- Split new horizontal windows under current window.
 
+-- Neovide specific settings
+vim.g.neovide_transparency = 0.8
