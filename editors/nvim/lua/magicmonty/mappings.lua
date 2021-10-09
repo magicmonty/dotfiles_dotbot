@@ -94,4 +94,7 @@ map('i', '<C-S-Down>', '<C-O><C-S-Down>', { silent = true, noremap = false })
 map('s', '<C-S-Up>', '<C-G><C-Up><C-G>', { silent = true, noremap = false })
 map('s', '<C-S-Down>', '<C-G><C-Down><C-G>', { silent = true, noremap = false })
 
-
+-- Buffer handling
+map('n', '<leader>bn', ':bn<cr>', silent)
+map('n', '<leader>bp', ':bp<cr>', silent)
+map('n', '<leader>bd', ':bd<cr>', silent)

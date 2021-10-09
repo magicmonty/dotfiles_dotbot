@@ -31,4 +31,5 @@ map("n", "<leader>fs", ":lua require('telescope').extensions.ultisnips.ultisnips
 map("n", "<leader>bb", ":lua require('telescope.builtin').buffers()<cr>", opts)
 map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
 map("n", "<leader>en", ":lua require('magicmonty.telescope').search_config()<cr>", opts)
+map("n", "<leader>.",  ":lua require('telescope.builtin').file_browser()<cr>", opts)
 
