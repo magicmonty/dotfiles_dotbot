@@ -136,3 +136,10 @@ nvim_lsp.omnisharp.setup {
   cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) };
   filetypes = { "cs" }
 }
+
+
+-- Clojure support
+nvim_lsp.clojure_lsp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}

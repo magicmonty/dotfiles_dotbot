@@ -30,6 +30,7 @@ treesitterConfigs.setup {
     "dockerfile",
     "javascript",
     "typescript",
+    "clojure",
     "lua",
     "regex",
     "ruby"

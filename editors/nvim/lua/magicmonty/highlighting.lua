@@ -13,6 +13,12 @@ opt.cursorline = true
 hi("Visual", {cterm = "NONE", ctermbg = "236", ctermfg = "NONE", guibg = "Grey40" })
 hi("LineNr", {cterm = "NONE", ctermfg = "240", guifg = "2b506e", guibg = "#000000" })
 
+-- Make window transparent
+augroup("TransparentBG",
+{
+  { "ColorScheme", "*", "hi Normal ctermbg=none guibg=none" }
+})
+
 -- Highlight column 120
 opt.colorcolumn = "120"
 hi("ColorColumn", { ctermbg = "10" })

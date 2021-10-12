@@ -232,10 +232,6 @@ fi
 
 source /home/mgondermann/.config/broot/launcher/bash/br
 
-if [ -e $(which oh-my-posh) ]; then
-  eval "$(oh-my-posh --init --shell zsh --config ~/.poshtheme.omp.json)"
-fi
-
 if [ -e $(which bat) ]; then
   alias cat=bat
 fi
@@ -243,3 +239,31 @@ fi
 if [ -e ${HOME}/.gem/ruby/3.0.0/bin ]; then
   export PATH=${HOME}/.gem/ruby/3.0.0/bin:$PATH
 fi
+
+USE_POWERLINE=true
+
+# Apply different settigns for different terminals
+case $(basename "$(cat "/proc/$PPID/comm")") in
+
+  login)
+    source /usr/share/zsh/zsh-maia-prompt
+    alias x='startx ~/.xinitrc'
+    ;;
+  *)
+    if [[ $TERM == "linux" ]]; then
+      # TTY does not have powerline fonts
+      source ~/.dotfiles/shells/zsh/zsh-fallback-prompt
+    elif [[ "$USE_POWERLINE" == "true" ]]; then
+      # Use powerline
+      if [ -e $(which oh-my-posh) ]; then
+        eval "$(oh-my-posh --init --shell zsh --config ~/.poshtheme.omp.json)"
+      else
+        source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+        [[ ! -f /usr/share/zsh/p10k.zsh ]] || source /usr/share/zsh/p10k.zsh
+      fi
+    else
+      # Don't use powerline anyway
+      source ~/.dotfiles/shells/zsh/zsh-fallback-prompt
+    fi
+    ;;
+esac

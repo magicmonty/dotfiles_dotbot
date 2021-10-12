@@ -54,5 +54,14 @@ Plug 'fhill2/telescope-ultisnips.nvim'
 
 Plug('groenewege/vim-less', { ['for'] = 'less' })
 
+-- Clojure / Overtone
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'guns/vim-sexp'
+
 vim.cmd "call plug#end()"
 

@@ -1,0 +1,20 @@
+[
+  {
+    "shell": [
+      {
+        "command": "~/.dotfiles/arch/install_yay",
+        "description": "Installing yay",
+        "stdin": true,
+        "stdout": true,
+        "stderr": true
+      },
+      {
+        "command": "yay --sudoloop --nodiffmenu --noeditmenu --noupgrademenu --nocleanmenu --noredownload --norebuild --useask --needed -S `cat ~/.dotfiles/arch_dependencies.i3 | grep -v '#'`",
+        "description": "Installing I3 for Arch via yay",
+        "stdin": true,
+        "stdout": true,
+        "stderr": true
+      }
+    ]
+  }
+]

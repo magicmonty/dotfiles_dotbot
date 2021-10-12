@@ -56,7 +56,7 @@ Xautolock.notifier: /usr/bin/notify-send "Locking now..."
 
 Xcursor.theme: xcursor-breeze
 
-*alpha: 82
+*alpha: 95
 
 !! black dark/light
 !! *color0: #282828
@@ -147,7 +147,7 @@ URxvt.scrollBar:	          false
 URxvt.mouseWheelScrollPage: true
 URxvt.cursorBlink:	        true
 !! URxvt.background:           [70]#282828
-URxvt.background:           [70]#2e3440
+URxvt.background:           [95]#2e3440
 !! URxvt.foreground:           #ebdbb2
 URxvt.foreground:           nord4
 URxvt.saveLines:            5000

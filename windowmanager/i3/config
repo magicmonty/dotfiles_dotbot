@@ -33,11 +33,11 @@ bindsym $mod+F12 exec $HOME/bin/touchpad_toggle
 bindsym $mod+Return exec $term
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+c kill
 
 # start program launcher
 # bindsym $mod+space exec --no-startup-id rofi -modi drun -i -l 10 -show drun
-bindsym $mod+space exec --no-startup-id dmenu_run -fn "Monoid NF" -h 25 -nb \#2e3440 -nf \#d8dee9
+bindsym $mod+space exec --no-startup-id dmenu_run -fn "Monoid Nerd Font" -h 25 -nb \#2e3440 -nf \#d8dee9
 
 # start window switcher
 bindsym $mod+Tab exec --no-startup-id rofi -modi windowcd -i -show windowcd
@@ -205,8 +205,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws8; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws8; workspace $ws10
 
-bindsym $mod+Shift+c exec "i3-msg reload && notify-send -a i3 -u low 'Reloaded'"
-bindsym $mod+Shift+r exec "i3-msg restart && notify-send -a i3 -u low 'Restarted'"
+bindsym $mod+Shift+r exec "i3-msg reload && notify-send -a i3 -u low 'Reloaded'"
+bindsym $mod+$alt+r exec "i3-msg restart && notify-send -a i3 -u low 'Restarted'"
 
 # Open applications on specific workspaces
 assign [title="GIMP Startup"] $ws5
@@ -310,7 +310,7 @@ mode "resize" {
 }
 
 # Autostart applications
-exec_always --no-startup-id ~/.config/i3/autostart.sh
+exec_always --no-startup-id /home/mgondermann/.config/i3/autostart.sh 
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

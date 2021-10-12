@@ -19,7 +19,7 @@ configuration {
   show-icons: true;
   modi: "windowcd,ssh,drun,combi,emoji";
   combi-modi: "windowcd,ssh,drun";
-  terminal: "termite";
+  terminal: "urxvt";
   case-sensitive: false;
 }
 
@@ -28,7 +28,7 @@ configuration {
     highlight: bold italic;
     scrollbar: true;
 
-    font: "Monoid NF 12";
+    font: "Monoid NerdFont 12";
 
     transparent: rgba(0, 0, 0, 0);
     transparent60: rgba(40, 40, 40, 0.95);
@@ -110,7 +110,7 @@ configuration {
   background: @transparent;
   highlight: @highlight;
   text-color: @foreground;
-  font: "Monoid NF 9";
+  font: "Monoid NerdFont 9";
 }
 
 #listview {
@@ -234,3 +234,7 @@ configuration {
   margin:     0 2px 0 0;
 }
 
+element-text {
+  background-color: inherit;
+  text-color: inherit;
+}

@@ -18,15 +18,15 @@ command=~/bin/i3volume
 signal=10
 separator=false
 
-[jackd]
-command=~/bin/i3jackd
-interval=once
-signal=9
+#[jackd]
+#command=~/bin/i3jackd
+#interval=once
+#signal=9
 
-[sonicpi]
-command=~/bin/i3pi
-signal=8
-interval=once
+#[sonicpi]
+#command=~/bin/i3pi
+#signal=8
+#interval=once
 
 [weather]
 command=~/bin/i3weather
@@ -46,11 +46,11 @@ interval=5
 command=~/bin/i3time
 interval=30
 
-[mail]
-label=📬
-command=~/bin/i3mail
-interval=180
-signal=12
+#[mail]
+#label=📬
+#command=~/bin/i3mail
+#interval=180
+#signal=12
 
 [pacman]
 label= 🔄
