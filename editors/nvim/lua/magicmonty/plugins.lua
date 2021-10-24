@@ -16,12 +16,14 @@ vim.cmd "call plug#begin('~/.config/nvim-data/plugged')"
 
 -- Git support
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 -- Bracket auto closing
 Plug 'cohama/lexima.vim'
 
 -- Color scheme
-Plug 'drewtempelmeyer/palenight.vim'
+Plug 'tjdevries/colorbuddy.nvim'
+Plug 'magicmonty/palebuddy.nvim'
 
 -- Nice status line
 Plug 'hoob3rt/lualine.nvim'
@@ -31,9 +33,14 @@ Plug 'tpope/vim-commentary'
 
 -- LSP/Completion config
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
-Plug 'hrsh7th/nvim-compe'
+Plug 'onsails/lspkind-nvim'
 
 -- Treesitter
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
@@ -41,9 +48,8 @@ Plug('nvim-treesitter/nvim-treesitter-refactor')
 Plug('p00f/nvim-ts-rainbow')
 
 -- Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
+Plug "SirVer/UltiSnips"
+Plug "quangnguyen30192/cmp-nvim-ultisnips"
 
 -- Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -62,6 +68,12 @@ Plug 'tpope/vim-classpath'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'guns/vim-sexp'
+
+-- Sonic Pi
+Plug 'dermusikman/sonicpi.vim'
+
+-- Other
+Plug  'tpope/vim-surround'
 
 vim.cmd "call plug#end()"
 

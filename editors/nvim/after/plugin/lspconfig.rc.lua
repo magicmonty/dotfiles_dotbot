@@ -88,6 +88,11 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
+local hascmp,cmp = pcall(require, "cmp_nvim_lsp")
+if hascmp then
+  capabilities = cmp.update_capabilities(capabilities)
+end
+
 -- Typescript support
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
@@ -96,6 +101,8 @@ nvim_lsp.tsserver.setup {
 }
 
 -- Lua support
+local sumneko_root_path =  vim.fn.fnamemodify(vim.fn.exepath("terminal"), ":h:h") .. "/src/lua-language-server"
+local sumneko_binary =  sumneko_root_path .. "/bin/Linux/lua-language-server" 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -103,7 +110,7 @@ table.insert(runtime_path, "lua/?/init.lua")
 nvim_lsp.sumneko_lua.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = { "lua-language-server" },
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
   settings = {
     Lua = {
       runtime = {

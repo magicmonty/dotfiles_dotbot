@@ -62,3 +62,8 @@ Host torstendev
 	HostName 192.168.6.28
 	User mg
 	PreferredAuthentications publickey
+
+Host bitbucket.org
+  HostName bitbucket.org
+  PreferredAuthentications publickey
+  HostKeyAlgorithms=+ssh-rsa

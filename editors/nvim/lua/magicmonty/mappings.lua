@@ -67,9 +67,6 @@ map("", "<C-S>", ":update<CR>", silent)
 map("v", "<C-S>", "<C-C>:update<CR>", silent)
 map("i", "<C-S>", "<C-O>:update<CR>", silent)
 
--- AutoComplete with C-Space
-map('i', '<C-space>', '<C-x><C-o>')
-
 -- split handling
 map('n', '<leader>v', ':vsplit<cr>', silent)
 map('n', '<leader>s', ':split<cr>', silent)

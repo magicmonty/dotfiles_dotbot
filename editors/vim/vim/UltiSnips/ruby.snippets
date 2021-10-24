@@ -1,4 +1,4 @@
-snippet "^lambda" "Prints my logo" rbA
+snippet lambda "Prints my logo" 
 # -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 #
 #                .:-\`
@@ -22,7 +22,7 @@ snippet "^lambda" "Prints my logo" rbA
 $0
 endsnippet
 
-snippet "^bd" "Base drum loop" rbA
+snippet bd "Base drum loop" 
 live_loop :drums, sync: :clock1 do
 	tick
 	sample :bd_haus if spread(4, 16).look
@@ -31,7 +31,7 @@ live_loop :drums, sync: :clock1 do
 end
 endsnippet
 
-snippet "^boot" "Bootstrapping" rbA
+snippet boot "Bootstrapping"
 \$port = ${1:\$circuit_port}
 
 set(:root, ${2::G4})
@@ -52,7 +52,7 @@ end
 $0
 endsnippet
 
-snippet "^clocks" "Clocks setup for SonicPi" rbA
+snippet clocks "Clocks setup for SonicPi"
 live_loop :clocks, auto_cue: false do
 	cue ("clock" + (tick % 8).to_s).to_sym
 	sleep 1
@@ -61,37 +61,37 @@ end
 $0
 endsnippet
 
-snippet "^\s*echo" "Echo fx" rbA
+snippet echo "Echo fx"
 with_fx(:echo, decay: 2.0, mix: 1.0, phase: 0.25) do
 	$0
 end
 endsnippet
 
-snippet "^\s*fx" "Generic FX" rbA
+snippet fx "Generic FX"
 with_fx(:$1) do
 	$0
 end
 endsnippet
 
-snippet "^ll" "Live loop" rb
+snippet ll "Live loop"
 live_loop :$1 do
 	$0
 end
 endsnippet
 
-snippet "^ll1"  "Live loop on Beat 1" rbA
+snippet ll1  "Live loop on Beat 1"
 live_loop :$1, sync: :clock1 do
 	$0
 end
 endsnippet
 
-snippet "^ll5"  "Live loop on Beat 5" rbA
+snippet ll5  "Live loop on Beat 5"
 live_loop :$1, sync: :clock5 do
 	$0
 end
 endsnippet
 
-snippet "^markov" "Simple Markov chain setup" rbA
+snippet markov "Simple Markov chain setup"
 chain = {
 	:i => [ :iv ],
 	:iv => [ :v ],
@@ -101,7 +101,7 @@ chain = {
 $0
 endsnippet
 
-snippet "^metropolism" "Metropolis inspired sequencer for modular" rbA
+snippet metropolism "Metropolis inspired sequencer for modular"
 seq = cur_scale num_octaves: 1
 steps = ${0:8}
 pulse_counts = ring(1)
@@ -135,7 +135,7 @@ with_fx :level, amp: 0 do
 end
 endsnippet
 
-snippet "^metropolis" "Metropolis inspired sequencer" rb
+snippet metropolis "Metropolis inspired sequencer"
 seq = cur_scale num_octaves: 1
 steps = 8
 pulse_counts = ring(1)
@@ -195,13 +195,13 @@ pis="314159265358979323846264338327950288419716939937510582097494459230781640628
 $0
 endsnippet
 
-snippet "^\s*reverb" "Reverb FX" rbA
+snippet reverb "Reverb FX"
 with_fx(:reverb, room: 0.6, mix: 0.4, damp: 0.5) do
 	$0
 end
 endsnippet
 
-snippet "^liv+" "Live audio" rbA
+snippet liv+ "Live audio"
 with_fx(:reverb, room: 0.8, mix: 0.7, damp: 0.5) do
 	live_audio :volcas, input: 1, amp: 1.5
 end
@@ -211,14 +211,14 @@ live_audio :modular, input: 2, amp: 1.5
 $0
 endsnippet
 
-snippet "^live" "Live audio" rbA
+snippet live "Live audio"
 live_audio :in, stereo: true, amp: 1.5
 
 $0
 endsnippet
 
 
-snippet "^doriangray" "Quotes from Dorian Gray" rbA
+snippet doriangray "Quotes from Dorian Gray"
 doriangray =
 	["The books that the world calls immoral are books that show the world its own shame.",
 		"You will always be fond of me.\nI represent to you all the sins you never had the courage to commit.",
@@ -253,39 +253,39 @@ doriangray =
 $0
 endsnippet
 
-snippet "^\s*midi1" "Circuit Midi Note Synth 1" rbA
+snippet midi1 "Circuit Midi Note Synth 1"
 midi ${1:60}, sustain: ${2:0.1}, channel: 1, port: \$port
 $0
 endsnippet
 
-snippet "^\s*midi2" "Circuit Midi Note Synth 2" rbA
+snippet midi2 "Circuit Midi Note Synth 2"
 midi ${1:60}, sustain: ${2:0.1}, channel: 2, port: \$port
 $0
 endsnippet
 
-snippet "^\s*midic1" "Circuit Midi CC channel 1" rbA
+snippet midic1 "Circuit Midi CC channel 1"
 midi_cc ${1:80}, val_f: ${2:1}, channel: 1, port: \$port
 $0
 endsnippet
 
-snippet "^\s*midic2" "Circuit Midi CC channel 2" rbA
+snippet midic2 "Circuit Midi CC channel 2"
 midi_cc ${1:80}, val_f: ${2:1}, channel: 2, port: \$port
 $0
 endsnippet
 
-snippet "^\s*midicd1" "Circuit Midi CC Delay Synth 1" rbA
+snippet midicd1 "Circuit Midi CC Delay Synth 1"
 # Delay Synth 1
 midi_cc 111, ${1:0}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^\s*midicd2" "Circuit Midi CC Delay Synth 2" rbA
+snippet midicd2 "Circuit Midi CC Delay Synth 2"
 # Delay Synth 2
 midi_cc 112, ${1:0}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^\s*midicf" "Circuit Midi Global Filter" rbA
+snippet midicf "Circuit Midi Global Filter"
 # Global Filter
 midi_cc 74, ${1:65}, channel: 16, port: \$port
 # Resonance
@@ -293,7 +293,7 @@ midi_cc 71, ${1:30}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^\s*midicmix" "Circuit Midi Mixer" rbA
+snippet midicmix "Circuit Midi Mixer"
 live_loop :mixer do
 	# Synth 1
 	midi_cc 12, ${1:54}, channel: 16, port: \$port
@@ -312,39 +312,39 @@ end
 $0
 endsnippet
 
-snippet "^\s*midicr1" "Circuit Midi CC Reverb Synth 1" rbA
+snippet midicr1 "Circuit Midi CC Reverb Synth 1"
 # Reverb Synth 1
 midi_cc 88, ${1:64}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^\s*midicr2" "Circuit Midi CC Reverb Synth 2" rbA
+snippet midicr2 "Circuit Midi CC Reverb Synth 2"
 # Reverb Synth 2
 midi_cc 89, ${1:64}, channel: 16, port: \$port
 $0
 endsnippet
 
-snippet "^\s*midid1" "Circuit Drum 1" rbA
+snippet midid1 "Circuit Drum 1"
 # Drum 1 (base drum)
 midi 60, vel_f: ${0:1.0}, channel: 10, port: \$port if spread(4, 16).look
 endsnippet
 
-snippet "^\s*midid2" "Circuit Drum 2" rbA
+snippet midid2 "Circuit Drum 2"
 # Drum 2 (snare)
 midi 62, vel_f: ${0:1.0}, channel: 10, port: \$port if ".... .... .... ....".bools.look
 endsnippet
 
-snippet "^\s*midid3" "Circuit Drum 3" rbA
+snippet midid3 "Circuit Drum 3"
 # Drum 3 (closed hats)
 midi 64, vel_f: ${0:1.0}, channel: 10, port: \$port if ".... .... .... ....".bools.look
 endsnippet
 
-snippet "^\s*midid4" "Circuit Drum 4" rbA
+snippet midid4 "Circuit Drum 4"
 #Drum 4 (open hats)
 midi 65, vel_f: ${0:1.0}, channel: 10, port: \$port if ".... .... .... ....".bools.look
 endsnippet
 
-snippet "^safari" "Safari Drum Loop" rbA
+snippet safari "Safari Drum Loop"
 live_loop :safari, sync: :clock1 do
 	sample :loop_safari, beat_stretch: 16, amp: 2
 	sleep 16

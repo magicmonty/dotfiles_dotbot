@@ -4,3 +4,8 @@ fs=yes
 # audio-device=jack
 
 stop-screensaver=yes
+
+ytdl-format="(bestvideo[height<=1080]+bestaudio)[ext=webm]/bestvideo[height<=1080]+bestaudio/bestvideo+bestaudio/best"
+cache=yes
+demuxer-max-bytes=123400KiB
+demuxer-readahead-secs=30

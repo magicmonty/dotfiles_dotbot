@@ -5,7 +5,7 @@ if (not status) then return end
 local map=require("vim_ext").map
 local actions = require("telescope.actions")
 
-telescope.setup { 
+telescope.setup {
   defaults = {
     prompt_prefix = "$ ",
     sorting_strategy = "ascending",

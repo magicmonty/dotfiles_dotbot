@@ -273,6 +273,10 @@ bindsym XF86AudioRaiseVolume exec $HOME/bin/lmc up
 bindsym XF86AudioLowerVolume exec $HOME/bin/lmc down
 bindsym XF86AudioMute exec $HOME/bin/lmc mute
 
+# Set brightness
+bindsym XF86MonBrightnessUp exec $HOME/bin/displayctl brightness up
+bindsym XF86MonBrightnessDown exec $HOME/bin/displayctl brightness down
+
 # Set shut down, restart and locking features
 bindsym $mod+Shift+x exec "~/bin/i3exit"
 

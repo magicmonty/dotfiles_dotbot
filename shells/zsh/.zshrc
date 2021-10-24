@@ -209,7 +209,7 @@ if [ -e /opt/dotnet ]; then
 fi
 
 if [ -e ~/.cargo/bin ]; then
-  export MATES_DIR=~/.contacts/pagansoft
+  export PATH=~/.cargo/bin:$PATH
 fi
 
 if [ -e ~/.dotnet/tools ]; then
@@ -267,3 +267,5 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     fi
     ;;
 esac
+
+alias luamake=/home/mgondermann/src/lua-language-server/3rd/luamake/luamake

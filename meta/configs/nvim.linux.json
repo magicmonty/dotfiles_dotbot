@@ -13,11 +13,11 @@
   },
   {
     "link": {
+      "~/.config/nvim-data/UltiSnips": "editors/vim/vim/UltiSnips",
       "~/.config/nvim/lua": "editors/nvim/lua",
       "~/.config/nvim/after": "editors/nvim/after",
       "~/.config/nvim/ginit.vim": "editors/nvim/ginit.vim",
       "~/.config/nvim/init.lua": "editors/nvim/init.lua",
-      "~/.config/nvim/UltiSnips": "editors/vim/vim/UltiSnips",
       "~/.config/nvim/autoload/plug.vim" : "editors/nvim/autoload/plug.vim",
       "~/.local/share/applications/vim.desktop": "windowmanager/applications/vim.desktop",
       "~/.local/share/applications/text.desktop": "windowmanager/applications/vim.desktop"

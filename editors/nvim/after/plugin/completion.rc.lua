@@ -1,64 +1,101 @@
-local status, compe = pcall(require, "compe")
+local status, cmp = pcall(require, "cmp")
 if not status then return end
 
-local map = require("vim_ext").map
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+    return false
+  end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
-vim.o.completeopt = "menuone,noinsert"
+local press = function(key)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
+end
 
-compe.setup({
-  source = {
-    path = true,
-    buffer = true,
-    calc = true,
-    nvim_lsp = true,
-    nvim_lua = true,
-    ultisnips = true,
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body)
+    end
+  },
+
+  experimental = {
+    native_menu = false,
+    ghost_text = true
+  },
+
+  mapping = {
+    -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
+    -- ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
+    ['<Tab>'] = cmp.mapping(
+      function(fallback)
+        if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+          press("<C-R>=UltiSnips#ExpandSnippet()<CR>")
+        elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+          press("<Esc>:call UltiSnips#JumpForwards()<CR>")
+        elseif cmp.visible() then
+          cmp.select_next_item()
+        elseif has_words_before() then
+          press("<Tab>")
+        else
+          fallback()
+        end
+      end,
+      { "i", "s" }),
+    ['<S-Tab>'] = cmp.mapping(
+      function(fallback)
+        if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+          press("<Esc>:call UltiSnips#JumpBackwards()<CR>")
+        elseif cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end,
+      { "i", "s" }),
+    ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
+    ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping(
+      function(fallback)
+        if cmp.visible() then
+          if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+            return press("<C-R>=UltiSnips#ExpandSnippet()<CR>")
+          end
+
+          cmp.select_next_item()
+        elseif has_words_before() then
+          press("<Space>")
+        else
+          fallback()
+        end
+      end,
+      {"i", "s"}
+    ),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({select = true})
+  },
+
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lua' },
+    { name = 'path' },
+    { name = 'ultisnips' },
+    { name = 'buffer' }
+  },
+
+  formatting = {
+    format = require("lspkind").cmp_format({with_text = true, menu = ({
+      buffer = "[Buffer]",
+      nvim_lsp = "[LSP]",
+      nvim_lua = "[api]",
+      ultisnips = "[snips]",
+      path = "[Path]",
+    })})
   }
 })
 
--- Tab support for navigating the completion list
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-  local col = vim.fn.col('.') - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match('%s') ~= nil
-end
-
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-    return t "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-
-_G.shift_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-    return t "<C-R>=UltiSnips#JumpBackwards()<CR>"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-local expr = { expr = true }
 vim.cmd'let g:lexima_no_default_rules = v:true'
 vim.cmd'call lexima#set_default_rules()'
-
-map('i', '<c-space>', 'compe#complete()', expr)
-map('i', '<cr>', 'compe#confirm(lexima#expand("<LT>CR>", "i"))', expr)
-map('i', '<c-e>', 'compe#close("<C-e>")', expr)
-
-map("i", "<Tab>", "v:lua.tab_complete()", expr)
-map("s", "<Tab>", "v:lua.tab_complete()", expr)
-map("i", "<S-Tab>", "v:lua.shift_tab_complete()", expr)
-map("s", "<S-Tab>", "v:lua.shift_tab_complete()", expr)
-
--- vim: foldlevel=99:

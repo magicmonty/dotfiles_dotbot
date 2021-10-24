@@ -468,11 +468,11 @@ mirror () {
 
 backlight () {
     case ${1:-} in
-        u*|i*|+)    xbacklight + 20 ;;
-        d*|-)       xbacklight - 20 ;;
-        batt)       xbacklight = 40 ;;
-        ac)         xbacklight = 100 ;;
-        *)          xbacklight = 100 ;;
+        u*|i*|+)    xbacklight-ctl up 20 ;;
+        d*|-)       xbacklight-ctl down 20 ;;
+        batt)       xbacklight-ctl set 40 ;;
+        ac)         xbacklight-ctl set 100 ;;
+        *)          xbacklight-ctl set 100 ;;
     esac
 
 }
