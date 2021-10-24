@@ -3,7 +3,7 @@ local cmd = vim.cmd
 local opt = vim.opt
 
 --
--- Fundamentals 
+-- Fundamentals
 -- ------------
 
 -- Map the leader key to <space>
@@ -66,7 +66,7 @@ opt.tabstop = 2
 opt.softtabstop = 2 -- Edit as if tabs are 2 characters wide.
 opt.autoindent = true
 opt.smartindent = true
-opt.wrap = false 
+opt.wrap = false
 opt.backspace = { "start", "eol", "indent" }
 
 -- Finding files - Search down into subfolders

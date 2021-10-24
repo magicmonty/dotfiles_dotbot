@@ -28,6 +28,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'onsails/lspkind-nvim'
+Plug 'folke/trouble.nvim'
 
 -- Treesitter
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
