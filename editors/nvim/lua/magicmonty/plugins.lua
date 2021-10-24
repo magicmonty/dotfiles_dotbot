@@ -1,18 +1,5 @@
-local Plug = function(name, opts)
-  local command = "Plug '" .. name .. "'"
-  if opts then
-    command = command .. ", {"
-    for k, v in pairs(opts) do
-      command = command .. "'" .. k .. "': '" .. v .. "'"
-    end
-
-    command = command .. "}"
-  end
-
-  vim.cmd(command)
-end
-
-vim.cmd "call plug#begin('~/.config/nvim-data/plugged')"
+local Plug = vim.fn["plug#"]
+vim.call("plug#begin", "~/.config/nvim-data/plugged")
 
 -- Git support
 Plug 'tpope/vim-fugitive'
@@ -44,8 +31,8 @@ Plug 'onsails/lspkind-nvim'
 
 -- Treesitter
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-Plug('nvim-treesitter/nvim-treesitter-refactor')
-Plug('p00f/nvim-ts-rainbow')
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'p00f/nvim-ts-rainbow'
 
 -- Snippets
 Plug "SirVer/UltiSnips"
@@ -75,5 +62,5 @@ Plug 'dermusikman/sonicpi.vim'
 -- Other
 Plug  'tpope/vim-surround'
 
-vim.cmd "call plug#end()"
+vim.call "plug#end"
 

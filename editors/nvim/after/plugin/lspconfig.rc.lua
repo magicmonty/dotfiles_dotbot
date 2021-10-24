@@ -102,7 +102,7 @@ nvim_lsp.tsserver.setup {
 
 -- Lua support
 local sumneko_root_path =  vim.fn.fnamemodify(vim.fn.exepath("terminal"), ":h:h") .. "/src/lua-language-server"
-local sumneko_binary =  sumneko_root_path .. "/bin/Linux/lua-language-server" 
+local sumneko_binary =  sumneko_root_path .. "/bin/Linux/lua-language-server"
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -144,9 +144,9 @@ nvim_lsp.omnisharp.setup {
   filetypes = { "cs" }
 }
 
-
 -- Clojure support
 nvim_lsp.clojure_lsp.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
+
