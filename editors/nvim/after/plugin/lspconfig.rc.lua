@@ -2,8 +2,6 @@
 local status, nvim_lsp = pcall(require, "lspconfig")
 if (not status) then return end
 
-local protocol = require'vim.lsp.protocol'
-local augroup = require("vim_ext").augroup
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -103,35 +101,34 @@ nvim_lsp.tsserver.setup {
 -- Lua support
 local sumneko_root_path =  vim.fn.fnamemodify(vim.fn.exepath("terminal"), ":h:h") .. "/src/lua-language-server"
 local sumneko_binary =  sumneko_root_path .. "/bin/Linux/lua-language-server"
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
 
-nvim_lsp.sumneko_lua.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-        path = runtime_path
-      },
-      diagnostics = {
-        -- get the server to recognize the vim global
-        globals = { "vim" }
-      },
-      workspace = {
-        -- make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true)
-      },
-      -- do not send telemetry data
-      telemetry = {
-        enable = false
+local luadev = require("lua-dev").setup({
+  library = {
+    vimruntime = true,
+    types = true,
+    plugins = true
+  },
+  lspconfig = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = {"use"}
+        },
+        workspace = {
+          preloadFileSize = 350
+        },
+        telemetry = {
+          enable = false
+        }
       }
     }
   }
-}
+})
+
+nvim_lsp.sumneko_lua.setup(luadev)
 
 -- C# support
 local pid = vim.fn.getpid()
@@ -149,4 +146,31 @@ nvim_lsp.clojure_lsp.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
+
+-- LSP signs default
+vim.fn.sign_define(
+  "DiagnosticSignError",
+  { texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" }
+)
+vim.fn.sign_define(
+  "DiagnosticSignWarning",
+  { texthl = "DiagnosticSignWarning", text = "", numhl = "DiagnosticSignWarning" }
+)
+vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" })
+vim.fn.sign_define(
+  "DiagnosticSignInformation",
+  { texthl = "DiagnosticSignInformation", text = "", numhl = "DiagnosticSignInformation" }
+)
+
+-- LSP Enable diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = false,
+  underline = true,
+  signs = true,
+  update_in_insert = false,
+})
+
+local pop_opts = { border = "rounded", max_width = 80 }
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, pop_opts)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, pop_opts)
 

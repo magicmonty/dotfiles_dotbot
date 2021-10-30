@@ -35,40 +35,40 @@ configuration {
     transparent60: rgba(40, 40, 40, 0.95);
 
     /* Nord colors */
-    nord0:  #2e3440;
-    nord1:  #3b4252;
-    nord2:  #434c5e;
-    nord4:  #4c566a;
+    pn-black:           rgb(41, 45, 62);
+    pn-red:             rgb(240, 113, 120);
+    pn-green:           rgb(195, 232, 141);
+    pn-yellow:          rgb(255, 203, 107);
+    pn-blue:            rgb(130, 170, 255);
+    pn-magenta:         rgb(199, 146, 234);
+    pn-cyan:            rgb(137, 221, 255);
+    pn-white:           rgb(208, 208, 208);
 
-    nord5:  #d8dee9;
-    nord6:  #e5e9f0;
-    nord7:  #eceff4;
-
-    nord7:  #8fbcbb;
-    nord8:  #88c0d0;
-    nord9:  #81a1c1;
-    nord10: #5e81ac;
-
-    nord11: #bf616a;
-    nord12: #d08770;
-    nord13: #ebcb8b;
-    nord14: #a3be8c;
-    nord15: #b48ead;
+    pn-bright-black:    rgb(67, 71, 88);
+    pn-bright-black60:  rgba(67, 71, 88, 0.9);
+    pn-bright-red:      rgb(255, 139, 146);
+    pn-bright-green:    rgb(221, 255, 167);
+    pn-bright-yellow:   rgb(255, 229, 133);
+    pn-bright-blue:     rgb(156, 196, 255);
+    pn-bright-magenta:  rgb(225, 172, 255);
+    pn-bright-cyan:     rgb(163, 247, 255);
+    pn-bright-white:    rgb(255, 255, 255);
 
     /* Theme colors */
     background:                  @transparent;
-    background-color:            @nord0;
-    foreground:                  @nord6;
-    border-color:                @nord8;
+    background60:                @transparent60;
+    background-color:            @pn-black;
+    foreground:                  @pn-cyan;
+    border-color:                @pn-bright-black;
     separatorcolor:              @border-color;
     scrollbar-handle:            @border-color;
 
-    normal-background:           @background;
+    normal-background:           @background60;
     normal-foreground:           @foreground;
-    alternate-normal-background: @nord1;
+    alternate-normal-background: @pn-bright-black60;
     alternate-normal-foreground: @foreground;
-    selected-normal-background:  @nord2;
-    selected-normal-foreground:  @nord6;
+    selected-normal-background:  @pn-blue;
+    selected-normal-foreground:  @pn-black;
 
     active-background:           @background;
     active-foreground:           @foreground;
@@ -78,7 +78,7 @@ configuration {
     selected-active-foreground:  @active-foreground;
 
     urgent-background:           @background;
-    urgent-foreground:           @foreground;
+    urgent-foreground:           @pn-yellow;
     alternate-urgent-background: @urgent-background;
     alternate-urgent-foreground: @urgent-foreground;
     selected-urgent-background:  @urgent-background;
@@ -89,7 +89,7 @@ configuration {
 #window {
   location:         center;
   anchor:           center;
-  transparency:     "screenshot";
+  transparency:     "real";
   padding:          0px;
   border:           1px;
   border-color:     @separatorcolor;
@@ -110,7 +110,7 @@ configuration {
 #textbox {
   background: @transparent;
   highlight: @highlight;
-  text-color: @foreground;
+  text-color: @pn-green;
   font: "Monoid NerdFont 9";
 }
 
@@ -204,23 +204,19 @@ configuration {
 #entry {
   padding:    2px;
   spacing:    0;
-  text-color: @normal-foreground;
+  text-color: @pn-magenta;
 }
 
 #prompt {
   padding:    2px;
   spacing:    0;
-  text-color: @normal-foreground;
+  text-color: @pn-magenta;
 }
 
 #button {
   padding:    2px;
   spacing:    0;
   text-color: @normal-foreground;
-}
-
-#prompt {
-  text-color: @nord5;
 }
 
 #button.selected {
@@ -231,7 +227,7 @@ configuration {
 #textbox-prompt-sep {
   expand:     false;
   str:        ":";
-  text-color: @nord5;
+  text-color: @pn-magenta;
   margin:     0 2px 0 0;
 }
 

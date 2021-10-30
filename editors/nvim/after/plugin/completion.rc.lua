@@ -13,6 +13,8 @@ local press = function(key)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
 end
 
+local lspkind = require("lspkind")
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -23,6 +25,10 @@ cmp.setup({
   experimental = {
     native_menu = false,
     ghost_text = true
+  },
+
+  documentation = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   },
 
   mapping = {
@@ -75,25 +81,40 @@ cmp.setup({
       {"i", "s"}
     ),
     ['<C-e>'] = cmp.mapping.close(),
+    ['<Right>'] = cmp.mapping.confirm({select = true}),
     ['<CR>'] = cmp.mapping.confirm({select = true})
   },
 
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
-    { name = 'path' },
+    -- { name = 'nvim_lua' },
+    { name = 'treesitter' },
     { name = 'ultisnips' },
-    { name = 'buffer' }
+    { name = 'path' },
+    {
+      name = 'buffer',
+      opts = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
+      }
+    }
   },
 
   formatting = {
-    format = require("lspkind").cmp_format({with_text = true, menu = ({
-      buffer = "[Buffer]",
-      nvim_lsp = "[LSP]",
-      nvim_lua = "[api]",
-      ultisnips = "[snips]",
-      path = "[Path]",
-    })})
+    format = function(entry, vim_item)
+      vim_item.kind = string.format("%s [%s]", lspkind.presets.default[vim_item.kind], vim_item.kind)
+      vim_item.menu = ({
+        nvim_lsp = "ﲳ",
+        nvim_lua = "",
+        treesitter = "",
+        path = "ﱮ",
+        buffer = "﬘",
+        ultisnips = "",
+      })[entry.source.name]
+
+      return vim_item
+    end
   }
 })
 

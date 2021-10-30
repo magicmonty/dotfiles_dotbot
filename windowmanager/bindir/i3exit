@@ -10,8 +10,11 @@ lock() {
 
 case "$chosen" in
   Lock) lock ;;
-  Logout) i3-msg exit ;;
-  Suspend) systemctl hybrid-sleep ;; 
+  Logout)
+    i3-msg exit
+    pkill xmonad
+    ;;
+  Suspend) systemctl hybrid-sleep ;;
   Hibernate) systemctl hibernate ;;
   Reboot) systemctl reboot ;;
   Shutdown) systemctl poweroff ;;

@@ -31,7 +31,7 @@ start_service "xautolock" '/usr/bin/xautolock -time 20 -detectsleep -locker "/us
 start_service "syndaemon" "/usr/bin/syndaemon -i 1 -dkR"
 # (pgrep polkit-gnome-au > /dev/null && echo "Gnome Polkit agent already running") || (echo "Starting Gnome Polkit agent";/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &)
 start_service "lxsession" "/usr/bin/lxsession -dkR"
-start_service "picom" "~/bin/toggle_picom"
+start_service "picom" "picom -cCG --experimental-backends"
 
 echo "Starting background applications"
 start_service "nm-applet" "nm-applet"

@@ -25,15 +25,20 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'ray-x/cmp-treesitter'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'folke/trouble.nvim'
+Plug 'folke/lua-dev.nvim'
 
 -- Treesitter
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug('nvim-treesitter/nvim-treesitter-textobjects', { branch = '0.5-compat' })
+Plug 'nvim-treesitter/nvim-treesitter-angular'
 Plug 'p00f/nvim-ts-rainbow'
+Plug 'David-Kunz/treesitter-unit'
 
 -- Snippets
 Plug "SirVer/UltiSnips"
@@ -61,7 +66,12 @@ Plug 'guns/vim-sexp'
 Plug 'dermusikman/sonicpi.vim'
 
 -- Other
-Plug  'tpope/vim-surround'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'amadeus/vim-convert-color-to'
+
+Plug 'github/copilot.vim'
 
 vim.call "plug#end"
 

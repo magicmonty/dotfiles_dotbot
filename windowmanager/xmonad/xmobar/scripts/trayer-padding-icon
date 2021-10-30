@@ -40,12 +40,12 @@ else
 fi
 
 # Icon file name
-iconfile="/tmp/trayer-padding-${width}px.xpm"
+iconfile="trayer-padding-${width}px.xpm"
 
 # If the desired icon does not exist create it
 if [[ ! -f $iconfile ]]
 then
-  create_xpm_icon "$width" "$iconfile"
+  create_xpm_icon "$width" "$HOME/.xmonad/xpm/$iconfile"
 fi
 
 # Output the icon tag for xmobar
