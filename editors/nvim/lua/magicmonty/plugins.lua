@@ -9,8 +9,6 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'cohama/lexima.vim'
 
 -- Color scheme
--- Plug 'tjdevries/colorbuddy.nvim'
--- Plug 'magicmonty/palebuddy.nvim'
 Plug 'EdenEast/nightfox.nvim'
 
 -- Nice status line
@@ -73,6 +71,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'amadeus/vim-convert-color-to'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'kassio/neoterm'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'rcarriga/nvim-notify'
 
 Plug 'github/copilot.vim'
 

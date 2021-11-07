@@ -28,6 +28,7 @@ map("n", "<leader>ff", ":lua require('telescope.builtin').find_files()<cr>", opt
 map("n", "<leader>fb", ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", opts)
 map("n", "<leader>fh", ":lua require('telescope.builtin').help_tags()<cr>", opts)
 map("n", "<leader>fs", ":lua require('telescope').extensions.ultisnips.ultisnips()<cr>", opts)
+map("n", "<leader>fn", ":lua require('telescope').extensions.notify.notify()<cr>", opts)
 map("n", "<leader>bb", ":lua require('telescope.builtin').buffers()<cr>", opts)
 map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
 map("n", "<leader>en", ":lua require('magicmonty.telescope').search_config()<cr>", opts)
