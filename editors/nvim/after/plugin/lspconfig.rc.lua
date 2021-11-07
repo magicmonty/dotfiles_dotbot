@@ -170,10 +170,20 @@ if not nvim_lsp.ls_emmet then
     }
   }
 end
+
+local emmet_capabilities = vim.lsp.protocol.make_client_capabilities()
+emmet_capabilities.textDocument.completion.completionItem.snippetSupport = true
 nvim_lsp.ls_emmet.setup {
   on_attach = on_attach,
   on_init = on_init,
-  capabilities = capabilities
+  capabilities = emmet_capabilities
+}
+
+-- Angular support
+nvim_lsp.angularls.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
 }
 
 -- LSP signs default
