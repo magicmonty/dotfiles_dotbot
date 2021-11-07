@@ -157,17 +157,23 @@ nvim_lsp.clojure_lsp.setup {
 }
 
 -- Emmet support
-local emmet_capabilities = vim.lsp.protocol.make_client_capabilities()
-emmet_capabilities.textDocument.completion.completionItem.snippetSupport = true
-nvim_lsp.emmet_ls.setup {
-  -- on_attach = on_attach,
+local configs = require('lspconfig/configs')
+if not nvim_lsp.ls_emmet then
+  configs.ls_emmet = {
+    default_config = {
+      cmd = { "ls_emmet", "--stdio" },
+      filetypes = { "html", "css", "scss" },
+      root_dir =  function(_)
+        return vim.loop.cwd()
+      end,
+      settings = {},
+    }
+  }
+end
+nvim_lsp.ls_emmet.setup {
+  on_attach = on_attach,
   on_init = on_init,
-  capabilities = emmet_capabilities,
-  filetypes = { "html", "css", "scss" },
-  root_dir = function()
-    return vim.loop.cwd()
-  end,
-  settings = {}
+  capabilities = capabilities
 }
 
 -- LSP signs default
@@ -193,6 +199,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
       prefix = "»",
+      severity_limit = 'Warning',
       spacing = 4
     },
     underline = true,
