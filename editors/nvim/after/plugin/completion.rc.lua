@@ -24,7 +24,7 @@ cmp.setup({
 
   experimental = {
     native_menu = false,
-    ghost_text = true
+    ghost_text = false
   },
 
   documentation = {
@@ -81,8 +81,8 @@ cmp.setup({
       {"i", "s"}
     ),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<Right>'] = cmp.mapping.confirm({select = true}),
-    ['<CR>'] = cmp.mapping.confirm({select = true})
+    ['<Right>'] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
+    ['<CR>'] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
   },
 
   sources = {

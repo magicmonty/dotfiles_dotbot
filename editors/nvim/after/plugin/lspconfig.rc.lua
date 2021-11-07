@@ -2,6 +2,11 @@
 local status, nvim_lsp = pcall(require, "lspconfig")
 if (not status) then return end
 
+local on_init = function(client)
+  if client.config.flags then
+    client.config.flags.allow_incremental_sync = true
+  end
+end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -94,6 +99,7 @@ end
 -- Typescript support
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
+  on_init = on_init,
   capabilities = capabilities,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
 }
@@ -110,6 +116,7 @@ local luadev = require("lua-dev").setup({
   },
   lspconfig = {
     on_attach = on_attach,
+    on_init = on_init,
     capabilities = capabilities,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
     settings = {
@@ -136,6 +143,7 @@ local omnisharp_bin = "/usr/bin/omnisharp"
 
 nvim_lsp.omnisharp.setup {
   on_attach = on_attach,
+  on_init = on_init,
   capabilities = capabilities,
   cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) };
   filetypes = { "cs" }
@@ -144,7 +152,22 @@ nvim_lsp.omnisharp.setup {
 -- Clojure support
 nvim_lsp.clojure_lsp.setup {
   on_attach = on_attach,
+  on_init = on_init,
   capabilities = capabilities
+}
+
+-- Emmet support
+local emmet_capabilities = vim.lsp.protocol.make_client_capabilities()
+emmet_capabilities.textDocument.completion.completionItem.snippetSupport = true
+nvim_lsp.emmet_ls.setup {
+  -- on_attach = on_attach,
+  on_init = on_init,
+  capabilities = emmet_capabilities,
+  filetypes = { "html", "css", "scss" },
+  root_dir = function()
+    return vim.loop.cwd()
+  end,
+  settings = {}
 }
 
 -- LSP signs default
@@ -153,22 +176,30 @@ vim.fn.sign_define(
   { texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" }
 )
 vim.fn.sign_define(
-  "DiagnosticSignWarning",
-  { texthl = "DiagnosticSignWarning", text = "", numhl = "DiagnosticSignWarning" }
+  "DiagnosticSignWarn",
+  { texthl = "DiagnosticSignWarn", text = "", numhl = "DiagnosticSignWarn" }
 )
-vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" })
 vim.fn.sign_define(
-  "DiagnosticSignInformation",
-  { texthl = "DiagnosticSignInformation", text = "", numhl = "DiagnosticSignInformation" }
+  "DiagnosticSignHint",
+  { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" }
+)
+vim.fn.sign_define(
+  "DiagnosticSignInfo",
+  { texthl = "DiagnosticSignInfo", text = "", numhl = "DiagnosticSignInformation" }
 )
 
 -- LSP Enable diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = false,
-  underline = true,
-  signs = true,
-  update_in_insert = false,
-})
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = {
+      prefix = "»",
+      spacing = 4
+    },
+    underline = true,
+    signs = true,
+    update_in_insert = false,
+  }
+)
 
 local pop_opts = { border = "rounded", max_width = 80 }
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, pop_opts)

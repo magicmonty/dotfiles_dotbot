@@ -30,6 +30,7 @@ Plug 'folke/lsp-colors.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'folke/trouble.nvim'
 Plug 'folke/lua-dev.nvim'
+Plug 'aca/emmet-ls'
 
 -- Treesitter
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
