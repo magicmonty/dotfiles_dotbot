@@ -1,13 +1,13 @@
 -- vim: foldlevel=99
 local status, lualine = pcall(require, "lualine")
-if (not status) then return end
+if not status then return end
 
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = 'nord',
-    section_separators = {'', ''},
-    component_separators = {'', ''},
+    theme = 'nightfox',
+    section_separators = {left = '',  right = ''},
+    component_separators = {left = '', right = ''},
     disabled_filetypes = {}
   },
   sections = {
@@ -15,15 +15,15 @@ lualine.setup {
     lualine_b = {'branch'},
     lualine_c = {'filename'},
     lualine_x = {
-      { 
-        'diagnostics', 
-        sources = {"nvim_lsp"}, 
+      {
+        'diagnostics',
+        sources = {"nvim_lsp"},
         symbols = {
-          error = ' ', 
-          warn = ' ', 
-          info = ' ', 
+          error = ' ',
+          warn = ' ',
+          info = ' ',
           hint = ' '
-        } 
+        }
       },
       'encoding',
       'filetype'
@@ -40,5 +40,5 @@ lualine.setup {
     lualine_z = {}
   },
   tabline = {},
-  extensions = {'fugitive'}
+  extensions = {}
 }

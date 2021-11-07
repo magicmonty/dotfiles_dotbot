@@ -95,3 +95,8 @@ map('s', '<C-S-Down>', '<C-G><C-Down><C-G>', { silent = true, noremap = false })
 map('n', '<leader>bn', ':bn<cr>', silent)
 map('n', '<leader>bp', ':bp<cr>', silent)
 map('n', '<leader>bd', ':bd<cr>', silent)
+
+vim.api.nvim_set_keymap('n', '<', ']', {})
+vim.api.nvim_set_keymap('x', '<', ']', {})
+vim.api.nvim_set_keymap('n', '>', ']', {})
+vim.api.nvim_set_keymap('x', '>', ']', {})

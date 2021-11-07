@@ -24,7 +24,6 @@
   #TERM: alacritty
 
 
-background_opacity: 0.95
 window:
   # Window dimensions (changes require restart)
   #
@@ -183,12 +182,44 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
-# Colors (Palenight)
+# Nightfox Alacritty Colors
+# Style: nightfox
+# Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nightfox/nightfox_alacritty.yml
 colors:
   # Default colors
   primary:
-    background: '0x292d3e'
-    foreground: '0xd0d0d0'
+    background: '0x192330'
+    foreground: '0xcdcecf'
+  # Normal colors
+  normal:
+    black:   '0x393b44'
+    red:     '0xc94f6d'
+    green:   '0x81b29a'
+    yellow:  '0xdbc074'
+    blue:    '0x719cd6'
+    magenta: '0x9d79d6'
+    cyan:    '0x63cdcf'
+    white:   '0xdfdfe0'
+  # Bright colors
+  bright:
+    black:   '0x475072'
+    red:     '0xd6616b'
+    green:   '0x58cd8b'
+    yellow:  '0xffe37e'
+    blue:    '0x84cee4'
+    magenta: '0xb8a1e3'
+    cyan:    '0x59f0ff'
+    white:   '0xf2f2f2'
+  indexed_colors:
+    - { index: 16, color: '0xf4a261' }
+    - { index: 17, color: '0xd67ad2' }
+
+# Colors (Palenight)
+# colors:
+  # Default colors
+  # primary:
+    # background: '0x292d3e'
+    # foreground: '0xd0d0d0'
 
     # Bright and dim foreground colors
     #
@@ -237,22 +268,22 @@ colors:
     #  foreground: '#1d1f21'
 
   # Keyboard regex hints
-  hints:
+  # hints:
     # First character in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
-    start:
-      foreground: '#1d1f21'
-      background: '#e9ff5e'
+    # start:
+      # foreground: '#1d1f21'
+      # background: '#e9ff5e'
 
     # All characters after the first one in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
-    end:
-      foreground: '#e9ff5e'
-      background: '#1d1f21'
+    # end:
+      # foreground: '#e9ff5e'
+      # background: '#1d1f21'
 
   # Line indicator
   #
@@ -275,26 +306,26 @@ colors:
   #  background: CellForeground
 
   # Normal colors
-  normal:
-    black:   '0x292d3e'
-    red:     '0xf07178'
-    green:   '0xc3e88d'
-    yellow:  '0xffcb6b'
-    blue:    '0x82aaff'
-    magenta: '0xc792ea'
-    cyan:    '0x89ddff'
-    white:   '0xd0d0d0'
+  # normal:
+  #   black:   '0x292d3e'
+  #   red:     '0xf07178'
+  #   green:   '0xc3e88d'
+  #   yellow:  '0xffcb6b'
+  #   blue:    '0x82aaff'
+  #   magenta: '0xc792ea'
+  #   cyan:    '0x89ddff'
+    # white:   '0xd0d0d0'
 
   # Bright colors
-  bright:
-    black:   '0x434758'
-    red:     '0xff8b92'
-    green:   '0xddffa7'
-    yellow:  '0xffe585'
-    blue:    '0x9cc4ff'
-    magenta: '0xe1acff'
-    cyan:    '0xa3f7ff'
-    white:   '0xffffff'
+  # bright:
+  #   black:   '0x434758'
+  #   red:     '0xff8b92'
+  #   green:   '0xddffa7'
+  #   yellow:  '0xffe585'
+  #   blue:    '0x9cc4ff'
+  #   magenta: '0xe1acff'
+  #   cyan:    '0xa3f7ff'
+  #   white:   '0xffffff'
 
   # Dim colors
   #

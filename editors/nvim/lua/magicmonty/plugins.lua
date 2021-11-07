@@ -3,17 +3,18 @@ vim.call("plug#begin", "~/.config/nvim-data/plugged")
 
 -- Git support
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 
 -- Bracket auto closing
 Plug 'cohama/lexima.vim'
 
 -- Color scheme
-Plug 'tjdevries/colorbuddy.nvim'
-Plug 'magicmonty/palebuddy.nvim'
+-- Plug 'tjdevries/colorbuddy.nvim'
+-- Plug 'magicmonty/palebuddy.nvim'
+Plug 'EdenEast/nightfox.nvim'
 
 -- Nice status line
-Plug 'hoob3rt/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 
 -- Auto comment line
 Plug 'tpope/vim-commentary'
@@ -70,6 +71,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'amadeus/vim-convert-color-to'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'kassio/neoterm'
 
 Plug 'github/copilot.vim'
 
