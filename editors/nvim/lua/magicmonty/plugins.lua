@@ -1,80 +1,77 @@
-local Plug = vim.fn["plug#"]
-vim.call("plug#begin", "~/.config/nvim-data/plugged")
+require('magicmonty.plug').init(function(use)
+  -- Git support
+  use 'tpope/vim-fugitive'
+  use 'lewis6991/gitsigns.nvim'
 
--- Git support
-Plug 'tpope/vim-fugitive'
-Plug 'lewis6991/gitsigns.nvim'
+  -- Bracket auto closing
+  use 'cohama/lexima.vim'
 
--- Bracket auto closing
-Plug 'cohama/lexima.vim'
+  -- Color scheme
+  use 'EdenEast/nightfox.nvim'
 
--- Color scheme
-Plug 'EdenEast/nightfox.nvim'
+  -- Nice status line
+  use 'nvim-lualine/lualine.nvim'
 
--- Nice status line
-Plug 'nvim-lualine/lualine.nvim'
+  -- Auto comment line
+  use 'tpope/vim-commentary'
 
--- Auto comment line
-Plug 'tpope/vim-commentary'
+  -- LSP/Completion config
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/cmp-nvim-lua'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/nvim-cmp'
+  use 'ray-x/cmp-treesitter'
+  use 'glepnir/lspsaga.nvim'
+  use 'folke/lsp-colors.nvim'
+  use 'onsails/lspkind-nvim'
+  use 'folke/trouble.nvim'
+  use 'folke/lua-dev.nvim'
 
--- LSP/Completion config
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lua'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'ray-x/cmp-treesitter'
-Plug 'glepnir/lspsaga.nvim'
-Plug 'folke/lsp-colors.nvim'
-Plug 'onsails/lspkind-nvim'
-Plug 'folke/trouble.nvim'
-Plug 'folke/lua-dev.nvim'
+  -- Treesitter
+  use('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+  use 'nvim-treesitter/nvim-treesitter-refactor'
+  use('nvim-treesitter/nvim-treesitter-textobjects', { branch = '0.5-compat' })
+  use 'nvim-treesitter/nvim-treesitter-angular'
+  use 'p00f/nvim-ts-rainbow'
+  use 'David-Kunz/treesitter-unit'
 
--- Treesitter
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
-Plug('nvim-treesitter/nvim-treesitter-textobjects', { branch = '0.5-compat' })
-Plug 'nvim-treesitter/nvim-treesitter-angular'
-Plug 'p00f/nvim-ts-rainbow'
-Plug 'David-Kunz/treesitter-unit'
+  -- Snippets
+  use "SirVer/UltiSnips"
+  use "quangnguyen30192/cmp-nvim-ultisnips"
 
--- Snippets
-Plug "SirVer/UltiSnips"
-Plug "quangnguyen30192/cmp-nvim-ultisnips"
+  -- Telescope
+  use 'nvim-lua/popup.nvim'
+  use 'nvim-lua/plenary.nvim'
+  use 'nvim-telescope/telescope.nvim'
+  use 'kyazdani42/nvim-web-devicons'
+  use 'fhill2/telescope-ultisnips.nvim'
 
--- Telescope
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'fhill2/telescope-ultisnips.nvim'
+  use('groenewege/vim-less', { ['for'] = 'less' })
 
-Plug('groenewege/vim-less', { ['for'] = 'less' })
+  -- Clojure / Overtone
+  use 'guns/vim-clojure-static'
+  use 'guns/vim-clojure-highlight'
+  use 'tpope/vim-fireplace'
+  use 'tpope/vim-classpath'
+  use 'tpope/vim-sexp-mappings-for-regular-people'
+  use 'kien/rainbow_parentheses.vim'
+  use 'guns/vim-sexp'
 
--- Clojure / Overtone
-Plug 'guns/vim-clojure-static'
-Plug 'guns/vim-clojure-highlight'
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-classpath'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'guns/vim-sexp'
+  -- Sonic Pi
+  use 'dermusikman/sonicpi.vim'
 
--- Sonic Pi
-Plug 'dermusikman/sonicpi.vim'
+  -- Other
+  use 'tpope/vim-surround'
+  use 'tpope/vim-repeat'
+  use 'editorconfig/editorconfig-vim'
+  use 'amadeus/vim-convert-color-to'
+  use 'lukas-reineke/indent-blankline.nvim'
+  use 'kassio/neoterm'
+  use 'norcalli/nvim-colorizer.lua'
+  use 'rcarriga/nvim-notify'
 
--- Other
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'amadeus/vim-convert-color-to'
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'kassio/neoterm'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'rcarriga/nvim-notify'
-
-Plug 'github/copilot.vim'
-
-vim.call "plug#end"
+  use 'github/copilot.vim'
+end)
 

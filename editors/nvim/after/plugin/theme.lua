@@ -25,7 +25,12 @@ vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
 
-require("indent_blankline").setup({
+
+local indent_blankline
+status, indent_blankline = pcall(require, "indent_blankline")
+if not status then return end
+
+indent_blankline.setup({
   show_end_of_line = true,
   space_char_blank_line = " ",
   show_current_context = true,
