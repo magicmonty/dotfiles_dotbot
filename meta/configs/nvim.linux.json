@@ -18,7 +18,7 @@
       "~/.config/nvim/after": "editors/nvim/after",
       "~/.config/nvim/ginit.vim": "editors/nvim/ginit.vim",
       "~/.config/nvim/init.lua": "editors/nvim/init.lua",
-      "~/.config/nvim/autoload/plug.vim" : "editors/nvim/autoload/plug.vim",
+      "~/.local/share/nvim/site/autoload/plug.vim": "editors/vim/vim/autoload/plug.vim",
       "~/.local/share/applications/vim.desktop": "windowmanager/applications/vim.desktop",
       "~/.local/share/applications/text.desktop": "windowmanager/applications/vim.desktop"
     }

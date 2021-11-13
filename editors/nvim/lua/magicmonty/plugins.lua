@@ -47,6 +47,7 @@ require('magicmonty.plug').init(function(use)
   use 'nvim-telescope/telescope.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'fhill2/telescope-ultisnips.nvim'
+  use 'jvgrootveld/telescope-zoxide'
 
   use('groenewege/vim-less', { ['for'] = 'less' })
 

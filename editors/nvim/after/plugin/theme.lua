@@ -14,7 +14,9 @@ if status then
     },
     hlgroups = {
       IndentBlanklineChar = { fg = '${comment}' },
-      IndentBlanklineContextChar = { fg= '${pink}' }
+      IndentBlanklineContextChar = { fg= '${pink}' },
+      IndentBlanklineSpaceChar = { fg= '${comment}' },
+      IndentBlanklineSpaceCharBlankLine = { fg= 'NONE' }
     }
   })
 

@@ -7,10 +7,37 @@ local actions = require("telescope.actions")
 
 telescope.setup {
   defaults = {
-    prompt_prefix = "$ ",
+    preview = {
+      timeout = 500,
+    },
+    prompt_prefix = "❯ ",
+    selection_caret = "❯ ",
     sorting_strategy = "ascending",
+    color_devicons = true,
+    dynamic_preview_title = true,
     layout_config = {
-      prompt_position = "top"
+      prompt_position = "bottom",
+      horizontal = {
+        width_padding = 0.04,
+        height_padding = 0.1,
+        preview_width = 0.6,
+      },
+      vertical = {
+        width_padding = 0.04,
+        height_padding = 1,
+        preview_height = 0.5,
+      },
+    },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--line-number",
+      "--with-filename",
+      "--column",
+      "--smart-case",
+      "--hidden",
+      "--follow"
     },
     winblend = 10,
     mappings = {
@@ -22,9 +49,10 @@ telescope.setup {
 }
 
 require("telescope").load_extension("ultisnips")
+require("telescope").load_extension("zoxide")
 
 local opts = { silent = true, noremap = true }
-map("n", "<leader>ff", ":lua require('telescope.builtin').find_files()<cr>", opts)
+map("n", "<leader>ff", ":lua require('magicmonty.telescope').project_files()<cr>", opts)
 map("n", "<leader>fb", ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", opts)
 map("n", "<leader>fh", ":lua require('telescope.builtin').help_tags()<cr>", opts)
 map("n", "<leader>fs", ":lua require('telescope').extensions.ultisnips.ultisnips()<cr>", opts)
@@ -32,5 +60,6 @@ map("n", "<leader>fn", ":lua require('telescope').extensions.notify.notify()<cr>
 map("n", "<leader>bb", ":lua require('telescope.builtin').buffers()<cr>", opts)
 map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
 map("n", "<leader>en", ":lua require('magicmonty.telescope').search_config()<cr>", opts)
+map("n", "<leader>cd", ":lua require'telescope'.extensions.zoxide.list{results_title='Z Directories', prompt_title='Z Prompt'}<cr>", opts)
 map("n", "<leader>.",  ":lua require('telescope.builtin').file_browser()<cr>", opts)
 

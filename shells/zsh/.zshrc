@@ -268,4 +268,15 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     ;;
 esac
 
+eval "$(/usr/bin/zoxide init zsh)"
+__zoxide_unset 'cdi'
+function cdi() {
+    __zoxide_zi "$@"
+}
+
+__zoxide_unset 'cd'
+function cd() {
+    __zoxide_z "$@"
+}
+
 alias luamake=/home/mgondermann/src/lua-language-server/3rd/luamake/luamake

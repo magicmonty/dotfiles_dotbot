@@ -67,7 +67,7 @@ opt.softtabstop = 2 -- Edit as if tabs are 2 characters wide.
 opt.autoindent = true
 opt.smartindent = true
 opt.wrap = false
-opt.backspace = { "start", "eol", "indent" }
+opt.backspace = "eol,indent,start"
 
 -- Finding files - Search down into subfolders
 opt.path = opt.path + "**"
