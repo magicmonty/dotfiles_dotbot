@@ -63,6 +63,13 @@ require('magicmonty.plug').init(function(use)
   -- Sonic Pi
   use 'dermusikman/sonicpi.vim'
 
+  -- Orgmode
+  use 'kristijanhusak/orgmode.nvim'
+  use 'dhruvasagar/vim-table-mode'
+  -- use 'lukas-reineke/headlines.nvim'
+  use 'akinsho/org-bullets.nvim'
+  use ('michaelb/sniprun', { ['do'] = 'bash install.sh' })
+
   -- Other
   use 'tpope/vim-surround'
   use 'tpope/vim-repeat'

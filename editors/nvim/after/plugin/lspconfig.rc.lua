@@ -104,6 +104,15 @@ nvim_lsp.tsserver.setup {
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
 }
 
+-- Python support
+nvim_lsp.pylsp.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+  filetypes = { "python" },
+  single_file_support = true
+}
+
 -- Lua support
 local sumneko_root_path =  vim.fn.fnamemodify(vim.fn.exepath("terminal"), ":h:h") .. "/src/lua-language-server"
 local sumneko_binary =  sumneko_root_path .. "/bin/Linux/lua-language-server"

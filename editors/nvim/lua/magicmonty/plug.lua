@@ -18,7 +18,8 @@ M.init = function(init_plugins)
 
   -- Auto install when there are changes to plugins.lua
   augroup('plug_user_config', {
-    au({ 'BufWritePost', 'plugins.lua', 'source <afile> | PlugClean | PlugInstall' })
+    -- au({ 'BufWritePost', 'plugins.lua', 'source <afile> | PlugClean | PlugInstall' })
+    au({ 'BufWritePost', 'plugins.lua', 'source <afile>' })
   })
 
   local plugin_path = fn.stdpath('data')..'/plugged'

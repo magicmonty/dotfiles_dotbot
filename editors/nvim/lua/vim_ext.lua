@@ -1,7 +1,9 @@
 -- vim: foldlevel=99:
 local cmd = vim.cmd
 
-local map = function(mode, leftHandSide, rightHandSide, opts)
+local M = {}
+
+M.map = function(mode, leftHandSide, rightHandSide, opts)
   local options = { noremap = true }
   if opts then
     options = vim.tbl_extend('force', options, opts)
@@ -10,7 +12,7 @@ local map = function(mode, leftHandSide, rightHandSide, opts)
   vim.api.nvim_set_keymap(mode, leftHandSide, rightHandSide, options)
 end
 
-local hi = function(group, opts)
+M.hi = function(group, opts)
 	local c = "highlight " .. group
 
   for k, v in pairs(opts) do
@@ -20,7 +22,7 @@ local hi = function(group, opts)
   cmd(c)
 end
 
-local init_autocmd = function(bufferOnly)
+M.init_autocmd = function(bufferOnly)
   if bufferOnly then
     cmd 'autocmd! <buffer>'
   else
@@ -28,26 +30,20 @@ local init_autocmd = function(bufferOnly)
   end
 end
 
-local au = function(autocmd)
+M.au = function(autocmd)
   cmd('autocmd ' .. table.concat(autocmd, ' '))
 end
 
-local augroup = function(name, autocmds, bufferOnly)
+M.augroup = function(name, autocmds, bufferOnly)
   cmd('augroup ' .. name)
 
-  init_autocmd(bufferOnly)
+  M.init_autocmd(bufferOnly)
 
   for _, autocmd in ipairs(autocmds) do
-    au(autocmd)
+    M.au(autocmd)
   end
 
   cmd 'augroup END'
 end
 
-return {
-  map = map,
-  hi = hi,
-  init_autocmd = init_autocmd,
-  au = au,
-  augroup = augroup
-}
+return M

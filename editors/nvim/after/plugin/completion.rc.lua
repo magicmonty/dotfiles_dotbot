@@ -111,6 +111,7 @@ cmp.setup({
         path = "ﱮ",
         buffer = "﬘",
         ultisnips = "",
+        orgmode = "",
       })[entry.source.name]
 
       return vim_item
