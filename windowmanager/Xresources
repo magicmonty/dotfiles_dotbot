@@ -37,6 +37,26 @@ Xautolock.notifier: /usr/bin/notify-send "Locking now..."
 #define nord14 #A3BE8C
 #define nord15 #B48EAD
 
+#define nightfox_background #192330
+#define nightfox_foreground #cdcecf
+#define nightfox0 #393b44
+#define nightfox1 #c94f6d
+#define nightfox2 #81b29a
+#define nightfox3 #dbc074
+#define nightfox4 #719cd6
+#define nightfox5 #9d79d6
+#define nightfox6 #63cdcf
+#define nightfox7 #dfdfe0
+#define nightfox8 #475072
+#define nightfox9 #d6616b
+#define nightfox10 #58cd8b
+#define nightfox11 #ffe37e
+#define nightfox12 #84cee4
+#define nightfox13 #b8a1e3
+#define nightfox14 #59f0ff
+#define nightfox15 #f2f2f2
+
+
 !! GruvBox
 !! *background:             #282828
 !! *foreground:             #ebdbb2
@@ -48,11 +68,11 @@ Xautolock.notifier: /usr/bin/notify-send "Locking now..."
 !! *pointerColorForeground: #ebdbb2
 !! *cursor:                 #ebdbb2
 
-*foreground: nord4
-*background: nord0
-*cursorColor: nord4
+*foreground: nightfox_foreground
+*background: nightfox_foreground
+*cursorColor: nightfox4
 *fading: 35
-*fadeColor: nord3
+*fadeColor: nightfox3
 
 Xcursor.theme: xcursor-breeze
 
@@ -61,53 +81,53 @@ Xcursor.theme: xcursor-breeze
 !! black dark/light
 !! *color0: #282828
 !! *color8: #928374
-*color0: nord1
-*color8: nord3
+*color0: nightfox0
+*color8: nightfox8
 
 !! red dark/light
 !! *color1: #cc241d
 !! *color9: #fb4934
-*color1: nord11
-*color9: nord11
+*color1: nightfox1
+*color9: nightfox9
 
 !! green dark/light
 !! *color2: #98971a
 !! *color10: #b8bb26
-*color2: nord14
-*color10: nord14
+*color2: nightfox2
+*color10: nightfox10
 
 !! yellow dark/light
 !! *color3: #d79921
 !! *color11: #fabd2f
-*color3: nord13
-*color11: nord13
+*color3: nightfox3
+*color11: nightfox11
 
 !! blue dark/light
 !! *color4: #458588
 !! *color12: #83a598
-*color4: nord9
-*color12: nord9
+*color4: nightfox4
+*color12: nightfox12
 
 !! magenta dark/light
 !! *color5: #b16286
 !! *color13: #d3869b
-*color5: nord15
-*color13: nord15
+*color5: nightfox5
+*color13: nightfox13
 
 !! cyan dark/light
 !! *color6: #689d6a
 !! *color14: #8ec07c
-*color6: nord8
-*color14: nord7
+*color6: nightfox6
+*color14: nightfox14
 
 !! white dark/light
 !! *color7: #a89984
 !! *color15: #ebdbb2
-*color7: nord5
-*color15: nord6
+*color7: nightfox7
+*color15: nightfox15
 
-*orange_dark:  #d65d0e
-*orange_light: #fe8019
+*orange_dark:  #e28940
+*orange_light: #f6a878
 
 URxvt.color24:  #076678
 URxvt.color66:  #427b58
@@ -146,13 +166,10 @@ URxvt.depth:		            32
 URxvt.scrollBar:	          false
 URxvt.mouseWheelScrollPage: true
 URxvt.cursorBlink:	        true
-!! URxvt.background:           [70]#282828
-URxvt.background:           [95]#2e3440
-!! URxvt.foreground:           #ebdbb2
-URxvt.foreground:           nord4
+URxvt.background:           nightfox_background
+URxvt.foreground:           nightfox_foreground
 URxvt.saveLines:            5000
-!! URxvt.cursorColor:	        #ebdbb2
-URxvt.cursorColor:	        nord4
+URxvt.cursorColor:	        nightfox_foreground
 URxvt.cursorUnderline:      false
 URxvt.letterSpace: -1
 
@@ -320,7 +337,7 @@ URxvt.keysym.S-M-C-F12:  \033[24;8~
 !! rofi.color-urgent:	#002b37, #da4281, #003643, #008ed4, #890661
 
 !! Nord
-rofi.color-window:    nord0,   nord0,   nord0
+rofi.color-window:    nightfox_background,   nightfox_background,   nightfox_background
 
 rofi.fake-transparency:	true
 rofi.lines:		          10

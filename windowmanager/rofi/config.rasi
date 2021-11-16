@@ -5,7 +5,7 @@ configuration {
 	case-sensitive: false;
 	combi-modi: "run,drun";
 	dpi: 96;
-	theme: "~/.config/rofi/palenight.rasi";
+	theme: "~/.config/rofi/nightfox.rasi";
 	display-window: "";
 	display-windowcd: "";
 	display-run: "ﰌ";
