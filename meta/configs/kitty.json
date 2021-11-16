@@ -1,0 +1,17 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/.config/kitty/kitty.conf": "apps/kitty/kitty.conf",
+      "~/.config/kitty/nightfox.conf": "apps/kitty/nightfox.conf"
+    }
+  }
+]
