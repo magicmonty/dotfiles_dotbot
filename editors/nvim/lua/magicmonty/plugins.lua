@@ -34,6 +34,7 @@ require('magicmonty.plug').init(function(use)
   use 'nvim-treesitter/nvim-treesitter-refactor'
   use('nvim-treesitter/nvim-treesitter-textobjects', { branch = '0.5-compat' })
   use 'nvim-treesitter/nvim-treesitter-angular'
+  use 'nvim-treesitter/playground'
   use 'p00f/nvim-ts-rainbow'
   use 'David-Kunz/treesitter-unit'
 
