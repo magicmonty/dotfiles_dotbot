@@ -195,6 +195,26 @@ nvim_lsp.angularls.setup {
   capabilities = capabilities,
 }
 
+-- JSON with schema support
+nvim_lsp.jsonls.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+      end
+    }
+  },
+  schemas = {
+    {
+      filematch = { ".vimspector.json" },
+      url = "https://puremourning.github.io/vimspector/schema/vimspector.schema.json"
+    }
+  }
+}
+
 -- LSP signs default
 vim.fn.sign_define(
   "DiagnosticSignError",
@@ -215,7 +235,8 @@ vim.fn.sign_define(
 
 -- LSP Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
     virtual_text = {
       prefix = "»",
       severity_limit = 'Warning',
