@@ -91,14 +91,14 @@ cmp.setup({
     { name = 'treesitter' },
     { name = 'ultisnips' },
     { name = 'path' },
-    {
-      name = 'buffer',
-      opts = {
-        get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
-        end
-      }
-    }
+    -- {
+    --   name = 'buffer',
+    --   opts = {
+    --     get_bufnrs = function()
+    --       return vim.api.nvim_list_bufs()
+    --     end
+    --   }
+    -- }
   },
 
   formatting = {
