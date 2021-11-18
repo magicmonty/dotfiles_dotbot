@@ -67,7 +67,6 @@ require('magicmonty.plug').init(function(use)
   -- Orgmode
   use 'kristijanhusak/orgmode.nvim'
   use 'dhruvasagar/vim-table-mode'
-  -- use 'lukas-reineke/headlines.nvim'
   use 'akinsho/org-bullets.nvim'
   use ('michaelb/sniprun', { ['do'] = 'bash install.sh' })
 
@@ -84,3 +83,4 @@ require('magicmonty.plug').init(function(use)
   use 'github/copilot.vim'
 end)
 
+-- vim: foldlevel=99
