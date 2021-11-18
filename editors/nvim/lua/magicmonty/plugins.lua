@@ -85,6 +85,7 @@ require('magicmonty.plug').init(function(use)
   use 'rcarriga/nvim-dap-ui'
   use 'nvim-telescope/telescope-dap.nvim'
   use 'nvim-telescope/telescope-project.nvim'
+  use 'nvim-telescope/telescope-file-browser.nvim'
 
 
   use 'github/copilot.vim'

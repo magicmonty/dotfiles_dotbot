@@ -59,6 +59,7 @@ require("telescope").load_extension("ultisnips")
 require("telescope").load_extension("zoxide")
 require("telescope").load_extension("dap")
 require("telescope").load_extension("project")
+require("telescope").load_extension("file_browser")
 
 local opts = { silent = true, noremap = true }
 map("n", "<leader>ff", ":lua require('magicmonty.telescope').project_files()<cr>", opts)
@@ -71,5 +72,5 @@ map("n", "<leader>bb", ":lua require('telescope.builtin').buffers()<cr>", opts)
 map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
 map("n", "<leader>en", ":lua require('magicmonty.telescope').search_config()<cr>", opts)
 map("n", "<leader>cd", ":lua require'telescope'.extensions.zoxide.list{results_title='Z Directories', prompt_title='Z Prompt'}<cr>", opts)
-map("n", "<leader>.",  ":lua require('telescope.builtin').file_browser()<cr>", opts)
+map("n", "<leader>.",  ":lua require('telescope').extensions.file_browser.file_browser()<cr>", opts)
 
