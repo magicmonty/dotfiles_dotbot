@@ -6,6 +6,13 @@ local map=require("vim_ext").map
 local actions = require("telescope.actions")
 
 telescope.setup {
+  extensions = {
+    project = {
+      base_dirs = {
+        { path = "~/src", max_depth = 2 }
+      }
+    }
+  },
   defaults = {
     preview = {
       timeout = 500,
@@ -51,6 +58,7 @@ telescope.setup {
 require("telescope").load_extension("ultisnips")
 require("telescope").load_extension("zoxide")
 require("telescope").load_extension("dap")
+require("telescope").load_extension("project")
 
 local opts = { silent = true, noremap = true }
 map("n", "<leader>ff", ":lua require('magicmonty.telescope').project_files()<cr>", opts)
@@ -58,6 +66,7 @@ map("n", "<leader>fb", ":lua require('telescope.builtin').current_buffer_fuzzy_f
 map("n", "<leader>fh", ":lua require('telescope.builtin').help_tags()<cr>", opts)
 map("n", "<leader>fs", ":lua require('telescope').extensions.ultisnips.ultisnips()<cr>", opts)
 map("n", "<leader>fn", ":lua require('telescope').extensions.notify.notify()<cr>", opts)
+map("n", "<leader>fp", ":lua require('telescope').extensions.project.project({display_type = 'minimal'})<cr>", opts)
 map("n", "<leader>bb", ":lua require('telescope.builtin').buffers()<cr>", opts)
 map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
 map("n", "<leader>en", ":lua require('magicmonty.telescope').search_config()<cr>", opts)
