@@ -80,6 +80,12 @@ require('magicmonty.plug').init(function(use)
   use 'norcalli/nvim-colorizer.lua'
   use 'rcarriga/nvim-notify'
 
+  -- Debugging support
+  use 'mfussenegger/nvim-dap'
+  use 'rcarriga/nvim-dap-ui'
+  use 'nvim-telescope/telescope-dap.nvim'
+
+
   use 'github/copilot.vim'
 end)
 

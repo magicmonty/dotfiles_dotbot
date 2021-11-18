@@ -50,6 +50,7 @@ telescope.setup {
 
 require("telescope").load_extension("ultisnips")
 require("telescope").load_extension("zoxide")
+require("telescope").load_extension("dap")
 
 local opts = { silent = true, noremap = true }
 map("n", "<leader>ff", ":lua require('magicmonty.telescope').project_files()<cr>", opts)

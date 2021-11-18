@@ -214,8 +214,8 @@ fi
 
 if [ -e ~/.dotnet/tools ]; then
   export PATH=~/.dotnet/tools:$PATH
-  export DOTNET_CLI_TELEMETRY_OPTOUT=1
 fi
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 
 export DEFAULT_USER=mgondermann

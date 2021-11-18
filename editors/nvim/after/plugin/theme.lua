@@ -16,7 +16,9 @@ if status then
       IndentBlanklineChar = { fg = '${comment}' },
       IndentBlanklineContextChar = { fg= '${pink}' },
       IndentBlanklineSpaceChar = { fg= '${comment}' },
-      IndentBlanklineSpaceCharBlankLine = { fg= 'NONE' }
+      IndentBlanklineSpaceCharBlankLine = { fg= 'NONE' },
+      DapBreakpointSign = { fg = '${red}' },
+      DapBreakpointLine = { bg = '${diff.delete}' },
     }
   })
 
