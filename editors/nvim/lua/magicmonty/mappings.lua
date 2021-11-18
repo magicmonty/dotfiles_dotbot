@@ -1,4 +1,5 @@
 local map = require("vim_ext").map
+local au = require("vim_ext").au
 local silent = { silent = true }
 local remap = { noremap = false }
 
@@ -95,6 +96,20 @@ map('s', '<C-S-Down>', '<C-G><C-Down><C-G>', { silent = true, noremap = false })
 map('n', '<leader>bn', ':bn<cr>', silent)
 map('n', '<leader>bp', ':bp<cr>', silent)
 map('n', '<leader>bd', ':bd<cr>', silent)
+
+
+-- Generic terminal maps
+map('t', '<C-w>h', '<C-\\><C-n><C-w>h')
+map('t', '<C-w><Left>', '<C-\\><C-n><C-w>h')
+map('t', '<C-w>l', '<C-\\><C-n><C-w>l')
+map('t', '<C-w><Right>', '<C-\\><C-n><C-w>l')
+map('t', '<C-w>j', '<C-\\><C-n><C-w>j')
+map('t', '<C-w><Down>', '<C-\\><C-n><C-w>j')
+map('t', '<C-w>k', '<C-\\><C-n><C-w>k')
+map('t', '<C-w><Up>', '<C-\\><C-n><C-w>k')
+
+-- Remap <C-\><C-n> to <Esc> in terminal mode
+au({'TermOpen', '*', 'tnoremap <Esc> <C-\\><C-n>'})
 
 vim.api.nvim_set_keymap('n', '<', ']', {})
 vim.api.nvim_set_keymap('x', '<', ']', {})

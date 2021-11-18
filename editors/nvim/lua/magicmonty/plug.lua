@@ -6,7 +6,7 @@ local use = fn['plug#']
 
 local M = {}
 
-function bootstrap()
+local function bootstrap()
   local data_dir = fn.stdpath('data')..'/site/autoload/plug.vim'
   if fn.empty(fn.glob(data_dir)) > 0 then
     vim.fn.execute('!curl -fLo '..data_dir..' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')

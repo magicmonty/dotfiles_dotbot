@@ -76,7 +76,7 @@ require('magicmonty.plug').init(function(use)
   use 'editorconfig/editorconfig-vim'
   use 'amadeus/vim-convert-color-to'
   use 'lukas-reineke/indent-blankline.nvim'
-  use 'kassio/neoterm'
+  use 'voldikss/vim-floaterm'
   use 'norcalli/nvim-colorizer.lua'
   use 'rcarriga/nvim-notify'
 
