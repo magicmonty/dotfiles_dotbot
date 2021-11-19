@@ -216,7 +216,12 @@ if [ -e ~/.dotnet/tools ]; then
   export PATH=~/.dotnet/tools:$PATH
 fi
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+  reply=( "${(ps:\n:)completions}" )
+}
+compctl -K _dotnet_zsh_complete dotnet
 
 export DEFAULT_USER=mgondermann
 if [ -e "$TMUX" ]; then
@@ -276,7 +281,7 @@ function cdi() {
 
 __zoxide_unset 'cd'
 function cd() {
-    __zoxide_z "$@"
+   __zoxide_z "$@"
 }
 
 alias luamake=/home/mgondermann/src/lua-language-server/3rd/luamake/luamake

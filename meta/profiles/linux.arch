@@ -1,6 +1,5 @@
 arch_dependencies.base
 arch_dependencies.desktop
-defaultapps
 dev
 git
 tmux.linux

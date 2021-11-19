@@ -18,7 +18,6 @@
       "~/.config/nvim/after": "editors/nvim/after",
       "~/.config/nvim/ginit.vim": "editors/nvim/ginit.vim",
       "~/.config/nvim/init.lua": "editors/nvim/init.lua",
-      "~/.local/share/nvim/site/autoload/plug.vim": "editors/vim/vim/autoload/plug.vim",
       "~/.local/share/applications/vim.desktop": "windowmanager/applications/vim.desktop",
       "~/.local/share/applications/text.desktop": "windowmanager/applications/vim.desktop"
     }
@@ -35,7 +34,15 @@
         "stdin": true,
         "stdout": true,
         "stderr": true
+      },
+      {
+        "command": "yay --sudoloop --nodiffmenu --noeditmenu --noupgrademenu --nocleanmenu --noredownload --norebuild --useask --needed -S `cat ~/.dotfiles/editors/nvim/dependencies | grep -v '#'`",
+        "description": "installing language servers",
+        "stdin": true,
+        "stdout": true,
+        "stderr": true
       }
+
     ]
   }
 ]

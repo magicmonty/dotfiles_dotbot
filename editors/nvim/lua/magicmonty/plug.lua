@@ -23,7 +23,7 @@ M.init = function(init_plugins)
   })
 
   local plugin_path = fn.stdpath('data')..'/plugged'
-  vim.call('plug#begin', fn.glob(plugin_path))
+  vim.call('plug#begin', plugin_path)
 
   init_plugins(use)
 

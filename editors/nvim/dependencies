@@ -1,0 +1,11 @@
+dotnet-sdk
+netcoredbg
+lazygit
+lua-language-server
+typescript-language-server-bin
+python-lsp-server
+omnisharp-roslyn
+clojure-lsp-bin
+vscode-json-languageserver
+vscode-html-languageserver
+vscode-css-languageserver

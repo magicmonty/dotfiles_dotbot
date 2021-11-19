@@ -1,0 +1,24 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "shell": [
+      ["sudo npm install -g neovim", "Installing NodeJS NeoVim plugin"],
+      {
+        "command": "yay --sudoloop --nodiffmenu --noeditmenu --noupgrademenu --nocleanmenu --noredownload --norebuild --useask --needed -S `cat ~/.dotfiles/editors/nvim/dependencies | grep -v '#'`",
+        "description": "installing language servers",
+        "stdin": true,
+        "stdout": true,
+        "stderr": true
+      }
+
+    ]
+  }
+]

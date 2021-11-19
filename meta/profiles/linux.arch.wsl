@@ -1,0 +1,6 @@
+arch_dependencies.base
+dev
+git
+tmux.linux
+zsh
+nvim.linux

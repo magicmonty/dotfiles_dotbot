@@ -11,9 +11,10 @@ leiningen
 man
 nerd-fonts-mononoki
 neofetch
-neovim
+neovim-nightly-bin
 noto-fonts
 noto-fonts-emoji
+npm
 otf-font-awesome
 paccache-hook
 python
@@ -40,3 +41,4 @@ zsh-completions
 zsh-history-substring-search
 zsh-syntax-highlighting
 usbutils
+lua
