@@ -114,8 +114,8 @@ nvim_lsp.pylsp.setup {
 }
 
 -- Lua support
-local sumneko_root_path =  vim.fn.fnamemodify(vim.fn.exepath("terminal"), ":h:h") .. "/src/lua-language-server"
-local sumneko_binary =  sumneko_root_path .. "/bin/Linux/lua-language-server"
+local sumneko_root_path =  "/usr/bin/lua-language-server"
+local sumneko_binary =  "/usr/bin/lua-language-server"
 
 local luadev = require("lua-dev").setup({
   library = {
@@ -194,12 +194,25 @@ nvim_lsp.angularls.setup {
   on_init = on_init,
   capabilities = capabilities,
 }
+-- HTML support
+nvim_lsp.html.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+}
+-- CSS support
+nvim_lsp.cssls.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+}
 
 -- JSON with schema support
 nvim_lsp.jsonls.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
+  cmd = { "vscode-json-languageserver", "--stdio" },
   commands = {
     Format = {
       function()
@@ -207,45 +220,69 @@ nvim_lsp.jsonls.setup {
       end
     }
   },
-  schemas = {
-    {
-      filematch = { ".vimspector.json" },
-      url = "https://puremourning.github.io/vimspector/schema/vimspector.schema.json"
+  settings = {
+    json = {
+      schemas = {
+        {
+          fileMatch = { ".eslintrc.json", ".eslintrc" },
+          url = "https://json.schemastore.org/eslintrc.json"
+        },
+        {
+          fileMatch = {
+            ".prettierrc",
+            ".prettierrc.json",
+            "prettier.config.json"
+          },
+          url = "https://json.schemastore.org/prettierrc.json"
+        },
+        {
+          fileMatch = { "tsconfig*.json" },
+          url = "https://json.schemastore.org/tsconfig.json"
+        },
+        {
+          fileMatch = { "package.json" },
+          url = "https://json.schemastore.org/package.json"
+        },
+        {
+          fileMatch = { ".vimspector.json" },
+          url = "https://puremourning.github.io/vimspector/schema/vimspector.schema.json"
+        }
+      }
     }
-  }
+  },
 }
 
 -- LSP signs default
 vim.fn.sign_define(
-  "DiagnosticSignError",
-  { texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" }
+"DiagnosticSignError",
+{ texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" }
 )
 vim.fn.sign_define(
-  "DiagnosticSignWarn",
-  { texthl = "DiagnosticSignWarn", text = "", numhl = "DiagnosticSignWarn" }
+"DiagnosticSignWarn",
+{ texthl = "DiagnosticSignWarn", text = "", numhl = "DiagnosticSignWarn" }
 )
 vim.fn.sign_define(
-  "DiagnosticSignHint",
-  { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" }
+"DiagnosticSignHint",
+{ texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" }
 )
 vim.fn.sign_define(
-  "DiagnosticSignInfo",
-  { texthl = "DiagnosticSignInfo", text = "", numhl = "DiagnosticSignInformation" }
+"DiagnosticSignInfo",
+{ texthl = "DiagnosticSignInfo", text = "", numhl = "DiagnosticSignInformation" }
 )
 
 -- LSP Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    virtual_text = {
-      prefix = "»",
-      severity_limit = 'Warning',
-      spacing = 4
-    },
-    underline = true,
-    signs = true,
-    update_in_insert = false,
-  }
+vim.lsp.diagnostic.on_publish_diagnostics,
+{
+  virtual_text = {
+    prefix = "»",
+    severity_limit = 'Warning',
+    spacing = 4
+  },
+  underline = true,
+  signs = true,
+  update_in_insert = false,
+}
 )
 
 local pop_opts = { border = "rounded", max_width = 80 }
