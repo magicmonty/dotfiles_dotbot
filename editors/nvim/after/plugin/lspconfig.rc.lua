@@ -104,6 +104,20 @@ nvim_lsp.tsserver.setup {
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
 }
 
+-- Tailwind CSS support
+nvim_lsp.tailwindcss.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+}
+
+-- Vue support
+nvim_lsp.vuels.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+}
+
 -- Python support
 nvim_lsp.pylsp.setup {
   on_attach = on_attach,

@@ -10,7 +10,10 @@
   },
   {
     "shell": [
-      ["sudo npm install -g neovim", "Installing NodeJS NeoVim plugin"],
+      [
+        "sudo npm install -g neovim @tailwindcss/language-server vls",
+        "Installing NodeJS NeoVim plugin"
+      ],
       {
         "command": "yay --sudoloop --nodiffmenu --noeditmenu --noupgrademenu --nocleanmenu --noredownload --norebuild --useask --needed -S `cat ~/.dotfiles/editors/nvim/dependencies | grep -v '#'`",
         "description": "installing language servers",
@@ -18,7 +21,6 @@
         "stdout": true,
         "stderr": true
       }
-
     ]
   }
 ]
