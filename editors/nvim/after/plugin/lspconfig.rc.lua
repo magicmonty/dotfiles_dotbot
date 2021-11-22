@@ -79,7 +79,6 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- Adds UltiSnips support
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -88,6 +87,9 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'detail',
     'additionalTextEdits'
   }
+}
+capabilities.textDocument.codeAction = {
+  dynamicRegistration = true,
 }
 
 local hascmp,cmp = pcall(require, "cmp_nvim_lsp")
@@ -152,6 +154,7 @@ lsp_installer.on_server_ready(function(server)
     }
     opts.settings = {
       json = {
+        schemaDownload = { enable = true },
         schemas = {
           {
             description = "ESLint config",
@@ -181,6 +184,11 @@ lsp_installer.on_server_ready(function(server)
             description = "A JSON schema for ASP.net launchsettings.json files",
             fileMatch = { "launchsettings.json" },
             url = "https://json.schemastore.org/launchsettings.json"
+          },
+          {
+            description = "VSCode snippets",
+            fileMatch = { "**/snippets/*.json" },
+            url = "https://raw.githubusercontent.com/Yash-Singh1/vscode-snippets-json-schema/main/schema.json"
           }
         }
       }
