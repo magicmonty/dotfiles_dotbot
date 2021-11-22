@@ -1,4 +1,3 @@
--- vim: foldlevel=99:
 local status, treesitterConfigs = pcall(require, "nvim-treesitter.configs")
 if (not status) then return end
 
@@ -16,11 +15,12 @@ parser_config.org = {
 treesitterConfigs.setup {
   highlight = {
     enable = true,
-    disable = {},
+    disable = { "latex" },
+    additional_vim_regex_highlighting = true
   },
   indent = {
     enable = false,
-    disable = {},
+    disable = { "yaml" },
   },
   refactor = {
     highlight_definitions = { enable = true },
@@ -30,6 +30,17 @@ treesitterConfigs.setup {
     enable = true,
     extended_mode = true,
     max_file_lines = 1000
+  },
+  context_commentstring = {
+    enable = true,
+    config = {
+      typescript = "// %s",
+      css = "/* %s */",
+      scss = "/* %s */",
+      html = "<!-- %s -->",
+      vue = "<!-- %s -->",
+      json = ""
+    }
   },
   textobjects = {
     select = {
@@ -72,4 +83,6 @@ treesitterConfigs.setup {
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldlevelstart = 99
+vim.opt.foldnestmax = 5
+
+-- vim: foldlevel=99

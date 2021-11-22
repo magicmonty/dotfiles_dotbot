@@ -14,6 +14,7 @@ require('magicmonty.plug').init(function(use)
 
   -- Auto comment line
   use 'tpope/vim-commentary'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
 
   -- LSP/Completion config
   use 'neovim/nvim-lspconfig'
@@ -31,7 +32,7 @@ require('magicmonty.plug').init(function(use)
   use 'folke/lua-dev.nvim'
 
   -- Treesitter
-  use('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
+  use('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate', branch = '0.5-compat' })
   use 'nvim-treesitter/nvim-treesitter-refactor'
   use('nvim-treesitter/nvim-treesitter-textobjects', { branch = '0.5-compat' })
   use 'nvim-treesitter/nvim-treesitter-angular'
@@ -48,6 +49,7 @@ require('magicmonty.plug').init(function(use)
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
+  use('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
   use 'kyazdani42/nvim-web-devicons'
   use 'fhill2/telescope-ultisnips.nvim'
   use 'jvgrootveld/telescope-zoxide'
