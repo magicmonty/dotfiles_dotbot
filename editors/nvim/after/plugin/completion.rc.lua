@@ -14,14 +14,14 @@ local press = function(key)
 end
 
 local lspkind = require("lspkind")
+local luasnip = require("luasnip")
 
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body)
+      luasnip.lsp_expand(args.body)
     end
   },
-
   experimental = {
     native_menu = false,
     ghost_text = false
@@ -32,64 +32,40 @@ cmp.setup({
   },
 
   mapping = {
-    -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
-    -- ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
-    ['<Tab>'] = cmp.mapping(
-      function(fallback)
-        if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-          press("<C-R>=UltiSnips#ExpandSnippet()<CR>")
-        elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-          press("<Esc>:call UltiSnips#JumpForwards()<CR>")
-        elseif cmp.visible() then
-          cmp.select_next_item()
-        elseif has_words_before() then
-          press("<Tab>")
-        else
-          fallback()
-        end
-      end,
-      { "i", "s" }),
-    ['<S-Tab>'] = cmp.mapping(
-      function(fallback)
-        if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-          press("<Esc>:call UltiSnips#JumpBackwards()<CR>")
-        elseif cmp.visible() then
-          cmp.select_prev_item()
-        else
-          fallback()
-        end
-      end,
-      { "i", "s" }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end,
+    { "i", "s" }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end,
+    { "i", "s" }),
     ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
     ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping(
-      function(fallback)
-        if cmp.visible() then
-          if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-            return press("<C-R>=UltiSnips#ExpandSnippet()<CR>")
-          end
-
-          cmp.select_next_item()
-        elseif has_words_before() then
-          press("<Space>")
-        else
-          fallback()
-        end
-      end,
-      {"i", "s"}
-    ),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<Right>'] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
     ['<CR>'] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
   },
 
   sources = {
     { name = 'nvim_lsp' },
-    -- { name = 'nvim_lua' },
     { name = 'treesitter' },
-    { name = 'ultisnips' },
+    { name = 'luasnip' },
     { name = 'path' },
     -- {
     --   name = 'buffer',
@@ -110,7 +86,7 @@ cmp.setup({
         treesitter = "",
         path = "ﱮ",
         buffer = "﬘",
-        ultisnips = "",
+        luasnip = "",
         orgmode = "",
       })[entry.source.name]
 
@@ -119,5 +95,7 @@ cmp.setup({
   }
 })
 
-vim.cmd'let g:lexima_no_default_rules = v:true'
-vim.cmd'call lexima#set_default_rules()'
+cmp.event:on('confirm_done', require("nvim-autopairs.completion.cmp").on_confirm_done())
+
+-- vim: foldlevel=99
+

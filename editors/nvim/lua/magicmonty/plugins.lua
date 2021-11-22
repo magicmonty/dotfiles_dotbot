@@ -17,6 +17,7 @@ require('magicmonty.plug').init(function(use)
 
   -- LSP/Completion config
   use 'neovim/nvim-lspconfig'
+  use 'williamboman/nvim-lsp-installer'
   use 'hrsh7th/cmp-nvim-lua'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
@@ -39,8 +40,9 @@ require('magicmonty.plug').init(function(use)
   use 'David-Kunz/treesitter-unit'
 
   -- Snippets
-  use "SirVer/UltiSnips"
-  use "quangnguyen30192/cmp-nvim-ultisnips"
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
+  use "rafamadriz/friendly-snippets"
 
   -- Telescope
   use 'nvim-lua/popup.nvim'

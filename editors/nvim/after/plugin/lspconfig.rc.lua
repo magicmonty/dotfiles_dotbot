@@ -1,5 +1,4 @@
--- vim: foldlevel=99:
-local status, nvim_lsp = pcall(require, "lspconfig")
+local status, lsp_installer = pcall(require, "nvim-lsp-installer")
 if (not status) then return end
 
 local on_init = function(client)
@@ -96,175 +95,102 @@ if hascmp then
   capabilities = cmp.update_capabilities(capabilities)
 end
 
--- Typescript support
-nvim_lsp.tsserver.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
-}
 
--- Tailwind CSS support
-nvim_lsp.tailwindcss.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
-
--- Vue support
-nvim_lsp.vuels.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
-
--- Python support
-nvim_lsp.pylsp.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  filetypes = { "python" },
-  single_file_support = true
-}
-
--- Lua support
-local sumneko_root_path =  "/usr/bin/lua-language-server"
-local sumneko_binary =  "/usr/bin/lua-language-server"
-
-local luadev = require("lua-dev").setup({
-  library = {
-    vimruntime = true,
-    types = true,
-    plugins = true
-  },
-  lspconfig = {
+lsp_installer.on_server_ready(function(server)
+  local opts = {
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = {"use"}
-        },
-        workspace = {
-          preloadFileSize = 350
-        },
-        telemetry = {
-          enable = false
+  }
+
+  if server.name == "pylsp" then
+    opts.single_file_support = true
+  end
+
+  if server.name == "sumneko_lua" then
+    local luadev = require("lua-dev").setup({
+      library = {
+        vimruntime = true,
+        types = true,
+        plugins = true
+      },
+      lspconfig = {
+        on_attach = on_attach,
+        on_init = on_init,
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = { globals = {"use"} },
+            workspace = { preloadFileSize = 350 },
+            telemetry = { enable = false }
+          }
         }
       }
+    })
+
+    server:setup(luadev)
+    return
+  end
+
+  if server.name == "emmet_ls" then
+    opts.root_dir = function()
+      return vim.loop.cwd()
+    end
+    opts.filetypes = { "html", "css", "scss" }
+    local emmet_capabilities = vim.lsp.protocol.make_client_capabilities()
+    emmet_capabilities.textDocument.completion.completionItem.snippetSupport = true
+    opts.capabilities = emmet_capabilities
+  end
+
+  if server.name == "jsonls" then
+    opts.commands = {
+      Format = {
+        function()
+          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+      }
     }
-  }
-})
-
-nvim_lsp.sumneko_lua.setup(luadev)
-
--- C# support
-local pid = vim.fn.getpid()
-local omnisharp_bin = "/usr/bin/omnisharp"
-
-nvim_lsp.omnisharp.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) };
-  filetypes = { "cs" }
-}
-
--- Clojure support
-nvim_lsp.clojure_lsp.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities
-}
-
--- Emmet support
-local configs = require('lspconfig/configs')
-if not nvim_lsp.ls_emmet then
-  configs.ls_emmet = {
-    default_config = {
-      cmd = { "ls_emmet", "--stdio" },
-      filetypes = { "html", "css", "scss" },
-      root_dir =  function(_)
-        return vim.loop.cwd()
-      end,
-      settings = {},
-    }
-  }
-end
-
-local emmet_capabilities = vim.lsp.protocol.make_client_capabilities()
-emmet_capabilities.textDocument.completion.completionItem.snippetSupport = true
-nvim_lsp.ls_emmet.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = emmet_capabilities
-}
-
--- Angular support
-nvim_lsp.angularls.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
--- HTML support
-nvim_lsp.html.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
--- CSS support
-nvim_lsp.cssls.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
-
--- JSON with schema support
-nvim_lsp.jsonls.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  cmd = { "vscode-json-languageserver", "--stdio" },
-  commands = {
-    Format = {
-      function()
-        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-      end
-    }
-  },
-  settings = {
-    json = {
-      schemas = {
-        {
-          fileMatch = { ".eslintrc.json", ".eslintrc" },
-          url = "https://json.schemastore.org/eslintrc.json"
-        },
-        {
-          fileMatch = {
-            ".prettierrc",
-            ".prettierrc.json",
-            "prettier.config.json"
+    opts.settings = {
+      json = {
+        schemas = {
+          {
+            description = "ESLint config",
+            fileMatch = { ".eslintrc.json", ".eslintrc" },
+            url = "https://json.schemastore.org/eslintrc.json"
           },
-          url = "https://json.schemastore.org/prettierrc.json"
-        },
-        {
-          fileMatch = { "tsconfig*.json" },
-          url = "https://json.schemastore.org/tsconfig.json"
-        },
-        {
-          fileMatch = { "package.json" },
-          url = "https://json.schemastore.org/package.json"
-        },
-        {
-          fileMatch = { ".vimspector.json" },
-          url = "https://puremourning.github.io/vimspector/schema/vimspector.schema.json"
+          {
+            description = "Prettier config",
+            fileMatch = {
+              ".prettierrc",
+              ".prettierrc.json",
+              "prettier.config.json"
+            },
+            url = "https://json.schemastore.org/prettierrc.json"
+          },
+          {
+            description = "TypeScript compiler configuration file",
+            fileMatch = { "tsconfig.json", "tsconfig.*.json" },
+            url = "https://json.schemastore.org/tsconfig.json"
+          },
+          {
+            description = "NPM package config",
+            fileMatch = { "package.json" },
+            url = "https://json.schemastore.org/package.json"
+          },
+          {
+            description = "A JSON schema for ASP.net launchsettings.json files",
+            fileMatch = { "launchsettings.json" },
+            url = "https://json.schemastore.org/launchsettings.json"
+          }
         }
       }
+
     }
-  },
-}
+
+  end
+
+  server:setup(opts)
+end)
 
 -- LSP signs default
 vim.fn.sign_define(
@@ -285,21 +211,23 @@ vim.fn.sign_define(
 )
 
 -- LSP Enable diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-vim.lsp.diagnostic.on_publish_diagnostics,
-{
-  virtual_text = {
-    prefix = "»",
-    severity_limit = 'Warning',
-    spacing = 4
-  },
-  underline = true,
-  signs = true,
-  update_in_insert = false,
-}
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    virtual_text = {
+      prefix = "»",
+      severity_limit = 'Warning',
+      spacing = 4
+    },
+    underline = true,
+    signs = true,
+    update_in_insert = false,
+  }
 )
 
 local pop_opts = { border = "rounded", max_width = 80 }
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, pop_opts)
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, pop_opts)
 
+-- vim: foldlevel=99:
