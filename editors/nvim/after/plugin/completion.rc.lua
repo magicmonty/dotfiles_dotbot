@@ -40,7 +40,7 @@ cmp.setup({
       elseif has_words_before() then
         cmp.complete()
       else
-        fallback()
+        press("<Tab>")
       end
     end,
     { "i", "s" }),
