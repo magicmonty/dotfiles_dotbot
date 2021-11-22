@@ -98,3 +98,8 @@ opt.splitbelow= true -- Split new horizontal windows under current window.
 
 -- Neovide specific settings
 vim.g.neovide_transparency = 0.8
+
+-- copilot settings
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+
