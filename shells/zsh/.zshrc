@@ -205,6 +205,14 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
+if [ -e /opt/android-sdk/cmdline-tools/latest/bin ]; then
+  export PATH=$PATH:/opt/android-sdk/cmdline-tools/latest/bin
+fi
+
+if [ -e /opt/android-sdk/platform-tools ]; then
+  export PATH=$PATH:/opt/android-sdk/platform-tools
+fi
+
 if [ -e /opt/dotnet ]; then
   export DOTNET_ROOT=/opt/dotnet
 fi
