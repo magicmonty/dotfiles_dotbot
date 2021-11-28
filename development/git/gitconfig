@@ -100,3 +100,5 @@ protocol = https
 	ff = only
 [init]
 	defaultBranch = main
+[color]
+	ui = auto
