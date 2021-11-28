@@ -94,6 +94,7 @@ alias ec='emacsclient -nc'
 alias vimdiff='nvim -d'
 
 ## Git aliases
+alias lg='lazygit'
 alias g='git'
 alias gci='git commit'
 alias gcim='git commit --message'
