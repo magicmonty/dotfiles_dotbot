@@ -65,6 +65,7 @@ cmp.setup({
 
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'sonicpi' },
     { name = 'treesitter' },
     { name = 'luasnip' },
     { name = 'path' },
@@ -89,7 +90,9 @@ cmp.setup({
         buffer = '﬘',
         luasnip = '',
         orgmode = '',
+        sonicpi = '',
       })[entry.source.name]
+
       return vim_item
     end,
   },
@@ -99,3 +102,4 @@ local hasautopairs, autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
 if hasautopairs then
   cmp.event:on('confirm_done', autopairs.on_confirm_done({ map_char = { tex = '' } }))
 end
+
