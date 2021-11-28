@@ -1,88 +1,106 @@
-local status, treesitterConfigs = pcall(require, "nvim-treesitter.configs")
-if (not status) then return end
+local status, treesitter = pcall(require, 'nvim-treesitter.configs')
+if not status then
+  return
+end
 
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
-parser_config.org = {
-  install_info = {
-    url = 'https://github.com/milisims/tree-sitter-org',
-    revision = 'main',
-    files = { 'src/parser.c', 'src/scanner.cc' },
-  },
-  filetype = 'org'
-}
+local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+parser_config.tsx.used_by = { 'javascript', 'typescript.tsx' }
 
-treesitterConfigs.setup {
+local has_org, _ = pcall(require, 'orgmode')
+if has_org then
+  parser_config.org = {
+    install_info = {
+      url = 'https://github.com/milisims/tree-sitter-org',
+      revision = 'main',
+      files = { 'src/parser.c', 'src/scanner.cc' },
+    },
+    filetype = 'org',
+  }
+end
+
+treesitter.setup({
   highlight = {
     enable = true,
-    disable = { "latex" },
-    additional_vim_regex_highlighting = true
+    disable = { 'latex' },
+    additional_vim_regex_highlighting = true,
   },
   indent = {
     enable = false,
-    disable = { "yaml" },
+    disable = { 'yaml' },
   },
   refactor = {
     highlight_definitions = { enable = true },
-    highlight_current_scope = { enable = false }
+    highlight_current_scope = { enable = false },
   },
+  matchup = { enable = true },
   rainbow = {
     enable = true,
-    extended_mode = true,
-    max_file_lines = 1000
+    extended_mode = false, -- don't highlight non parentheses delimiters
+    max_file_lines = 1000,
   },
+  autopairs = { enable = true },
   context_commentstring = {
     enable = true,
     config = {
-      typescript = "// %s",
-      css = "/* %s */",
-      scss = "/* %s */",
-      html = "<!-- %s -->",
-      vue = "<!-- %s -->",
-      json = ""
-    }
+      typescript = '// %s',
+      css = '/* %s */',
+      scss = '/* %s */',
+      html = '<!-- %s -->',
+      vue = '<!-- %s -->',
+      json = '',
+    },
   },
   textobjects = {
     select = {
       enable = true,
       lookahead = true,
-      keymaps =  {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner"
-      }
+      keymaps = {
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+      },
     },
     lsp_interop = {
       enable = true,
       border = 'none',
       peek_definition_code = {
-        ["<leader>df"] = "@function.outer",
-        ["<leader>dF"] = "@class.outer"
-      }
-    }
+        ['<leader>df'] = '@function.outer',
+        ['<leader>dF'] = '@class.outer',
+      },
+    },
   },
   ensure_installed = {
-    "toml",
-    "yaml",
-    "json",
-    "html",
-    "scss",
-    "c_sharp",
-    "dockerfile",
-    "javascript",
-    "typescript",
-    "clojure",
-    "lua",
-    "regex",
-    "ruby",
-    "org"
+    'angular',
+    'bash',
+    'c_sharp',
+    'cmake',
+    'clojure',
+    'css',
+    'dockerfile',
+    'html',
+    'javascript',
+    'json',
+    'latex',
+    'lua',
+    'php',
+    'org',
+    'regex',
+    'ruby',
+    'rust',
+    'scss',
+    'toml',
+    'typescript',
+    'vim',
+    'yaml',
   },
-}
+})
 
-
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldnestmax = 5
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldlevel = 99
+vim.opt.fillchars = 'fold:-'
+vim.wo.foldmethod = 'expr'
+vim.o.foldtext =
+  [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
 
 -- vim: foldlevel=99

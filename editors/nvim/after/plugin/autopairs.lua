@@ -1,7 +1,7 @@
-local status, auto_pairs = pcall(require, "nvim-autopairs")
+local status, autopairs = pcall(require, "nvim-autopairs")
 if not status then return end
 
-auto_pairs.setup {
+autopairs.setup {
   disabled_filetype = { "TelescopePrompt" },
   check_ts = true,
   ts_config = {

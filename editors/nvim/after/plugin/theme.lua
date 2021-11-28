@@ -1,43 +1,54 @@
-local status, nightfox = pcall(require, "nightfox")
+local status, nightfox = pcall(require, 'nightfox')
 if status then
   nightfox.setup({
-    fox = "nightfox",
+    fox = 'nightfox',
     transparent = false,
     alt_nc = true,
     terminal_colors = true,
     styles = {
-      comments = "italic",
-      keywords = "bold",
+      comments = 'italic',
+      keywords = 'bold',
     },
     inverse = {
       visual = false,
     },
     hlgroups = {
       IndentBlanklineChar = { fg = '${comment}' },
-      IndentBlanklineContextChar = { fg= '${pink}' },
-      IndentBlanklineSpaceChar = { fg= '${comment}' },
-      IndentBlanklineSpaceCharBlankLine = { fg= 'NONE' },
+      IndentBlanklineContextChar = { fg = '${pink}' },
+      IndentBlanklineSpaceChar = { fg = '${comment}' },
+      IndentBlanklineSpaceCharBlankLine = { fg = 'NONE' },
       DapBreakpointSign = { fg = '${red}' },
       DapBreakpointLine = { bg = '${diff.delete}' },
-    }
+      TSTag = { fg = '${red}' },
+      TSTagDelimiter = { fg = '${fg}' },
+      htmlTag = { fg = '${red}' },
+      htmlEndTag = { fg = '${red}' },
+      NvimTreeExecFile = { style = 'bold' },
+      NvimTreeGitDirty = { fg = '${git.change}' },
+      NvimTreeGitStaged = { fg = '${green_br}' },
+      NvimTreeGitMerge = { fg = '${orange}' },
+      NvimTreeGitRenamed = { fg = '${green_dm}' },
+      NvimTreeGitNew = { fg = '${git.add}' },
+      NvimTreeGitDeleted = { fg = '${git.delete}' },
+    },
   })
 
   nightfox.load()
 end
 
 vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
-vim.opt.listchars:append("eol:↴")
-
+vim.opt.listchars:append('space:⋅')
+vim.opt.listchars:append('eol:↴')
 
 local indent_blankline
-status, indent_blankline = pcall(require, "indent_blankline")
-if not status then return end
+status, indent_blankline = pcall(require, 'indent_blankline')
+if not status then
+  return
+end
 
 indent_blankline.setup({
   show_end_of_line = true,
-  space_char_blank_line = " ",
+  space_char_blank_line = ' ',
   show_current_context = true,
   show_current_context_start = true,
 })
-

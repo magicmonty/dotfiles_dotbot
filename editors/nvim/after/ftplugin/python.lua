@@ -3,7 +3,7 @@ cmp.setup.buffer({
   sources = {
     { name = "nvim_lsp" },
     { name = "treesitter" },
-    { name = "ultisnips" },
+    { name = "luasnip" },
     { name = "path" }
   }
 })
