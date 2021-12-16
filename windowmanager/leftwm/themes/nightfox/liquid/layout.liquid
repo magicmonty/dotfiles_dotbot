@@ -1,0 +1,9 @@
+{% assign layout = workspace.layout %}
+{% case layout %}
+{% when "MainAndVertStack" %}
+{% when "MainAndHorizontalStack" %}-ﮇ
+{% when "GridHorizontal" %}﩯
+{% when "CenterMainBalanced" %}
+{% when "Monocle" %}
+{% else %}[?]
+{% endcase %} | {{ window_title | truncate: 40, '…' }}

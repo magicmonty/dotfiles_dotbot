@@ -1,0 +1,19 @@
+#!/bin/bash
+
+SCRIPTPATH="$( cd "$(dirname "$0")" || return ; pwd -P )"
+
+echo "UnloadTheme" > "$XDG_RUNTIME_DIR"/leftwm/commands.pipe
+
+pkill picom
+pkill polybar
+pkill dunst
+pkill greenclip
+pkill nm-applet
+pkill blueman-applet
+pkill dropbox
+pkill udiskie
+pkill onedrive
+pkill xfce4-power-manager
+pkill xautolock
+pkill syndaemon
+pkill xbanish

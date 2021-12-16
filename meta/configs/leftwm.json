@@ -1,0 +1,28 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true,
+        "force": true
+      }
+    }
+  },
+  {
+    "link": {
+      "~/.config/leftwm/config.toml": "windowmanager/leftwm/config.toml",
+      "~/.config/leftwm/themes/current": "windowmanager/leftwm/themes/nightfox",
+      "~/bin/leftwmexit": "windowmanager/leftwm/bin/leftwmexit",
+      "~/.Xdefaults": "windowmanager/Xresources",
+      "~/.Xresources": "windowmanager/Xresources"
+    }
+  },
+  {
+    "shell": [
+      [
+        "sudo fc-cache -f",
+        "Updating font cache"
+      ]
+    ]
+  }
+]
