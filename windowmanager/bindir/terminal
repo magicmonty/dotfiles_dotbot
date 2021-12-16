@@ -1,5 +1,6 @@
 #!/bin/sh
 kitty
+# alacritty
 
 # urxvtc $@
 # if [ $? -eq 2 ]; then
