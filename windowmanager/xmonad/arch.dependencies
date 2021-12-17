@@ -1,3 +1,6 @@
+xmonad
+xmonad-contrib
+xorg-xbacklight
 picom-jonaburg-git
 nerd-fonts-monoid
 greenclip
@@ -17,3 +20,11 @@ dunst
 candy-icons
 sardi-icons
 humanity-icon-theme
+kitty
+alacritty
+nitrogen
+pcmanfm
+ncmpcpp
+xcape
+xclip
+noto-fonts

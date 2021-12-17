@@ -45,6 +45,13 @@
   },
   {
     "shell": [
+      {
+        "command": "yay --sudoloop --nodiffmenu --noeditmenu --noupgrademenu --nocleanmenu --noredownload --norebuild --useask --needed -S `cat ~/.dotfiles/windowmanager/xmonad/arch.dependencies | grep -v '#'`",
+        "description": "Installing xmonad dependencies for arch via yay",
+        "stdin": true,
+        "stdout": true,
+        "stderr": true
+      },
       [
         "fc-cache -f",
         "Updating font cache"
