@@ -69,7 +69,7 @@ Xautolock.notifier: /usr/bin/notify-send "Locking now..."
 !! *cursor:                 #ebdbb2
 
 *foreground: nightfox_foreground
-*background: nightfox_foreground
+*background: nightfox_background
 *cursorColor: nightfox4
 *fading: 35
 *fadeColor: nightfox3
