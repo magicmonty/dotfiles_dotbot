@@ -24,21 +24,7 @@ echo "LoadTheme $SCRIPTPATH/theme.toml" > "$XDG_RUNTIME_DIR"/leftwm/commands.pip
 if [ -x "$(command -v feh)" ]; then
   monitor_count=$(xrandr --listactivemonitors | grep -oP '\+\d+\+\d+' | uniq | wc -l)
   if [ $monitor_count -eq 1 ]; then
-    MONITORS=$(xrandr --listmonitors | grep -e DP2-1 -e DP2-3 | wc -l)
-    if [[ $MONITORS -eq 2 ]]; then
-      xrandr \
-        --output eDP1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal \
-        --output DP2-3 --mode 1920x1080 --pos 0x0 --rotate normal \
-        --output DP2-1 --mode 1920x1080 --pos 3840x0 --rotate normal
-
-      monitors=($(xrandr --listactivemonitors | grep -oP '\d:' | sed 's/://'))
-      for i in "${monitors[@]}"; do
-        nitrogen --head=$i --set-zoom-fill "$SCRIPTPATH/background_$i.png"
-      done
-    else
-      nitrogen --set-zoom-fill "$SCRIPTPATH/background_0.png"
-    fi
-
+    nitrogen --set-zoom-fill "$SCRIPTPATH/background_0.png"
   else
     monitors=($(xrandr --listactivemonitors | grep -oP '\d:' | sed 's/://'))
     for i in "${monitors[@]}"; do
