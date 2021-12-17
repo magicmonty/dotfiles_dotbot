@@ -52,7 +52,7 @@ nvim_tree.setup({
     update_cwd = true,
   },
   diagnostics = {
-    enable = false,
+    enable = true,
     icons = {
       hint = '',
       info = '',
