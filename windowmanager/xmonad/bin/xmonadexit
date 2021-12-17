@@ -1,20 +1,58 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-options="Lock\nLogout\nSuspend\nHibernate\nReboot\nShutdown"
+# Options
+shutdown=""
+reboot=""
+lock=""
+suspend=""
+logout=""
 
-chosen=$(echo -e "$options" | /usr/bin/rofi -i -l 6 -p "" -mesg "Option zum Beenden auswählen:" -dmenu)
+yes=""
+no="ﰸ"
 
-lock() {
-  /usr/bin/betterlockscreen -l dimblur &
+# Confirmation
+confirm_exit() {
+	echo -e "$yes\n$no" | rofi -dmenu -theme $HOME/.xmonad/rofi/powermenu/confirm.rasi
 }
 
-case "$chosen" in
-  Lock) lock ;;
-  Logout) xmonadctl 39 ;;
-  Suspend) systemctl hybrid-sleep ;;
-  Hibernate) systemctl hibernate ;;
-  Reboot) systemctl reboot ;;
-  Shutdown) systemctl poweroff ;;
-esac
+chosen="$(echo -e "$shutdown\n$reboot\n$lock\n$suspend\n$logout" | rofi -theme $HOME/.xmonad/rofi/powermenu/powermenu.rasi -dmenu -selected-row 2)"
 
-exit 0
+case $chosen in
+  $shutdown)
+    ans=$(confirm_exit &)
+    if [[ $ans == $yes ]]; then
+      systemctl poweroff
+    else
+      exit 0
+    fi
+    ;;
+  $reboot)
+    ans=$(confirm_exit &)
+    if [[ $ans == $yes ]]; then
+      systemctl reboot
+    else
+      exit 0
+    fi
+    ;;
+  $lock)
+    xautolock -locknow
+    ;;
+  $suspend)
+    ans=$(confirm_exit &)
+    if [[ $ans == $yes ]]; then
+      lmc pause
+      lmc mute
+      systemctl hybrid-sleep
+    else
+      exit 0
+    fi
+    ;;
+  $logout)
+    ans=$(confirm_exit &)
+    if [[ $ans == $yes ]]; then
+      loginctl kill-session $XDG_SESSION_ID
+    else
+      exit 0
+    fi
+    ;;
+esac

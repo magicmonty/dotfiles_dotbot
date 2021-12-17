@@ -8,80 +8,54 @@
       }
     }
   },
-  { "shell": [
-      {
-        "command": "~/.dotfiles/windowmanager/xmonad/build_xmonadctl.sh",
-        "description": "Compiling xmonadctl...",
-        "stdin": true,
-        "stdout": true,
-        "stderr": true
-      }
-    ]
-  },
   {
     "link": {
-      "~/.xmonad/autostart.sh": "windowmanager/xmonad/autostart.sh",
-      "~/.xmonad/xmonad.hs": "windowmanager/xmonad/xmonad.hs",
-      "~/.xmonad/xmobar/scripts": "windowmanager/xmonad/xmobar/scripts",
-      "~/.xmonad/xmobar/xmobarrc0": "windowmanager/xmonad/xmobar/xmobarrc0",
-      "~/.xmonad/xmobar/xmobarrc1": "windowmanager/xmonad/xmobar/xmobarrc1",
-      "~/.xmonad/xmobar/xmobarrc2": "windowmanager/xmonad/xmobar/xmobarrc1",
-      "~/.xmonad/xmobar/xmobarrc3": "windowmanager/xmonad/xmobar/xmobarrc1",
-      "~/.xmonad/xpm": "windowmanager/xmonad/xpm",
+      "~/.xmonad/xmonad.hs": "windowmanager/xmonad/config/xmonad.hs",
+      "~/.xmonad/set_bg": "windowmanager/xmonad/config/set_bg",
+      "~/.xmonad/picom": "windowmanager/xmonad/picom",
+      "~/.xmonad/polybar": "windowmanager/xmonad/polybar",
+      "~/.xmonad/rofi": "windowmanager/xmonad/rofi",
       "~/bin/xmonadexit": "windowmanager/xmonad/bin/xmonadexit",
-      "~/bin/xmonadctl": "windowmanager/xmonad/xmonadctl",
-      "~/.config/picom.conf": "apps/picom.conf",
+      "~/bin/toggle_picom": "windowmanager/xmonad/bin/toggle_picom",
+      "~/bin/launcher": "windowmanager/xmonad/bin/launcher",
+      "~/bin/greenclip_launcher": "windowmanager/xmonad/bin/greenclip_launcher",
       "~/.config/dunst": "windowmanager/dunst",
       "~/.config/ranger": "apps/ranger",
       "~/.config/rofi": "windowmanager/rofi",
       "~/.config/udiskie": "windowmanager/udiskie",
       "~/.Xdefaults": "windowmanager/Xresources",
       "~/.Xresources": "windowmanager/Xresources",
-      "~/bin/addpocket": "apps/pockyt/addpocket",
-      "~/bin/camtoggle": "windowmanager/bindir/camtoggle",
       "~/bin/displayctl": "windowmanager/bindir/displayctl",
-      "~/bin/dmenuhandler": "windowmanager/bindir/dmenuhandler",
-      "~/bin/dmenupass": "windowmanager/bindir/dmenupass",
-      "~/bin/getpocket": "apps/pockyt/getpocket",
-      "~/bin/i3_bluetooth": "windowmanager/bindir/i3_bluetooth",
-      "~/bin/jack-post-start": "arch/jack-post-start",
-      "~/bin/jack-post-stop": "arch/jack-post-stop",
-      "~/bin/jack-pre-start": "arch/jack-pre-start",
-      "~/bin/jack-pre-stop": "arch/jack-pre-stop",
-      "~/bin/launcher": "windowmanager/bindir/launcher",
       "~/bin/linkhandler": "windowmanager/bindir/linkhandler",
-      "~/bin/livejack": "windowmanager/bindir/livejack",
       "~/bin/lmc": "windowmanager/bindir/lmc",
       "~/bin/notify_me": "windowmanager/bindir/notify_me",
-      "~/bin/opout": "windowmanager/bindir/opout",
       "~/bin/optimize_pdf": "windowmanager/bindir/optimize_pdf",
-      "~/bin/pacupdate": "windowmanager/bindir/pacupdate",
-      "~/bin/popweather": "windowmanager/bindir/popweather",
-      "~/bin/prepare_live_coding": "windowmanager/bindir/prepare_live_coding",
       "~/bin/ranger-open": "windowmanager/bindir/ranger-open",
       "~/bin/remaps": "windowmanager/bindir/remaps",
-      "~/bin/reset_skyblock": "windowmanager/bindir/reset_skyblock",
-      "~/bin/showclip": "windowmanager/bindir/showclip",
-      "~/bin/startjack": "windowmanager/bindir/startjack",
-      "~/bin/stopjack": "windowmanager/bindir/stopjack",
+      "~/bin/start_screensaver": "windowmanager/bindir/start_screensaver",
+      "~/bin/stop_screensaver": "windowmanager/bindir/stop_screensaver",
       "~/bin/terminal": "windowmanager/bindir/terminal",
-      "~/bin/toggle_picom": "windowmanager/bindir/toggle_picom",
       "~/bin/toggle_pi": "windowmanager/bindir/toggle_pi",
       "~/bin/toggle_screensaver": "windowmanager/bindir/toggle_screensaver",
       "~/bin/touchpad_toggle": "windowmanager/bindir/touchpad_toggle",
       "~/bin/umpv": "windowmanager/bindir/umpv",
       "~/.mailcap": "windowmanager/mailcap",
-      "~/.local/share/applications/feh.desktop": "windowmanager/applications/feh.desktop",
-      "~/.local/share/applications/img.desktop": "windowmanager/applications/feh.desktop",
-      "~/.local/share/applications/torrent.desktop": "windowmanager/applications/torrent.desktop",
-      "~/.config/mimeapps.list": "windowmanager/mimeapps.list",
       "~/.fonts": "fonts"
     }
   },
   {
     "shell": [
-      [ "sudo fc-cache -f", "Updating font cache" ],
-      [ "xmonad --recompile", "Rebuilding XMonad configuration" ]
+      [
+        "fc-cache -f",
+        "Updating font cache"
+      ],
+      [
+        "xmonad --recompile",
+        "Rebuilding XMonad configuration"
+      ],
+      [
+        "betterlockscreen -u ~/.dotfiles/windowmanager/xmonad/wallpapers/background_0.png"
+      ]
     ]
   }
 ]

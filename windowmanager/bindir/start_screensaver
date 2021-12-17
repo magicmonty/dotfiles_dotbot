@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+xset s on
+xset dpms 900 900 900
+pgrep xautolock || xautolock -time 20  -detectsleep -locker "/usr/bin/betterlockscreen -l blur -- -n" -killtime 10 -killer "systemctl hybrid-sleep" & disown

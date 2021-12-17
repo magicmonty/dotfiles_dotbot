@@ -1,0 +1,11 @@
+#!/bin/bash
+pkill polybar
+
+export index=0
+monitors=($(polybar -m | sed s/:.*//))
+polybar -m | sed 's/.*: \([0-9]\+\)x[0-9]\++\([0-9]\+\)+\([0-9]\+\).*/\1 \2 \3/g' | while read -r width x y
+do
+  barname="mainbar$index"
+  monitor=${monitors[index]} width=$(( width - 16 )) polybar -c ${HOME}/.xmonad/polybar/polybar.config $barname &> /dev/null &
+  let index=index+1
+done

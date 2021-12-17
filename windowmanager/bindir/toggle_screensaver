@@ -3,14 +3,9 @@
 DISPLAY=:0
 timeout=$(xset q | awk '/DPMS is/ {print $3}')
 if [[ ${timeout} = "Disabled" ]]; then
-  xset s on
-  xset dpms 900 900 900
-  pgrep xautolock || (xautolock -detectsleep & disown)
+  start_screensaver
   notify-send -u low -a "Screensaver" "Screensaver is now on"
 else
-  xset dpms 0 0 0
-  xset -dpms
-  xset s off
-  pkill xautolock
+  stop_screensaver
   notify-send -u low -a "Screensaver" "Screensaver is now off"
 fi

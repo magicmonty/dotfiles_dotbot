@@ -1,0 +1,44 @@
+-- Xmobar (http://projects.haskell.org/xmobar/)
+-- This is the default xmobar configuration for DTOS.
+-- This config is packaged in the DTOS repo as dtos-xmobar
+-- Dependencies: otf-font-awesome ttf-mononoki ttf-ubuntu-font-family trayer
+-- Also depends on scripts from dtos-local-bin from the dtos-core-repo.
+
+Config { font            = "xft:Monoid Nerd Font:style=Retina:size=11:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:Mononoki:pixelsize=14:antialias=true:hinting=true"
+                           , "xft:Font Awesome 5 Free Solid:pixelsize=14"
+                           , "xft:Font Awesome 5 Brands:pixelsize=14"
+                           ]
+       , bgColor      = "#192330"
+       , fgColor      = "#cdcecf"
+       -- Position TopSize and BottomSize take 3 arguments:
+       --   an alignment parameter (L/R/C) for Left, Right or Center.
+       --   an integer for the percentage width, so 100 would be 100%.
+       --   an integer for the minimum pixel height for xmobar, so 24 would force a height of at least 24 pixels.
+       --   NOTE: The height should be the same as the trayer (system tray) height.
+       , position     = Static { xpos = 8, ypos = 8, width = 1904, height = 40 }
+       , lowerOnStart = True
+       , hideOnStart  = False
+       , allDesktops  = True
+       , persistent   = True
+       , iconRoot     = ".xmonad/xpm/"  -- default: "."
+
+       , commands = [ -- Prints out the left side items such as workspaces, layout, etc.
+                      Run UnsafeStdinReader
+                      -- Cpu usage in percent
+                    , Run Cpu ["-t", " <total>%","-H","50","--high","#d6616b"] 20
+                      -- Ram used number and percent
+                    , Run Memory ["-t", " <used>M (<usedratio>%)"] 20
+                      -- Disk space free
+                    , Run DiskU [("/", " <free> free")] [] 60
+                    -- Check for pacman updates (script found in bin)
+                    , Run Com "bin/pacupdate" [] "pacupdate" 36000
+                    -- Battery
+                    , Run Com ".xmonad/xmobar/scripts/battery" [] "battery" 360
+                    -- Time and date
+                    , Run Date " %d.%m.%Y - %H:%M" "date" 50
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %UnsafeStdinReader%}{<fc=#719cd6>%cpu%</fc>  <fc=#84cee4>%memory%</fc>  <fc=#b8a1e3>%disku%</fc>%pacupdate%  %battery%  <fc=#63cdcf>%date%</fc> "
+       }

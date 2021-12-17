@@ -1,0 +1,16 @@
+#!/bin/bash
+export WALLPAPERS="${HOME}/.dotfiles/windowmanager/xmonad/wallpapers"
+
+# Set background
+if [ -x "$(command -v feh)" ]; then
+  monitor_count=$(xrandr --listactivemonitors | grep -oP '\+\d+\+\d+' | uniq | wc -l)
+  if [ $monitor_count -eq 1 ]; then
+    nitrogen --set-zoom-fill "$WALLPAPERS/background_0.png"
+  else
+    monitors=($(xrandr --listactivemonitors | grep -oP '\d:' | sed 's/://'))
+    for i in "${monitors[@]}"; do
+      nitrogen --head=$i --set-zoom-fill "$WALLPAPERS/background_$i.png"
+    done
+  fi
+fi
+
