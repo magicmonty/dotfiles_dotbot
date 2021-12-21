@@ -1,10 +1,5 @@
-require('magicmonty.settings')
-require('magicmonty.highlighting')
-require('magicmonty.filetype_settings')
-require('magicmonty.plugins')
-require('magicmonty.mappings')
-require('magicmonty.theme')
-
-function DN(value)
-  require('notify')(vim.inspect(value))
-end
+require('options')
+require('filetype_settings')
+require('plugins')
+require('mappings')
+require('global_helpers')

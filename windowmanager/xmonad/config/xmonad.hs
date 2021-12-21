@@ -129,12 +129,10 @@ myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "lxqt-policykit-agent &"
     -- spawnOnce "xfce4-power-manager &"
-    spawnOnce "autorandr -c"
+    spawnOnce "autorandr --current"
     spawnOnce "greenclip daemon &"
     spawnOnce "picom -CG --experimental-backends &"
     spawnOnce "nm-applet &"
-    spawnOnce "~/.xmonad/polybar/up"
-    spawnOnce "~/.xmonad/set_bg"
     spawnOnce "dropbox &"
     spawnOnce "/opt/enpass/Enpass -minimize &"
     spawnOnce "udiskie -ans -f /usr/bin/pcmanfm &"
@@ -144,6 +142,8 @@ myStartupHook = do
     spawnOnce "xset dpms 900 900 900"
     spawnOnce "remaps"
     spawnOnce "xbanish &"
+    spawnOnce "/home/mgondermann/.xmonad/polybar/up"
+    spawnOnce "/home/mgondermann/.xmonad/set_bg"
     setWMName "LG3D"
 
 --Makes setting the spacingRaw simpler to write. The spacingRaw module adds a configurable amount of space around windows.
