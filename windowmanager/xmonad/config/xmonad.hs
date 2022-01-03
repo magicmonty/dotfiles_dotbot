@@ -319,6 +319,8 @@ myKeys =
         , ("M-u h", spawn "mocp --previous")
         , ("M-u <Space>", spawn "mocp --toggle-pause")
 
+        , ("<F12>", spawn "touchpad_toggle")
+
     -- KB_GROUP Multimedia Keys
         , ("<XF86AudioPlay>", spawn "mocp --play")
         , ("<XF86AudioPrev>", spawn "mocp --previous")
