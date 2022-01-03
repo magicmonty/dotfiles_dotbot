@@ -260,7 +260,7 @@ USE_POWERLINE=true
 case $(basename "$(cat "/proc/$PPID/comm")") in
 
   login)
-    source /usr/share/zsh/zsh-maia-prompt
+    source ~/.dotfiles/shells/zsh/zsh-fallback-prompt
     alias x='startx ~/.xinitrc'
     ;;
   *)
