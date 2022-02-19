@@ -28,14 +28,14 @@ return require('packer').startup({
     use({
       'kyazdani42/nvim-web-devicons',
       config = function()
-        require('settings.web-devicons')
+        require('settings.web-devicons.settings')
       end,
     })
     use('nvim-lua/plenary.nvim')
     use({
       'nvim-lua/lsp-status.nvim',
       config = function()
-        require('settings.lsp-status')
+        require('settings.lsp-status.settings')
       end,
     })
 
@@ -43,7 +43,7 @@ return require('packer').startup({
     use({
       'folke/which-key.nvim',
       config = function()
-        require('settings.which-key')
+        require('settings.which-key.settings')
       end,
     })
 
@@ -51,7 +51,7 @@ return require('packer').startup({
     use({
       'EdenEast/nightfox.nvim',
       config = function()
-        require('settings.nightfox')
+        require('settings.nightfox.settings')
       end,
       requires = {
         'kyazdani42/nvim-web-devicons',
@@ -62,7 +62,7 @@ return require('packer').startup({
     use({
       'folke/lsp-colors.nvim',
       config = function()
-        require('settings.lsp-colors')
+        require('settings.lsp-colors.settings')
       end,
       requires = 'EdenEast/nightfox.nvim',
     })
@@ -71,7 +71,7 @@ return require('packer').startup({
     use({
       'rcarriga/nvim-notify',
       config = function()
-        require('settings.notify')
+        require('settings.notify.settings')
       end,
       requires = 'EdenEast/nightfox.nvim',
     })
@@ -80,7 +80,7 @@ return require('packer').startup({
     use({
       'kyazdani42/nvim-tree.lua',
       config = function()
-        require('settings.nvim-tree')
+        require('settings.nvim-tree.settings')
       end,
       requires = 'kyazdani42/nvim-web-devicons',
     })
@@ -89,7 +89,7 @@ return require('packer').startup({
     use({
       'nvim-lualine/lualine.nvim',
       config = function()
-        require('settings.lualine')
+        require('settings.lualine.settings')
       end,
       requires = { 'kyazdani42/nvim-web-devicons', 'nvim-lua/lsp-status.nvim' },
     })
@@ -97,7 +97,7 @@ return require('packer').startup({
     use({
       'kdheepak/tabline.nvim',
       config = function()
-        require('settings.tabline')
+        require('settings.tabline.settings')
       end,
     })
 
@@ -115,7 +115,7 @@ return require('packer').startup({
     use({
       'numToStr/Comment.nvim',
       config = function()
-        require('settings.comment')
+        require('settings.comment.settings')
       end,
     })
 
@@ -124,12 +124,12 @@ return require('packer').startup({
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
       config = function()
-        require('settings.treesitter')
+        require('settings.treesitter.settings')
       end,
       requires = {
         'nvim-treesitter/nvim-treesitter-refactor',
         'nvim-treesitter/nvim-treesitter-textobjects',
-        'nvim-treesitter/nvim-treesitter-angular',
+        -- 'nvim-treesitter/nvim-treesitter-angular',
         'nvim-treesitter/playground',
         'windwp/nvim-ts-autotag',
         'p00f/nvim-ts-rainbow',
@@ -143,7 +143,7 @@ return require('packer').startup({
     use({
       'williamboman/nvim-lsp-installer',
       config = function()
-        require('settings.lsp-installer')
+        require('settings.lsp-installer.settings')
       end,
       requires = {
         'neovim/nvim-lspconfig',
@@ -155,45 +155,34 @@ return require('packer').startup({
     })
 
     use({
-      'tami5/lspsaga.nvim',
-      config = function()
-        require('settings.lspsaga')
-      end,
-    })
-    use({
-      'folke/trouble.nvim',
-      config = function()
-        require('trouble').setup({ use_diagnostic_signs = true })
-      end,
-    })
-    use({
       'mhartington/formatter.nvim',
       config = function()
-        require('settings.formatter')
+        require('settings.formatter.settings')
       end,
     })
 
     use({
       'hrsh7th/nvim-cmp',
       config = function()
-        require('settings.cmp')
+        require('settings.cmp.settings')
       end,
       requires = {
         'hrsh7th/cmp-nvim-lua',
         'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-nvim-lsp-document-symbol',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
         'ray-x/cmp-treesitter',
         {
           'onsails/lspkind-nvim',
           config = function()
-            require('settings.lspkind')
+            require('settings.lspkind.settings')
           end,
         },
         {
           'L3MON4D3/LuaSnip',
           config = function()
-            require('settings.luasnip')
+            require('settings.luasnip.settings')
           end,
           requires = {
             'saadparwaiz1/cmp_luasnip',
@@ -204,7 +193,7 @@ return require('packer').startup({
         {
           'windwp/nvim-autopairs',
           config = function()
-            require('settings.autopairs')
+            require('settings.autopairs.settings')
           end,
         },
       },
@@ -214,7 +203,7 @@ return require('packer').startup({
     use({
       'nvim-telescope/telescope.nvim',
       config = function()
-        require('settings.telescope')
+        require('settings.telescope.settings')
       end,
       requires = {
         'nvim-lua/plenary.nvim',
@@ -228,7 +217,7 @@ return require('packer').startup({
             {
               'mfussenegger/nvim-dap',
               config = function()
-                require('settings.nvim-dap')
+                require('settings.nvim-dap.settings')
               end,
               requires = {
                 'rcarriga/nvim-dap-ui',
@@ -251,7 +240,7 @@ return require('packer').startup({
     use({
       'voldikss/vim-floaterm',
       config = function()
-        require('settings.floaterm')
+        require('settings.floaterm.settings')
       end,
     })
 
@@ -266,6 +255,12 @@ return require('packer').startup({
     })
     use('amadeus/vim-convert-color-to')
     use('editorconfig/editorconfig-vim')
+    use({
+      'stevearc/dressing.nvim',
+      config = function()
+        require('settings.dressing.settings')
+      end,
+    })
 
     -- SCSS syntax support
     use('cakebaker/scss-syntax.vim')
@@ -274,7 +269,7 @@ return require('packer').startup({
     use({
       'kristijanhusak/orgmode.nvim',
       config = function()
-        require('settings.orgmode')
+        require('settings.orgmode.settings')
       end,
       requires = {
         'dhruvasagar/vim-table-mode',
@@ -305,6 +300,17 @@ return require('packer').startup({
     -- PHP
     use('StanAngeloff/php.vim')
     use('github/copilot.vim')
+
+    -- Note taking
+    use({
+      'vimwiki/vimwiki',
+      requires = {
+        'EdenEast/nightfox.nvim',
+      },
+      config = function()
+        require('settings.vimwiki.settings')
+      end,
+    })
 
     if packer_bootstrap then
       require('packer').sync()

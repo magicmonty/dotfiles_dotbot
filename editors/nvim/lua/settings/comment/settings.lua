@@ -1,6 +1,6 @@
-local map = require("vim_ext").map
+local map = require('vim_ext').map
 
-require("Comment").setup({
+require('Comment').setup({
   ---Add a space b/w comment and the line
   ---@type boolean
   padding = true,
@@ -66,9 +66,12 @@ require("Comment").setup({
 
   ---Post-hook, called after commenting is done
   ---@type fun(ctx: Ctx)
-  post_hook = nil
+  post_hook = nil,
 })
 
+local comment_ft = require('Comment.ft')
+comment_ft.set('lua', { '--%s', '--[[%s]]' })
+
 -- comment/uncomment line/block
-map('n', '<leader>#', 'gcc', {noremap = false})
-map('v', '#', 'gb', {noremap = false})
+map('n', '<leader>#', 'gcc', { noremap = false })
+map('v', '#', 'gb', { noremap = false })

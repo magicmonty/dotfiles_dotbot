@@ -6,22 +6,23 @@
       "horizontal_offset": 0,
       "segments": [
         {
+          "type": "path",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
           "background": "#feae34",
           "foreground": "#262b44",
-          "leading_diamond": "",
-          "powerline_symbol": "",
           "properties": {
             "prefix": "  ",
             "style": "folder"
-          },
-          "style": "diamond",
-          "trailing_diamond": "",
-          "type": "path"
+          }
         },
         {
+          "type": "git",
+          "style": "powerline",
+          "powerline_symbol": "",
           "background": "#fee761",
           "foreground": "#262b44",
-          "powerline_symbol": "",
           "properties": {
             "ahead_and_behind_color": "#e43b44",
             "ahead_color": "#2ce8f5",
@@ -31,31 +32,29 @@
             "local_changes_color": "#f77622",
             "stash_count_icon": " ",
             "status_colors_enabled": true
-          },
-          "style": "powerline",
-          "type": "git"
+          }
         },
         {
-          "background": "#fee761",
-          "foreground": "#262b44",
+          "type": "root",
+          "style": "powerline",
           "powerline_symbol": "",
-          "style": "powerline",
-          "type": "root"
+          "background": "#fee761",
+          "foreground": "#262b44"
         },
         {
+          "type": "exit",
+          "style": "diamond",
+          "leading_diamond": "<transparent, #0095e9></>",
+          "trailing_diamond": "",
           "background": "#0095e9",
           "foreground": "#ffffff",
-          "leading_diamond": "<transparent, #0095e9></>",
           "properties": {
             "always_enabled": true,
             "color_background": true,
             "display_exit_code": false,
             "error_color": "#ff0044",
             "prefix": " "
-          },
-          "style": "diamond",
-          "trailing_diamond": "",
-          "type": "exit"
+          }
         }
       ],
       "type": "prompt",

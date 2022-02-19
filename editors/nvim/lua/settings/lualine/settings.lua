@@ -1,7 +1,7 @@
 local function LspStatus()
   local status = ''
   if vim.lsp.buf_get_clients() then
-    status = require('magicmonty.lsp-status').status()
+    status = require('magicmonty.status').status()
   end
 
   return status

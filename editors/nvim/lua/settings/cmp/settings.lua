@@ -58,6 +58,7 @@ cmp.setup({
 
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_document_symbol' },
     { name = 'sonicpi' },
     { name = 'treesitter' },
     { name = 'luasnip' },
@@ -77,6 +78,7 @@ cmp.setup({
       vim_item.kind = string.format('%s [%s]', lspkind.presets.default[vim_item.kind], vim_item.kind)
       vim_item.menu = ({
         nvim_lsp = 'ﲳ',
+        nvim_lsp_document_symbol = 'ﲳ',
         nvim_lua = '',
         treesitter = '',
         path = 'ﱮ',

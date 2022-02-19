@@ -1,83 +1,53 @@
 local lsp_installer = require('nvim-lsp-installer')
 
-require('lsp-status').register_progress()
+local status = require('settings.lsp-status.settings')
+status.activate()
 
 local on_init = function(client)
-  if client.config.flags then
-    client.config.flags.allow_incremental_sync = true
-  end
+  client.config.flags = client.config.flags or {}
+  client.config.flags.allow_incremental_sync = true
 end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   require('lsp-status').on_attach(client)
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-
   --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
   -- Mappings.
-  mappings = {
-    f = {
-      name = 'Find',
-      d = { '<cmd>Lspsaga lsp_finder<cr>', 'Find definitions' },
-      D = { ':Telescope lsp_definitions<cr>', 'Find definitions (Telescope)' },
-      r = { '<cmd>Lspsaga lsp_finder<cr>', 'Find references' },
-      R = { ':Telescope lsp_references<cr>', 'Find references (Telescope)' },
-    },
+  local leader_mappings = {
     l = {
       name = 'LSP',
-      a = { ':Lspsaga code_actions<cr>', 'Show available code actions' },
-      A = { ':Telescope lsp_code_actions<cr>', 'Show available code actions (Telescope)' },
-      d = { ':Lspsaga lsp_finder<cr>', 'Find definition' },
-      D = { ':Telescope lsp_definitions<cr>', 'Find definition (Telescope)' },
-      f = { '<cmd>Format<CR>', 'Format buffer' },
-      i = { '<cmd>Lspsaga implement<CR>', 'Find implementation' },
-      I = { '<cmd>Telescope lsp_implementations<CR>', 'Find implementation (Telescope)' },
-      n = { ':Lspsaga rename<cr>', 'Rename symbol' },
-      r = { ':Lspsaga lsp_finder<cr>', 'Find references' },
-      R = { ':Telescope lsp_references<cr>', 'Find references (Telescope)' },
-      s = { ':Lspsaga signature_help<cr>', 'Signature help' },
+      a = { vim.lsp.buf.code_action, 'Show available code actions' },
+      f = { '<cmd>Format<cr>', 'Format buffer' },
+      n = { vim.lsp.buf.rename, 'Rename symbol' },
     },
-    x = {
-      name = 'Inspections',
-      d = { ':Trouble document_diagnostics<cr>', 'Document diagnostics' },
-      l = { ':Trouble loclist<cr>', 'Open diagnostics in loclist' },
-      q = { ':Trouble quickfix<cr>', 'Open diagnostics in quickfix list' },
-      w = { ':Trouble workspace_diagnostics<cr>', 'Workspace diagnostics' },
-      x = { ':TroubleToggle<cr>', 'Toggle diagnostics' },
+    d = {
+      name = 'Diagnostics',
+      l = { '<cmd>Telescope diagnostics<cr>', 'Workspace diagnostics list' },
+      n = { vim.diagnostic.goto_next, 'Jump to next diagnostic entry' },
+      p = { vim.diagnostic.goto_prev, 'Jump to previous diagnostic entry' },
     },
   }
 
-  require('which-key').register(
-    mappings,
-    { prefix = '<leader>', buffer = bufnr, mode = 'n', noremap = true, silent = true }
-  )
+  local wk = require('which-key')
+  wk.register(leader_mappings, { prefix = '<leader>', buffer = bufnr, mode = 'n', noremap = true, silent = true })
 
-  local opts = { noremap = true, silent = true }
-  buf_set_keymap('n', '<C-r><C-r>', ':Lspsaga rename<cr>', opts)
-  buf_set_keymap('n', 'K', ':Lspsaga hover_doc<cr>', opts)
+  local normal_mappings = {
+    ['<C-s>'] = { vim.lsp.buf.signature_help, 'Show signature help' },
+    g = {
+      name = 'Goto',
+      d = { '<cmd>Telescope lsp_definitions<cr>', 'Goto definition' },
+      D = { vim.lsp.buf.declaration, 'Goto declaration' },
+      r = { '<cmd>Telescope lsp_references<cr>', 'Goto reference' },
+      i = { '<cmd>Telescope lsp_implementations<cr>', 'Goto implementation' },
+      T = { '<cmd>Telescope lsp_type_definitions<cr>', 'Goto type definition' },
+    },
+    K = { vim.lsp.buf.hover, 'Show hover documentation' },
+  }
 
-  buf_set_keymap('n', '<S-C-j>', ':Lspsaga diagnostic_jump_next<cr>', opts)
-  buf_set_keymap('n', '<M-End>', ':Lspsaga diagnostic_jump_next<cr>', opts)
-  buf_set_keymap('n', '<S-M-Right>', ':Lspsaga diagnostic_jump_next<cr>', opts)
-  buf_set_keymap('n', '<S-C-k>', ':Lspsaga diagnostic_jump_prev<cr>', opts)
-  buf_set_keymap('n', '<M-Home>', ':Lspsaga diagnostic_jump_prev<cr>', opts)
-  buf_set_keymap('n', '<S-M-Left>', ':Lspsaga diagnostic_jump_prev<cr>', opts)
-
-  -- automatic formatting on save
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd([[augroup Format]])
-    vim.cmd([[autocmd!]])
-    vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]])
-    vim.cmd([[augroup END]])
-  end
+  wk.register(normal_mappings, { buffer = bufnr, mode = 'n', noremap = true, silent = true })
 
   --protocol.SymbolKind = { }
   local icons = {
@@ -112,6 +82,26 @@ local on_attach = function(client, bufnr)
   for i, kind in ipairs(kinds) do
     kinds[i] = icons[kind] or kind
   end
+
+  if client.resolved_capabilities.document_highlight then
+    vim.cmd([[
+      augroup lsp_document_highlight
+        au! * <buffer>
+        au CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]])
+  end
+
+  if client.resolved_capabilities.code_lens then
+    vim.cmd([[
+      augroup lsp_document_code_lens
+        au! * <buffer>
+        au BufEnter ++once lua vim.lsp.codelens.refresh()
+        au BufWritePost,CursorHold <buffer> lua vim.lsp.codelens.refresh()
+      augroup END
+    ]])
+  end
 end
 
 lsp_installer.settings({
@@ -125,21 +115,9 @@ lsp_installer.settings({
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local hascmp, cmp = pcall(require, 'cmp_nvim_lsp')
-if hascmp then
-  capabilities = cmp.update_capabilities(capabilities)
-end
-
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  },
-}
-capabilities.textDocument.codeAction.dynamicRegistration = true
-capabilities = vim.tbl_extend('keep', capabilities, require('lsp-status').capabilities)
+capabilities = vim.tbl_deep_extend('keep', capabilities, require('lsp-status').capabilities)
+capabilities.textDocument.codeLens = { dynamicRegistration = false }
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 lsp_installer.on_server_ready(function(server)
   local opts = {
@@ -186,6 +164,17 @@ lsp_installer.on_server_ready(function(server)
 
     server:setup(luadev)
     return
+  end
+
+  if server.name == 'ltex' then
+    opts.settings = {
+      ltex = {
+        additionalRules = {
+          motherTongue = 'de-DE',
+        },
+        language = 'de-DE',
+      },
+    }
   end
 
   if server.name == 'jsonls' then

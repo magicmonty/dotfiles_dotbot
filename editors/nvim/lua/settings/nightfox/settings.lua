@@ -34,6 +34,8 @@ nightfox.setup({
     NvimTreeGitRenamed = { fg = '${green_dm}' },
     NvimTreeGitNew = { fg = '${git.add}' },
     NvimTreeGitDeleted = { fg = '${git.delete}' },
+    VimwikiWeblink1 = { fg = '${cyan}', style = 'underline' },
+    VimwikiCellSeparator = { fg = '${magenta}' },
   },
 })
 

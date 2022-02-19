@@ -1,347 +1,222 @@
-Xft.dpi: 96
-*.dpi: 96
-Xft.antialias: true
-Xft.hinting: true
-Xft.hintstyle: hintslight
-Xft.rgba: rgb
-Xft.autohint: false
-Xft.lcdfilter: lcddefault
-
-XTerm*background: #282828
-XTerm*foreground: #ebdbb2
-XTerm*pointerColor: #ebdbb2
-XTerm*faceName: Fixed
-XTerm*faceSize: 12
-XTerm*reverseVideo: off
-XTerm*selectToClipboard: true
-
-Xautolock.time: 15
-Xautolock.locker: /usr/bin/betterlockscreen -l dimblur
-Xautolock.notify: 5
-Xautolock.notifier: /usr/bin/notify-send "Locking now..."
-
-#define nord0 #2E3440
-#define nord1 #3B4252
-#define nord2 #434C5E
-#define nord3 #4C566A
-#define nord4 #D8DEE9
-#define nord5 #E5E9F0
-#define nord6 #ECEFF4
-#define nord7 #8FBCBB
-#define nord8 #88C0D0
-#define nord9 #81A1C1
-#define nord10 #5E81AC
-#define nord11 #BF616A
-#define nord12 #D08770
-#define nord13 #EBCB8B
-#define nord14 #A3BE8C
-#define nord15 #B48EAD
-
-#define nightfox_background #192330
-#define nightfox_foreground #cdcecf
-#define nightfox0 #393b44
-#define nightfox1 #c94f6d
-#define nightfox2 #81b29a
-#define nightfox3 #dbc074
-#define nightfox4 #719cd6
-#define nightfox5 #9d79d6
-#define nightfox6 #63cdcf
-#define nightfox7 #dfdfe0
-#define nightfox8 #475072
-#define nightfox9 #d6616b
-#define nightfox10 #58cd8b
-#define nightfox11 #ffe37e
-#define nightfox12 #84cee4
-#define nightfox13 #b8a1e3
-#define nightfox14 #59f0ff
-#define nightfox15 #f2f2f2
-
-
-!! GruvBox
-!! *background:             #282828
-!! *foreground:             #ebdbb2
-!! *foreground_bold:        #ebdbb2
-!! *fading:                 8
-!! *fadeColor:              black
-!! *cursorColor:            #ebdbb2
-!! *pointerColorBackground: #2B2C2B
-!! *pointerColorForeground: #ebdbb2
-!! *cursor:                 #ebdbb2
-
-*foreground: nightfox_foreground
-*background: nightfox_background
-*cursorColor: nightfox4
-*fading: 35
-*fadeColor: nightfox3
-
-Xcursor.theme: xcursor-breeze
-
-*alpha: 95
-
-!! black dark/light
-!! *color0: #282828
-!! *color8: #928374
-*color0: nightfox0
-*color8: nightfox8
-
-!! red dark/light
-!! *color1: #cc241d
-!! *color9: #fb4934
-*color1: nightfox1
-*color9: nightfox9
-
-!! green dark/light
-!! *color2: #98971a
-!! *color10: #b8bb26
-*color2: nightfox2
-*color10: nightfox10
-
-!! yellow dark/light
-!! *color3: #d79921
-!! *color11: #fabd2f
-*color3: nightfox3
-*color11: nightfox11
-
-!! blue dark/light
-!! *color4: #458588
-!! *color12: #83a598
-*color4: nightfox4
-*color12: nightfox12
-
-!! magenta dark/light
-!! *color5: #b16286
-!! *color13: #d3869b
-*color5: nightfox5
-*color13: nightfox13
-
-!! cyan dark/light
-!! *color6: #689d6a
-!! *color14: #8ec07c
-*color6: nightfox6
-*color14: nightfox14
-
-!! white dark/light
-!! *color7: #a89984
-!! *color15: #ebdbb2
-*color7: nightfox7
-*color15: nightfox15
-
-*orange_dark:  #e28940
-*orange_light: #f6a878
-
-URxvt.color24:  #076678
-URxvt.color66:  #427b58
-URxvt.color88:  #9d0006
-URxvt.color96:  #8f3f71
-URxvt.color100: #79740e
-URxvt.color108: #8ec07c
-URxvt.color109: #83a598
-URxvt.color130: #af3a03
-URxvt.color136: #b57614
-URxvt.color142: #b8bb26
-URxvt.color167: #fb4934
-URxvt.color175: #d3869b
-URxvt.color208: #fe8019
-URxvt.color214: #fabd2f
-URxvt.color223: #ebdbb2
-URxvt.color228: #f2e5bc
-URxvt.color229: #fbf1c7
-URxvt.color230: #f9f5d7
-URxvt.color234: #1d2021
-URxvt.color235: #282828
-URxvt.color236: #32302f
-URxvt.color237: #3c3836
-URxvt.color239: #504945
-URxvt.color241: #665c54
-URxvt.color243: #7c6f64
-URxvt.color244: #928374
-URxvt.color245: #928374
-URxvt.color246: #a89984
-URxvt.color248: #bdae93
-URxvt.color250: #d5c4a1
-
-URxvt.font: 		            xft:Monoid NF:size=12,xft:Noto Color Emoji:size=9
-URxvt.intensityStyles:	    false
-URxvt.depth:		            32
-URxvt.scrollBar:	          false
-URxvt.mouseWheelScrollPage: true
-URxvt.cursorBlink:	        true
-URxvt.background:           nightfox_background
-URxvt.foreground:           nightfox_foreground
-URxvt.saveLines:            5000
-URxvt.cursorColor:	        nightfox_foreground
-URxvt.cursorUnderline:      false
-URxvt.letterSpace: -1
-
-! Normal Copy-Paste keybindings without perls
-URxvt.iso14755:               false
-URxvt.keysym.Shift-Control-V: eval:paste_clipboard
-URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
-
-!Xterm escape codes, word by word movement
-URxvt.keysym.Control-Left:        \033[1;5D
-URxvt.keysym.Shift-Control-Left:  \033[1;6D
-URxvt.keysym.Control-Right:       \033[1;5C
-URxvt.keysym.Shift-Control-Right: \033[1;6C
-URxvt.keysym.Control-Up:          \033[1;5A
-URxvt.keysym.Shift-Control-Up:    \033[1;6A
-URxvt.keysym.Control-Down:        \033[1;5B
-URxvt.keysym.Shift-Control-Down:  \033[1;6B
-
-!! Disable printing
-URxvt.print-pipe: cat > /dev/null
-rxvt.print-pipe: cat > /dev/null
-
-!! Extensions
-URxvt.perl-ext-common:	default,matcher,resize-font,keyboard-select
-URxvt.colorUL:		#458588
-
-!! matcher
-URxvt.url-launcher: linkhandler
-URxvt.keysym.M-u: matcher:select
+xrenoise.use_xcursors:	1
+xrenoise.display:	:0
+xrenoise.display_resource:	0x00,0x00,0xCE,0xD4,0x00,0xB9,0x19,0x0F
+xrenoise.executable_path:	/usr/bin/renoise
+Xautolock.time:	15
+Xautolock.locker:	/usr/bin/betterlockscreen -l dimblur
+Xautolock.notify:	5
+Xautolock.notifier:	/usr/bin/notify-send "Locking now..."
+Xcursor.theme:	xcursor-breeze
+rofi.opacity:	10
+rofi.color-window:	nightfox_background,   nightfox_background,   nightfox_background
+rofi.hide-scrollbar:	true
+rofi.bw:	0
+rofi.lines:	10
+rofi.fake-transparency:	true
+rofi.width:	30-1
+rxvt.print-pipe:	cat > /dev/null
+XTerm*faceSize:	12
+XTerm*foreground:	#ebdbb2
+XTerm*background:	#282828
+XTerm*reverseVideo:	off
+XTerm*faceName:	Fixed
+XTerm*pointerColor:	#ebdbb2
+XTerm*selectToClipboard:	true
+Xft.hinting:	true
+Xft.antialias:	true
+Xft.dpi:	96
+Xft.lcdfilter:	lcddefault
+Xft.rgba:	rgb
+Xft.hintstyle:	hintslight
+Xft.autohint:	false
+URxvt.keysym.F4:	\033OS
+URxvt.keysym.S-C-End:	\033[1;6F~
+URxvt.keysym.S-M-C-F12:	\033[24;8~
+URxvt.keysym.Home:	\033OH
+URxvt.keysym.S-C-F1:	\033[1;6P~
+URxvt.keysym.S-M-C-F2:	\033[1;8Q~
+URxvt.keysym.S-C-F10:	\033[21;6~
+URxvt.keysym.M-C-End:	\033[1;7F~
+URxvt.keysym.S-M-C-F3:	\033[1;8R~
+URxvt.keysym.S-C-F11:	\033[23;6~
+URxvt.keysym.M-C-F1:	\033[1;7P~
+URxvt.keysym.S-M-C-F4:	\033[1;8S~
+URxvt.keysym.S-C-F12:	\033[24;6~
+URxvt.keysym.M-C-F10:	\033[21;7~
+URxvt.keysym.S-M-C-F5:	\033[15;8~
+URxvt.keysym.S-C-F2:	\033[1;6Q~
+URxvt.keysym.M-C-F11:	\033[23;7~
+URxvt.keysym.S-M-C-F6:	\033[17;8~
+URxvt.keysym.S-C-F3:	\033[1;6R~
+URxvt.keysym.M-C-F12:	\033[24;7~
+URxvt.keysym.S-M-C-F7:	\033[18;8~
+URxvt.keysym.S-C-F4:	\033[1;6S~
+URxvt.keysym.M-C-F2:	\033[1;7Q~
+URxvt.keysym.S-M-C-F8:	\033[19;8~
+URxvt.keysym.S-C-F5:	\033[15;6~
+URxvt.keysym.M-C-F3:	\033[1;7R~
+URxvt.keysym.S-M-C-F9:	\033[20;8~
+URxvt.keysym.S-C-F6:	\033[17;6~
+URxvt.keysym.M-C-F4:	\033[1;7S~
+URxvt.keysym.S-M-C-Home:	\033[1;8H~
+URxvt.keysym.C-End:	\033[1;5F~
+URxvt.keysym.S-M-End:	\033[1;4F~
+URxvt.keysym.S-C-F7:	\033[18;6~
+URxvt.keysym.M-C-F5:	\033[15;7~
+URxvt.keysym.C-F1:	\033[1;5P~
+URxvt.keysym.S-M-F1:	\033[1;4P~
+URxvt.keysym.S-C-F8:	\033[19;6~
+URxvt.keysym.M-C-F6:	\033[17;7~
+URxvt.keysym.S-M-F10:	\033[21;4~
+URxvt.keysym.C-F10:	\033[21;5~
+URxvt.keysym.S-C-F9:	\033[20;6~
+URxvt.keysym.M-C-F7:	\033[18;7~
+URxvt.keysym.S-M-F11:	\033[23;4~
+URxvt.keysym.C-F11:	\033[23;5~
+URxvt.keysym.S-C-Home:	\033[1;6H~
+URxvt.keysym.M-C-F8:	\033[19;7~
+URxvt.keysym.S-M-F12:	\033[24;4~
+URxvt.keysym.S-End:	\033[1;2F~
+URxvt.keysym.C-F12:	\033[24;5~
+URxvt.keysym.M-C-F9:	\033[20;7~
+URxvt.keysym.C-F2:	\033[1;5Q~
+URxvt.keysym.S-M-F2:	\033[1;4Q~
+URxvt.keysym.S-F1:	\033[1;2P~
+URxvt.keysym.M-C-Home:	\033[1;7H~
+URxvt.keysym.C-F3:	\033[1;5R~
+URxvt.keysym.S-M-F3:	\033[1;4R~
+URxvt.keysym.M-End:	\033[8;3~
+URxvt.keysym.S-F10:	\033[21;2~
+URxvt.keysym.S-M-F4:	\033[1;4S~
+URxvt.keysym.M-Escape:	perl:keyboard-select:activate
+URxvt.keysym.S-F11:	\033[23;2~
+URxvt.keysym.C-F4:	\033[1;5S~
+URxvt.keysym.S-M-F5:	\033[15;4~
+URxvt.keysym.M-F1:	\033[1;3P~
+URxvt.keysym.S-F12:	\033[24;2~
+URxvt.keysym.C-F5:	\033[15;5~
+URxvt.keysym.S-M-F6:	\033[17;4~
+URxvt.keysym.M-F10:	\033[21;3~
+URxvt.keysym.S-F2:	\033[1;2Q~
+URxvt.keysym.C-F6:	\033[17;5~
+URxvt.keysym.S-M-F7:	\033[18;4~
+URxvt.keysym.M-F11:	\033[23;3~
+URxvt.keysym.S-F3:	\033[1;2R~
+URxvt.keysym.C-F7:	\033[18;5~
+URxvt.keysym.S-M-F8:	\033[19;4~
+URxvt.keysym.M-F12:	\033[24;3~
+URxvt.keysym.S-F4:	\033[1;2S~
+URxvt.keysym.C-F8:	\033[19;5~
+URxvt.keysym.S-M-F9:	\033[20;4~
+URxvt.keysym.M-F2:	\033[1;3Q~
+URxvt.keysym.S-F5:	\033[15;2~
+URxvt.keysym.C-F9:	\033[20;5~
+URxvt.keysym.C-Home:	\033[1;5H~
+URxvt.keysym.S-M-Home:	\033[1;4H~
+URxvt.keysym.M-F3:	\033[1;3R~
+URxvt.keysym.S-F6:	\033[17;2~
+URxvt.keysym.M-F4:	\033[1;3S~
+URxvt.keysym.Shift-Control-C:	eval:selection_to_clipboard
+URxvt.keysym.Control-Down:	\033[1;5B
+URxvt.keysym.S-F7:	\033[18;2~
+URxvt.keysym.M-F5:	\033[15;3~
+URxvt.keysym.Shift-Control-Down:	\033[1;6B
+URxvt.keysym.Control-Left:	\033[1;5D
+URxvt.keysym.S-F8:	\033[19;2~
+URxvt.keysym.M-F6:	\033[17;3~
+URxvt.keysym.Control-Right:	\033[1;5C
+URxvt.keysym.Shift-Control-Left:	\033[1;6D
+URxvt.keysym.S-F9:	\033[20;2~
+URxvt.keysym.M-F7:	\033[18;3~
+URxvt.keysym.Shift-Control-Right:	\033[1;6C
+URxvt.keysym.Control-Up:	\033[1;5A
+URxvt.keysym.S-Home:	\033[1;2H~
+URxvt.keysym.M-F8:	\033[19;3~
+URxvt.keysym.End:	\033OF
+URxvt.keysym.Shift-Control-Up:	\033[1;6A
+URxvt.keysym.S-M-C-End:	\033[1;8F~
+URxvt.keysym.M-F9:	\033[20;3~
+URxvt.keysym.F1:	\033OP
+URxvt.keysym.Shift-Control-V:	eval:paste_clipboard
+URxvt.keysym.S-M-C-F1:	\033[1;8P~
+URxvt.keysym.F2:	\033OQ
+URxvt.keysym.M-Home:	\033[7;3~
+URxvt.keysym.S-M-C-F10:	\033[21;8~
+URxvt.keysym.F3:	\033OR
+URxvt.keysym.M-u:	matcher:select
+URxvt.keysym.S-M-C-F11:	\033[23;8~
 URxvt.matcher.button:	1
-
-
-!! keyboard-select:
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-
-!! resize-font
 URxvt.resize-font.smaller:	C-Down
 URxvt.resize-font.bigger:	C-Up
-
-! Special Keys
-! Normal
-URxvt.keysym.Home: \033OH
-URxvt.keysym.End: \033OF
-URxvt.keysym.F1: \033OP
-URxvt.keysym.F2: \033OQ
-URxvt.keysym.F3: \033OR
-URxvt.keysym.F4: \033OS
-
-! Shift
-URxvt.keysym.S-Home: \033[1;2H~
-URxvt.keysym.S-End:  \033[1;2F~
-URxvt.keysym.S-F1:   \033[1;2P~
-URxvt.keysym.S-F2:   \033[1;2Q~
-URxvt.keysym.S-F3:   \033[1;2R~
-URxvt.keysym.S-F4:   \033[1;2S~
-URxvt.keysym.S-F5:   \033[15;2~
-URxvt.keysym.S-F6:   \033[17;2~
-URxvt.keysym.S-F7:   \033[18;2~
-URxvt.keysym.S-F8:   \033[19;2~
-URxvt.keysym.S-F9:   \033[20;2~
-URxvt.keysym.S-F10:  \033[21;2~
-URxvt.keysym.S-F11:  \033[23;2~
-URxvt.keysym.S-F12:  \033[24;2~
-
-! Alt
-URxvt.keysym.M-Home: \033[7;3~
-URxvt.keysym.M-End:  \033[8;3~
-URxvt.keysym.M-F1:   \033[1;3P~
-URxvt.keysym.M-F2:   \033[1;3Q~
-URxvt.keysym.M-F3:   \033[1;3R~
-URxvt.keysym.M-F4:   \033[1;3S~
-URxvt.keysym.M-F5:   \033[15;3~
-URxvt.keysym.M-F6:   \033[17;3~
-URxvt.keysym.M-F7:   \033[18;3~
-URxvt.keysym.M-F8:   \033[19;3~
-URxvt.keysym.M-F9:   \033[20;3~
-URxvt.keysym.M-F10:  \033[21;3~
-URxvt.keysym.M-F11:  \033[23;3~
-URxvt.keysym.M-F12:  \033[24;3~
-
-! Shift+Alt
-URxvt.keysym.S-M-Home: \033[1;4H~
-URxvt.keysym.S-M-End:  \033[1;4F~
-URxvt.keysym.S-M-F1:   \033[1;4P~
-URxvt.keysym.S-M-F2:   \033[1;4Q~
-URxvt.keysym.S-M-F3:   \033[1;4R~
-URxvt.keysym.S-M-F4:   \033[1;4S~
-URxvt.keysym.S-M-F5:   \033[15;4~
-URxvt.keysym.S-M-F6:   \033[17;4~
-URxvt.keysym.S-M-F7:   \033[18;4~
-URxvt.keysym.S-M-F8:   \033[19;4~
-URxvt.keysym.S-M-F9:   \033[20;4~
-URxvt.keysym.S-M-F10:  \033[21;4~
-URxvt.keysym.S-M-F11:  \033[23;4~
-URxvt.keysym.S-M-F12:  \033[24;4~
-
-! Control
-URxvt.keysym.C-Home: \033[1;5H~
-URxvt.keysym.C-End:  \033[1;5F~
-URxvt.keysym.C-F1:   \033[1;5P~
-URxvt.keysym.C-F2:   \033[1;5Q~
-URxvt.keysym.C-F3:   \033[1;5R~
-URxvt.keysym.C-F4:   \033[1;5S~
-URxvt.keysym.C-F5:   \033[15;5~
-URxvt.keysym.C-F6:   \033[17;5~
-URxvt.keysym.C-F7:   \033[18;5~
-URxvt.keysym.C-F8:   \033[19;5~
-URxvt.keysym.C-F9:   \033[20;5~
-URxvt.keysym.C-F10:  \033[21;5~
-URxvt.keysym.C-F11:  \033[23;5~
-URxvt.keysym.C-F12:  \033[24;5~
-
-! Shift+Control
-URxvt.keysym.S-C-Home: \033[1;6H~
-URxvt.keysym.S-C-End:  \033[1;6F~
-URxvt.keysym.S-C-F1:   \033[1;6P~
-URxvt.keysym.S-C-F2:   \033[1;6Q~
-URxvt.keysym.S-C-F3:   \033[1;6R~
-URxvt.keysym.S-C-F4:   \033[1;6S~
-URxvt.keysym.S-C-F5:   \033[15;6~
-URxvt.keysym.S-C-F6:   \033[17;6~
-URxvt.keysym.S-C-F7:   \033[18;6~
-URxvt.keysym.S-C-F8:   \033[19;6~
-URxvt.keysym.S-C-F9:   \033[20;6~
-URxvt.keysym.S-C-F10:  \033[21;6~
-URxvt.keysym.S-C-F11:  \033[23;6~
-URxvt.keysym.S-C-F12:  \033[24;6~
-
-! Alt+Control
-URxvt.keysym.M-C-Home: \033[1;7H~
-URxvt.keysym.M-C-End:  \033[1;7F~
-URxvt.keysym.M-C-F1:   \033[1;7P~
-URxvt.keysym.M-C-F2:   \033[1;7Q~
-URxvt.keysym.M-C-F3:   \033[1;7R~
-URxvt.keysym.M-C-F4:   \033[1;7S~
-URxvt.keysym.M-C-F5:   \033[15;7~
-URxvt.keysym.M-C-F6:   \033[17;7~
-URxvt.keysym.M-C-F7:   \033[18;7~
-URxvt.keysym.M-C-F8:   \033[19;7~
-URxvt.keysym.M-C-F9:   \033[20;7~
-URxvt.keysym.M-C-F10:  \033[21;7~
-URxvt.keysym.M-C-F11:  \033[23;7~
-URxvt.keysym.M-C-F12:  \033[24;7~
-
-! Shift+Alt+Control
-URxvt.keysym.S-M-C-Home: \033[1;8H~
-URxvt.keysym.S-M-C-End:  \033[1;8F~
-URxvt.keysym.S-M-C-F1:   \033[1;8P~
-URxvt.keysym.S-M-C-F2:   \033[1;8Q~
-URxvt.keysym.S-M-C-F3:   \033[1;8R~
-URxvt.keysym.S-M-C-F4:   \033[1;8S~
-URxvt.keysym.S-M-C-F5:   \033[15;8~
-URxvt.keysym.S-M-C-F6:   \033[17;8~
-URxvt.keysym.S-M-C-F7:   \033[18;8~
-URxvt.keysym.S-M-C-F8:   \033[19;8~
-URxvt.keysym.S-M-C-F9:   \033[20;8~
-URxvt.keysym.S-M-C-F10:  \033[21;8~
-URxvt.keysym.S-M-C-F11:  \033[23;8~
-URxvt.keysym.S-M-C-F12:  \033[24;8~
-
-!! GruvBox
-!! rofi.color-window:	#000,    #000,    #000
-!! rofi.color-normal:	#111,    #819396, #222,    #008ed4, #ffffff
-!! rofi.color-active:	#002b37, #008ed4, #003643, #008ed4, #66c6ff
-!! rofi.color-urgent:	#002b37, #da4281, #003643, #008ed4, #890661
-
-!! Nord
-rofi.color-window:    nightfox_background,   nightfox_background,   nightfox_background
-
-rofi.fake-transparency:	true
-rofi.lines:		          10
-rofi.bw:		            0
-rofi.opacity:		        10
-rofi.hide-scrollbar:  	true
-rofi.width:		          30-1
+URxvt.color88:	#9d0006
+URxvt.color229:	#fbf1c7
+URxvt.foreground:	nightfox_foreground
+URxvt.color230:	#f9f5d7
+URxvt.color96:	#8f3f71
+URxvt.mouseWheelScrollPage:	true
+URxvt.color234:	#1d2021
+URxvt.perl-ext-common:	default,matcher,resize-font,keyboard-select
+URxvt.colorUL:	#458588
+URxvt.color235:	#282828
+URxvt.cursorBlink:	true
+URxvt.print-pipe:	cat > /dev/null
+URxvt.color236:	#32302f
+URxvt.color100:	#79740e
+URxvt.cursorUnderline:	false
+URxvt.depth:	32
+URxvt.color237:	#3c3836
+URxvt.color108:	#8ec07c
+URxvt.font:	xft:Monoid NF:size=12,xft:Noto Color Emoji:size=9
+URxvt.color239:	#504945
+URxvt.color109:	#83a598
+URxvt.intensityStyles:	false
+URxvt.color130:	#af3a03
+URxvt.color24:	#076678
+URxvt.saveLines:	5000
+URxvt.color241:	#665c54
+URxvt.color136:	#b57614
+URxvt.scrollBar:	false
+URxvt.iso14755:	false
+URxvt.color243:	#7c6f64
+URxvt.color142:	#b8bb26
+URxvt.url-launcher:	linkhandler
+URxvt.color244:	#928374
+URxvt.color167:	#fb4934
+URxvt.color245:	#928374
+URxvt.color175:	#d3869b
+URxvt.color246:	#a89984
+URxvt.color208:	#fe8019
+URxvt.background:	nightfox_background
+URxvt.color248:	#bdae93
+URxvt.color214:	#fabd2f
+URxvt.cursorColor:	nightfox_foreground
+URxvt.color250:	#d5c4a1
+URxvt.color223:	#ebdbb2
+URxvt.letterSpace:	-1
+URxvt.color66:	#427b58
+URxvt.color228:	#f2e5bc
+*color11:	nightfox11
+*foreground:	nightfox_foreground
+*color5:	nightfox5
+*color12:	nightfox12
+*color6:	nightfox6
+*orange_dark:	#e28940
+*dpi:	96
+*color13:	nightfox13
+*color7:	nightfox7
+*orange_light:	#f6a878
+*alpha:	95
+*color8:	nightfox8
+*color14:	nightfox14
+*color9:	nightfox9
+*background:	nightfox_background
+*color15:	nightfox15
+*color2:	nightfox2
+*cursorColor:	nightfox4
+*color0:	nightfox0
+*color3:	nightfox3
+*color1:	nightfox1
+*fadeColor:	nightfox3
+*color4:	nightfox4
+*color10:	nightfox10
+*fading:	35

@@ -40,6 +40,9 @@ opt.cmdheight = 1
 opt.laststatus = 2
 opt.scrolloff = 10
 
+-- time it takes for CursorHold to fire
+opt.updatetime = 1000
+
 -- incremental substitution (neovim)
 opt.inccommand = 'split'
 

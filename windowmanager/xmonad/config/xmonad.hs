@@ -142,6 +142,7 @@ myStartupHook = do
     spawnOnce "xset dpms 900 900 900"
     spawnOnce "remaps"
     spawnOnce "xbanish &"
+    spawnOnce "syncthing serve --nobrowser &"
     spawnOnce "/home/mgondermann/.xmonad/polybar/up"
     spawnOnce "/home/mgondermann/.xmonad/set_bg"
     setWMName "LG3D"
