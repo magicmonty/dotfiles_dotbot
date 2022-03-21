@@ -88,6 +88,9 @@ map('i', '<C-S-Down>', '<C-O><C-S-Down>', { silent = true, noremap = false })
 map('s', '<C-S-Up>', '<C-G><C-Up><C-G>', { silent = true, noremap = false })
 map('s', '<C-S-Down>', '<C-G><C-Down><C-G>', { silent = true, noremap = false })
 
+-- Fugitive bindings
+map('n', '<leader>gs', '<cmd>Git<cr>', silent)
+
 vim.api.nvim_set_keymap('n', '<', ']', {})
 vim.api.nvim_set_keymap('x', '<', ']', {})
 vim.api.nvim_set_keymap('n', '>', ']', {})

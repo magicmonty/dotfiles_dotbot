@@ -15,6 +15,7 @@ M.git = {
   added = '',
   modified = '',
   removed = '',
+  branch = '',
 }
 
 M.spinner = {

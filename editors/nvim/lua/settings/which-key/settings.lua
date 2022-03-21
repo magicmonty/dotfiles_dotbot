@@ -53,6 +53,15 @@ local mappings = {
     w = 'Find word under cursor',
     W = 'Find exact word under cursor',
   },
+  g = {
+    name = 'Git',
+    s = 'Git status',
+    d = {
+      name = 'Git diff',
+      n = 'Next hunk',
+      p = 'Previous hunk',
+    },
+  },
   h = {
     name = 'Git Hunk',
     b = 'Blame line',

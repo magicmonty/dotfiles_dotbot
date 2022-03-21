@@ -23,6 +23,9 @@ local conditions = {
     local gitdir = vim.fn.finddir('.git', filepath .. ';')
     return gitdir and #gitdir > 0 and #gitdir < #filepath
   end,
+  has_gitsigns_info = function()
+    return vim.b.gitsigns_status_dict ~= nil
+  end,
 }
 
 local config = {
@@ -36,7 +39,42 @@ local config = {
   },
   sections = {
     lualine_a = { 'mode' },
-    lualine_b = { { 'branch', icon = '' } },
+    lualine_b = {
+      {
+        function()
+          local gitsigns = vim.b.gitsigns_status_dict
+          if gitsigns then
+            return icons.git.branch .. ' ' .. gitsigns.head
+          end
+        end,
+        cond = conditions.has_gitsigns_info,
+        separator = '',
+      },
+      {
+        'diff',
+        source = function()
+          local gitsigns = vim.b.gitsigns_status_dict
+          if gitsigns then
+            return {
+              added = gitsigns.added,
+              modified = gitsigns.changed,
+              removed = gitsigns.removed,
+            }
+          end
+        end,
+        symbols = {
+          added = icons.git.added .. ' ',
+          modified = icons.git.modified .. ' ',
+          removed = icons.git.removed .. ' ',
+        },
+        diff_color = {
+          added = { fg = colors.git.add },
+          modified = { fg = colors.git.changed },
+          removed = { fg = colors.git.removed },
+        },
+        cond = conditions.has_gitsigns_info,
+      },
+    },
     lualine_c = {},
     lualine_x = {},
     lualine_y = {
@@ -78,20 +116,6 @@ local function ins_right(component)
 end
 
 ins_left({ 'filename' })
-ins_left({
-  'diff',
-  symbols = {
-    added = icons.git.added .. ' ',
-    modified = icons.git.modified .. ' ',
-    removed = icons.git.removed .. ' ',
-  },
-  diff_color = {
-    added = { fg = colors.git.add },
-    modified = { fg = colors.git.changed },
-    removed = { fg = colors.git.removed },
-  },
-  cond = conditions.hide_in_width,
-})
 ins_right({
   'filetype',
   cond = conditions.buffer_not_empty,
