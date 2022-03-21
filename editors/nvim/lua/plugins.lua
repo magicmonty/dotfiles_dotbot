@@ -1,6 +1,4 @@
 local fn = vim.fn
-local au = require('vim_ext').au
-local augroup = require('vim_ext').augroup
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 local packer_bootstrap = false
@@ -16,13 +14,28 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd([[packadd packer.nvim]])
 end
 
-augroup('packer_user_config', {
-  au({ 'BufWritePost', 'plugins.lua', 'source <afile> | PackerCompile' }),
+vim.api.nvim_create_augroup('packer_user_config', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = 'plugins.lua',
+  command = 'source <afile> | PackerCompile',
+  group = 'packer_user_config',
+})
+
+vim.api.nvim_create_augroup('packer', { clear = true })
+vim.api.nvim_create_autocmd('User PackerComplete', {
+  group = 'packer',
+  pattern = '*',
+  callback = function()
+    -- treesitter needs to be loaded after packer completes
+    -- otherwise it will not enable highlighting on the first load
+    require('settings.treesitter.settings').setup()
+  end,
 })
 
 return require('packer').startup({
   function(use)
     use('wbthomason/packer.nvim')
+    use('lewis6991/impatient.nvim')
 
     -- common dependencies
     use({
@@ -123,9 +136,6 @@ return require('packer').startup({
     use({
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
-      config = function()
-        require('settings.treesitter.settings')
-      end,
       requires = {
         'nvim-treesitter/nvim-treesitter-refactor',
         'nvim-treesitter/nvim-treesitter-textobjects',
@@ -160,6 +170,8 @@ return require('packer').startup({
         require('settings.formatter.settings')
       end,
     })
+
+    use('/home/mgondermann/src/plugins/cmp-sonicpi.nvim')
 
     use({
       'hrsh7th/nvim-cmp',

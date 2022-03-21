@@ -40,8 +40,8 @@ local on_attach = function(client, bufnr)
       name = 'Goto',
       d = { '<cmd>Telescope lsp_definitions<cr>', 'Goto definition' },
       D = { vim.lsp.buf.declaration, 'Goto declaration' },
-      r = { '<cmd>Telescope lsp_references<cr>', 'Goto reference' },
       i = { '<cmd>Telescope lsp_implementations<cr>', 'Goto implementation' },
+      r = { '<cmd>Telescope lsp_references<cr>', 'Goto reference' },
       T = { '<cmd>Telescope lsp_type_definitions<cr>', 'Goto type definition' },
     },
     K = { vim.lsp.buf.hover, 'Show hover documentation' },
@@ -114,12 +114,12 @@ lsp_installer.settings({
   },
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend('keep', capabilities, require('lsp-status').capabilities)
-capabilities.textDocument.codeLens = { dynamicRegistration = false }
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
 lsp_installer.on_server_ready(function(server)
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = vim.tbl_deep_extend('keep', capabilities, require('lsp-status').capabilities)
+  capabilities.textDocument.codeLens = { dynamicRegistration = false }
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
   local opts = {
     on_attach = on_attach,
     on_init = on_init,
@@ -137,32 +137,23 @@ lsp_installer.on_server_ready(function(server)
         types = true,
         plugins = true,
       },
+      runtime_path = false,
+
       lspconfig = {
         on_attach = on_attach,
         on_init = on_init,
         capabilities = capabilities,
+
         settings = {
           Lua = {
             diagnostics = { globals = { 'use' } },
-            workspace = { preloadFileSize = 350 },
-            telemetry = { enable = false },
           },
         },
       },
     })
 
-    local plugin_path = vim.fn.stdpath('data') .. '/plugged'
-    for _, p in pairs(vim.fn.expand(plugin_path .. '/*/lua', false, true)) do
-      p = vim.loop.fs_realpath(p)
-      if p then
-        table.insert(luadev.settings.Lua.runtime.path, p .. '/?.lua')
-        table.insert(luadev.settings.Lua.runtime.path, p .. '/?/init.lua')
-      end
-    end
-
-    luadev.settings.Lua.workspace.library[vim.fn.expand(plugin_path .. '/lua/cmp/types')] = true
-
-    server:setup(luadev)
+    server:setup_lsp(luadev)
+    server:attach_buffers()
     return
   end
 
@@ -231,6 +222,30 @@ lsp_installer.on_server_ready(function(server)
         },
       },
     }
+  end
+
+  if server.name == 'solargraph' then
+    opts.cmd = {
+      '/home/mgondermann/.local/share/gem/ruby/3.0.0/bin/solargraph',
+      'stdio',
+    }
+    opts.cmd_env = {
+      GEM_HOME = '/home/mgondermann/.local/share/gem/ruby/3.0.0',
+      GEM_PATH = '/home/mgondermann/.local/share/gem/ruby/3.0.0',
+    }
+    opts.settings = {
+      solargraph = {
+        diagnostics = true,
+        include = {
+          '/opt/sonic-pi/app/server/ruby/lib/sonicpi/**/*.rb',
+        },
+        require = {
+          '/opt/sonic-pi/app/server/core',
+          '/opt/sonic-pi/app/server/ruby/lib/sonicpi/lang/core',
+        },
+      },
+    }
+    opts.single_file_support = true
   end
 
   server:setup(opts)

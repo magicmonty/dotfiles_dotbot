@@ -25,7 +25,8 @@ if [ -e $HOME/.defaultapps ]; then
   source $HOME/.defaultapps
 fi
 
-WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
+# Don't consider certain characters part of the word
+WORDCHARS=${WORDCHARS//\/[&.;]}
 
 search_history () {
   local PECO_FLAGS=''
@@ -43,10 +44,13 @@ search_history () {
 }
 
 zle -N search_history_widget search_history
-bindkey '^R' search_history_widget
 
 ## Keybindings section
 bindkey -e
+
+## Search history via Peco
+bindkey '^r' search_history_widget
+
 bindkey '^[[7~' beginning-of-line                               # Home key
 bindkey '^[[H' beginning-of-line                                # Home key
 if [[ "${terminfo[khome]}" != "" ]]; then
@@ -250,8 +254,8 @@ if [ -e $(which bat) ]; then
   alias cat=bat
 fi
 
-if [ -e ${HOME}/.gem/ruby/3.0.0/bin ]; then
-  export PATH=${HOME}/.gem/ruby/3.0.0/bin:$PATH
+if [ -e ${HOME}/.local/share/gem/ruby/3.0.0/bin ]; then
+  export PATH=${HOME}/.local/share/gem/ruby/3.0.0/bin:$PATH
 fi
 
 USE_POWERLINE=true

@@ -37,8 +37,8 @@ opt.encoding = 'utf-8'
 opt.bomb = false
 opt.background = 'dark'
 opt.cmdheight = 1
-opt.laststatus = 2
 opt.scrolloff = 10
+opt.laststatus = 3
 
 -- time it takes for CursorHold to fire
 opt.updatetime = 1000

@@ -1,15 +1,15 @@
-local icons = require('icons')
+local icons = require('icons').diagnostics
 
 require('notify').setup({
   timeout = 3000,
   stages = 'fade',
   icons = {
-    ERROR = icons.diagnostics.Error,
-    WARN = icons.diagnostics.Warning,
-    INFO = icons.diagnostics.Information,
-    DEBUG = icons.diagnostics.Debug,
-    TRACE = icons.diagnostics.Trace,
+    ERROR = icons.Error,
+    WARN = icons.Warning,
+    INFO = icons.Information,
+    DEBUG = icons.Debug,
+    TRACE = icons.Trace,
   },
-  background_colour = require('nightfox.colors').init().bg,
+  background_colour = require('nightfox.pallet.nightfox').pallet.bg0,
 })
 

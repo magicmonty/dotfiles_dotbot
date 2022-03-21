@@ -3,11 +3,9 @@ local icons = require('icons')
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
 vim.cmd([[
-  let g:nvim_tree_quit_on_open = 1 " 0 by default, closes the tree when you open a file
   let g:nvim_tree_indent_markers = 1
   let g:nvim_tree_git_hl = 1
   let g:nvim_tree_highlight_opened_files = 3
-  let g:nvim_tree_window_picker_exclude = [ "filetype", [ "packer", "vim-plug", "qf" ] ]
   let g:nvim_tree_icons = {
       \ 'default': '',
       \ 'symlink': '',
@@ -63,6 +61,16 @@ require('nvim-tree').setup({
       list = {
         { key = 'cd', cb = tree_cb('cd') },
         { key = { '<C-s>', '<C-x>', '<C-h>' }, cb = tree_cb('split') },
+      },
+    },
+  },
+  actions = {
+    open_file = {
+      quit_on_open = true,
+      window_picker = {
+        exclude = {
+          filetype = { 'packer', 'vim-plug', 'qf' },
+        },
       },
     },
   },

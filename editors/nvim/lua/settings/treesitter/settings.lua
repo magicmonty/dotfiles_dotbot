@@ -1,20 +1,12 @@
-local treesitter = require('nvim-treesitter.configs')
-local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
 local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
 ft_to_parser.tsx = { 'javascript', 'typescript.tsx' }
 
-parser_config.org = {
-  install_info = {
-    url = 'https://github.com/milisims/tree-sitter-org',
-    revision = 'main',
-    files = { 'src/parser.c', 'src/scanner.cc' },
-  },
-  filetype = 'org',
-}
+local M = {}
 
-treesitter.setup({
+local opts = {
   highlight = {
     enable = true,
+    disable = {},
     additional_vim_regex_highlighting = true,
   },
   indent = {
@@ -30,8 +22,9 @@ treesitter.setup({
     disable = { 'html' },
     enable = true,
     extended_mode = true, -- don't highlight non parentheses delimiters
-    max_file_lines = 1000,
+    max_file_lines = 5000,
   },
+  autotag = { enable = true },
   autopairs = { enable = true },
   context_commentstring = {
     enable = true,
@@ -56,14 +49,60 @@ treesitter.setup({
       },
     },
   },
-  ensure_installed = 'maintained',
-})
+  ensure_installed = {
+    'bash',
+    'c_sharp',
+    'comment',
+    'css',
+    'dockerfile',
+    'go',
+    'html',
+    'javascript',
+    'json',
+    'json5',
+    'jsonc',
+    'latex',
+    'lua',
+    'markdown',
+    'ninja',
+    'org',
+    'php',
+    'phpdoc',
+    'python',
+    'regex',
+    'ruby',
+    'scss',
+    'supercollider',
+    'tsx',
+    'typescript',
+    'vim',
+    'vue',
+    'yaml',
+  },
+  sync_install = false,
+}
 
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.opt.foldlevel = 99
-vim.opt.fillchars = 'fold:-'
-vim.wo.foldmethod = 'expr'
-vim.o.foldtext =
-  [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
+M.setup = function()
+  -- avoid running in headless mode since it's harder to detect failures
+  if #vim.api.nvim_list_uis() == 0 then
+    return
+  end
+
+  local status, treesitter = pcall(require, 'nvim-treesitter.configs')
+  if not status then
+    return
+  end
+
+  treesitter.setup(opts)
+
+  vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+  vim.opt.foldlevel = 99
+  vim.opt.fillchars = 'fold:-'
+  vim.wo.foldmethod = 'expr'
+  vim.o.foldtext =
+    [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
+end
+
+return M
 
 -- vim: foldlevel=99

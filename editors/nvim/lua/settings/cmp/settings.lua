@@ -57,12 +57,12 @@ cmp.setup({
   },
 
   sources = {
+    { name = 'path' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_document_symbol' },
     { name = 'sonicpi' },
     { name = 'treesitter' },
     { name = 'luasnip' },
-    { name = 'path' },
     -- {
     --   name = 'buffer',
     --   opts = {
