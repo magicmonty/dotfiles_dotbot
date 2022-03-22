@@ -45,6 +45,17 @@ require('telescope').setup({
   },
 })
 
+vim.cmd [[
+  packadd! nvim-dap
+  packadd! nvim-dap-ui
+  packadd! nvim-dap-virtual-text
+  packadd! nvim-neoclip.lua
+  packadd! telescope-dap.nvim
+  packadd! telescope-file-browser.nvim
+  packadd! telescope-fzf-native.nvim
+  packadd! telescope-project.nvim
+  packadd! telescope-zoxide
+]]
 require('telescope').load_extension('file_browser')
 require('telescope').load_extension('zoxide')
 require('telescope').load_extension('dap')

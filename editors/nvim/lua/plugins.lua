@@ -36,6 +36,8 @@ return require('packer').startup({
   function(use)
     use('wbthomason/packer.nvim')
     use('lewis6991/impatient.nvim')
+    use('nvim-lua/popup.nvim')
+    use('nvim-lua/plenary.nvim')
 
     -- common dependencies
     use({
@@ -44,7 +46,6 @@ return require('packer').startup({
         require('settings.web-devicons.settings')
       end,
     })
-    use('nvim-lua/plenary.nvim')
     use({
       'nvim-lua/lsp-status.nvim',
       config = function()
@@ -214,33 +215,54 @@ return require('packer').startup({
     -- Telescope
     use({
       'nvim-telescope/telescope.nvim',
+      opt = true,
+      keys = {
+        '<leader>cc',
+        '<leader>cd',
+        '<leader>fp',
+        '<leader>ff',
+        '<leader>fF',
+        '<leader>fb',
+        '<leader>fh',
+        '<leader>fn',
+        '<leader>fk',
+        '<leader>fm',
+        '<leader>fw',
+        '<leader>fW',
+        '<leader>fB',
+        '<leader>flg',
+        '<leader>en',
+      },
       config = function()
         require('settings.telescope.settings')
       end,
       requires = {
-        'nvim-lua/plenary.nvim',
-        'nvim-lua/popup.nvim',
-        'nvim-telescope/telescope-file-browser.nvim',
-        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-        'nvim-telescope/telescope-project.nvim',
+        { 'nvim-lua/plenary.nvim', opt = false },
+        { 'nvim-lua/popup.nvim', opt = false },
+        { 'nvim-telescope/telescope-file-browser.nvim', opt = false },
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = false },
+        { 'nvim-telescope/telescope-project.nvim', opt = false },
         {
           'nvim-telescope/telescope-dap.nvim',
+          opt = false,
           requires = {
             {
               'mfussenegger/nvim-dap',
+              opt = false,
               config = function()
                 require('settings.nvim-dap.settings')
               end,
               requires = {
-                'rcarriga/nvim-dap-ui',
-                'theHamsta/nvim-dap-virtual-text',
+                { 'rcarriga/nvim-dap-ui', opt = false },
+                { 'theHamsta/nvim-dap-virtual-text', opt = false },
               },
             },
           },
         },
-        'jvgrootveld/telescope-zoxide',
+        { 'jvgrootveld/telescope-zoxide', opt = false },
         {
           'AckslD/nvim-neoclip.lua',
+          opt = false,
           config = function()
             require('neoclip').setup()
           end,
@@ -276,19 +298,6 @@ return require('packer').startup({
 
     -- SCSS syntax support
     use('cakebaker/scss-syntax.vim')
-
-    -- Org Mode support
-    use({
-      'kristijanhusak/orgmode.nvim',
-      config = function()
-        require('settings.orgmode.settings')
-      end,
-      requires = {
-        'dhruvasagar/vim-table-mode',
-        'akinsho/org-bullets.nvim',
-        { 'michaelb/sniprun', run = 'bash install.sh' },
-      },
-    })
 
     -- Clojure / Overtone
     use('guns/vim-clojure-static')
