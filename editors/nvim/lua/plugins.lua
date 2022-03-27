@@ -232,10 +232,14 @@ return require('packer').startup({
         '<leader>fB',
         '<leader>flg',
         '<leader>en',
+        '<leader><Tab>',
       },
       config = function()
         require('settings.telescope.settings')
       end,
+      cmd = {
+        'Telescope',
+      },
       requires = {
         { 'nvim-lua/plenary.nvim', opt = false },
         { 'nvim-lua/popup.nvim', opt = false },

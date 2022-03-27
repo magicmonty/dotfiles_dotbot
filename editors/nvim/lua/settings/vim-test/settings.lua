@@ -1,4 +1,4 @@
-local map = require('vim_ext').map
+local map = vim.keymap.set
 
 map('n', '<leader>rt', ':Ultest<cr>', { silent = true, noremap = true })
 map('n', '<leader>rl', ':UltestLast<cr>', { silent = true, noremap = true })

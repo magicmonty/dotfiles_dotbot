@@ -73,11 +73,11 @@ local mappings = {
     U = 'Reset buffer index',
     u = 'Unstage hunk',
   },
-  o = {
-    name = 'Orgmode',
-    a = 'Agenda',
-    c = 'Quick capture',
-  },
+  -- o = {
+    -- name = 'Orgmode',
+    -- a = 'Agenda',
+    -- c = 'Quick capture',
+  -- },
   q = {
     name = 'Quickfix list',
     n = 'Next entry',

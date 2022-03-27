@@ -1,5 +1,6 @@
 local nvim_status = require('lsp-status')
-local icons = require('icons').diagnostics
+local theme = require('magicmonty.theme')
+local icons = theme.icons.diagnostics
 
 local status = {}
 

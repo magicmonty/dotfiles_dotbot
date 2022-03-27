@@ -25,7 +25,7 @@ local on_attach = function(client, bufnr)
     },
     d = {
       name = 'Diagnostics',
-      l = { '<cmd>Telescope diagnostics<cr>', 'Workspace diagnostics list' },
+      l = { '<cmd>Telescope diagnostics<CR>', 'Workspace diagnostics list' },
       n = { vim.diagnostic.goto_next, 'Jump to next diagnostic entry' },
       p = { vim.diagnostic.goto_prev, 'Jump to previous diagnostic entry' },
     },
@@ -38,11 +38,11 @@ local on_attach = function(client, bufnr)
     ['<C-s>'] = { vim.lsp.buf.signature_help, 'Show signature help' },
     g = {
       name = 'Goto',
-      d = { '<cmd>Telescope lsp_definitions<cr>', 'Goto definition' },
+      d = { '<cmd>Telescope lsp_definitions<CR>', 'Goto definition' },
       D = { vim.lsp.buf.declaration, 'Goto declaration' },
-      i = { '<cmd>Telescope lsp_implementations<cr>', 'Goto implementation' },
-      r = { '<cmd>Telescope lsp_references<cr>', 'Goto reference' },
-      T = { '<cmd>Telescope lsp_type_definitions<cr>', 'Goto type definition' },
+      i = { '<cmd>Telescope lsp_implementations<CR>', 'Goto implementation' },
+      r = { '<cmd>Telescope lsp_references<CR>', 'Goto reference' },
+      T = { '<cmd>Telescope lsp_type_definitions<CR>', 'Goto type definition' },
     },
     K = { vim.lsp.buf.hover, 'Show hover documentation' },
   }

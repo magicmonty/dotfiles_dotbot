@@ -1,34 +1,35 @@
 -- vim: foldlevel=99:
 local lspcolors = require('lsp-colors')
-local icons = require('icons').diagnostics
-local nightfox = require('nightfox.pallet.nightfox')
-local colors = nightfox.generate_spec(nightfox.pallet)
+local theme = require('magicmonty.theme')
+local icons = theme.icons.diagnostics
+local colors = theme.colors.spec.diag
+local sign_define = vim.fn.sign_define
 
 -- Setting LSP colors to the NightFox color theme
 lspcolors.setup({
-  Error = colors.diag.error,
-  Warning = colors.diag.warn,
-  Information = colors.diag.info,
-  Hint = colors.diag.hint,
+  Error = colors.error,
+  Warning = colors.warn,
+  Information = colors.info,
+  Hint = colors.hint,
 })
 
 -- LSP signs default
-vim.fn.sign_define(
+sign_define(
   'DiagnosticSignError',
   { texthl = 'DiagnosticSignError', text = icons.Error, numhl = 'DiagnosticSignError' }
 )
 
-vim.fn.sign_define(
+sign_define(
   'DiagnosticSignWarn',
   { texthl = 'DiagnosticSignWarn', text = icons.Warning, numhl = 'DiagnosticSignWarn' }
 )
 
-vim.fn.sign_define(
+sign_define(
   'DiagnosticSignHint',
   { texthl = 'DiagnosticSignHint', text = icons.Hint, numhl = 'DiagnosticSignHint' }
 )
 
-vim.fn.sign_define(
+sign_define(
   'DiagnosticSignInfo',
   { texthl = 'DiagnosticSignInfo', text = icons.Information, numhl = 'DiagnosticSignInformation' }
 )

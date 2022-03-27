@@ -12,7 +12,7 @@ require('telescope').setup({
       timeout = 500,
       msg_bg_fillchar = '',
     },
-    prompt_prefix = '❯ ',
+    prompt_prefix = '🔎 ',
     selection_caret = '❯ ',
     sorting_strategy = 'ascending',
     color_devicons = true,
@@ -45,7 +45,7 @@ require('telescope').setup({
   },
 })
 
-vim.cmd [[
+vim.cmd([[
   packadd! nvim-dap
   packadd! nvim-dap-ui
   packadd! nvim-dap-virtual-text
@@ -55,59 +55,81 @@ vim.cmd [[
   packadd! telescope-fzf-native.nvim
   packadd! telescope-project.nvim
   packadd! telescope-zoxide
-]]
-require('telescope').load_extension('file_browser')
-require('telescope').load_extension('zoxide')
-require('telescope').load_extension('dap')
-require('telescope').load_extension('project')
-require('telescope').load_extension('neoclip')
+]])
 
-local map = require('vim_ext').map
+local map = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
+local function telescope()
+  return require('telescope.builtin')
+end
+local function extensions()
+  return require('telescope').extensions
+end
+
 -- Clipboard manager
-map('n', '<leader>cc', ":lua require('telescope').extensions.neoclip.default()<cr>", opts)
+map('n', '<leader>cc', function()
+  extensions().neoclip.default()
+end, opts)
 
 -- Change to directory from zoxide db
-map(
-  'n',
-  '<leader>cd',
-  ":lua require'telescope'.extensions.zoxide.list{results_title='Z Directories', prompt_title='Z Prompt'}<cr>",
-  opts
-)
+map('n', '<leader>cd', function()
+  extensions().zoxide.list({ results_title = 'Z Directories', prompt_title = 'Z Prompt' })
+end, opts)
 
 -- Find projects
-map('n', '<leader>fp', ":lua require('telescope').extensions.project.project({display_type = 'minimal'})<cr>", opts)
+map('n', '<leader>fp', function()
+  extensions().project.project({ display_type = 'minimal' })
+end, opts)
 
 -- Find files in current project directory
-map('n', '<leader>ff', ":lua require('magicmonty.telescope').project_files()<cr>", opts)
-map('n', '<leader>fF', ":lua require('telescope.builtin').find_files()<cr>", opts)
+map('n', '<leader>ff', function()
+  require('magicmonty.telescope').project_files()
+end, opts)
+map('n', '<leader>fF', function()
+  telescope().find_files()
+end, opts)
 
 -- Find text in current buffer
-map('n', '<leader>fb', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", opts)
+map('n', '<leader>fb', function()
+  telescope().current_buffer_fuzzy_find()
+end, opts)
 -- Help
-map('n', '<leader>fh', ":lua require('telescope.builtin').help_tags()<cr>", opts)
+map('n', '<leader>fh', function()
+  telescope().help_tags()
+end, opts)
 -- Browse notification history
-map('n', '<leader>fn', ":lua require('telescope').extensions.notify.notify()<cr>", opts)
+map('n', '<leader>fn', function()
+  extensions().notify.notify()
+end, opts)
 -- Browse keymaps
-map('n', '<leader>fk', ":lua require('telescope.builtin').keymaps({results_title='Key Maps Results'})<cr>", opts)
+map('n', '<leader>fk', function()
+  telescope().keymaps({ results_title = 'Key Maps Results' })
+end, opts)
 -- Browse marks
-map('n', '<leader>fm', ":lua require('telescope.builtin').marks({results_title='Marks Results'})<cr>", opts)
+map('n', '<leader>fm', function()
+  telescope().marks({ results_title = 'Marks Results' })
+end, opts)
 -- Find word under cursor
-map('n', '<leader>fw', ":lua require('telescope.builtin').grep_string()<cr>", opts)
+map('n', '<leader>fw', function()
+  telescope().grep_string()
+end, opts)
 -- Find word under cursor (exact word, case sensitive)
-map('n', '<leader>fW', ":lua require('telescope.builtin').grep_string({word_match='-w'})<cr>", opts)
+map('n', '<leader>fW', function()
+  telescope().grep_string({ word_match = '-w' })
+end, opts)
 -- Find buffer
-map(
-  'n',
-  '<leader>fB',
-  ":lua require('telescope.builtin').buffers({prompt_title = 'Find Buffer', results_title = 'Buffers', layout_strategy = 'vertical'})<cr>",
-  opts
-)
+map('n', '<leader><Tab>', function()
+  telescope().buffers({ prompt_title = 'Find Buffer', results_title = 'Buffers', layout_strategy = 'vertical' })
+end, opts)
 -- Live grep
-map('n', '<leader>flg', ':Telescope live_grep<cr>', opts)
+map('n', '<leader>flg', function()
+  telescope().live_grep()
+end, opts)
 -- Find file in neovim config directory
-map('n', '<leader>en', ":lua require('magicmonty.telescope').search_config()<cr>", opts)
+map('n', '<leader>en', function()
+  require('magicmonty.telescope').search_config()
+end, opts)
 
 -- Wrap preview text
 vim.cmd([[autocmd User TelescopePreviewerLoaded setlocal wrap]])

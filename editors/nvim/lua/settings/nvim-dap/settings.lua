@@ -1,5 +1,4 @@
 local dap = require('dap')
-local map = require('vim_ext').map
 
 require('nvim-dap-virtual-text').setup()
 

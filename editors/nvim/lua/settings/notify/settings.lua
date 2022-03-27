@@ -1,4 +1,5 @@
-local icons = require('icons').diagnostics
+local theme = require('magicmonty.theme')
+local icons = theme.icons.diagnostics
 
 require('notify').setup({
   timeout = 3000,
@@ -10,6 +11,7 @@ require('notify').setup({
     DEBUG = icons.Debug,
     TRACE = icons.Trace,
   },
-  background_colour = require('nightfox.pallet.nightfox').pallet.bg0,
+  background_colour = theme.colors.spec.bg0,
 })
 
+vim.notify = require('notify')

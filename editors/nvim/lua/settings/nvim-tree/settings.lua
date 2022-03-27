@@ -1,5 +1,5 @@
-local map = require('vim_ext').map
-local icons = require('icons')
+local map = vim.keymap.set
+local icons = require('magicmonty.theme').icons.diagnostics
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
 vim.cmd([[
@@ -50,10 +50,10 @@ require('nvim-tree').setup({
   diagnostics = {
     enable = true,
     icons = {
-      hint = icons.diagnostics.Hint,
-      info = icons.diagnostics.Information,
-      warning = icons.diagnostics.Warning,
-      error = icons.diagnostics.Error,
+      hint = icons.Hint,
+      info = icons.Information,
+      warning = icons.Warning,
+      error = icons.Error,
     },
   },
   view = {

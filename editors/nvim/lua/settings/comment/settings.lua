@@ -1,4 +1,4 @@
-local map = require('vim_ext').map
+local map = vim.keymap.set
 
 require('Comment').setup({
   ---Add a space b/w comment and the line
@@ -73,5 +73,5 @@ local comment_ft = require('Comment.ft')
 comment_ft.set('lua', { '--%s', '--[[%s]]' })
 
 -- comment/uncomment line/block
-map('n', '<leader>#', 'gcc', { noremap = false })
-map('v', '#', 'gb', { noremap = false })
+map('n', '<leader>#', 'gcc', { remap = true })
+map('v', '#', 'gb', { remap = true })

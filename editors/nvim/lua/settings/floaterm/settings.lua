@@ -1,5 +1,4 @@
-local map = require('vim_ext').map
-local au = require('vim_ext').au
+local map = vim.keymap.set
 
 vim.g.floaterm_width = 0.8
 vim.g.floaterm_height = 0.8
@@ -28,7 +27,16 @@ map('t', '<C-w>k', '<C-\\><C-n><C-w>k')
 map('t', '<C-w><Up>', '<C-\\><C-n><C-w>k')
 
 -- Remap <C-\><C-n> to <Esc> in terminal mode
-au({ 'TermOpen', '*', 'tnoremap <Esc> <C-\\><C-n>' })
-au({ 'BufEnter', '*', "if &buftype == 'terminal' | :startinsert | endif" })
+vim.api.nvim_create_augroup('FloaTerm', { clear = true })
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = '*',
+  command = 'tnoremap <Esc> <C-\\><C-n>',
+  group = 'FloaTerm'
+})
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*',
+  command = "if &buftype == 'terminal' | :startinsert | endif" ,
+  group = 'FloaTerm'
+})
 
 -- vim: foldlevel=99

@@ -1,4 +1,4 @@
-local map = require('vim_ext').map
+local map = vim.keymap.set
 local silent = { silent = true }
 
 require('tabline').setup({ options = { show_filename_only = true } })

@@ -1,8 +1,4 @@
-local formatter = require('formatter')
-
 local formatters = require('magicmonty.formatters')
-local augroup = require('vim_ext').augroup
-local au = require('vim_ext').au
 
 require('formatter').setup({
   filetype = {
@@ -17,6 +13,9 @@ require('formatter').setup({
   },
 })
 
-augroup('AutoFormatFiles', {
-  { 'BufWritePost', '*.js,*.ts,*.jsx,*.tsx,*.html,*.scss,*.css,*.lua', 'FormatWrite' },
+vim.api.nvim_create_augroup('AutoFormatFiles', {clear = true})
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = 'AutoFormatFiles',
+  pattern = '*.js,*.ts,*.tsx,*.jsx,*.html,*.css,*.scss,*.lua',
+  command = 'FormatWrite',
 })
