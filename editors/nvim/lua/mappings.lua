@@ -1,5 +1,4 @@
-local map = require('vim_ext').map
-local au = require('vim_ext').au
+local map = vim.keymap.set
 local silent = { silent = true }
 local remap = { noremap = false }
 
@@ -91,7 +90,7 @@ map('s', '<C-S-Down>', '<C-G><C-Down><C-G>', { silent = true, noremap = false })
 -- Fugitive bindings
 map('n', '<leader>gs', '<cmd>Git<cr>', silent)
 
-vim.api.nvim_set_keymap('n', '<', ']', {})
-vim.api.nvim_set_keymap('x', '<', ']', {})
-vim.api.nvim_set_keymap('n', '>', ']', {})
-vim.api.nvim_set_keymap('x', '>', ']', {})
+map('n', '<', ']')
+map('x', '<', ']')
+map('n', '>', ']')
+map('x', '>', ']')
