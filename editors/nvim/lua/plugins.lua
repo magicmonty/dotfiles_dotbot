@@ -258,6 +258,11 @@ return require('packer').startup({
       cmd = {
         'Telescope',
       },
+      module = {
+        'telescope',
+        'telescope.builtin',
+        'telescope.utils',
+      },
       requires = {
         { 'nvim-lua/plenary.nvim', opt = false },
         { 'nvim-lua/popup.nvim', opt = false },
