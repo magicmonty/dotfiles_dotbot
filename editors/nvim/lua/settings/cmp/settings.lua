@@ -58,9 +58,9 @@ cmp.setup({
 
   sources = {
     { name = 'path' },
+    { name = 'sonicpi' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_document_symbol' },
-    { name = 'sonicpi' },
     { name = 'treesitter' },
     { name = 'luasnip' },
     -- {

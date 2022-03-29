@@ -6,8 +6,8 @@
   "contributes": {
     "snippets": [
       {
-        "language": "ruby",
-        "path": "./snippets/ruby.json"
+        "language": "sonicpi",
+        "path": "./snippets/sonicpi.json"
       }
     ]
   }

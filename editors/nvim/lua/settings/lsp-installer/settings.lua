@@ -6,6 +6,8 @@ status.activate()
 local on_init = function(client)
   client.config.flags = client.config.flags or {}
   client.config.flags.allow_incremental_sync = true
+
+  require('sonicpi').lsp_on_init(client, { server_dir = '/opt/sonic-pi/app/server' })
 end
 
 -- Use an on_attach function to only map the following keys
@@ -225,6 +227,7 @@ lsp_installer.on_server_ready(function(server)
   end
 
   if server.name == 'solargraph' then
+    opts.filetypes = { 'ruby', 'sonicpi' }
     opts.cmd = {
       '/home/mgondermann/.local/share/gem/ruby/3.0.0/bin/solargraph',
       'stdio',
@@ -236,16 +239,8 @@ lsp_installer.on_server_ready(function(server)
     opts.settings = {
       solargraph = {
         diagnostics = true,
-        include = {
-          '/opt/sonic-pi/app/server/ruby/lib/sonicpi/**/*.rb',
-        },
-        require = {
-          '/opt/sonic-pi/app/server/core',
-          '/opt/sonic-pi/app/server/ruby/lib/sonicpi/lang/core',
-        },
       },
     }
-    opts.single_file_support = true
   end
 
   server:setup(opts)

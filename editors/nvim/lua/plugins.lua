@@ -38,6 +38,12 @@ return require('packer').startup({
     use('lewis6991/impatient.nvim')
     use('nvim-lua/popup.nvim')
     use('nvim-lua/plenary.nvim')
+    use({
+      'nathom/filetype.nvim',
+      config = function()
+        vim.g.did_load_filetypes = 1
+      end,
+    })
 
     -- common dependencies
     use({
@@ -119,6 +125,7 @@ return require('packer').startup({
     use('tpope/vim-fugitive')
     use({
       'lewis6991/gitsigns.nvim',
+      event = 'BufRead',
       config = function()
         require('settings.gitsigns.settings')
       end,
@@ -153,6 +160,7 @@ return require('packer').startup({
     -- LSP/Completion config
     use({
       'williamboman/nvim-lsp-installer',
+      event = 'BufRead',
       config = function()
         require('settings.lsp-installer.settings')
       end,
@@ -172,7 +180,16 @@ return require('packer').startup({
       end,
     })
 
-    use('/home/mgondermann/src/plugins/cmp-sonicpi.nvim')
+    --[[ use({
+      '/home/mgondermann/src/plugins/sonicpi.nvim',
+      event = 'BufRead',
+      config = function()
+        require('sonicpi').setup({ server_dir = '/opt/sonic-pi/app/server' })
+      end,
+      requires = {
+        'kyazdani42/nvim-web-devicons',
+      },
+    }) ]]
 
     use({
       'hrsh7th/nvim-cmp',
@@ -227,6 +244,7 @@ return require('packer').startup({
         '<leader>fn',
         '<leader>fk',
         '<leader>fm',
+        '<leader>fo',
         '<leader>fw',
         '<leader>fW',
         '<leader>fB',
@@ -334,6 +352,13 @@ return require('packer').startup({
       },
       config = function()
         require('settings.vimwiki.settings')
+      end,
+    })
+
+    use({
+      'glepnir/dashboard-nvim',
+      config = function()
+        require('settings.dashboard.settings').setup()
       end,
     })
 

@@ -39,6 +39,7 @@
       "~/bin/toggle_screensaver": "windowmanager/bindir/toggle_screensaver",
       "~/bin/touchpad_toggle": "windowmanager/bindir/touchpad_toggle",
       "~/bin/umpv": "windowmanager/bindir/umpv",
+      "~/bin/setmon": "windowmanager/bindir/setmon",
       "~/.mailcap": "windowmanager/mailcap",
       "~/.fonts": "fonts"
     }

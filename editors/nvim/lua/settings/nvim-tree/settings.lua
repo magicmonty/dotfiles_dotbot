@@ -36,7 +36,6 @@ map('n', '<leader>.', ':NvimTreeFindFileToggle<cr>', { noremap = true, silent = 
 require('nvim-tree').setup({
   disable_netrw = true,
   hijack_netrw = true,
-  auto_close = true,
   hijack_cursor = true,
   open_on_setup = false,
   update_cwd = true,

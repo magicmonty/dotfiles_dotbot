@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+autorandr -c
+~/.xmonad/polybar/up
+~/.xmonad/set_bg

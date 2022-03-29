@@ -49,6 +49,7 @@ local mappings = {
     lg = 'Live grep',
     m = 'Find marks',
     n = 'Show notification history',
+    o = 'Old files (history)',
     p = 'Find project',
     w = 'Find word under cursor',
     W = 'Find exact word under cursor',
@@ -72,6 +73,10 @@ local mappings = {
     S = 'Stage buffer',
     U = 'Reset buffer index',
     u = 'Unstage hunk',
+  },
+  n = {
+    name = 'New',
+    f = 'New file'
   },
   -- o = {
     -- name = 'Orgmode',

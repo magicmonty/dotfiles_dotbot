@@ -25,17 +25,6 @@
       "$0"
     ]
   },
-  "Base drum loop": {
-    "prefix": "bd",
-    "body": [
-      "live_loop :drums, sync: :clock1 do",
-      "  tick",
-      "  sample :bd_haus if spread(4, 16).look",
-      "  $0",
-      "  sleep 0.25",
-      "end"
-    ]
-  },
   "Bootstrapping": {
     "prefix": "boot",
     "body": [
@@ -57,57 +46,6 @@
       "end",
       "",
       "$0"
-    ]
-  },
-  "Clocks setup for SonicPi": {
-    "prefix": "clocks",
-    "body": [
-      "live_loop :clocks, auto_cue: false do",
-      "  cue (\"clock\" + (tick % 8).to_s).to_sym",
-      "  sleep 1",
-      "end",
-      "",
-      "$0"
-    ]
-  },
-  "Echo fx": {
-    "prefix": "echo",
-    "body": [
-      "with_fx(:echo, decay: 2.0, mix: 1.0, phase: 0.25) do",
-      "  $0",
-      "end"
-    ]
-  },
-  "Generic fx": {
-    "prefix": "fx",
-    "body": [
-      "with_fx(:$1) do",
-      "  $0",
-      "end"
-    ]
-  },
-  "Live loop": {
-    "prefix": "ll",
-    "body": [
-      "live_loop :$1 do",
-      "  $0",
-      "end"
-    ]
-  },
-  "Live loop on beat 1": {
-    "prefix": "ll1",
-    "body": [
-      "live_loop :$1, sync: :clock1 do",
-      "  $0",
-      "end"
-    ]
-  },
-  "Live loop on beat 5": {
-    "prefix": "ll5",
-    "body": [
-      "live_loop :$1, sync: :clock5 do",
-      "  $0",
-      "end"
     ]
   },
   "Simple Markov chain setup": {
@@ -218,14 +156,6 @@
       "$pi=pis.split(\"\").map { |v| v.to_i }.ring",
       "",
       "$0"
-    ]
-  },
-  "Reverb FX": {
-    "prefix": "reverb",
-    "body": [
-      "with_fx(:reverb, room: 0.6, mix: 0.4, damp: 0.5) do",
-      "  $0",
-      "end"
     ]
   },
   "Live audio": {
