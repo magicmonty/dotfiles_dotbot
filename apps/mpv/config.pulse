@@ -9,3 +9,5 @@ ytdl-format="(bestvideo[height<=1080]+bestaudio)[ext=webm]/bestvideo[height<=108
 cache=yes
 demuxer-max-bytes=123400KiB
 demuxer-readahead-secs=30
+
+osc=no

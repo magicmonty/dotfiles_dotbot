@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 autorandr -c
+sleep 1s
 ~/.xmonad/polybar/up
 ~/.xmonad/set_bg

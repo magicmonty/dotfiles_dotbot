@@ -52,12 +52,6 @@ return require('packer').startup({
         require('settings.web-devicons.settings')
       end,
     })
-    use({
-      'nvim-lua/lsp-status.nvim',
-      config = function()
-        require('settings.lsp-status.settings')
-      end,
-    })
 
     -- Display keybindings
     use({
@@ -111,7 +105,9 @@ return require('packer').startup({
       config = function()
         require('settings.lualine.settings')
       end,
-      requires = { 'kyazdani42/nvim-web-devicons', 'nvim-lua/lsp-status.nvim' },
+      requires = {
+        'kyazdani42/nvim-web-devicons',
+      },
     })
 
     use({
@@ -169,8 +165,15 @@ return require('packer').startup({
         'folke/lua-dev.nvim',
         'kyazdani42/nvim-web-devicons',
         'folke/lsp-colors.nvim',
-        'nvim-lua/lsp-status.nvim',
       },
+    })
+
+    use({
+      'j-hui/fidget.nvim',
+      after = 'nvim-lsp-installer',
+      config = function()
+        require('settings.fidget.settings')
+      end,
     })
 
     use({

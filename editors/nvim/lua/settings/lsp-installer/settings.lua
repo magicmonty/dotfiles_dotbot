@@ -1,8 +1,5 @@
 local lsp_installer = require('nvim-lsp-installer')
 
-local status = require('settings.lsp-status.settings')
-status.activate()
-
 local on_init = function(client)
   client.config.flags = client.config.flags or {}
   client.config.flags.allow_incremental_sync = true
@@ -13,7 +10,6 @@ end
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  require('lsp-status').on_attach(client)
   --Enable completion triggered by <c-x><c-o>
   vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
@@ -118,7 +114,6 @@ lsp_installer.settings({
 
 lsp_installer.on_server_ready(function(server)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = vim.tbl_deep_extend('keep', capabilities, require('lsp-status').capabilities)
   capabilities.textDocument.codeLens = { dynamicRegistration = false }
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 

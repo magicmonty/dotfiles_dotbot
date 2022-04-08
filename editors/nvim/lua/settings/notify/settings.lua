@@ -11,7 +11,7 @@ require('notify').setup({
     DEBUG = icons.Debug,
     TRACE = icons.Trace,
   },
-  background_colour = theme.colors.spec.bg0,
+  background_colour = theme.colors.bg0,
 })
 
 vim.notify = require('notify')

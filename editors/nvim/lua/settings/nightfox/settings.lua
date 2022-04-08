@@ -14,33 +14,33 @@ nightfox.setup({
     inverse = {
       visual = false,
     },
-    groups = {
-      IndentBlanklineChar = { fg = '${comment}' },
-      IndentBlanklineContextChar = { fg = '${pink}' },
-      IndentBlanklineSpaceChar = { fg = '${comment}' },
-      IndentBlanklineSpaceCharBlankLine = { fg = 'NONE' },
-      DapBreakpointSign = { fg = '${red}' },
-      DebugBreakpointSign = { fg = '${red}' },
-      DapBreakpointLine = { bg = '${diff.delete}' },
-      DebugBreakpointLine = { bg = '${diff.delete}' },
-      TSTag = { fg = '${red}' },
-      TSTagDelimiter = { fg = '${fg}' },
-      htmlTag = { fg = '${red}' },
-      htmlEndTag = { fg = '${red}' },
-      NvimTreeExecFile = { style = 'bold' },
-      NvimTreeGitDirty = { fg = '${git.change}' },
-      NvimTreeGitStaged = { fg = '${green_br}' },
-      NvimTreeGitMerge = { fg = '${orange}' },
-      NvimTreeGitRenamed = { fg = '${green_dm}' },
-      NvimTreeGitNew = { fg = '${git.add}' },
-      NvimTreeGitDeleted = { fg = '${git.delete}' },
-      VimwikiWeblink1 = { fg = '${cyan}', style = 'underline' },
-      VimwikiCellSeparator = { fg = '${magenta}' },
-    },
-  }
+  },
+  groups = {
+    IndentBlanklineChar = { fg = 'syntax.comment' },
+    IndentBlanklineContextChar = { fg = 'palette.pink' },
+    IndentBlanklineSpaceChar = { fg = 'syntax.comment' },
+    IndentBlanklineSpaceCharBlankLine = { fg = 'NONE' },
+    DapBreakpointSign = { fg = 'palette.red' },
+    DebugBreakpointSign = { fg = 'palette.red' },
+    DapBreakpointLine = { bg = 'diff.delete' },
+    DebugBreakpointLine = { bg = 'diff.delete' },
+    TSTag = { fg = 'palette.red' },
+    TSTagDelimiter = { fg = 'fg0' },
+    htmlTag = { fg = 'palette.red' },
+    htmlEndTag = { fg = 'palette.red' },
+    NvimTreeExecFile = { style = 'bold' },
+    NvimTreeGitDirty = { fg = 'git.changed' },
+    NvimTreeGitStaged = { fg = 'palette.green.bright' },
+    NvimTreeGitMerge = { fg = 'palette.orange' },
+    NvimTreeGitRenamed = { fg = 'palette.green.dim' },
+    NvimTreeGitNew = { fg = 'git.add' },
+    NvimTreeGitDeleted = { fg = 'git.removed' },
+    VimwikiWeblink1 = { fg = 'palette.cyan', style = 'underline' },
+    VimwikiCellSeparator = { fg = 'palette.magenta' },
+  },
 })
 
-vim.cmd [[ colorscheme nightfox ]]
+vim.cmd([[ colorscheme nightfox ]])
 
 opt.list = true
 opt.listchars:append('space:⋅')

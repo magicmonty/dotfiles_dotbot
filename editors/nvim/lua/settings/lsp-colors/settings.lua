@@ -2,7 +2,7 @@
 local lspcolors = require('lsp-colors')
 local theme = require('magicmonty.theme')
 local icons = theme.icons.diagnostics
-local colors = theme.colors.spec.diag
+local colors = theme.colors.diag
 local sign_define = vim.fn.sign_define
 
 -- Setting LSP colors to the NightFox color theme

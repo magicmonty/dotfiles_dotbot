@@ -1,6 +1,6 @@
 local theme = require('magicmonty.theme')
 local icons = theme.icons
-local colors = theme.colors.spec
+local colors = theme.colors
 
 local function LspStatus()
   local status = ''
@@ -132,7 +132,7 @@ ins_right({
     end
     return ''
   end,
-  color = { fg = theme.colors.pallet.green.base },
+  color = { fg = colors.palette.green.base },
 })
 
 ins_right({ 'encoding', cond = conditions.buffer_not_empty })
