@@ -111,10 +111,13 @@ return require('packer').startup({
     })
 
     use({
-      'kdheepak/tabline.nvim',
+      'romgrk/barbar.nvim',
       config = function()
-        require('settings.tabline.settings')
+        require('settings.barbar.settings')
       end,
+      requires = {
+        'kyazdani42/nvim-web-devicons',
+      },
     })
 
     -- Git support
