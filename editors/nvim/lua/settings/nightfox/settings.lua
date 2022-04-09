@@ -40,7 +40,8 @@ nightfox.setup({
   },
 })
 
-vim.cmd([[ colorscheme nightfox ]])
+local theme = require('magicmonty.theme')
+vim.cmd('colorscheme ' .. theme.colorscheme)
 
 opt.list = true
 opt.listchars:append('space:⋅')

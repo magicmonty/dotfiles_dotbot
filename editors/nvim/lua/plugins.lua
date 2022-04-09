@@ -116,6 +116,7 @@ return require('packer').startup({
         require('settings.barbar.settings')
       end,
       requires = {
+        'EdenEast/nightfox.nvim',
         'kyazdani42/nvim-web-devicons',
       },
     })
@@ -129,6 +130,13 @@ return require('packer').startup({
         require('settings.gitsigns.settings')
       end,
       requires = 'nvim-lua/plenary.nvim',
+    })
+    use({
+      'sindrets/diffview.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require('settings.diffview.settings')
+      end,
     })
 
     -- Auto commenter

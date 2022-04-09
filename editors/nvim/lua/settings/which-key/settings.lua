@@ -77,6 +77,8 @@ local mappings = {
     s = 'Git status',
     d = {
       name = 'Git diff',
+      o = 'Open Diff View',
+      h = 'Open File history',
       n = 'Next hunk',
       p = 'Previous hunk',
     },
