@@ -3,14 +3,14 @@ if not status then
   return
 end
 
+local map = vim.keymap.set
+
 require('dapui').setup()
 vim.cmd([[
   command! DapUiToggle lua require('dapui').toggle()
   command! DapUiOpen lua require('dapui').open()
   command! DapUiClose lua require('dapui').close()
 ]])
-
-local map = require('vim_ext').map
 
 vim.fn.sign_define(
   'DapBreakpoint',
@@ -19,25 +19,35 @@ vim.fn.sign_define(
 vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpointSign', linehl = '', numhl = '' })
 vim.fn.sign_define('DapStopped', { text = '', texthl = '', linehl = '', numhl = '' })
 
-local opts = { silent = true, noremap = true }
-vim.api.nvim_buf_set_keymap(vim.api.nvim_get_current_buf(), 'n', '<F5>', ':lua require"dap".continue()<cr>', opts)
-vim.api.nvim_buf_set_keymap(
-  vim.api.nvim_get_current_buf(),
-  'n',
-  '<F9>',
-  ':lua require"dap".toggle_breakpoint()<cr>',
-  opts
-)
-vim.api.nvim_buf_set_keymap(vim.api.nvim_get_current_buf(), 'n', '<F10>', ':lua require"dap".step_over()<cr>', opts)
-vim.api.nvim_buf_set_keymap(vim.api.nvim_get_current_buf(), 'n', '<F11>', ':lua require"dap".step_into()<cr>', opts)
-vim.api.nvim_buf_set_keymap(vim.api.nvim_get_current_buf(), 'n', '<S-F11>', ':lua require"dap".step_out()<cr>', opts)
-vim.api.nvim_buf_set_keymap(vim.api.nvim_get_current_buf(), 'n', '<leader>dq', ':lua require"dapui".close()<cr>', opts)
-vim.api.nvim_buf_set_keymap(vim.api.nvim_get_current_buf(), 'n', '<leader>do', ':lua require"dapui".open()<cr>', opts)
-vim.api.nvim_buf_set_keymap(
-  vim.api.nvim_get_current_buf(),
-  'n',
-  '<leader>db',
-  ':Telescope dap list_breakpoints<cr>',
-  opts
-)
-vim.api.nvim_buf_set_keymap(vim.api.nvim_get_current_buf(), 'n', '<leader>dv', ':Telescope dap variables<cr>', opts)
+local opts = { silent = true, noremap = true, buffer = vim.api.nvim_get_current_buf() }
+
+map('n', '<F5>', function()
+  dap.continue()
+end, opts)
+
+map('n', '<F9>', function()
+  dap.toggle_breakpoint()
+end, opts)
+
+map('n', '<F10>', function()
+  dap.step_over()
+end, opts)
+
+map('n', '<F11>', function()
+  dap.step_into()
+end, opts)
+
+map('n', '<S-F11>', function()
+  dap.step_out()
+end, opts)
+
+map('n', '<leader>dq', function()
+  require('dapui').close()
+end, opts)
+
+map('n', '<leader>do', function()
+  require('dapui').open()
+end, opts)
+
+map('n', '<leader>db', ':Telescope dap list_breakpoints<cr>', opts)
+map('n', '<leader>dv', ':Telescope dap variables<cr>', opts)

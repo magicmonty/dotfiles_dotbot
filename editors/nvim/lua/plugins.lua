@@ -194,7 +194,7 @@ return require('packer').startup({
       end,
     })
 
-    --[[ use({
+    use({
       '/home/mgondermann/src/plugins/sonicpi.nvim',
       event = 'BufRead',
       config = function()
@@ -203,7 +203,7 @@ return require('packer').startup({
       requires = {
         'kyazdani42/nvim-web-devicons',
       },
-    }) ]]
+    })
 
     use({
       'hrsh7th/nvim-cmp',
