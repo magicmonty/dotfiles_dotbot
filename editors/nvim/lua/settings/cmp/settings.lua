@@ -22,8 +22,10 @@ cmp.setup({
     ghost_text = false,
   },
 
-  documentation = {
-    border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+  window = {
+    documentation = {
+      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+    },
   },
 
   mapping = {
