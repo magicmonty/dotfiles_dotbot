@@ -23,9 +23,11 @@ diffview.setup({
     fold_open = '',
   },
   file_panel = {
-    position = 'left', -- One of 'left', 'right', 'top', 'bottom'
-    width = 35, -- Only applies when position is 'left' or 'right'
-    height = 10, -- Only applies when position is 'top' or 'bottom'
+    win_config = {
+      position = 'left', -- One of 'left', 'right', 'top', 'bottom'
+      width = 35, -- Only applies when position is 'left' or 'right'
+      height = 10, -- Only applies when position is 'top' or 'bottom'
+    },
     listing_style = 'tree', -- One of 'list' or 'tree'
     tree_options = { -- Only applies when listing_style is 'tree'
       flatten_dirs = true, -- Flatten dirs that only contain one single dir
@@ -33,9 +35,11 @@ diffview.setup({
     },
   },
   file_history_panel = {
-    position = 'bottom',
-    width = 35,
-    height = 16,
+    win_config = {
+      position = 'bottom',
+      width = 35,
+      height = 16,
+    },
     log_options = {
       max_count = 256, -- Limit the number of commits
       follow = true, -- Follow renames (only for single file)
@@ -58,7 +62,7 @@ diffview.setup({
       ['<tab>'] = cb('select_next_entry'), -- Open the diff for the next file
       ['<s-tab>'] = cb('select_prev_entry'), -- Open the diff for the previous file
       ['gf'] = cb('goto_file'), -- Open the file in a new split in previous tabpage
-      ['q'] = ":DiffviewClose<CR>", -- Close the diff
+      ['q'] = ':DiffviewClose<CR>', -- Close the diff
     },
     file_panel = {
       ['j'] = cb('next_entry'), -- Bring the cursor to the next file entry
@@ -78,7 +82,7 @@ diffview.setup({
       ['gf'] = cb('goto_file'),
       ['i'] = cb('listing_style'), -- Toggle between 'list' and 'tree' views
       ['f'] = cb('toggle_flatten_dirs'), -- Flatten empty subdirectories in tree listing style.
-      ['q'] = ":DiffviewClose<CR>", -- Close the diff
+      ['q'] = ':DiffviewClose<CR>', -- Close the diff
     },
     file_history_panel = {
       ['g!'] = cb('options'), -- Open the option panel
@@ -96,11 +100,11 @@ diffview.setup({
       ['gf'] = cb('goto_file'),
       ['<leader>e'] = cb('focus_files'),
       ['<leader>b'] = cb('toggle_files'),
-      ['q'] = ":DiffviewClose<CR>", -- Close the diff
+      ['q'] = ':DiffviewClose<CR>', -- Close the diff
     },
     option_panel = {
       ['<tab>'] = cb('select'),
-      ['q'] = ":DiffviewClose<CR>", -- Close the diff
+      ['q'] = ':DiffviewClose<CR>', -- Close the diff
     },
   },
 })

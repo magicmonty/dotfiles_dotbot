@@ -140,6 +140,8 @@ alias gv='vim -c "GV" -c "tabonly"'
 alias gitv='vim -c "GV" -c "tabonly"'
 alias gls="git log --graph --oneline --decorate --all --color=always | fzf --ansi +s --preview='git show --color=always {2}' --bind='ctrl-d:preview-page-down' --bind='ctrl-u:preview-page-up' --bind='enter:execute:git show --color=always {2} | less -R' --bind='ctrl-x:execute:git checkout {2} .'"
 
+alias zz="z -" # Toggle last directory
+
 # aurman aliases
 pclean() {
   sudo pacman -Sc
@@ -150,11 +152,9 @@ pclean() {
 
 pupd() {
   notify-send -a 'Package Update' 'Upgrade started'
-  neofetch
   yay -Syyuv --noconfirm --noeditmenu && notify-send -a 'Package Update' 'Update completed' || notify-send -a 'Package Update' -u critical 'Update failed'
   pkill -RTMIN+13 i3blocks
 }
-alias hc='herbstclient'
 alias pinst='yay --noeditmenu --nodiffmenu --nocleanmenu --answerclean --sudoloop --needed -S'
 alias psearch='yay -Ss'
 alias puninst='yay -R'
