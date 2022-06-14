@@ -54,12 +54,12 @@ return require('packer').startup({
     })
 
     -- Display keybindings
-    use({
+    --[[ use({
       'folke/which-key.nvim',
       config = function()
         require('settings.which-key.settings')
       end,
-    })
+    }) ]]
 
     -- Color scheme
     use({

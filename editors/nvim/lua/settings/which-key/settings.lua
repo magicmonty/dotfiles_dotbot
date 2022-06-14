@@ -1,4 +1,11 @@
-require('which-key').setup({
+vim.opt.timeoutlen = 100
+
+local has_wk, wk = pcall(require, 'which-key')
+if not has_wk then
+  return
+end
+
+wk.setup({
   plugins = {
     marks = false,
     registers = false,
@@ -134,6 +141,4 @@ local opts = {
   prefix = '<leader>',
 }
 
-vim.opt.timeoutlen = 100
-
-require('which-key').register(mappings, opts)
+wk.register(mappings, opts)

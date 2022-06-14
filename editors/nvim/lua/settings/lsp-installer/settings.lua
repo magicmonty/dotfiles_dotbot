@@ -1,4 +1,5 @@
 local lsp_installer = require('nvim-lsp-installer')
+local mappings = require('magicmonty.mappings')
 
 local on_init = function(client)
   client.config.flags = client.config.flags or {}
@@ -29,8 +30,7 @@ local on_attach = function(client, bufnr)
     },
   }
 
-  local wk = require('which-key')
-  wk.register(leader_mappings, { prefix = '<leader>', buffer = bufnr, mode = 'n', noremap = true, silent = true })
+  mappings.register(leader_mappings, { prefix = '<leader>', buffer = bufnr, mode = 'n', noremap = true, silent = true })
 
   local normal_mappings = {
     ['<C-s>'] = { vim.lsp.buf.signature_help, 'Show signature help' },
@@ -45,7 +45,7 @@ local on_attach = function(client, bufnr)
     K = { vim.lsp.buf.hover, 'Show hover documentation' },
   }
 
-  wk.register(normal_mappings, { buffer = bufnr, mode = 'n', noremap = true, silent = true })
+  mappings.register(normal_mappings, { buffer = bufnr, mode = 'n', noremap = true, silent = true })
 
   --protocol.SymbolKind = { }
   local icons = {
