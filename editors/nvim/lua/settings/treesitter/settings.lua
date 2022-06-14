@@ -57,6 +57,7 @@ local opts = {
     'dockerfile',
     'go',
     'html',
+    'http',
     'javascript',
     'json',
     'json5',

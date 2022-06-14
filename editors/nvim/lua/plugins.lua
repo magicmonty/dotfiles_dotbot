@@ -35,9 +35,9 @@ vim.api.nvim_create_autocmd('User PackerComplete', {
 return require('packer').startup({
   function(use)
     use('wbthomason/packer.nvim')
-    use('lewis6991/impatient.nvim')
+    -- use('lewis6991/impatient.nvim')
     use('nvim-lua/popup.nvim')
-    use('nvim-lua/plenary.nvim')
+    use({ 'nvim-lua/plenary.nvim' })
     use({
       'nathom/filetype.nvim',
       config = function()
@@ -243,6 +243,19 @@ return require('packer').startup({
       },
     })
 
+    -- debugger
+    use({
+      'mfussenegger/nvim-dap',
+      opt = false,
+      config = function()
+        require('settings.nvim-dap.settings')
+      end,
+      requires = {
+        { 'rcarriga/nvim-dap-ui', opt = false },
+        { 'theHamsta/nvim-dap-virtual-text', opt = false },
+      },
+    })
+
     -- Telescope
     use({
       'nvim-telescope/telescope.nvim',
@@ -287,17 +300,7 @@ return require('packer').startup({
           'nvim-telescope/telescope-dap.nvim',
           opt = false,
           requires = {
-            {
-              'mfussenegger/nvim-dap',
-              opt = false,
-              config = function()
-                require('settings.nvim-dap.settings')
-              end,
-              requires = {
-                { 'rcarriga/nvim-dap-ui', opt = false },
-                { 'theHamsta/nvim-dap-virtual-text', opt = false },
-              },
-            },
+            'mfussenegger/nvim-dap',
           },
         },
         { 'jvgrootveld/telescope-zoxide', opt = false },
@@ -363,6 +366,15 @@ return require('packer').startup({
     use('StanAngeloff/php.vim')
     use('github/copilot.vim')
 
+    -- REST Client
+    use({
+      'NTBBloodbath/rest.nvim',
+      requires = { 'nvim-lua/plenary.nvim' },
+      commit = 'e5f68db73276c4d4d255f75a77bbe6eff7a476ef',
+      config = function()
+        require('settings.rest.settings')
+      end,
+    })
     -- Note taking
     use({
       'vimwiki/vimwiki',

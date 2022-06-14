@@ -1,4 +1,3 @@
--- pcall(require, "impatient")
 require('options')
 require('filetype_settings')
 require('plugins')

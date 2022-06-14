@@ -19,7 +19,7 @@ vim.fn.sign_define(
 vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpointSign', linehl = '', numhl = '' })
 vim.fn.sign_define('DapStopped', { text = '', texthl = '', linehl = '', numhl = '' })
 
-local opts = { silent = true, noremap = true, buffer = vim.api.nvim_get_current_buf() }
+local opts = { silent = true, noremap = true, buffer = 0 }
 
 map('n', '<F5>', function()
   dap.continue()
