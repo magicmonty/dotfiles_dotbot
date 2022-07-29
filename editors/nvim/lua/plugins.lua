@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd('User PackerComplete', {
 return require('packer').startup({
   function(use)
     use('wbthomason/packer.nvim')
-    -- use('lewis6991/impatient.nvim')
+    use('lewis6991/impatient.nvim')
     use('nvim-lua/popup.nvim')
     use({ 'nvim-lua/plenary.nvim' })
     use({
@@ -55,12 +55,12 @@ return require('packer').startup({
     })
 
     -- Display keybindings
-    --[[ use({
+    use({
       'folke/which-key.nvim',
       config = function()
         require('settings.which-key.settings')
       end,
-    }) ]]
+    })
 
     -- Color scheme
     use({
@@ -182,6 +182,7 @@ return require('packer').startup({
       },
     })
 
+    -- nice LSP status
     use({
       'j-hui/fidget.nvim',
       after = 'nvim-lsp-setup',
@@ -190,6 +191,7 @@ return require('packer').startup({
       end,
     })
 
+    -- external formatters (stylua, prettier etc.)
     use({
       'mhartington/formatter.nvim',
       config = function()
@@ -197,17 +199,20 @@ return require('packer').startup({
       end,
     })
 
-    use({
-      '/home/mgondermann/src/plugins/sonicpi.nvim',
-      event = 'BufRead',
-      config = function()
-        require('sonicpi').setup({ server_dir = '/opt/sonic-pi/app/server' })
-      end,
-      requires = {
-        'kyazdani42/nvim-web-devicons',
-      },
-    })
+    if vim.fn.isdirectory('/home/mgondermann/src/plugins/sonicpi.nvim') then
+      use({
+        '/home/mgondermann/src/plugins/sonicpi.nvim',
+        -- event = 'BufRead',
+        config = function()
+          require('settings.sonicpi.settings')
+        end,
+        requires = {
+          'kyazdani42/nvim-web-devicons',
+        },
+      })
+    end
 
+    -- Completion coniguration
     use({
       'hrsh7th/nvim-cmp',
       config = function()
@@ -263,7 +268,7 @@ return require('packer').startup({
     -- Telescope
     use({
       'nvim-telescope/telescope.nvim',
-      opt = true,
+      --[[ opt = true,
       keys = {
         '<leader>cc',
         '<leader>cd',
@@ -283,17 +288,18 @@ return require('packer').startup({
         '<leader>en',
         '<leader><Tab>',
       },
-      config = function()
-        require('settings.telescope.settings')
-      end,
-      cmd = {
-        'Telescope',
-      },
       module = {
         'telescope',
         'telescope.builtin',
         'telescope.utils',
       },
+      cmd = {
+        'Telescope',
+      },
+      ]]
+      config = function()
+        require('settings.telescope.settings')
+      end,
       requires = {
         { 'nvim-lua/plenary.nvim', opt = false },
         { 'nvim-lua/popup.nvim', opt = false },
@@ -356,9 +362,6 @@ return require('packer').startup({
     use('kien/rainbow_parentheses.vim')
     use('guns/vim-sexp')
 
-    -- Sonic Pi
-    -- use('dermusikman/sonicpi.vim')
-
     -- Other
     use('mattn/emmet-vim')
 
@@ -368,7 +371,6 @@ return require('packer').startup({
 
     -- PHP
     use('StanAngeloff/php.vim')
-    use('github/copilot.vim')
 
     -- REST Client
     use({
@@ -390,6 +392,7 @@ return require('packer').startup({
       end,
     })
 
+    -- Nice start page
     use({
       'glepnir/dashboard-nvim',
       config = function()

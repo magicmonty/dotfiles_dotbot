@@ -40,7 +40,10 @@ local on_init = function(client)
   client.config.flags = client.config.flags or {}
   client.config.flags.allow_incremental_sync = true
 
-  require('sonicpi').lsp_on_init(client, { server_dir = '/opt/sonic-pi/app/server' })
+  local has_sonicpi, sonicpi = pcall(require, 'sonicpi')
+  if has_sonicpi then
+    sonicpi.lsp_on_init(client, { server_dir = '/opt/sonic-pi/app/server' })
+  end
 end
 
 -- Use an on_attach function to only map the following keys
