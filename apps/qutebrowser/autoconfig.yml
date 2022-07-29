@@ -8,6 +8,7 @@ config_version: 2
 settings:
   content.geolocation:
     http://localhost:8080: true
+    https://tevis.ekom21.de: true
   content.notifications.enabled:
     https://resource-pack.com: false
     https://www.netflix.com: false

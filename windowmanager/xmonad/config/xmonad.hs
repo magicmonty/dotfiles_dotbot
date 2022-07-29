@@ -1,9 +1,10 @@
-  -- Base
+{-# LANGUAGE AllowAmbiguousTypes, DeriveDataTypeable, TypeSynonymInstances, MultiParamTypeClasses #-}  -- Base
 import XMonad
 import System.Directory
 import System.IO (hPutStrLn)
 import System.Exit (exitSuccess)
 import Control.Monad ( join, when )
+import XMonad hiding ( (|||) )
 import qualified XMonad.StackSet as W
 
     -- Actions
@@ -14,6 +15,8 @@ import XMonad.Actions.Promote
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
 import XMonad.Actions.WindowGo (runOrRaise)
 import XMonad.Actions.WithAll (sinkAll, killAll)
+import XMonad.Actions.MessageFeedback
+
 import qualified XMonad.Actions.Search as S
 
     -- Data
@@ -22,6 +25,7 @@ import Data.Maybe (fromJust)
 import Data.Monoid
 import Data.Maybe (isJust, maybeToList)
 import Data.Tree
+import Data.List
 import qualified Data.Map as M
 
     -- Hooks
@@ -37,12 +41,7 @@ import XMonad.Hooks.WorkspaceHistory
     -- Layouts
 import XMonad.Layout.Accordion
 import XMonad.Layout.Gaps
-    ( Direction2D(D, L, R, U),
-      gaps,
-      setGaps,
-      GapMessage(DecGap, ToggleGaps, IncGap) )
 import XMonad.Layout.Fullscreen
-    ( fullscreenEventHook, fullscreenManageHook, fullscreenSupport, fullscreenFull )
 import XMonad.Layout.GridVariants (Grid(Grid))
 import XMonad.Layout.Spacing ( spacingRaw, Border(Border) )
 import XMonad.Layout.SimplestFloat
@@ -51,12 +50,17 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
 
+import XMonad.Layout.PerScreen
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.BinarySpacePartition
+import XMonad.Layout.Hidden
+import XMonad.Layout.NoFrillsDecoration
+import XMonad.Layout.Reflect
+
     -- Layouts modifiers
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 import XMonad.Layout.Magnifier
-import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
-import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed
 import XMonad.Layout.ShowWName
@@ -65,8 +69,8 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.SubLayouts
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import XMonad.Layout.WindowNavigation
-import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(Toggle))
-import qualified XMonad.Layout.MultiToggle as MT (Toggle(..))
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
 
    -- Utilities
 import XMonad.Util.Dmenu
@@ -133,7 +137,7 @@ myStartupHook = do
     spawnOnce "greenclip daemon &"
     spawnOnce "picom -CG --experimental-backends &"
     spawnOnce "nm-applet &"
-    spawnOnce "dropbox &"
+    spawnOnce "/usr/bin/dropbox &"
     spawnOnce "/opt/enpass/Enpass -minimize &"
     spawnOnce "udiskie -ans -f /usr/bin/pcmanfm &"
     spawnOnce "onedrive -m &"
@@ -144,7 +148,8 @@ myStartupHook = do
     spawnOnce "xbanish &"
     spawnOnce "syncthing serve --nobrowser &"
     spawnOnce "/home/mgondermann/.xmonad/polybar/up"
-    spawnOnce "/home/mgondermann/.xmonad/set_bg"
+    -- spawnOnce "/home/mgondermann/.xmonad/set_bg"
+    spawnOnce "/home/mgondermann/bin/setmon"
     setWMName "LG3D"
 
 --Makes setting the spacingRaw simpler to write. The spacingRaw module adds a configurable amount of space around windows.
@@ -156,10 +161,15 @@ mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 mySpacing' :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing' i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
+--- sizes
+gap = 10
+topbar = 10
+border = 0
+
 -- Defining a bunch of layouts, many that I don't use.
 -- limitWindows n sets maximum number of windows displayed for layout.
 -- mySpacing n sets the gap size around the windows.
-tall     = renamed [Replace "tall"]
+{- tall     = renamed [Replace "tall"]
            $ smartBorders
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
@@ -167,19 +177,39 @@ tall     = renamed [Replace "tall"]
            $ limitWindows 12
            $ mySpacing 5
            $ ResizableTall 1 (3/100) (1/2) []
+
 floats   = renamed [Replace "floats"]
            $ smartBorders
-           $ limitWindows 20 simplestFloat
+           $ limitWindows 20 simplestFloat -}
+
+-- colors
+inactive1 = "#313846"
+inactive2 = "#232c34"
+inactive3 = "#d0d0d0"
+active1 = "#46d9ff"
+active2 = "#232c34"
 
 -- setting colors for tabs layout and tabs sublayout.
 myTabTheme = def { fontName            = myFont
-                 , activeColor         = "#46d9ff"
-                 , inactiveColor       = "#313846"
-                 , activeBorderColor   = "#46d9ff"
-                 , inactiveBorderColor = "#282c34"
-                 , activeTextColor     = "#282c34"
-                 , inactiveTextColor   = "#d0d0d0"
+                 , activeColor         = active1
+                 , activeBorderColor   = active1
+                 , activeTextColor     = active2
+                 , inactiveColor       = inactive1
+                 , inactiveBorderColor = inactive2
+                 , inactiveTextColor   = inactive3
                  }
+
+topBarTheme = def
+    { fontName             = myFont
+    , activeColor          = active1
+    , activeBorderColor    = active1
+    , activeTextColor      = active2
+    , inactiveColor        = inactive1
+    , inactiveBorderColor  = inactive2
+    , inactiveTextColor    = inactive3
+    , decoHeight           = topbar
+    }
+
 
 -- Theme for showWName which prints current workspace when you change workspaces.
 myShowWNameTheme :: SWNConfig
@@ -191,7 +221,7 @@ myShowWNameTheme = def
     }
 
 -- The layout hook
-myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats
+{- myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
              where
                myDefaultLayout =     withBorder myBorderWidth tall
@@ -199,7 +229,63 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| floats
                                  -- ||| noBorders tabs
                                  -- ||| grid
-                                 -- ||| spirals
+                                 -- ||| spirals -}
+data FULLBAR = FULLBAR deriving (Read, Show, Eq, Typeable)
+instance Transformer FULLBAR Window where
+    transform FULLBAR x k = k barFull (\_ -> x)
+
+barFull = avoidStruts $ Simplest
+
+myLayoutHook = onWorkspace wsFLOAT floatWorkspace
+             $ fullscreenFloat
+             $ fullScreenToggle
+             $ fullBarToggle
+             $ reflectToggle
+             $ flex ||| tabs
+  where
+    floatWorkspace    = simplestFloat
+    fullBarToggle     = mkToggle (single FULLBAR)
+    fullScreenToggle  = mkToggle (NBFULL ?? NOBORDERS ?? EOT)
+    reflectToggle     = mkToggle (single REFLECTX)
+    smallMonResWidth  = 1920
+    showWorkspaceName = showWName' myShowWNameTheme
+
+    named n           = renamed [(XMonad.Layout.Renamed.Replace n)]
+    trimNamed w n     = renamed [(XMonad.Layout.Renamed.CutWordsLeft w),
+                                 (XMonad.Layout.Renamed.PrependWords n)]
+    suffixed n        = renamed [(XMonad.Layout.Renamed.AppendWords n)]
+    trimSuffixed w n  = renamed [(XMonad.Layout.Renamed.CutWordsRight w),
+                                 (XMonad.Layout.Renamed.AppendWords n)]
+
+    -- addTopBar         = noFrillsDeco shrinkText topBarTheme
+
+    mySpacing         = spacing 5
+    sGap              = quot gap 2
+    myGaps            = gaps [(U, gap), (D, gap), (L, gap), (R, gap)]
+    mySmallGaps       = gaps [(U, sGap), (D, sGap), (L, sGap), (R, sGap)]
+    myBigGaps         = gaps [(U, gap * 2), (D, gap * 2), (L, gap * 2), (R, gap * 2)]
+
+    tabs = named "Tabs"
+         $ avoidStruts
+         $ noBorders
+         $ addTabs shrinkText myTabTheme
+         $ Simplest
+
+    flex = trimNamed 5 "Flex"
+              $ avoidStruts
+              $ windowNavigation
+              $ withBorder myBorderWidth
+              $ addTabs shrinkText myTabTheme
+              $ subLayout [] (Simplest ||| Accordion)
+              $ ifWider smallMonResWidth wideLayouts standardLayouts
+              where
+                wideLayouts = mySmallGaps $ mySpacing
+                    $ (suffixed "Wide 3Col" $ ThreeColMid 1 (1/20) (1/2))
+                  ||| (trimSuffixed 1 "Wide BSP" $ hiddenWindows emptyBSP)
+                standardLayouts = mySmallGaps $ mySpacing
+                    $ (suffixed "Std 2/3" $ ResizableTall 1 (1/20) (2/3) [])
+                  ||| (suffixed "Std 1/2" $ ResizableTall 1 (1/20) (1/2) [])
+
 
 myManageHook = fullscreenManageHook <+> manageDocks <+> composeAll
      -- 'doFloat' forces a window to float.  Useful for dialog boxes and such.
@@ -221,6 +307,8 @@ myManageHook = fullscreenManageHook <+> manageDocks <+> composeAll
      , className =? "zoom"            --> doFloat
      , className =? "Yad"             --> doCenterFloat
      , className =? "Peek"            --> doFloat
+     , title =? "FML early loading"     --> doFloat
+     , className =? "Minecraft"     --> doFullFloat
      , title =? "Oracle VM VirtualBox Manager"  --> doFloat
      , title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
      , className =? "brave-browser"   --> doShift ( myWorkspaces !! 1 )
@@ -231,6 +319,9 @@ myManageHook = fullscreenManageHook <+> manageDocks <+> composeAll
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , isFullscreen -->  doFullFloat
      ]
+
+-- try sending one message, fallback if unreceived, then refresh
+tryMsgR x y = sequence_ [(tryMessageWithNoRefreshToCurrent x y), refresh]
 
 -- START_KEYS
 myKeys :: [(String, X ())]
@@ -284,14 +375,15 @@ myKeys =
         , ("M-S-k", windows W.swapUp)     -- Swap focused window with prev window
         , ("M-S-<Right>", windows W.swapUp)     -- Swap focused window with prev window
         , ("M-<Backspace>", promote)      -- Moves focused window to master, others maintain order
-        , ("M-S-<Tab>", rotSlavesDown)    -- Rotate all windows except master and keep focus in place
-        , ("M-C-<Tab>", rotAllDown)       -- Rotate all the windows in the current stack
+        -- , ("M-S-<Tab>", rotSlavesDown)    -- Rotate all windows except master and keep focus in place
+        -- , ("M-C-<Tab>", rotAllDown)       -- Rotate all the windows in the current stack
 
     -- KB_GROUP Layouts
         , ("M-<Tab>", sendMessage NextLayout)           -- Switch to next layout
-        , ("M-<Space>", sendMessage (MT.Toggle NBFULL) >> sendMessage ToggleStruts) -- Toggles noborder/full
-
-    -- KB_GROUP Increase/decrease windows in the master pane or the stack
+        , ("C-<Tab>", toSubl NextLayout)           -- Switch to next layout
+        , ("M-<Space>", sequence_ [ (withFocused $ windows . W.sink), (sendMessage (XMonad.Layout.MultiToggle.Toggle NBFULL) >> sendMessage ToggleStruts) ])
+        , ("M-r", tryMsgR (Rotate) (XMonad.Layout.MultiToggle.Toggle REFLECTX))
+        -- KB_GROUP Increase/decrease windows in the master pane or the stack
         , ("M-S-<Up>", sendMessage (IncMasterN 1))      -- Increase # of clients master pane
         , ("M-S-<Down>", sendMessage (IncMasterN (-1))) -- Decrease # of clients master pane
 
@@ -307,25 +399,24 @@ myKeys =
         , ("M-C-l", sendMessage $ pullGroup R)
         , ("M-C-k", sendMessage $ pullGroup U)
         , ("M-C-j", sendMessage $ pullGroup D)
-        , ("M-C-m", withFocused (sendMessage . MergeAll))
-        -- , ("M-C-u", withFocused (sendMessage . UnMerge))
-        , ("M-C-/", withFocused (sendMessage . UnMergeAll))
+        , ("M-S-g", withFocused (sendMessage . MergeAll))
+        , ("M-g", withFocused (sendMessage . UnMerge))
+        , ("M-C-g", withFocused (sendMessage . UnMergeAll))
         , ("M-C-.", onGroup W.focusUp')    -- Switch focus to next tab
         , ("M-C-,", onGroup W.focusDown')  -- Switch focus to prev tab
 
-    -- wallpapers directory; then in sxiv, type 'C-x x' to set the wallpaper that you
     -- KB_GROUP Controls for mocp music player (SUPER-u followed by a key)
-        , ("M-u p", spawn "mocp --play")
-        , ("M-u l", spawn "mocp --next")
-        , ("M-u h", spawn "mocp --previous")
-        , ("M-u <Space>", spawn "mocp --toggle-pause")
+        , ("M-u p", spawn "mpc play")
+        , ("M-u l", spawn "mpc next")
+        , ("M-u h", spawn "mpc prev")
+        , ("M-u <Space>", spawn "mpc toggle")
 
         , ("<F12>", spawn "touchpad_toggle")
 
     -- KB_GROUP Multimedia Keys
-        , ("<XF86AudioPlay>", spawn "mocp --play")
-        , ("<XF86AudioPrev>", spawn "mocp --previous")
-        , ("<XF86AudioNext>", spawn "mocp --next")
+        , ("<XF86AudioPlay>", spawn "mpc play")
+        , ("<XF86AudioPrev>", spawn "mpc prev")
+        , ("<XF86AudioNext>", spawn "mpc next")
         , ("<XF86AudioMute>", spawn "amixer set Master toggle")
         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
@@ -372,8 +463,10 @@ main = do
 workspaceIcons :: [String]
 workspaceIcons = ["\xf120", "\xf268", "\xf108", "\xf02d", "\xf16b", "\xf095", "\xf025", "\xf008", "\xf03e"]
 
+wsFLOAT = "mus"
+
 workspaceNames :: [String]
-workspaceNames = ["dev", "www", "sys", "doc", "vbox", "chat", "mus", "vid", "gfx"]
+workspaceNames = ["dev", "www", "sys", "doc", "vbox", "chat", wsFLOAT, "vid", "gfx"]
 
 myWorkspaces :: [String]
 myWorkspaces = workspaceIcons

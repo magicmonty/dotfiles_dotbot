@@ -2,4 +2,4 @@
 autorandr -c
 sleep 1s
 ~/.xmonad/set_bg
-~/.xmonad/polybar/up
+# ~/.xmonad/polybar/up

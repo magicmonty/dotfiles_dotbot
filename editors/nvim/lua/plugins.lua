@@ -44,6 +44,7 @@ return require('packer').startup({
         vim.g.did_load_filetypes = 1
       end,
     })
+    use('antoinemadec/FixCursorHold.nvim')
 
     -- common dependencies
     use({
@@ -253,6 +254,7 @@ return require('packer').startup({
       requires = {
         { 'rcarriga/nvim-dap-ui', opt = false },
         { 'theHamsta/nvim-dap-virtual-text', opt = false },
+        { 'Pocco81/dap-buddy.nvim' },
       },
     })
 
@@ -353,14 +355,14 @@ return require('packer').startup({
     use('guns/vim-sexp')
 
     -- Sonic Pi
-    use('dermusikman/sonicpi.vim')
+    -- use('dermusikman/sonicpi.vim')
 
     -- Other
     use('mattn/emmet-vim')
 
     -- Test runner support
-    use('vim-test/vim-test')
-    use('rcarriga/vim-ultest', { ['do'] = ':UpdateRemotePlugins' })
+    -- use('vim-test/vim-test')
+    -- use('rcarriga/vim-ultest', { ['do'] = ':UpdateRemotePlugins' })
 
     -- PHP
     use('StanAngeloff/php.vim')

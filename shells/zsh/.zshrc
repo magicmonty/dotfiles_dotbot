@@ -229,6 +229,7 @@ if [ -e ~/.dotnet/tools ]; then
   export PATH=~/.dotnet/tools:$PATH
 fi
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export ASPNETCORE_ENVIRONMENT=Development
 _dotnet_zsh_complete()
 {
   local completions=("$(dotnet complete "$words")")
@@ -287,12 +288,12 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
 esac
 
 eval "$(/usr/bin/zoxide init zsh)"
-__zoxide_unset 'cdi'
+# __zoxide_unset 'cdi'
 function cdi() {
     __zoxide_zi "$@"
 }
 
-__zoxide_unset 'cd'
+# __zoxide_unset 'cd'
 function cd() {
    __zoxide_z "$@"
 }

@@ -8,14 +8,17 @@ dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
 dap.adapters.coreclr = {
   type = 'executable',
-  command = 'netcoredbg',
-  args = { '--interpreter=vscode' },
-  options = {
-    env = {
-      ASPNETCORE_ENVIRONMENT = 'Development',
-      cwd = '${workspaceFolder}',
-    },
+  command = '/usr/bin/netcoredbg',
+  args = {
+    '--interpreter=vscode',
+    string.format('--engineLogging=%s/netcoredbg.engine.log', os.getenv('XDG_CACHE_HOME')),
+    string.format('--log=%s/netcoredbg.log', os.getenv('XDG_CACHE_HOME')),
   },
+  env = function()
+    return {
+      ASPNETCORE_ENVIRONMENT = 'Development',
+    }
+  end,
 }
 
 dap.configurations.cs = {
@@ -24,16 +27,15 @@ dap.configurations.cs = {
     name = 'launch - netcoredbg',
     request = 'launch',
     program = function()
+      local dll = io.popen('find . -name "*.dll" | grep -v obj')
+      -- return vim.fn.getcwd() .. '/' .. dll:lines()()
       return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
     end,
-  },
-  {
-    type = 'netcoredbg',
-    name = 'attach - netcoredbg',
-    request = 'attach',
-    processId = require('dap.utils').pick_process,
+    stopAtEntry = true,
   },
 }
+
+dapui.setup()
 
 dap.listeners.after.event_initialized['dapui_config'] = function()
   dapui.open()

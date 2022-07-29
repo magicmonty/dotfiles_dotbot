@@ -81,7 +81,7 @@ local on_attach = function(client, bufnr)
     kinds[i] = icons[kind] or kind
   end
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.cmd([[
       augroup lsp_document_highlight
         au! * <buffer>
@@ -91,7 +91,7 @@ local on_attach = function(client, bufnr)
     ]])
   end
 
-  if client.resolved_capabilities.code_lens then
+  if client.server_capabilities.codeLensProvider then
     vim.cmd([[
       augroup lsp_document_code_lens
         au! * <buffer>

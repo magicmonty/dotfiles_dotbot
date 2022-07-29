@@ -11,6 +11,11 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.shortmess:append('c')
+
+lspkind.init()
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -29,33 +34,62 @@ cmp.setup({
   },
 
   mapping = {
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback() -- press('<Tab>')
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
-    ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
+    ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+    ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+    ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+    ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-y>'] = cmp.mapping(
+      cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      }),
+      { 'i', 'c' }
+    ),
+    ['<C-Space>'] = cmp.mapping({
+      i = cmp.mapping.complete(),
+      c = function(_)
+        if cmp.visible() then
+          if not cmp.confirm({ select = true }) then
+            return
+          end
+        else
+          cmp.complete()
+        end
+      end,
+    }),
+    ['<Tab>'] = cmp.config.disable,
     ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+  },
+
+  sorting = {
+    comparators = {
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+
+      -- copied from cmp-under, but I don't think I need the plugin for this.
+      -- I might add some more of my own.
+      -- sorts items starting with underlines better
+      function(entry1, entry2)
+        local _, entry1_under = entry1.completion_item.label:find('^_+')
+        local _, entry2_under = entry2.completion_item.label:find('^_+')
+        entry1_under = entry1_under or 0
+        entry2_under = entry2_under or 0
+        if entry1_under > entry2_under then
+          return false
+        elseif entry1_under < entry2_under then
+          return true
+        end
+      end,
+
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    },
   },
 
   sources = {
@@ -76,9 +110,9 @@ cmp.setup({
   },
 
   formatting = {
-    format = function(entry, vim_item)
-      vim_item.kind = string.format('%s [%s]', lspkind.presets.default[vim_item.kind], vim_item.kind)
-      vim_item.menu = ({
+    format = lspkind.cmp_format({
+      with_text = true,
+      menu = {
         nvim_lsp = 'ﲳ',
         nvim_lsp_document_symbol = 'ﲳ',
         nvim_lua = '',
@@ -88,10 +122,8 @@ cmp.setup({
         luasnip = '',
         orgmode = '',
         sonicpi = '',
-      })[entry.source.name]
-
-      return vim_item
-    end,
+      },
+    }),
   },
 })
 
