@@ -167,13 +167,15 @@ return require('packer').startup({
 
     -- LSP/Completion config
     use({
-      'williamboman/nvim-lsp-installer',
-      event = 'BufRead',
+      'junnplus/nvim-lsp-setup',
+      -- event = 'BufRead',
       config = function()
-        require('settings.lsp-installer.settings')
+        require('settings.lsp-setup.settings')
       end,
       requires = {
         'neovim/nvim-lspconfig',
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
         'folke/lua-dev.nvim',
         'kyazdani42/nvim-web-devicons',
         'folke/lsp-colors.nvim',
@@ -182,7 +184,7 @@ return require('packer').startup({
 
     use({
       'j-hui/fidget.nvim',
-      after = 'nvim-lsp-installer',
+      after = 'nvim-lsp-setup',
       config = function()
         require('settings.fidget.settings')
       end,

@@ -13,7 +13,7 @@ require('formatter').setup({
   },
 })
 
-vim.api.nvim_create_augroup('AutoFormatFiles', {clear = true})
+vim.api.nvim_create_augroup('AutoFormatFiles', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = 'AutoFormatFiles',
   pattern = '*.js,*.ts,*.tsx,*.jsx,*.html,*.css,*.scss,*.lua',

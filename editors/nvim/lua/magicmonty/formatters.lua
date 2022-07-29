@@ -5,23 +5,22 @@ M.stylua = function()
     exe = 'stylua',
     args = {
       '--config-path .stylua.toml',
-      '-'
+      '-',
     },
-    stdin = true
+    stdin = true,
   }
 end
 
 M.prettier = function()
   return {
-    exe = "prettier",
+    exe = 'prettier',
     args = {
-      "--stdin-filepath",
+      '--stdin-filepath',
       vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-      '--single-quote'
+      '--single-quote',
     },
-    stdin = true
+    stdin = true,
   }
 end
-
 
 return M
