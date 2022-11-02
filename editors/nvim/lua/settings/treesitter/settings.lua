@@ -1,5 +1,4 @@
 local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
-ft_to_parser.tsx = { 'javascript', 'typescript.tsx' }
 
 local M = {}
 
@@ -64,7 +63,6 @@ local opts = {
     'jsonc',
     'latex',
     'lua',
-    'markdown',
     'ninja',
     'org',
     'php',
@@ -101,7 +99,7 @@ M.setup = function()
   vim.opt.fillchars = 'fold:-'
   vim.wo.foldmethod = 'expr'
   vim.o.foldtext =
-    [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
+  [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
 end
 
 return M

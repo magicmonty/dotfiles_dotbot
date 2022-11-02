@@ -1,6 +1,9 @@
 local M = {}
 M.setup = function()
-  local db = require('dashboard')
+  local has_dashboard, db = pcall(require, 'dashboard')
+  if not has_dashboard then
+    return
+  end
   local home = os.getenv('HOME')
   local g = vim.g
   local fn = vim.fn
@@ -37,7 +40,8 @@ M.setup = function()
       icon = ' ',
       desc = 'Find file                  ',
       shortcut = 'SPC f F',
-      action = 'Telescope find_files' },
+      action = 'Telescope find_files',
+    },
     {
       icon = ' ',
       desc = 'Find project file          ',
@@ -61,7 +65,7 @@ M.setup = function()
       desc = 'New File                   ',
       shortcut = 'SPC n f',
       action = 'DashboardNewFile',
-    }
+    },
   }
 
   db.custom_footer = {

@@ -21,17 +21,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   group = 'packer_user_config',
 })
 
-vim.api.nvim_create_augroup('packer', { clear = true })
-vim.api.nvim_create_autocmd('User PackerComplete', {
-  group = 'packer',
-  pattern = '*',
-  callback = function()
-    -- treesitter needs to be loaded after packer completes
-    -- otherwise it will not enable highlighting on the first load
-    require('settings.treesitter.settings').setup()
-  end,
-})
-
 return require('packer').startup({
   function(use)
     use('wbthomason/packer.nvim')
@@ -55,12 +44,12 @@ return require('packer').startup({
     })
 
     -- Display keybindings
-    use({
+    --[[ use({
       'folke/which-key.nvim',
       config = function()
         require('settings.which-key.settings')
       end,
-    })
+    }) ]]
 
     -- Color scheme
     use({
@@ -107,7 +96,10 @@ return require('packer').startup({
         require('settings.lualine.settings')
       end,
       requires = {
+        'neovim/nvim-lspconfig',
+        'lewis6991/gitsigns.nvim',
         'kyazdani42/nvim-web-devicons',
+        'nvim-treesitter/nvim-treesitter',
       },
     })
 
@@ -126,7 +118,7 @@ return require('packer').startup({
     use('tpope/vim-fugitive')
     use({
       'lewis6991/gitsigns.nvim',
-      event = 'BufRead',
+      -- event = 'BufRead',
       config = function()
         require('settings.gitsigns.settings')
       end,
@@ -167,8 +159,7 @@ return require('packer').startup({
 
     -- LSP/Completion config
     use({
-      'junnplus/nvim-lsp-setup',
-      -- event = 'BufRead',
+      'junnplus/lsp-setup.nvim',
       config = function()
         require('settings.lsp-setup.settings')
       end,
@@ -176,7 +167,7 @@ return require('packer').startup({
         'neovim/nvim-lspconfig',
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
-        'folke/lua-dev.nvim',
+        'folke/neodev.nvim',
         'kyazdani42/nvim-web-devicons',
         'folke/lsp-colors.nvim',
       },
@@ -185,7 +176,7 @@ return require('packer').startup({
     -- nice LSP status
     use({
       'j-hui/fidget.nvim',
-      after = 'nvim-lsp-setup',
+      after = 'lsp-setup.nvim',
       config = function()
         require('settings.fidget.settings')
       end,
@@ -226,6 +217,12 @@ return require('packer').startup({
         'hrsh7th/cmp-path',
         'ray-x/cmp-treesitter',
         {
+          'dcampos/cmp-emmet-vim',
+          requires = {
+            'mattn/emmet-vim'
+          }
+        },
+        {
           'onsails/lspkind-nvim',
           config = function()
             require('settings.lspkind.settings')
@@ -254,13 +251,12 @@ return require('packer').startup({
     -- debugger
     use({
       'mfussenegger/nvim-dap',
-      opt = false,
       config = function()
         require('settings.nvim-dap.settings')
       end,
       requires = {
-        { 'rcarriga/nvim-dap-ui', opt = false },
-        { 'theHamsta/nvim-dap-virtual-text', opt = false },
+        { 'rcarriga/nvim-dap-ui' },
+        { 'theHamsta/nvim-dap-virtual-text' },
         { 'Pocco81/dap-buddy.nvim' },
       },
     })
@@ -268,55 +264,24 @@ return require('packer').startup({
     -- Telescope
     use({
       'nvim-telescope/telescope.nvim',
-      --[[ opt = true,
-      keys = {
-        '<leader>cc',
-        '<leader>cd',
-        '<leader>fp',
-        '<leader>ff',
-        '<leader>fF',
-        '<leader>fb',
-        '<leader>fh',
-        '<leader>fn',
-        '<leader>fk',
-        '<leader>fm',
-        '<leader>fo',
-        '<leader>fw',
-        '<leader>fW',
-        '<leader>fB',
-        '<leader>flg',
-        '<leader>en',
-        '<leader><Tab>',
-      },
-      module = {
-        'telescope',
-        'telescope.builtin',
-        'telescope.utils',
-      },
-      cmd = {
-        'Telescope',
-      },
-      ]]
       config = function()
         require('settings.telescope.settings')
       end,
       requires = {
-        { 'nvim-lua/plenary.nvim', opt = false },
-        { 'nvim-lua/popup.nvim', opt = false },
-        { 'nvim-telescope/telescope-file-browser.nvim', opt = false },
-        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = false },
-        { 'nvim-telescope/telescope-project.nvim', opt = false },
+        { 'nvim-lua/plenary.nvim' },
+        { 'nvim-lua/popup.nvim' },
+        { 'nvim-telescope/telescope-file-browser.nvim' },
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+        { 'nvim-telescope/telescope-project.nvim' },
         {
           'nvim-telescope/telescope-dap.nvim',
-          opt = false,
           requires = {
             'mfussenegger/nvim-dap',
           },
         },
-        { 'jvgrootveld/telescope-zoxide', opt = false },
+        { 'jvgrootveld/telescope-zoxide' },
         {
           'AckslD/nvim-neoclip.lua',
-          opt = false,
           config = function()
             require('neoclip').setup()
           end,
@@ -381,16 +346,6 @@ return require('packer').startup({
         require('settings.rest.settings')
       end,
     })
-    -- Note taking
-    use({
-      'vimwiki/vimwiki',
-      requires = {
-        'EdenEast/nightfox.nvim',
-      },
-      config = function()
-        require('settings.vimwiki.settings')
-      end,
-    })
 
     -- Nice start page
     use({
@@ -399,6 +354,15 @@ return require('packer').startup({
         require('settings.dashboard.settings').setup()
       end,
     })
+
+    -- LaTeX
+    use({
+      'lervag/vimtex',
+      config = function()
+        require('settings.vim-tex.settings')
+      end
+    })
+    -- use('matze/vim-tex-fold')
 
     if packer_bootstrap then
       require('packer').sync()

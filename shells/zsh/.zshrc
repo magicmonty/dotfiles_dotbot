@@ -259,6 +259,10 @@ if [ -e ${HOME}/.local/share/gem/ruby/3.0.0/bin ]; then
   export PATH=${HOME}/.local/share/gem/ruby/3.0.0/bin:$PATH
 fi
 
+if [ -e ${HOME}/.local/share/nvim/mason/bin ]; then
+  export PATH=$PATH:${HOME}/.local/share/nvim/mason/bin
+fi
+
 USE_POWERLINE=true
 
 # Apply different settigns for different terminals

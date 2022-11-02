@@ -13,20 +13,20 @@ M.map = function(mode, leftHandSide, rightHandSide, opts)
 end
 
 M.hi = function(group, opts)
-	local c = "highlight " .. group
+  local c = 'highlight ' .. group
 
   for k, v in pairs(opts) do
-		c = c .. " " .. k .. "=" .. v
-	end
+    c = c .. ' ' .. k .. '=' .. v
+  end
 
   cmd(c)
 end
 
 M.init_autocmd = function(bufferOnly)
   if bufferOnly then
-    cmd 'autocmd! <buffer>'
+    cmd('autocmd! <buffer>')
   else
-    cmd 'autocmd!'
+    cmd('autocmd!')
   end
 end
 
@@ -43,7 +43,17 @@ M.augroup = function(name, autocmds, bufferOnly)
     M.au(autocmd)
   end
 
-  cmd 'augroup END'
+  cmd('augroup END')
+end
+
+M.file_exists = function(name)
+  local f = io.open(name, 'r')
+  if f ~= nil then
+    io.close(f)
+    return true
+  else
+    return false
+  end
 end
 
 return M

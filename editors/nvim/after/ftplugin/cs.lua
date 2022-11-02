@@ -5,12 +5,9 @@ end
 
 local map = vim.keymap.set
 
-require('dapui').setup()
-vim.cmd([[
-  command! DapUiToggle lua require('dapui').toggle()
-  command! DapUiOpen lua require('dapui').open()
-  command! DapUiClose lua require('dapui').close()
-]])
+vim.api.nvim_create_user_command('DapUiToggle', require('dapui').toggle, { force = true })
+vim.api.nvim_create_user_command('DapUiOpen', require('dapui').open, { force = true })
+vim.api.nvim_create_user_command('DapUiClose', require('dapui').close, { force = true })
 
 vim.fn.sign_define(
   'DapBreakpoint',

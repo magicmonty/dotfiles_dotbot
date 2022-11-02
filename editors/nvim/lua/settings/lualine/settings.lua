@@ -83,7 +83,23 @@ local config = {
           local total_lines = vim.fn.line('$')
           if total_lines > 1 then
             local current_line = vim.fn.line('.')
-            local chars = { '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' }
+            local chars = {
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+            }
             local line_ratio = current_line / total_lines
             local percentage = math.floor(line_ratio * 100)
             local index = math.ceil(line_ratio * #chars)

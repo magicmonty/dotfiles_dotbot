@@ -1,14 +1,26 @@
 local M = {}
 
+local f = require('vim_ext')
+
 M.stylua = function()
-  return {
-    exe = 'stylua',
-    args = {
-      '--config-path .stylua.toml',
-      '-',
-    },
-    stdin = true,
-  }
+  if f.file_exists('.stylua.toml') then
+    return {
+      exe = 'stylua',
+      args = {
+        '--config-path .stylua.toml',
+        '-',
+      },
+      stdin = true,
+    }
+  else
+    return {
+      exe = 'stylua',
+      args = {
+        '-',
+      },
+      stdin = true,
+    }
+  end
 end
 
 M.prettier = function()

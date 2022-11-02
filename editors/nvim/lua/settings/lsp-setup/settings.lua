@@ -1,9 +1,15 @@
-local installed, lsp_setup = pcall(require, 'nvim-lsp-setup')
+local installed, lsp_setup = pcall(require, 'lsp-setup')
 if not installed then
   return
 end
 
+local installed, neodev = pcall(require, "neodev")
+if installed then
+  neodev.setup({})
+end
+
 local mappings = require('magicmonty.mappings')
+local root_pattern = require('lspconfig.util').root_pattern
 
 require('mason').setup({
   ui = {
@@ -29,21 +35,21 @@ require('mason').setup({
 
 require('mason-lspconfig').setup({
   ensure_installed = {
+    'eslint',
+    'html',
+    'jsonls',
+    'omnisharp',
     'sumneko_lua',
-    'ltex',
-    'json',
     'solargraph',
+    'marksman',
+    'eslint',
+    'tsserver'
   },
 })
 
-local on_init = function(client)
+local custom_on_init = function(client)
   client.config.flags = client.config.flags or {}
   client.config.flags.allow_incremental_sync = true
-
-  local has_sonicpi, sonicpi = pcall(require, 'sonicpi')
-  if has_sonicpi then
-    sonicpi.lsp_on_init(client, { server_dir = '/opt/sonic-pi/app/server' })
-  end
 end
 
 -- Use an on_attach function to only map the following keys
@@ -158,27 +164,35 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_clear_autocmds({ buffer = 0, group = augroup_format })
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = 0,
-      callback = vim.lsp.buf.formatting_sync,
+      group = augroup_format,
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
+  else
+    local augroup_non_lsp_format = vim.api.nvim_create_augroup('non_lsp_format', { clear = true })
+    vim.api.nvim_clear_autocmds({ buffer = 0, group = augroup_non_lsp_format })
+    vim.api.nvim_create_autocmd('BufWritePost', {
+      group = augroup_non_lsp_format,
+      pattern = '*.js,*.ts,*.tsx,*.jsx,*.html,*.css,*.scss,*.lua',
+      command = 'FormatWrite',
     })
   end
 end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.codeLens = { dynamicRegistration = false }
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 lsp_setup.setup({
   default_mappings = false,
   capabilities = capabilities,
   on_attach = on_attach,
-  on_init = on_init,
   mappings = {},
   servers = {
-    sumneko_lua = require('lua-dev').setup({
-      library = {
-        vimruntime = true,
-        types = true,
-        plugins = true,
-      },
+    eslint = {},
+    tsserver = {},
+    sumneko_lua = {
+      on_init = custom_on_init,
       runtime_path = false,
       lspconfig = {
         settings = {
@@ -188,18 +202,9 @@ lsp_setup.setup({
           },
         },
       },
-    }),
-    ltex = {
-      settings = {
-        ltex = {
-          additionalRules = {
-            motherTongue = 'de-DE',
-          },
-          language = 'de-DE',
-        },
-      },
     },
     jsonls = {
+      on_init = custom_on_init,
       commands = {
         Format = {
           function()
@@ -256,6 +261,14 @@ lsp_setup.setup({
     },
     solargraph = {
       single_file_support = true,
+      on_init = function(client)
+        custom_on_init(client)
+
+        local has_sonicpi, sonicpi = pcall(require, 'sonicpi')
+        if has_sonicpi then
+          sonicpi.lsp_on_init(client, { server_dir = '/opt/sonic-pi/app/server' })
+        end
+      end,
       filetypes = { 'ruby', 'sonicpi' },
       cmd = {
         '/home/mgondermann/.local/share/gem/ruby/3.0.0/bin/solargraph',
@@ -272,10 +285,41 @@ lsp_setup.setup({
           formatting = true,
         },
       },
-      pylsp = {
-        single_file_support = true,
+    },
+    pylsp = {
+      single_file_support = true,
+    },
+    marksman = {
+      filetypes = { 'markdown' },
+      root_dir = root_pattern('.git', '.marksman.toml', 'README.md', 'index.md'),
+    },
+    omnisharp = {
+      settings = {
+        omnisharp = {
+          enable_roslyn_analyzers = true,
+          organize_imports_on_format = true,
+          enable_import_completion = true,
+        },
       },
     },
+    texlab = {
+      settings = {
+        texlab = {
+          build = {
+            onSave = true,
+            forwardSearchAfter = false
+          },
+          forwardSearch = {
+            executable = 'zathura',
+            args = { '--synctex-forward', '%l:1:%f', '%p' }
+          },
+          chktext = {
+            onOpenAndSave = true,
+            onEdit = true
+          }
+        }
+      }
+    }
   },
 })
 

@@ -9,6 +9,7 @@ local opt = vim.opt
 -- Map the leader key to <space>
 vim_ext.map('n', '<space>', '', {})
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 vim_ext.init_autocmd()
 

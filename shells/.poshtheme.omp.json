@@ -3,63 +3,64 @@
   "blocks": [
     {
       "alignment": "left",
-      "horizontal_offset": 0,
       "segments": [
         {
-          "type": "path",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
           "background": "#feae34",
           "foreground": "#262b44",
+          "leading_diamond": "\ue0b6",
           "properties": {
-            "prefix": "  ",
             "style": "folder"
-          }
+          },
+          "style": "diamond",
+          "template": " \ue5ff {{ .Path }} ",
+          "trailing_diamond": "\ue0b0",
+          "type": "path"
         },
         {
-          "type": "git",
+          "background": "#fee761",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#f77622{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#e43b44{{ end }}",
+            "{{ if gt .Ahead 0 }}#f77622{{ end }}",
+            "{{ if gt .Behind 0 }}#2ce8f5{{ end }}"
+          ],
+          "foreground": "#262b44",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "fetch_stash_count": true,
+            "fetch_upstream_icon": true
+          },
           "style": "powerline",
-          "powerline_symbol": "",
+          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}}\uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} ",
+          "type": "git"
+        },
+        {
           "background": "#fee761",
           "foreground": "#262b44",
-          "properties": {
-            "ahead_and_behind_color": "#e43b44",
-            "ahead_color": "#2ce8f5",
-            "behind_color": "#f77622",
-            "display_stash_count": true,
-            "display_upstream_icon": true,
-            "local_changes_color": "#f77622",
-            "stash_count_icon": " ",
-            "status_colors_enabled": true
-          }
-        },
-        {
-          "type": "root",
+          "powerline_symbol": "\ue0b0",
           "style": "powerline",
-          "powerline_symbol": "",
-          "background": "#fee761",
-          "foreground": "#262b44"
+          "template": " \uf0e7 ",
+          "type": "root"
         },
         {
-          "type": "exit",
-          "style": "diamond",
-          "leading_diamond": "<transparent, #0095e9></>",
-          "trailing_diamond": "",
           "background": "#0095e9",
+          "background_templates": [
+            "{{ if gt .Code 0 }}#ff0044{{ end }}"
+          ],
           "foreground": "#ffffff",
+          "leading_diamond": "<transparent, #0095e9>\ue0b0</>",
           "properties": {
-            "always_enabled": true,
-            "color_background": true,
-            "display_exit_code": false,
-            "error_color": "#ff0044",
-            "prefix": " "
-          }
+            "always_enabled": true
+          },
+          "style": "diamond",
+          "template": " \uf0e7{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} ",
+          "trailing_diamond": "\ue0b4",
+          "type": "exit"
         }
       ],
-      "type": "prompt",
-      "vertical_offset": 0
+      "type": "prompt"
     }
   ],
-  "final_space": true
+  "final_space": true,
+  "version": 2
 }

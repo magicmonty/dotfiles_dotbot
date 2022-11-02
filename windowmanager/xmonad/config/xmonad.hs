@@ -316,6 +316,7 @@ myManageHook = fullscreenManageHook <+> manageDocks <+> composeAll
      , className =? "mpv"             --> doShift ( myWorkspaces !! 7 )
      , className =? "Gimp"            --> doShift ( myWorkspaces !! 8 )
      , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
+     , appName =? "ulauncher" --> hasBorder False
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , isFullscreen -->  doFullFloat
      ]
