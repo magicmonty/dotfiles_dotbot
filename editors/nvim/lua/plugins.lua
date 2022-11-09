@@ -1,7 +1,7 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
-local packer_bootstrap = false
+local packer_bootstrap = nil
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({
     'git',
@@ -39,23 +39,15 @@ return require('packer').startup({
     use({
       'kyazdani42/nvim-web-devicons',
       config = function()
-        require('settings.web-devicons.settings')
+        require('plugins.web-devicons.config')
       end,
     })
-
-    -- Display keybindings
-    --[[ use({
-      'folke/which-key.nvim',
-      config = function()
-        require('settings.which-key.settings')
-      end,
-    }) ]]
 
     -- Color scheme
     use({
       'EdenEast/nightfox.nvim',
       config = function()
-        require('settings.nightfox.settings')
+        require('plugins.nightfox.config')
       end,
       requires = {
         'kyazdani42/nvim-web-devicons',
@@ -66,7 +58,7 @@ return require('packer').startup({
     use({
       'folke/lsp-colors.nvim',
       config = function()
-        require('settings.lsp-colors.settings')
+        require('plugins.lsp-colors.config')
       end,
       requires = 'EdenEast/nightfox.nvim',
     })
@@ -75,7 +67,7 @@ return require('packer').startup({
     use({
       'rcarriga/nvim-notify',
       config = function()
-        require('settings.notify.settings')
+        require('plugins.notify.config')
       end,
       requires = 'EdenEast/nightfox.nvim',
     })
@@ -84,7 +76,7 @@ return require('packer').startup({
     use({
       'kyazdani42/nvim-tree.lua',
       config = function()
-        require('settings.nvim-tree.settings')
+        require('plugins.nvim-tree.config')
       end,
       requires = 'kyazdani42/nvim-web-devicons',
     })
@@ -93,7 +85,7 @@ return require('packer').startup({
     use({
       'nvim-lualine/lualine.nvim',
       config = function()
-        require('settings.lualine.settings')
+        require('plugins.lualine.config')
       end,
       requires = {
         'neovim/nvim-lspconfig',
@@ -106,7 +98,7 @@ return require('packer').startup({
     use({
       'romgrk/barbar.nvim',
       config = function()
-        require('settings.barbar.settings')
+        require('plugins.barbar.config')
       end,
       requires = {
         'EdenEast/nightfox.nvim',
@@ -120,7 +112,7 @@ return require('packer').startup({
       'lewis6991/gitsigns.nvim',
       -- event = 'BufRead',
       config = function()
-        require('settings.gitsigns.settings')
+        require('plugins.gitsigns.config')
       end,
       requires = 'nvim-lua/plenary.nvim',
     })
@@ -128,7 +120,7 @@ return require('packer').startup({
       'sindrets/diffview.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
-        require('settings.diffview.settings')
+        require('plugins.diffview.config')
       end,
     })
 
@@ -136,7 +128,7 @@ return require('packer').startup({
     use({
       'numToStr/Comment.nvim',
       config = function()
-        require('settings.comment.settings')
+        require('plugins.comment.config')
       end,
     })
 
@@ -161,7 +153,7 @@ return require('packer').startup({
     use({
       'junnplus/lsp-setup.nvim',
       config = function()
-        require('settings.lsp-setup.settings')
+        require('plugins.lsp-setup.config')
       end,
       requires = {
         'neovim/nvim-lspconfig',
@@ -173,12 +165,26 @@ return require('packer').startup({
       },
     })
 
+    use({
+      'folke/trouble.nvim',
+      config = function()
+        require('plugins.trouble.config')
+      end
+    })
+
+    use({
+      'glepnir/lspsaga.nvim',
+      config = function()
+        require('plugins.lspsaga.config')
+      end
+    })
+
     -- nice LSP status
     use({
       'j-hui/fidget.nvim',
       after = 'lsp-setup.nvim',
       config = function()
-        require('settings.fidget.settings')
+        require('plugins.fidget.config')
       end,
     })
 
@@ -186,7 +192,7 @@ return require('packer').startup({
     use({
       'mhartington/formatter.nvim',
       config = function()
-        require('settings.formatter.settings')
+        require('plugins.formatter.config')
       end,
     })
 
@@ -195,7 +201,7 @@ return require('packer').startup({
         '/home/mgondermann/src/plugins/sonicpi.nvim',
         -- event = 'BufRead',
         config = function()
-          require('settings.sonicpi.settings')
+          require('plugins.sonicpi.config')
         end,
         requires = {
           'kyazdani42/nvim-web-devicons',
@@ -207,7 +213,7 @@ return require('packer').startup({
     use({
       'hrsh7th/nvim-cmp',
       config = function()
-        require('settings.cmp.settings')
+        require('plugins.cmp.config')
       end,
       requires = {
         'hrsh7th/cmp-nvim-lua',
@@ -225,13 +231,13 @@ return require('packer').startup({
         {
           'onsails/lspkind-nvim',
           config = function()
-            require('settings.lspkind.settings')
+            require('plugins.lspkind.config')
           end,
         },
         {
           'L3MON4D3/LuaSnip',
           config = function()
-            require('settings.luasnip.settings')
+            require('plugins.luasnip.config')
           end,
           requires = {
             'saadparwaiz1/cmp_luasnip',
@@ -242,7 +248,7 @@ return require('packer').startup({
         {
           'windwp/nvim-autopairs',
           config = function()
-            require('settings.autopairs.settings')
+            require('plugins.autopairs.config')
           end,
         },
       },
@@ -252,7 +258,7 @@ return require('packer').startup({
     use({
       'mfussenegger/nvim-dap',
       config = function()
-        require('settings.nvim-dap.settings')
+        require('plugins.nvim-dap.config')
       end,
       requires = {
         { 'rcarriga/nvim-dap-ui' },
@@ -265,7 +271,7 @@ return require('packer').startup({
     use({
       'nvim-telescope/telescope.nvim',
       config = function()
-        require('settings.telescope.settings')
+        require('plugins.telescope.config')
       end,
       requires = {
         { 'nvim-lua/plenary.nvim' },
@@ -293,7 +299,7 @@ return require('packer').startup({
     use({
       'voldikss/vim-floaterm',
       config = function()
-        require('settings.floaterm.settings')
+        require('plugins.floaterm.config')
       end,
     })
 
@@ -311,7 +317,7 @@ return require('packer').startup({
     use({
       'stevearc/dressing.nvim',
       config = function()
-        require('settings.dressing.settings')
+        require('plugins.dressing.config')
       end,
     })
 
@@ -343,7 +349,7 @@ return require('packer').startup({
       requires = { 'nvim-lua/plenary.nvim' },
       commit = 'e5f68db73276c4d4d255f75a77bbe6eff7a476ef',
       config = function()
-        require('settings.rest.settings')
+        require('plugins.rest.config')
       end,
     })
 
@@ -351,7 +357,7 @@ return require('packer').startup({
     use({
       'glepnir/dashboard-nvim',
       config = function()
-        require('settings.dashboard.settings').setup()
+        require('plugins.dashboard.config').setup()
       end,
     })
 
@@ -359,7 +365,7 @@ return require('packer').startup({
     use({
       'lervag/vimtex',
       config = function()
-        require('settings.vim-tex.settings')
+        require('plugins.vim-tex.config')
       end
     })
     -- use('matze/vim-tex-fold')

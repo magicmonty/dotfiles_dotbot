@@ -2,6 +2,9 @@ local map = vim.keymap.set
 local silent = { silent = true }
 local remap = { noremap = false }
 
+-- X does not yank
+map('n', 'x', '"_x')
+
 -- Suppress literal <S-Insert> and paste instead
 map('i', '<S-Insert>', '<C-r>+', silent)
 
@@ -64,9 +67,22 @@ map('v', '<C-S>', '<C-C>:update<CR>', silent)
 map('i', '<C-S>', '<C-O>:update<CR>', silent)
 
 -- split handling
-map('n', '<leader>wv', ':vsplit<cr>', silent)
-map('n', '<leader>ws', ':split<cr>', silent)
-map('n', '<leader>wo', ':only<cr>', { silent = true, noremap = false })
+map('n', 'sv', ':vsplit<cr><C-w>w', { silent = true, noremap = false })
+map('n', 'ss', ':split<cr><C-w>w', { silent = true, noremap = false })
+map('n', 'so', ':only<cr>', { silent = true, noremap = false })
+map('n', 'sq', '<C-w>q')
+map('n', 's<left>', '<C-w>h')
+map('n', 'sh', '<C-w>h')
+map('n', 's<right>', '<C-w>l')
+map('n', 'sl', '<C-w>l')
+map('n', 's<up>', '<C-w>k')
+map('n', 'sk', '<C-w>k')
+map('n', 's<down>', '<C-w>j')
+map('n', 'sj', '<C-w>j')
+map('n', '<C-w><C-left>', '5<C-w><')
+map('n', '<C-w><C-right>', '5<C-w>>')
+map('n', '<C-w><C-up>', '5<C-w>-')
+map('n', '<C-w><C-down>', '5<C-w>+')
 
 -- Map Control+Up/Down to move lines and selections up and down.
 -- Define maps for Normal and Visual modes, then re-use
@@ -94,3 +110,7 @@ map('n', '<', ']')
 map('x', '<', ']')
 map('n', '>', ']')
 map('x', '>', ']')
+
+-- Increment and decrement with + and -
+map('n', '+', '<C-a>')
+map('n', '-', '<C-x>')

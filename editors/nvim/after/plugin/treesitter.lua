@@ -1,1 +1,1 @@
-require("settings.treesitter.settings").setup()
+require("plugins.treesitter.config").setup()

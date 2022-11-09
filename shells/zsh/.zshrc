@@ -241,7 +241,9 @@ export DEFAULT_USER=mgondermann
 if [ -e "$TMUX" ]; then
   export TERM=screen-256color
 else
-  export TERM=xterm-256color
+  if [ -e "$KITTY_PID" ]; then
+    export TERM=xterm-256color
+  fi
 fi
 
 if [ -e ~/.gem/ruby/2.7.0/gems/tmuxinator-1.1.4/completion/tmuxinator.zsh ]; then
