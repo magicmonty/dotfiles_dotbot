@@ -1,11 +1,8 @@
-local rest = require('rest-nvim')
-local mappings = require('magicmonty.mappings')
+local installed, rest = pcall(require, 'rest-nvim')
+if not installed then return end
 
-mappings.register({
-  r = { rest.run, 'Run request' },
-  R = { '<Plug>RestNvimPreview', 'Run request preview' },
-}, { prefix = '<leader>', buffer = 0, mode = 'n', noremap = true, silent = true })
-
-mappings.register({
-  ['<C-j>'] = { require('magicmonty.jwt').decode, "JWT" }
-}, { buffer = 0, mode = 'v', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>r', rest.run, { buffer = 0, noremap = true, desc = '[R]un request' })
+vim.keymap.set('n', '<leader>R', vim.cmd.RestNvimPreview,
+  { buffer = 0, silent = true, noremap = true, desc = '[R]un request preview' })
+vim.keymap.set('v', '<C-j>', require('magicmonty.jwt').decode,
+  { buffer = 0, silent = true, noremap = true, desc = 'Decode selected [J]WT token' })
