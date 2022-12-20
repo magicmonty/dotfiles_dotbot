@@ -1,0 +1,4 @@
+default_roles:
+  - tmux
+  - zsh
+  - neovim

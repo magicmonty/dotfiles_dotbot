@@ -101,6 +101,15 @@ if [ -e ~/.bash_shortcuts ]; then
   source ~/.bash_shortcuts
 fi
 
+alias d='docker'
+
+function dclear {
+  docker ps -a -q | xargs docker kill -f 2>/dev/null
+  docker ps -a -q | xargs docker rm -f 2>/dev/null
+  docker images | awk '{print $3}' | xargs docker rmi -f 2>/dev/null
+  docker volume prune -f
+}
+
 alias cp="cp -i"                                                # Confirm before overwriting something
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
@@ -209,8 +218,10 @@ export LESS=-r
 
 ## Plugins section: Enable fish style features
 
-# bind UP and DOWN arrow keys to history substring search
+
 zmodload zsh/terminfo
+
+# bind UP and DOWN arrow keys to history substring search
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up
@@ -261,7 +272,9 @@ if [ -e ~/.gem/ruby/2.7.0/gems/tmuxinator-1.1.4/completion/tmuxinator.zsh ]; the
   alias mux='tmuxinator'
 fi
 
-source /home/mgondermann/.config/broot/launcher/bash/br
+if [ -e ~/.config/broot ]; then
+  source ~/.config/broot/launcher/bash/br
+fi
 
 if command -v bat &> /dev/null; then
   alias cat=bat

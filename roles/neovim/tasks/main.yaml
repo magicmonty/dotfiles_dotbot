@@ -1,0 +1,81 @@
+---
+- name: Dependencies
+  ansible.builtin.package:
+    name: 
+      - build-essential
+      - cmake
+      - curl
+      - ninja-build
+      - libtree-sitter-dev
+      - unzip
+      - pkg-config
+      - libtool-bin
+      - autoconf
+      - gettext
+    state: latest
+  become: yes
+
+- name: Clone
+  ansible.builtin.git:
+    clone: yes
+    depth: 1
+    dest: "{{ ansible_user_dir }}/src/github.com/neovim"
+    force: yes
+    repo: https://github.com/neovim/neovim.git
+    update: yes
+    version: "{{ neovim_version | default('master') }}"
+  register: clone
+
+- name: Build
+  make:
+    chdir: "{{ ansible_user_dir }}/src/github.com/neovim"
+    params:
+      CMAKE_BUILD_TYPE: RelWithDebInfo
+  when: clone.changed
+
+- name: Install
+  make:
+    chdir: "{{ ansible_user_dir }}/src/github.com/neovim"
+    target: install
+  become: yes
+  when: clone.changed
+
+- name: Remove build folder
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/src/github.com/neovim/build"
+    state: absent
+  become: yes
+
+- name: Config folder
+  ansible.builtin.file:
+    mode: "0755"
+    path: "{{ ansible_user_dir }}/.config/nvim"
+    state: directory
+
+- name: Link lua folder
+  ansible.builtin.file:
+    dest: "{{ ansible_user_dir }}/.config/nvim/lua"
+    src: "{{ ansible_user_dir }}/.dotfiles/editors/nvim/lua/"
+    force: true
+    state: link
+
+- name: Link init.lua
+  ansible.builtin.file:
+    dest: "{{ ansible_user_dir }}/.config/nvim/init.lua"
+    src: "{{ ansible_user_dir }}/.dotfiles/editors/nvim/init.lua"
+    force: true
+    state: link
+
+- name: Link after
+  ansible.builtin.file:
+    dest: "{{ ansible_user_dir }}/.config/nvim/after"
+    src: "{{ ansible_user_dir }}/.dotfiles/editors/nvim/after/"
+    force: true
+    state: link
+
+- name: Link snippets
+  ansible.builtin.file:
+    dest: "{{ ansible_user_dir }}/.config/nvim/snippets"
+    src: "{{ ansible_user_dir }}/.dotfiles/editors/nvim/snippets/"
+    force: true
+    state: link
