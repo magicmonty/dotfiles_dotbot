@@ -1,57 +1,72 @@
 [
-  {
-    "defaults": {
-      "link": {
-        "create": true,
-        "relink": true,
-        "force": true
-      }
-    }
-  },
-  {
-    "shell": [
-      {
-        "command": "~/.dotfiles/arch/set_zsh",
-        "description": "Making ZSH the default shell and install Oh My Zsh",
-        "stdin": true,
-        "stdout": true,
-        "stderr": true
-      },
-      ["~/.dotfiles/scripts/shortcuts.sh", "Create shortcuts"]
-    ]
-  },
-  {
-    "link": {
-      "~/.zshrc": "shells/zsh/.zshrc",
-      "~/.profile": "shells/profile",
-      "~/.zprofile": "shells/profile",
-      "~/.poshtheme.omp.json": "shells/.poshtheme.omp.json",
-      "~/.defaultapps": "shells/defaultapps"
-    }
-  },
-  {
-    "shell": [
-      ["broot --install", "linking Broot" ],
-      {
-	      "command": "yay -Sy zoxide", 
-	      "description": "installing zoxide", 
-	      "stdin": true, "stdout": true, "stderr": true
-      },
-      {
-	      "command": "sudo pacman -S zsh-theme-powerlevel10k", 
-	      "description": "installing Theme", 
-	      "stdin": true, "stdout": true, "stderr": true
-      },
-      {
-	      "command": "sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh", 
-	      "description": "installing oh-my-posh", 
-	      "stdin": true, "stdout": true, "stderr": true
-      },
-      {
-	      "command": "sudo chmod +x /usr/local/bin/oh-my-posh", 
-	      "description": "making oh-my-posh executable", 
-	      "stdin": true, "stdout": true, "stderr": true
-      }
-    ]
-  }
+	{
+		"defaults": {
+			"link": {
+				"create": true,
+				"relink": true,
+				"force": true
+			}
+		}
+	},
+	{
+		"shell": [
+			{
+				"command": "~/.dotfiles/arch/set_zsh",
+				"description": "Making ZSH the default shell and install Oh My Zsh",
+				"stdin": true,
+				"stdout": true,
+				"stderr": true
+			},
+			[
+				"~/.dotfiles/scripts/shortcuts.sh",
+				"Create shortcuts"
+			]
+		]
+	},
+	{
+		"link": {
+			"~/.zshrc": "shells/zsh/.zshrc",
+			"~/.profile": "shells/profile",
+			"~/.zprofile": "shells/profile",
+			"~/.poshtheme.omp.json": "shells/.poshtheme.omp.json",
+			"~/.defaultapps": "shells/defaultapps",
+			"~/.config/starship.toml": "shells/zsh/starship.toml"
+		}
+	},
+	{
+		"shell": [
+			[
+				"broot --install",
+				"linking Broot"
+			],
+			{
+				"command": "yay -Sy zoxide",
+				"description": "installing zoxide",
+				"stdin": true,
+				"stdout": true,
+				"stderr": true
+			},
+			{
+				"command": "sudo pacman -S zsh-theme-powerlevel10k",
+				"description": "installing Theme",
+				"stdin": true,
+				"stdout": true,
+				"stderr": true
+			},
+			{
+				"command": "sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh",
+				"description": "installing oh-my-posh",
+				"stdin": true,
+				"stdout": true,
+				"stderr": true
+			},
+			{
+				"command": "sudo chmod +x /usr/local/bin/oh-my-posh",
+				"description": "making oh-my-posh executable",
+				"stdin": true,
+				"stdout": true,
+				"stderr": true
+			}
+		]
+	}
 ]

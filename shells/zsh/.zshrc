@@ -25,6 +25,25 @@ if [ -e $HOME/.defaultapps ]; then
   source $HOME/.defaultapps
 fi
 
+# Bootstrap Antigen plugin manager
+export ADOTDIR=${HOME}/.config/antigen
+if ! [ -f ${ADOTDIR}/antigen.zsh ]; then
+  mkdir -p ${ADOTDIR}
+  curl -L git.io/antigen > ${ADOTDIR}/antigen.zsh 
+fi
+
+source ${ADOTDIR}/antigen.zsh
+
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+
+antigen apply
+
+if ! command -v starship &> /dev/null; then
+  curl -sS https://starship.rs/install.sh | sh 
+fi
+
 # Don't consider certain characters part of the word
 WORDCHARS=${WORDCHARS//\/[&.;]}
 
@@ -89,9 +108,9 @@ alias gitu='git add . && git commit && git push'
 alias vi='nvim'
 alias v='nvim'
 alias ls='exa'
-alias la='exa -glah --git --color-scale'
-alias ll='exa -glh --git --color-scale'
-alias l='exa -lh --git --color-scale'
+alias la='exa -glah --color-scale'
+alias ll='exa -glh --color-scale'
+alias l='exa -lh --color-scale'
 alias c.='code .'
 alias e='emacsclient -nt'
 alias ec='emacsclient -nc'
@@ -170,10 +189,6 @@ fi
 # enable substitution for prompt
 setopt prompt_subst
 
-# Prompt (on left side) similar to default bash prompt, or redhat zsh prompt with colors
-# PROMPT="%(!.%{$fg[red]%}[%n@%m %1~]%{$reset_color%}# .%{$fg[green]%}[%n@%m %1~]%{$reset_color%}$ "
-# Maia prompt
-# PROMPT="%B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b " # Print some system information when the shell is first started
 eval fg_gray='$FG[238]'
 eval bg_gray='$BG[238]'
 eval fg_red='$FG[001]'
@@ -193,10 +208,6 @@ export LESS=-r
 
 
 ## Plugins section: Enable fish style features
-# Use syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# Use history substring search
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # bind UP and DOWN arrow keys to history substring search
 zmodload zsh/terminfo
@@ -205,7 +216,6 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
@@ -253,8 +263,10 @@ fi
 
 source /home/mgondermann/.config/broot/launcher/bash/br
 
-if [ -e $(which bat) ]; then
+if command -v bat &> /dev/null; then
   alias cat=bat
+elif command -v batcat &> /dev/null; then
+  alias cat=batcat
 fi
 
 if [ -e ${HOME}/.local/share/gem/ruby/3.0.0/bin ]; then
@@ -280,7 +292,9 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
       source ~/.dotfiles/shells/zsh/zsh-fallback-prompt
     elif [[ "$USE_POWERLINE" == "true" ]]; then
       # Use powerline
-      if [ -e $(which oh-my-posh) ]; then
+      if command -v starship &> /dev/null; then
+        eval "$(starship init zsh)"
+      elif command -v oh-my-posh &>/dev/null; then
         eval "$(oh-my-posh --init --shell zsh --config ~/.poshtheme.omp.json)"
       else
         source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -293,15 +307,12 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     ;;
 esac
 
-eval "$(/usr/bin/zoxide init zsh)"
-# __zoxide_unset 'cdi'
-function cdi() {
-    __zoxide_zi "$@"
-}
-
-# __zoxide_unset 'cd'
-function cd() {
-   __zoxide_z "$@"
-}
-
 alias luamake=/home/mgondermann/src/lua-language-server/3rd/luamake/luamake
+
+# Add Windows Path, if run in WSL
+if uname -r | grep -q 'microsoft'; then
+  export PATH="$PATH:/mnt/c/Windows/System32:/mnt/c/Windows/SysWOW64/:/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
+fi
+
+eval "$(/usr/bin/zoxide init zsh)"
+
