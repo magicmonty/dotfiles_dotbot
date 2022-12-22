@@ -2,6 +2,7 @@ require("magicmonty.settings")
 require("magicmonty.plugins")
 require("magicmonty.remap")
 require("magicmonty.highlights")
+require("magicmonty.wsl_support")
 
 Augroup = vim.api.nvim_create_augroup
 Autocmd = vim.api.nvim_create_autocmd
