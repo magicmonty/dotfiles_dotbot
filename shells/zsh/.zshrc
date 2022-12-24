@@ -20,6 +20,7 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 HISTFILE=~/.zhistory
 HISTSIZE=1000
 SAVEHIST=500
+ZSH_PECO_HISTORY_DEDUP=1
 
 if [ -e $HOME/.defaultapps ]; then
   source $HOME/.defaultapps
@@ -29,7 +30,7 @@ fi
 export ADOTDIR=${HOME}/.config/antigen
 if ! [ -f ${ADOTDIR}/antigen.zsh ]; then
   mkdir -p ${ADOTDIR}
-  curl -L git.io/antigen > ${ADOTDIR}/antigen.zsh 
+  curl -L git.io/antigen > ${ADOTDIR}/antigen.zsh
 fi
 
 source ${ADOTDIR}/antigen.zsh
@@ -37,38 +38,23 @@ source ${ADOTDIR}/antigen.zsh
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle jimeh/zsh-peco-history
 
 antigen apply
 
 if ! command -v starship &> /dev/null; then
-  curl -sS https://starship.rs/install.sh | sh 
+  curl -sS https://starship.rs/install.sh | sh
 fi
 
 # Don't consider certain characters part of the word
 WORDCHARS=${WORDCHARS//\/[&.;]}
 
-search_history () {
-  local PECO_FLAGS=''
-  if [[ $# -gt 0 ]]; then
-    PECO_FLAGS="--query=\"$@\""
-  fi
-
-  cat ~/.zhistory | uniq | peco --layout=bottom-up $PECO_FLAGS | read from_peco
-
-  if [ -n $from_peco ]; then
-    eval $from_peco
-  else
-    eval $@
-  fi
-}
-
-zle -N search_history_widget search_history
-
 ## Keybindings section
 bindkey -e
 
 ## Search history via Peco
-bindkey '^r' search_history_widget
+zle -N peco_select_history
+bindkey '^r' peco_select_history
 
 bindkey '^[[7~' beginning-of-line                               # Home key
 bindkey '^[[H' beginning-of-line                                # Home key
