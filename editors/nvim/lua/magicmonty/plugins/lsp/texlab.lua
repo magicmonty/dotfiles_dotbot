@@ -3,9 +3,12 @@ local M = {}
 M.opts = {
   settings = {
     texlab = {
+      auxDirectory = "./out",
       build = {
         onSave = true,
         forwardSearchAfter = true,
+        executable = 'latexmk',
+        args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=./out", "-shell-escape", "%f" }
       },
       forwardSearch = {
         executable = 'zathura',

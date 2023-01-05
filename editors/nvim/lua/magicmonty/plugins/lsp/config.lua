@@ -38,7 +38,10 @@ lsp.set_preferences({
 })
 
 -- setup CMP
-lsp.setup_nvim_cmp(require('magicmonty.plugins.cmp.config').get_options())
+local cmp_config = require('magicmonty.plugins.cmp.config')
+
+lsp.setup_nvim_cmp(cmp_config.get_options())
+require 'cmp'.setup { sorting = cmp_config.get_sorting(), }
 
 -- LSP settings.
 lsp.on_attach(function(client, bufnr)

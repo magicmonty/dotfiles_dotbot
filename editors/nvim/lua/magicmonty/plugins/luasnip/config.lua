@@ -12,7 +12,7 @@ ls.config.set_config({
   -- Updates as you type on dynamic snippets
   updateevents = 'TextChanged,TextChangedI',
 
-  enable_auto_snippets = true,
+  enable_autosnippets = true,
   ext_opts = {
     [types.choiceNode] = {
       active = {
@@ -28,6 +28,7 @@ local my_snippets = fn.glob(data_path .. '/snippets')
 local friendly_snippets = fn.glob(plugin_path .. '/friendly-snippets')
 
 local paths = {}
+
 if fn.empty(my_snippets) == 0 then
   table.insert(paths, my_snippets)
 end
@@ -36,6 +37,9 @@ if fn.empty(friendly_snippets) == 0 then
 end
 
 require('luasnip.loaders.from_vscode').lazy_load({ paths = paths })
+
+local luasnip_snippets = '~/.config/nvim/lua/magicmonty/plugins/luasnip/snippets'
+require('luasnip.loaders.from_lua').load({ paths = luasnip_snippets })
 
 -- expand snippet or jump to next placeholder
 vim.keymap.set({ 'i', 's' }, '<C-k>', function()
