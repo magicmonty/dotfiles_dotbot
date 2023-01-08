@@ -14,6 +14,8 @@ set :progression, :i
 
 $kodelife_port = 'midi_through_port-0'
 
+$midi_port = 'usb_uno_midi_interface_usb_uno_midi_interface_midi_1_20_0'
+
 $volca_port = 'usb_uno_midi_interface_midi_1'
 $volca_fm_channel = 2
 $volca_bass_channel = 13

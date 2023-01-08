@@ -68,12 +68,15 @@ local opts = {
 
   context_commentstring = {
     enable = true,
+    enable_autocmd = false,
     config = {
       typescript = '// %s',
       css = '/* %s */',
       scss = '/* %s */',
       html = '<!-- %s -->',
       vue = '<!-- %s -->',
+      sonicpi = { __default = '# %s', __multiline = '=begin %s =end' },
+      ruby = { __default = '# %s', __multiline = '=begin %s =end' },
       json = '',
     }
   },
@@ -133,6 +136,10 @@ local opts = {
   },
 }
 
+require('ts_context_commentstring.internal').update_commentstring({
+  key = '__multiline'
+})
+
 M.setup = function()
   -- avoid running in headless mode since it's harder to detect failures
   if #vim.api.nvim_list_uis() == 0 then return end
@@ -149,6 +156,14 @@ M.setup = function()
   vim.wo.foldmethod = 'expr'
   vim.o.foldtext =
   [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
+
+  local comment_installed, comment = pcall(require, 'Comment')
+  if comment_installed then
+    comment.setup {
+      -- integration with treesitter context comment string
+      pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+    }
+  end
 end
 
 return M
