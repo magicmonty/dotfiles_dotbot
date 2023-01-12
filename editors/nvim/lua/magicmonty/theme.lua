@@ -3,7 +3,7 @@ local M = {}
 M.colors = {}
 
 M.setup = function()
-  local nightfox = require('magicmonty.plugins.nightfox.config')
+  local nightfox = require('magicmonty.config.nightfox')
   nightfox.setup()
   M.colors = nightfox.colors
 
