@@ -1,5 +1,6 @@
 #!/bin/sh
-kitty tmux attach
+# kitty tmux attach
+kitty
 # alacritty
 
 # urxvtc $@

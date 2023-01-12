@@ -11,4 +11,17 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup('plugins')
+local options = {
+  dev = {
+    path = '~/src/plugins',
+    patterns = { 'sonicpi' }
+  },
+  ui = {
+    border = "rounded"
+  },
+  change_detections = {
+    notify = false,
+  }
+}
+
+require('lazy').setup('plugins', options)

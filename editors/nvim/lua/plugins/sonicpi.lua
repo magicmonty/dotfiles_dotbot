@@ -1,12 +1,9 @@
 return {
-  '~/src/plugins/sonicpi.nvim',
+  'magicmonty/sonicpi.nvim',
   dev = true,
-  cond = vim.fn.isdirectory(vim.fn.glob('~/src/plugins/sonicpi.nvim')),
   dependencies = { 'webdevicons' },
+  ft = { "sonicpi" },
   config = function()
-    local installed, sonicpi = pcall(require, "sonicpi")
-    if not installed then return end
-
-    sonicpi.setup { server_dir = '/opt/sonic-pi/app/server' }
+    require('sonicpi').setup { server_dir = '/opt/sonic-pi/app/server' }
   end
 }

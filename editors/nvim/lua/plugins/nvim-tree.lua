@@ -2,6 +2,9 @@
 return {
   'kyazdani42/nvim-tree.lua',
   dependencies = 'webdevicons',
+  keys = {
+    { '<leader>.', '<cmd>NvimTreeFindFileToggle<cr>', desc = 'NvimTree' },
+  },
   config = function()
     local icons = require('magicmonty.theme').icons.diagnostics
     local tree_cb = require('nvim-tree.config').nvim_tree_callback
@@ -80,6 +83,5 @@ return {
       },
     })
 
-    vim.keymap.set('n', '<leader>.', vim.cmd.NvimTreeFindFileToggle)
   end
 }
