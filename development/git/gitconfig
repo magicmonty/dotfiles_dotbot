@@ -6,6 +6,23 @@
 	excludesfile = ~/.gitignore_global
 	editor = /usr/bin/nvim
 	autocrlf = input
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[add.interactive]
+  useBuiltin = false
+
+[delta]
+  navigate = true # use n and N to move between diff sections
+  light = false
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
 
 [difftool "sourcetree"]
 	cmd = /usr/bin/bcompare \"$LOCAL\" \"$REMOTE\"

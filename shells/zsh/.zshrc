@@ -119,7 +119,7 @@ alias ga='git add'
 alias gaa='git add --all'
 alias unstage='git reset HEAD'
 alias gco='git checkout'
-alias gb='git branch'
+alias gb='git branch --sort=-committerdate | fzf --header "Checkout Recent Branch" --preview "git diff --color=always {1} | delta" --pointer="" | xargs git checkout'
 alias gbr='git branch'
 alias gbrs='git branch --all -verbose'
 alias gp='git push'
@@ -144,6 +144,7 @@ alias gcleanf='git cleanf -xdf'
 alias gv='vim -c "GV" -c "tabonly"'
 alias gitv='vim -c "GV" -c "tabonly"'
 alias gls="git log --graph --oneline --decorate --all --color=always | fzf --ansi +s --preview='git show --color=always {2}' --bind='ctrl-d:preview-page-down' --bind='ctrl-u:preview-page-up' --bind='enter:execute:git show --color=always {2} | less -R' --bind='ctrl-x:execute:git checkout {2} .'"
+
 
 alias zz="z -" # Toggle last directory
 
