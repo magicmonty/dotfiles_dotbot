@@ -39,7 +39,7 @@ return {
     local config = {
       options = {
         icons_enabled = true,
-        theme = 'nightfox',
+        theme = vim.g.colors_name,
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
         disabled_filetypes = { 'NvimTree' },
@@ -111,7 +111,7 @@ return {
                 local line_ratio = current_line / total_lines
                 local percentage = math.floor(line_ratio * 100)
                 local index = math.ceil(line_ratio * #chars)
-return chars[index] .. ' ' .. string.format('%02d%%%%', percentage)
+                return chars[index] .. ' ' .. string.format('%02d%%%%', percentage)
               end
               return ''
             end,
