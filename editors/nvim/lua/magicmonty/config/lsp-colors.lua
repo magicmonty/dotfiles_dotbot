@@ -1,6 +1,6 @@
 M = {}
 
-M.setup = function()
+M.configure = function()
   local colors = require('magicmonty.theme').colors.diag
   require('lsp-colors').setup({
     Error = colors.error,

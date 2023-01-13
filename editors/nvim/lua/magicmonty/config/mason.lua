@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.configure = function()
   local installed, mason_settings = pcall(require, 'mason.settings')
   if not installed then return end
 

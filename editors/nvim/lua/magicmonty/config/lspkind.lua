@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.configure = function()
   local installed, lspkind = pcall(require, 'lspkind')
   if not installed then return end
 

@@ -14,11 +14,11 @@ M.set_mappings = function(client, bufnr)
   nmap('<leader>o', function() vim.cmd.Lspsaga('outline') end, 'Toggle [O]utline')
 
   if client.server_capabilities.codeActionProvider then
-    nmap('<leader>la', function() vim.cmd.Lspsaga('code_action') end, '[C]ode [A]ction')
+    nmap('<leader>la', function() vim.cmd.Lspsaga('code_action') end, '[L]SP code [A]ction')
   end
 
   nmap('<C-s>', vim.lsp.buf.signature_help, 'Signature Documentation')
-  nmap('gd', function() vim.cmd.Lspsaga('lsp_finder') end, '[G]oto [D]efinition')
+  nmap('gd', function() vim.cmd.Lspsaga('goto_defintion') end, '[G]oto [D]efinition')
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('gi', function() vim.cmd.Lspsaga('lsp_finder') end, '[G]oto [I]mplementation')
   nmap('gr', function() vim.cmd.Lspsaga('lsp_finder') end, '[G]oto [R]eferences')

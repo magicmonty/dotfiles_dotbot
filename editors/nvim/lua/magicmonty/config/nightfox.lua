@@ -2,7 +2,7 @@ local M = {}
 
 M.colors = {}
 
-M.setup = function()
+M.configure = function()
   local installed, nightfox = pcall(require, 'nightfox')
   if not installed then return end
 

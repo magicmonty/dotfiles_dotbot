@@ -1,10 +1,10 @@
 local M = {}
 
-M.setup = function()
+M.configure = function()
   local icons = require('magicmonty.icons').diagnostics
 
   -- LSPSaga Configuration
-  require('lspsaga').init_lsp_saga({
+  require('lspsaga').setup({
     border_style = 'rounded',
     saga_winblend = 5,
     diagnostic_header = { icons.Error, icons.Warning, icons.Information, icons.Hint },
@@ -20,6 +20,13 @@ M.setup = function()
     code_action_keys = {
       quit = '<Esc>',
       exec = '<CR>',
+    },
+    lightbulb = {
+      enable = true,
+      enable_in_insert = true,
+      sign = true,
+      sign_priority = 40,
+      virtual_text = true
     },
     rename_action_quit = '<Esc>',
     server_filetype_map = {}

@@ -43,10 +43,10 @@ return { -- LSP Configuration & Plugins
 
     -- Configure some indiviual settings for differen plugins
     -- This must be set up before running lsp.preset
-    require('magicmonty.config.mason').setup()
-    require('magicmonty.config.lspsaga').setup()
-    require('magicmonty.config.trouble').setup()
-    require('magicmonty.config.lspkind').setup()
+    require('magicmonty.config.mason').configure()
+    require('magicmonty.config.lspsaga').configure()
+    require('magicmonty.config.trouble').configure()
+    require('magicmonty.config.lspkind').configure()
 
     -- ensure that these LSP servers are installed
     lsp.ensure_installed({
@@ -102,13 +102,13 @@ return { -- LSP Configuration & Plugins
 
     lsp.setup()
 
-    require('magicmonty.config.diagnostics').setup()
+    require('magicmonty.config.diagnostics').configure()
 
     -- Turn on lsp status information
     require('fidget').setup({ text = { spinner = 'moon' } })
 
     -- lsp colors
-    require('magicmonty.config.lsp-colors').setup()
+    require('magicmonty.config.lsp-colors').configure()
 
     -- LSP Enable diagnostics
     vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

@@ -140,7 +140,7 @@ require('ts_context_commentstring.internal').update_commentstring({
   key = '__multiline'
 })
 
-M.setup = function()
+M.configure = function()
   -- avoid running in headless mode since it's harder to detect failures
   if #vim.api.nvim_list_uis() == 0 then return end
 

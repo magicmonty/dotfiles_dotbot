@@ -1,6 +1,6 @@
 local M = {}
 
-M.setup = function()
+M.configure = function()
   local icons = require('magicmonty.icons').diagnostics
   local sign_define = vim.fn.sign_define
 

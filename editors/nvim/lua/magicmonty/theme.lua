@@ -2,9 +2,9 @@ local M = {}
 
 M.colors = {}
 
-M.setup = function()
+M.configure = function()
   local nightfox = require('magicmonty.config.nightfox')
-  nightfox.setup()
+  nightfox.configure()
   M.colors = nightfox.colors
 
   vim.opt.list = true

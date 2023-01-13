@@ -8,14 +8,14 @@ return {
     'webdevicons'
   },
   config = function()
-    require('magicmonty.theme').setup()
+    require('magicmonty.theme').configure()
 
     vim.api.nvim_create_user_command(
       'ToggleDarkMode',
       function()
         local colorscheme = vim.g.colors_name == 'nightfox' and 'dayfox' or 'nightfox'
         vim.cmd('colorscheme ' .. colorscheme)
-        require('lualine').setup({ options =  { theme = colorscheme } })
+        require('lualine').setup({ options = { theme = colorscheme } })
       end,
       {}
     )
