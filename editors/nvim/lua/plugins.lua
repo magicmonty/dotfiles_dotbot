@@ -14,11 +14,10 @@ return {
   'cakebaker/scss-syntax.vim',
 
   -- Clojure / Overtone
-  'guns/vim-clojure-static',
-  'guns/vim-clojure-highlight',
-  'tpope/vim-fireplace',
-  'tpope/vim-classpath',
-  'tpope/vim-sexp-mappings-for-regular-people',
-  'kien/rainbow_parentheses.vim',
-  'guns/vim-sexp',
+  { 'guns/vim-clojure-static', ft = { 'clojure' } },
+  { 'guns/vim-clojure-highlight', ft = { 'clojure' } },
+  { 'tpope/vim-fireplace', ft = { 'clojure' } },
+  { 'tpope/vim-classpath', ft = { 'clojure' } },
+  { 'tpope/vim-sexp-mappings-for-regular-people', ft = { 'clojure' } },
+  { 'guns/vim-sexp', ft = { 'clojure' } },
 }
