@@ -1,3 +1,4 @@
+-- Plugins which don't need configuration
 return {
   'nvim-lua/popup.nvim',
 
@@ -5,7 +6,6 @@ return {
 
   'tpope/vim-repeat',
   'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-surround',
   'editorconfig/editorconfig-vim',
