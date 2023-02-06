@@ -34,3 +34,7 @@ if [[ -e $HOME/.gem/ruby/2.7.0/bin ]]; then
 fi
 
 export SUDO_ASKPASS=$HOME/bin/dmenupass
+
+if [ -e ${HOME}/.nix-profile/etc/profile.d/nix.sh ]; then 
+  . ${HOME}/.nix-profile/etc/profile.d/nix.sh; 
+fi

@@ -42,9 +42,34 @@ antigen bundle jimeh/zsh-peco-history
 
 antigen apply
 
-if ! command -v starship &> /dev/null; then
-  curl -sS https://starship.rs/install.sh | sh
-fi
+function install_pkg {
+  if ! command -v nix-env &> /dev/null; then
+    return
+  fi
+
+  if command -v $1 &> /dev/null; then
+    return
+  fi
+
+  PACKAGE_NAME=$1
+  if [[ "$2" -ne "" ]]; then 
+    PACKAGE_NAME=$2
+  fi
+  nix-env -iA nixpkgs.$PACKAGE_NAME
+}
+
+# Install packages with nix if not installed
+install_pkg starship
+install_pkg lazygit 
+install_pkg exa 
+install_pkg peco 
+install_pkg fzf
+install_pkg delta
+install_pkg broot
+install_pkg ranger
+install_pkg nvim neovim
+install_pkg bat
+install_pkg zoxide
 
 # Don't consider certain characters part of the word
 WORDCHARS=${WORDCHARS//\/[&.;]}
@@ -93,10 +118,10 @@ alias free='free -m'                                            # Show sizes in 
 alias gitu='git add . && git commit && git push'
 alias vi='nvim'
 alias v='nvim'
-alias ls='exa'
-alias la='exa -glah --color-scale'
-alias ll='exa -glh --color-scale'
-alias l='exa -lh --color-scale'
+alias ls='exa --git'
+alias la='exa --git -glah --color-scale'
+alias ll='exa --git -glh --color-scale'
+alias l='exa --git -lh --color-scale'
 alias c.='code .'
 alias e='emacsclient -nt'
 alias ec='emacsclient -nc'
@@ -141,29 +166,31 @@ alias hsit="git log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short"
 alias wdw='git wdw'
 alias most-changed="git log --format=%n --name-only | grep -v '^$' | sort | uniq -c |--numeric-sort --reverse | head -n 50"
 alias gcleanf='git cleanf -xdf'
-alias gv='vim -c "GV" -c "tabonly"'
-alias gitv='vim -c "GV" -c "tabonly"'
+alias gv='nvim -c "GV" -c "tabonly"'
+alias gitv='nvim -c "GV" -c "tabonly"'
 alias gls="git log --graph --oneline --decorate --all --color=always | fzf --ansi +s --preview='git show --color=always {2}' --bind='ctrl-d:preview-page-down' --bind='ctrl-u:preview-page-up' --bind='enter:execute:git show --color=always {2} | less -R' --bind='ctrl-x:execute:git checkout {2} .'"
 
 
 alias zz="z -" # Toggle last directory
 
-# aurman aliases
-pclean() {
-  sudo pacman -Sc
-  yay -Sc
-  yay -Rns $(yay -Qtdq) 2>/dev/null
-  paccache -r
-}
+if command -v yay &> /dev/null; then
+  # yay aliases
+  pclean() {
+    sudo pacman -Sc
+    yay -Sc
+    yay -Rns $(yay -Qtdq) 2>/dev/null
+    paccache -r
+  }
 
-pupd() {
-  notify-send -a 'Package Update' 'Upgrade started'
-  yay -Syyuv --noconfirm --noeditmenu && notify-send -a 'Package Update' 'Update completed' || notify-send -a 'Package Update' -u critical 'Update failed'
-  pkill -RTMIN+13 i3blocks
-}
-alias pinst='yay --noeditmenu --nodiffmenu --nocleanmenu --answerclean --sudoloop --needed -S'
-alias psearch='yay -Ss'
-alias puninst='yay -R'
+  pupd() {
+    notify-send -a 'Package Update' 'Upgrade started'
+    yay -Syyuv --noconfirm --noeditmenu && notify-send -a 'Package Update' 'Update completed' || notify-send -a 'Package Update' -u critical 'Update failed'
+    pkill -RTMIN+13 i3blocks
+  }
+  alias pinst='yay --noeditmenu --nodiffmenu --nocleanmenu --answerclean --sudoloop --needed -S'
+  alias psearch='yay -Ss'
+  alias puninst='yay -R'
+fi
 
 # Theming section
 autoload -U compinit colors zcalc
@@ -252,8 +279,6 @@ source /home/mgondermann/.config/broot/launcher/bash/br
 
 if command -v bat &> /dev/null; then
   alias cat=bat
-elif command -v batcat &> /dev/null; then
-  alias cat=batcat
 fi
 
 if [ -e ${HOME}/.local/share/gem/ruby/3.0.0/bin ]; then
@@ -294,12 +319,12 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     ;;
 esac
 
-alias luamake=/home/mgondermann/src/lua-language-server/3rd/luamake/luamake
-
 # Add Windows Path, if run in WSL
 if uname -r | grep -q 'microsoft'; then
   export PATH="$PATH:/mnt/c/Windows/System32:/mnt/c/Windows/SysWOW64/:/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
 fi
 
-eval "$(/usr/bin/zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
+
+if [ -e /home/mgondermann/.nix-profile/etc/profile.d/nix.sh ]; then . /home/mgondermann/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
