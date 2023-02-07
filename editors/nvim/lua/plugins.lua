@@ -12,6 +12,9 @@ return {
   -- SCSS syntax support
   'cakebaker/scss-syntax.vim',
 
+  -- KDL support
+  'imsnif/kdl.vim',
+
   -- Clojure / Overtone
   { 'guns/vim-clojure-static', ft = { 'clojure' } },
   { 'guns/vim-clojure-highlight', ft = { 'clojure' } },

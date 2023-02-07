@@ -42,8 +42,12 @@ antigen bundle jimeh/zsh-peco-history
 
 antigen apply
 
+if command -v nix-env &> /dev/null; then
+  HAS_NIX=1
+fi
+
 function install_pkg {
-  if ! command -v nix-env &> /dev/null; then
+  if [[ $HAS_NIX -ne 1 ]]; then
     return
   fi
 
@@ -52,7 +56,7 @@ function install_pkg {
   fi
 
   PACKAGE_NAME=$1
-  if [[ "$2" -ne "" ]]; then 
+  if [[ "$2" -ne "" ]]; then
     PACKAGE_NAME=$2
   fi
   nix-env -iA nixpkgs.$PACKAGE_NAME
@@ -60,9 +64,9 @@ function install_pkg {
 
 # Install packages with nix if not installed
 install_pkg starship
-install_pkg lazygit 
-install_pkg exa 
-install_pkg peco 
+install_pkg lazygit
+install_pkg exa
+install_pkg peco
 install_pkg fzf
 install_pkg delta
 install_pkg broot
@@ -70,6 +74,7 @@ install_pkg ranger
 install_pkg nvim neovim
 install_pkg bat
 install_pkg zoxide
+install_pkg zellij
 
 # Don't consider certain characters part of the word
 WORDCHARS=${WORDCHARS//\/[&.;]}
@@ -170,6 +175,12 @@ alias gv='nvim -c "GV" -c "tabonly"'
 alias gitv='nvim -c "GV" -c "tabonly"'
 alias gls="git log --graph --oneline --decorate --all --color=always | fzf --ansi +s --preview='git show --color=always {2}' --bind='ctrl-d:preview-page-down' --bind='ctrl-u:preview-page-up' --bind='enter:execute:git show --color=always {2} | less -R' --bind='ctrl-x:execute:git checkout {2} .'"
 
+# Zellij
+alias tmux=zellij
+alias mux=zellij
+alias tr="zellij run --"
+alias te="zellij edit"
+alias trf="zellij run --floating --"
 
 alias zz="z -" # Toggle last directory
 
@@ -289,6 +300,8 @@ if [ -e ${HOME}/.local/share/nvim/mason/bin ]; then
   export PATH=$PATH:${HOME}/.local/share/nvim/mason/bin
 fi
 
+export NVIM_LISTEN_ADDRESS=~/.cache/nvim/server.pipe
+
 USE_POWERLINE=true
 
 # Apply different settigns for different terminals
@@ -328,3 +341,5 @@ eval "$(zoxide init zsh)"
 
 
 if [ -e /home/mgondermann/.nix-profile/etc/profile.d/nix.sh ]; then . /home/mgondermann/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+eval "$(zellij setup --generate-auto-start zsh)"
