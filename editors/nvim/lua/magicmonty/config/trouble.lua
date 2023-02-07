@@ -51,7 +51,7 @@ M.configure = function()
     use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
   })
 
-  vim.keymap.set('n', '<leader>xx', '<cmd>TroubleToggle<cr>', { remap = false, silent = true })
+  vim.keymap.set('n', '<leader>ct', vim.cmd.TroubleToggle, { remap = false, silent = true, desc = "Toggle trouble" })
 end
 
 return M

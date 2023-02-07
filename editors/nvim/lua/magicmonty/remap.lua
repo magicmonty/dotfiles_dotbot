@@ -113,8 +113,6 @@ map('n', '<C-w><C-right>', '5<C-w>>')
 map('n', '<C-w><C-up>', '5<C-w>-')
 map('n', '<C-w><C-down>', '5<C-w>+')
 
--- Fugitive bindings
-map('n', '<leader>gs', '<cmd>Git<cr>', silent)
 
 map('n', '<', ']')
 map('x', '<', ']')

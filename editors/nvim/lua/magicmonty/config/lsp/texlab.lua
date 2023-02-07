@@ -12,7 +12,14 @@ M.opts = {
       },
       forwardSearch = {
         executable = 'zathura',
-        args = { '--synctex-forward', '%l:1:%f', '%p' }
+        args = {
+          '-x', 'nvr --servername /home/mgondermann/.cache/nvim/server.pipe --remote-silent +%{line} %{input}',
+          '--synctex-forward',
+          '%l:1:%f',
+          '%p',
+        }
+        -- executable = 'okular',
+        -- args = { '--unique', 'file:%p#src:%l%f' }
       },
       chktex = {
         onOpenAndSave = true,

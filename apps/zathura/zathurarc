@@ -21,4 +21,5 @@ map [fullscreen] J zoom out
 map [fullscreen] D toggle_page_mode
 map [fullscreen] i recolor
 
-
+set synctex true
+set synctex-editor-command "nvr --remote-silent +%{line} %{input}"

@@ -5,7 +5,6 @@ return {
   'amadeus/vim-convert-color-to',
 
   'tpope/vim-repeat',
-  'tpope/vim-fugitive',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-surround',
   'editorconfig/editorconfig-vim',

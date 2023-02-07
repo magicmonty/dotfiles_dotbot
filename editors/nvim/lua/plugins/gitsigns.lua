@@ -14,20 +14,15 @@ return {
         local map = vim.keymap.set
         --
         -- navigation
-        map('n', '<leader>gdn', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<cr>'", { expr = true })
-        map('n', '<leader>gdp', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<cr>'", { expr = true })
+        map('n', '<leader>gn', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<cr>'",
+          { remap = false, expr = true, desc = 'Next hunk' })
+        map('n', '<leader>gp', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<cr>'",
+          { remap = false, expr = true, desc = 'Previous hunk' })
 
         -- actions
-        map({ 'n', 'v' }, '<leader>hs', function() vim.cmd.Gitsigns('stage_hunk') end)
-        map({ 'n', 'v' }, '<leader>hu', function() vim.cmd.Gitsigns('undo_stage_hunk') end)
-        map('n', '<leader>hb', function() vim.cmd.Gitsigns('blame_line') end)
-        map('n', '<leader>hp', function() vim.cmd.Gitsigns('preview_hunk') end)
-        map('n', '<leader>hr', function() vim.cmd.Gitsigns('reset_hunk') end)
-        map('n', '<leader>hR', function() vim.cmd.Gitsigns('reset_buffer') end)
-        map('n', '<leader>hS', function() vim.cmd.Gitsigns('stage_buffer') end)
-        map('n', '<leader>hU', function() vim.cmd.Gitsigns('reset_buffer_index') end)
+        map('n', '<leader>gb', function() vim.cmd.Gitsigns('blame_line') end, { remap = false, desc = 'blame line' })
 
-        map({ 'o', 'x' }, 'ih', '<cmd><C-U>Gitsigns select_hunk<cr>')
+        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<cr>', { desc = 'inner hunk' })
       end,
 
       signs = {
