@@ -112,7 +112,7 @@ keybinds {
     }
     tmux {
         bind "[" { SwitchToMode "Scroll"; }
-        bind "Ctrl a" { Write 2; SwitchToMode "Normal"; }
+        bind "Ctrl a" { Write 1; SwitchToMode "Normal"; }
         bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "#" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
@@ -174,6 +174,8 @@ plugins {
     strider { path "strider"; }
     compact-bar { path "compact-bar"; }
 }
+
+default_shell "zsh"
 
 //  Send a request for a simplified ui (without arrow fonts) to plugins
 //  Options:
