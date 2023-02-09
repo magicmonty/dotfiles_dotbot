@@ -136,9 +136,12 @@ local opts = {
   },
 }
 
-require('ts_context_commentstring.internal').update_commentstring({
-  key = '__multiline'
-})
+local has_plugin, context_comment_string = pcall(require, 'ts_context_commentstring.internal')
+if has_plugin then
+  context_comment_string.update_commentstring({
+    key = '__multiline'
+  })
+end
 
 M.configure = function()
   -- avoid running in headless mode since it's harder to detect failures

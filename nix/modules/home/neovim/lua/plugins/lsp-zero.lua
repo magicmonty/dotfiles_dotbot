@@ -54,8 +54,8 @@ return { -- LSP Configuration & Plugins
       'html',
       'jsonls',
       'omnisharp',
-      'sumneko_lua',
-      'solargraph',
+      -- 'sumneko_lua',
+      -- 'solargraph',
       'marksman',
       'tsserver',
     })
