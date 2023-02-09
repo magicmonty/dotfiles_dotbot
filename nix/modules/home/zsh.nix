@@ -108,9 +108,6 @@ with lib;
           # Zellij
           alias tmux=zellij
           alias mux=zellij
-          alias tr="zellij run --"
-          alias te="zellij edit"
-          alias trf="zellij run --floating --"
         
           alias zz="z -" # Toggle last directory
 
@@ -136,6 +133,10 @@ with lib;
 
         ''
           eval "$(zellij setup --generate-auto-start zsh)"
+          function zr () { zellij run --name "$*" -- zsh -ic "$*";}
+          function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
+          function ze () { zellij edit "$*";}
+          function zef () { zellij edit --floating "$*";}
         ''
       ]);
     };
