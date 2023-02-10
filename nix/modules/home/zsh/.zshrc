@@ -315,19 +315,9 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     if [[ $TERM == "linux" ]]; then
       # TTY does not have powerline fonts
       source ~/.dotfiles/shells/zsh/zsh-fallback-prompt
-    elif [[ "$USE_POWERLINE" == "true" ]]; then
-      # Use powerline
-      if command -v starship &> /dev/null; then
-        eval "$(starship init zsh)"
-      elif command -v oh-my-posh &>/dev/null; then
-        eval "$(oh-my-posh --init --shell zsh --config ~/.poshtheme.omp.json)"
-      else
-        source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-        [[ ! -f /usr/share/zsh/p10k.zsh ]] || source /usr/share/zsh/p10k.zsh
-      fi
     else
-      # Don't use powerline anyway
-      source ~/.dotfiles/shells/zsh/zsh-fallback-prompt
+      # Use powerline
+      eval "$(starship init zsh)"
     fi
     ;;
 esac

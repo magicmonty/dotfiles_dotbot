@@ -13,7 +13,7 @@ in
 
   modules.git.enable = true;
   modules.zsh.enable = true;
-  modules.zsh.yayAliases = false;
+  modules.zsh.yayAliases = true;
   modules.neovim.enable = true;
 
   programs.home-manager.enable = true;
