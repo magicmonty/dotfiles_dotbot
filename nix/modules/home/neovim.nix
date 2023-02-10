@@ -9,13 +9,8 @@ with lib;
   config = mkIf config.modules.neovim.enable {
     home.packages = with pkgs; [
       stylua
-      nodejs
-      ruby
-      python3
       tree-sitter
       vimPlugins.nvim-treesitter
-      cargo
-      gcc
     ];
 
     programs.fzf = {
@@ -44,6 +39,14 @@ with lib;
       withNodeJs = true;
       withPython3 = true;
       withRuby = true;
+
+      extraPackages = with pkgs; [
+        cargo
+        gcc
+        nodejs
+        ruby
+        python3
+      ];
     };
   };
 }

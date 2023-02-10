@@ -11,10 +11,19 @@ in
     "/home/${username}/.config/nixpkgs/modules/home/neovim.nix"
   ];
 
-  modules.git.enable = true;
-  modules.zsh.enable = true;
-  modules.zsh.yayAliases = true;
-  modules.neovim.enable = true;
+  modules = {
+    git.enable = true;
+    neovim.enable = true;
+
+    zsh = {
+      enable = true;
+      yayAliases = true;
+      tmux = {
+        enable = true;
+        autostart = true;
+      };
+    };
+  };
 
   programs.home-manager.enable = true;
 
