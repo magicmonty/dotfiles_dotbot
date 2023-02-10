@@ -223,7 +223,7 @@ in
             function zef () { zellij edit --floating "$*";}
 
             function zellij_start () {
-              ZJ_SESSIONS=$(echo -e "$(zellij list-sessions 2>/dev/null)\nNew Session" | sed '/^$/d')
+              ZJ_SESSIONS=$(echo -e "New Session\n$(zellij list-sessions 2>/dev/null)" | sed '/^$/d')
               NO_SESSIONS=$(echo "$ZJ_SESSIONS" | wc -l)
 
               if [ "$NO_SESSIONS" -eq 1 ]; then
@@ -233,7 +233,7 @@ in
 
                 if [ "$ZJ_SESSION" = "New Session" ]; then
                   zellij
-                else
+                elif [ "x$ZJ_SESSION" != "x" ]; then
                   zellij attach $ZJ_SESSION
                 fi
               fi
@@ -252,7 +252,6 @@ in
     (mkIf config.modules.zsh.tmux.enable {
       home.packages = [ pkgs.diceware ];
       home.file.".config/tmux/nightfox.conf".source = ./tmux/nightfox.conf;
-      home.file."bin/tmux-mem-cpu-load".source = ./tmux/bin/tmux-mem-cpu-load;
 
       programs.zsh = {
         initExtra = (mkMerge [
@@ -264,7 +263,7 @@ in
 
             function tmux_start () {
               MUX=${pkgs.tmux}/bin/tmux
-              TMUX_SESSIONS=$(echo -e "$($MUX ls -F '#{session_name}' 2>/dev/null)\nNew Session" | sed '/^$/d')
+              TMUX_SESSIONS=$(echo -e "New Session\n$($MUX ls -F '#{session_name}' 2>/dev/null)" | sed '/^$/d')
               NO_SESSIONS=$(echo "$TMUX_SESSIONS" | wc -l)
 
               if [ "$NO_SESSIONS" -eq 1 ]; then
@@ -415,7 +414,6 @@ in
           set -g status-right-length 30
           set -g status-interval 3
           set -g status-left-length 48
-          set -g status-left "#[fg=blue]  #(tmux-mem-cpu-load --p -i 3 -g 2 -a 1 -m 2)"
           set -g status-right "#[fg=blue]#S#[fg=default]__#[fg=yellow]%d %b %Y_%H:%M "
 
           ################################################################
