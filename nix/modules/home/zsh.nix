@@ -268,6 +268,7 @@ in
 
               if [ "$NO_SESSIONS" -eq 1 ]; then
                 $MUX new-session -s $(diceware -n 2 --no-caps -d -)
+                exit
               else
                 TMUX_SESSION=$(echo $TMUX_SESSIONS | gum filter --placeholder "Select session")
 

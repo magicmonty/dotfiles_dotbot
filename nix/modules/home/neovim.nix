@@ -10,7 +10,7 @@ with lib;
     home.packages = with pkgs; [
       stylua
       tree-sitter
-      vimPlugins.nvim-treesitter
+      gcc
     ];
 
     programs.fzf = {
@@ -47,6 +47,15 @@ with lib;
         ruby
         python3
       ];
+
+      extraLuaConfig = ''
+        require("magicmonty")
+
+        local status, ts_install = pcall(require, "nvim-treesitter.install")
+        if status then
+          ts_install.compilers = { "${pkgs.gcc}/bin/gcc" }
+        end
+      '';
     };
   };
 }
