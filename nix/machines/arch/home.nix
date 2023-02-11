@@ -9,6 +9,7 @@ in
     "/home/${username}/.config/nixpkgs/modules/home/git.nix"
     "/home/${username}/.config/nixpkgs/modules/home/zsh.nix"
     "/home/${username}/.config/nixpkgs/modules/home/neovim.nix"
+    "/home/${username}/.config/nixpkgs/modules/home/zathura.nix"
   ];
 
   modules = {
@@ -19,6 +20,7 @@ in
     };
 
     neovim.enable = true;
+    zathura.enable = true;
 
     zsh = {
       enable = true;
