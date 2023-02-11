@@ -3,13 +3,6 @@
 with lib;
 
 let
-  zellijModule = types.submodule {
-    options = {
-      enable = mkEnableOption "zellij";
-      autostart = mkOption { type = types.bool; default = false; };
-    };
-  };
-
   tmuxModule = types.submodule {
     options = {
       enable = mkEnableOption "tmux";
@@ -22,7 +15,6 @@ in
   options.modules.zsh = {
     enable = mkOption { type = types.bool; default = false; };
     yayAliases = mkOption { type = types.bool; default = false; };
-    zellij = mkOption { type = zellijModule; default = { }; };
     tmux = mkOption { type = tmuxModule; default = { }; };
   };
 
@@ -205,50 +197,6 @@ in
       };
     }
 
-    (mkIf config.modules.zsh.zellij.enable {
-      home.packages = [ pkgs.zellij ];
-
-      home.file.".config/zellij/config.kdl".source = ./zellij/config.kdl;
-
-      programs.zsh = {
-        initExtra = (mkMerge [
-          ''
-            # Zellij
-            alias tmux=zellij
-            alias mux=zellij
-
-            function zr () { zellij run --name "$*" -- zsh -ic "$*";}
-            function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
-            function ze () { zellij edit "$*";}
-            function zef () { zellij edit --floating "$*";}
-
-            function zellij_start () {
-              ZJ_SESSIONS=$(echo -e "New Session\n$(zellij list-sessions 2>/dev/null)" | sed '/^$/d')
-              NO_SESSIONS=$(echo "$ZJ_SESSIONS" | wc -l)
-
-              if [ "$NO_SESSIONS" -eq 1 ]; then
-                zellij
-              else
-                ZJ_SESSION=$(echo $ZJ_SESSIONS | gum filter --placeholder "Select session")
-
-                if [ "$ZJ_SESSION" = "New Session" ]; then
-                  zellij
-                elif [ "x$ZJ_SESSION" != "x" ]; then
-                  zellij attach $ZJ_SESSION
-                fi
-              fi
-            }
-          ''
-
-          (mkIf config.modules.zsh.zellij.autostart ''
-            if [[ -z "$ZELLIJ" && -z "$TMUX" ]]; then
-              zellij_start
-            fi
-          '')
-        ]);
-      };
-    })
-
     (mkIf config.modules.zsh.tmux.enable {
       home.packages = [ pkgs.diceware ];
       home.file.".config/tmux/nightfox.conf".source = ./tmux/nightfox.conf;
@@ -282,7 +230,7 @@ in
           ''
 
           (mkIf config.modules.zsh.tmux.autostart ''
-            if [[ -z "$ZELLIJ" && -z "$TMUX" ]]; then
+            if [[ -z "$TMUX" ]]; then
               tmux_start
             fi
           '')

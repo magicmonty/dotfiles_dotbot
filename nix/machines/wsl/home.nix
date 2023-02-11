@@ -12,7 +12,11 @@ in
   ];
 
   modules = {
-    git.enable = true;
+    git = {
+      enable = true;
+      user = "Martin Gondermann";
+      email = "martin.gondermann@bayoo.net";
+    };
     neovim.enable = true;
 
     zsh = {
