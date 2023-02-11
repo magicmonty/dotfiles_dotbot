@@ -1,5 +1,0 @@
-#!/bin/env sh
-
-/usr/bin/pockyt put -i $1 && notify-send -a "Pocket" "Added $1" || notify-send -a "Pocket" -urgency critical "Error adding $1"
-
-exit $?

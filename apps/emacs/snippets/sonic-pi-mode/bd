@@ -1,9 +1,0 @@
-# name: Base drum loop
-# key: bd
-# --
-live_loop :drums, sync: :clock1 do
-	tick
-	sample :bd_haus if spread(4, 16).look
-	$0
-	sleep 0.25
-end

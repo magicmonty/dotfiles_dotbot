@@ -1,6 +1,0 @@
-# key: echo
-# name: Echo fx
-# --
-with_fx(:echo, decay: 2.0, mix: 1.0, phase: 0.25) do
-	$0
-end

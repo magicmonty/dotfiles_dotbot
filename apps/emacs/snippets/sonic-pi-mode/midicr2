@@ -1,6 +1,0 @@
-# key: midicr2
-# Circuit Midi CC Reverb Synth 2
-# --
-# Reverb Synth 2
-midi_cc 89, ${1:64}, channel: 16, port: \$port
-$0

@@ -1,4 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Neomutt Mail
-Exec=/usr/bin/urxvt -e neomutt %u

@@ -1,3 +1,0 @@
-#!/bin/env sh
-
-$HOME/bin/1pc -act lock

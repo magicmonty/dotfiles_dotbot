@@ -1,5 +1,0 @@
-# key: fx
-# name: Generic FX
-with_fx(:$1) do
-	$0
-end

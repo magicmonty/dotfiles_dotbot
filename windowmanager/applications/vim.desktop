@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=Vim
-Exec=/usr/bin/urxvt -e nvim %u
+Exec=kitty -e nvim %u

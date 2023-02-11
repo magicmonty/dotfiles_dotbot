@@ -1,2 +1,0 @@
-macro index,pager i1 '<sync-mailbox><enter-command>source /home/mgondermann/.config/mutt/accounts/google.muttrc<enter><change-folder>!<enter>'
-source /home/mgondermann/.config/mutt/accounts/google.muttrc

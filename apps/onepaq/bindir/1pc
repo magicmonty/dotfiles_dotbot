@@ -1,4 +1,0 @@
-#!/bin/sh
-
-$HOME/bin/onepaq client -config-path $HOME/.config/onepaq/default.json  $*
-exit $?

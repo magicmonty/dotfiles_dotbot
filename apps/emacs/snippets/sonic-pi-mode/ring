@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: ring
-# key: ring
-# --
-(ring $0).tick

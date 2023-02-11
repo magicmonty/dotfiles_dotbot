@@ -1,8 +1,0 @@
-# key: safari
-# name: Safari Drum Loop
-# --
-live_loop :safari, sync: :clock1 do
-	sample :loop_safari, beat_stretch: 16, amp: 2
-	sleep 16
-end
-$0

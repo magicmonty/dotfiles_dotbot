@@ -1,5 +1,0 @@
-# key: midid1
-# name: Circuit Drum 1
-# --
-# Drum 1 (base drum)
-midi 60, vel_f: ${0:1.0}, channel: 10, port: \$port if spread(4, 16).look

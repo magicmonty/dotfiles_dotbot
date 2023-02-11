@@ -1,8 +1,0 @@
-# key: midicf
-# name: Circuit Midi Global Filter
-# --
-# Global Filter
-midi_cc 74, ${1:65}, channel: 16, port: \$port
-# Resonance
-midi_cc 71, ${1:30}, channel: 16, port: \$port
-$0

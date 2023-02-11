@@ -1,6 +1,0 @@
-# key: ll
-# name: Live loop
-# --
-live_loop :$1 do
-	$0
-end

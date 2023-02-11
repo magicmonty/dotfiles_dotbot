@@ -1,6 +1,0 @@
-# key: ll5
-# name: Live loop on Beat 5
-# --
-live_loop :$1, sync: :clock5 do
-	$0
-end

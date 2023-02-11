@@ -1,5 +1,0 @@
-# key: midic1
-# name: Circuit Midi CC channel 1
-# --
-midi_cc ${1:80}, val_f: ${2:1}, channel: 1, port: \$port
-$0

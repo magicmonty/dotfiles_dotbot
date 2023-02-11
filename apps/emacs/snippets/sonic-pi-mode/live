@@ -1,6 +1,0 @@
-# key: live
-# name: Live audio
-# --
-live_audio :in, stereo: true, amp: 1.5
-
-$0
