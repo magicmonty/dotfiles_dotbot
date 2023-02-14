@@ -222,8 +222,10 @@ in
 
                 if [ "$TMUX_SESSION" = "New Session" ]; then
                   $MUX new-session -s $(diceware -n 2 --no-caps -d -)
+                  exit
                 elif [ "x$TMUX_SESSION" != "x" ]; then
                   $MUX attach $MUX_SESSION
+                  exit
                 fi
               fi
             }
@@ -290,7 +292,7 @@ in
           set -g focus-events on
 
           # don't detach from tmux when killing a session
-          set -g detach-on-destroy off
+          set -g detach-on-destroy on
 
           # tmux messages are displayed for 4 seconds
           set -g display-time 4000
