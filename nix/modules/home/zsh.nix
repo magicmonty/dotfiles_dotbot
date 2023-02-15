@@ -24,9 +24,11 @@ in
         ranger
         gum
         ripgrep
+        ncdu
       ];
 
       home.file.".config/starship.toml".source = ./zsh/starship.toml;
+      home.file.".config/ncdu/config".source = ./zsh/ncdu.config;
 
       programs = {
         zoxide = {
