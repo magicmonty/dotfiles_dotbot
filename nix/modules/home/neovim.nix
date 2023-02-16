@@ -10,7 +10,6 @@ with lib;
     home.packages = with pkgs; [
       stylua
       tree-sitter
-      gcc
     ];
 
     programs.fzf = {
