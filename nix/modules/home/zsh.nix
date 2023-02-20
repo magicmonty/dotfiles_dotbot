@@ -25,6 +25,7 @@ in
         gum
         ripgrep
         ncdu
+        pbgopy
       ];
 
       # home.file.".config/starship.toml".source = ./zsh/starship.toml;
@@ -315,6 +316,15 @@ in
               # Add Windows Path, if run in WSL
               if uname -r | grep -q 'microsoft'; then
                 export PATH="$PATH:/mnt/c/Windows/System32:/mnt/c/Windows/SysWOW64/:/mnt/c/Windows/System32/WindowsPowerShell/v1.0"
+
+                # pbcopy/pbpaste function to copy into system clipboard
+                function pbcopy() {
+                    printf $(</dev/stdin) | clip.exe
+                }
+
+                function pbpaste() {
+                  pwsh.exe -NoProfile -NonInteractive -Command Get-Clipboard 2>/dev/null | sed 's/\r$//' | sed '$ s/\n$//'
+                }
               fi
             ''
           ]);
@@ -368,7 +378,7 @@ in
         enable = true;
         baseIndex = 1;
         clock24 = true;
-        escapeTime = 0;
+        escapeTime = 1;
         historyLimit = 10000;
         keyMode = "vi";
         mouse = true;
@@ -443,8 +453,8 @@ in
           # Switch between previous and next window with repeats
           bind -r n next-window
           bind -r p previous-window
-          bind C-n next-window
-          bind C-p previous-window
+          bind -r C-n next-window
+          bind -r C-p previous-window
 
           # Switch between the last used window and the current one
           bind Space last-window
@@ -485,12 +495,6 @@ in
           ################################################################
 
           bind s set -g status
-          # set -g status-justify center
-
-          set -g status-right-length 30
-          set -g status-interval 3
-          set -g status-left-length 48
-          set -g status-right "#[fg=blue]#S#[fg=default]__#[fg=yellow]%d %b %Y_%H:%M "
 
           ################################################################
           #### COLOUR (Nightfox)
