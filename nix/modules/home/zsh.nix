@@ -44,7 +44,7 @@ in
           settings = {
             add_newline = true;
             format = ''
-              [](blue)$env_var$os$username$hostname[](fg:blue)
+              [](blue)$env_var$os$username$hostname[](fg:blue)
               [│](blue)$directory$git_branch$git_metrics$git_state$git_status$dotnet$lua$nodejs
               [└─](blue)$battery$status[>](blue) '';
 
@@ -62,6 +62,14 @@ in
               display = [
                 {
                   threshold = 80;
+                  style = "green";
+                }
+                {
+                  threshold = 30;
+                  style = "bold yellow";
+                }
+                {
+                  threshold = 20;
                   style = "bold red";
                 }
               ];
