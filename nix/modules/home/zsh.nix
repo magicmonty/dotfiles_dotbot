@@ -262,6 +262,7 @@ in
             gitv = "nvim -c \"GV\" -c \"tabonly\"";
             gls = "git log --graph --oneline --decorate --all --color=always | fzf --ansi +s --preview='git show --color=always {2}' --bind='ctrl-d:preview-page-down' --bind='ctrl-u:preview-page-up' --bind='enter:execute:git show --color=always {2} | less -R' --bind='ctrl-x:execute:git checkout {2} .'";
             zz = "z -"; # Toggle last directory via zoxide
+            cat = "bat";
           };
 
           initExtraFirst = ''
