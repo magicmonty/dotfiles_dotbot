@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if pgrep picom; then
+  pkill picom
+else
+  picom --experimental-backends --config ~/.xmonad/picom/picom.conf & disown
+fi

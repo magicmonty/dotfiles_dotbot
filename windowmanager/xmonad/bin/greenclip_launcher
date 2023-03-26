@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rofi -modi " :greenclip print" -show " " -run-command '{cmd}' -theme $HOME/.xmonad/rofi/list_launcher.rasi

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+rofi -no-config -no-lazy-grab -modi drun -show drun -theme $HOME/.xmonad/rofi/launcher.rasi
