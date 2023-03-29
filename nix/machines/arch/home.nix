@@ -6,10 +6,11 @@ let
 in
 {
   imports = [
-    "/home/${username}/.config/nixpkgs/modules/home/git.nix"
-    "/home/${username}/.config/nixpkgs/modules/home/zsh.nix"
-    "/home/${username}/.config/nixpkgs/modules/home/neovim.nix"
-    "/home/${username}/.config/nixpkgs/modules/home/zathura.nix"
+    "/home/${username}/.dotfiles/nix/modules/home/git.nix"
+    "/home/${username}/.dotfiles/nix/modules/home/zsh.nix"
+    "/home/${username}/.dotfiles/nix/modules/home/neovim.nix"
+    "/home/${username}/.dotfiles/nix/modules/home/zathura.nix"
+    "/home/${username}/.dotfiles/nix/modules/home/kitty.nix"
   ];
 
   modules = {
@@ -21,6 +22,7 @@ in
 
     neovim.enable = true;
     zathura.enable = true;
+    kitty.enable = true;
 
     zsh = {
       enable = true;
