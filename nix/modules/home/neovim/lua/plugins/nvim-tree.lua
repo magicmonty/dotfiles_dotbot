@@ -1,4 +1,28 @@
 -- Tree view
+local function on_attach(bufnr)
+  local api = require('nvim-tree.api')
+
+  local function opts(desc)
+    return {
+      desc = 'nvim-tree: ' .. desc,
+      buffer = bufnr,
+      noremap = true,
+      silent = true,
+      nowait = true
+    }
+  end
+
+
+  -- Default mappings.
+  api.config.mappings.default_on_attach(bufnr)
+
+
+  vim.keymap.set('n', 'cd', api.tree.change_root_to_node, opts('CD'))
+  vim.keymap.set('n', '<C-s>', api.node.open.horizontal, opts('Open: Horizontal Split'))
+  vim.keymap.set('n', '<C-x>', api.node.open.horizontal, opts('Open: Horizontal Split'))
+  vim.keymap.set('n', '<C-h>', api.node.open.horizontal, opts('Open: Horizontal Split'))
+end
+
 return {
   'kyazdani42/nvim-tree.lua',
   dependencies = 'webdevicons',
@@ -10,10 +34,10 @@ return {
     local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
     require('nvim-tree').setup({
+      on_attach = on_attach,
       disable_netrw = true,
       hijack_netrw = true,
       hijack_cursor = true,
-      open_on_setup = false,
       update_cwd = true,
       update_focused_file = {
         enable = true,
@@ -63,14 +87,6 @@ return {
           error = icons.Error,
         },
       },
-      view = {
-        mappings = {
-          list = {
-            { key = 'cd', cb = tree_cb('cd') },
-            { key = { '<C-s>', '<C-x>', '<C-h>' }, cb = tree_cb('split') },
-          },
-        },
-      },
       actions = {
         open_file = {
           quit_on_open = true,
@@ -82,6 +98,5 @@ return {
         },
       },
     })
-
   end
 }
