@@ -6,7 +6,6 @@ M.set_mappings = function(client, bufnr)
   end
 
   local telescope = require('telescope.builtin')
-  nmap('<leader>cn', function() vim.cmd.Lspsaga("rename") end, 'Rename')
 
   nmap('<leader>dl', telescope.diagnostics, 'Workspace [d]iagnostics list')
   nmap('<leader>dn', require('lspsaga.diagnostic').goto_next, 'Jump to next diagnostics entry')
@@ -28,6 +27,21 @@ M.set_mappings = function(client, bufnr)
   nmap('<leader>cS', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
   nmap('K', function() vim.cmd.Lspsaga('hover_doc') end, 'Hover Documentation')
+
+  local inc_rename_installed, inc_rename = pcall(require, 'inc_rename')
+  if inc_rename_installed then
+    inc_rename.setup()
+
+    vim.keymap.set("n", "<leader>rr", function()
+      return ":IncRename " .. vim.fn.expand("<cword>")
+    end, { expr = true })
+    vim.keymap.set("n", "<leader>cn", function()
+      return ":IncRename " .. vim.fn.expand("<cword>")
+    end, { expr = true })
+  else
+    nmap('<leader>cn', function() vim.cmd.Lspsaga("rename") end, 'Rename')
+    nmap('<leader>rr', function() vim.cmd.Lspsaga("rename") end, 'Rename')
+  end
 end
 
 M.setup_formatting = function(client, bufnr)

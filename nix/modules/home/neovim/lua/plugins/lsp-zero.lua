@@ -1,4 +1,5 @@
-return { -- LSP Configuration & Plugins
+return {
+         -- LSP Configuration & Plugins
   'VonHeikemen/lsp-zero.nvim',
   dependencies = {
     'nightfox',
@@ -34,6 +35,9 @@ return { -- LSP Configuration & Plugins
     'glepnir/lspsaga.nvim',
 
     'windwp/nvim-autopairs',
+
+    -- Inc rename
+    'smjonas/inc-rename.nvim'
   },
   config = function()
     local lsp = require('lsp-zero')
