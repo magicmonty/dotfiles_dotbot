@@ -298,6 +298,9 @@ in
               if [ -e $HOME/.defaultapps ]; then
                 source $HOME/.defaultapps
               fi
+              
+              bindkey '^[[1;5D' backward-word
+              bindkey '^[[1;5C' forward-word
             ''
 
             (mkIf config.modules.zsh.yayAliases ''

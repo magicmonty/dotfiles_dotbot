@@ -132,6 +132,7 @@ centerFloat win = do
 myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "lxqt-policykit-agent &"
+    spawnOnce "dunst &"
     -- spawnOnce "xfce4-power-manager &"
     spawnOnce "autorandr --current"
     spawnOnce "greenclip daemon &"
