@@ -11,6 +11,8 @@ with lib;
       stylua
       tree-sitter
       unzip
+      fd
+      ripgrep
     ];
 
     programs.fzf = {
