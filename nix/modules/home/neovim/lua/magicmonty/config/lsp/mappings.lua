@@ -17,7 +17,7 @@ M.set_mappings = function(client, bufnr)
   end
 
   nmap('<C-s>', vim.lsp.buf.signature_help, 'Signature Documentation')
-  nmap('gd', function() vim.cmd.Lspsaga('goto_defintion') end, 'Goto Definition')
+  nmap('gd', function() vim.cmd.Lspsaga('goto_definition') end, 'Goto Definition')
   nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
   nmap('gi', function() vim.cmd.Lspsaga('lsp_finder') end, 'Goto Implementation')
   nmap('gr', function() vim.cmd.Lspsaga('lsp_finder') end, 'Goto References')

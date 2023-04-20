@@ -71,7 +71,7 @@ map('n', '<leader>ln', '<cmd>lnext<CR>zz', { desc = "Go to next entry in locatio
 map('n', '<leader>lp', '<cmd>lprev<CR>zz', { desc = "Go to previous entry in location list" })
 map('n', '<leader>lc', '<cmd>lclose<CR>', { desc = "close location list window" })
 
-map('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'replace word under cursor' })
+-- map('n', '<leader>S', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'replace word under cursor' })
 
 -- Diagnostic keymaps
 map('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show current diagnostic in float" })

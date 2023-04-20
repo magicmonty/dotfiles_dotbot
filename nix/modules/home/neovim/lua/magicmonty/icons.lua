@@ -11,6 +11,16 @@ M.diagnostics = {
   Ok = '',
 }
 
+M.todo = {
+  Fix = " ",
+  Todo = " ",
+  Hack = " ",
+  Warn = " ",
+  Perf = " ",
+  Note = " ",
+  Test = "⏲ ",
+}
+
 M.git = {
   added = '',
   modified = '',

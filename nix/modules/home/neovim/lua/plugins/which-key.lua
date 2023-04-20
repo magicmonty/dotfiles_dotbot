@@ -13,8 +13,13 @@ return {
       g = { name = 'Git', },
       l = { name = 'location list' },
       q = { name = 'quickfix list' },
+      r = { name = 'refactor' },
+      s = { name = 'Search' },
       t = { name = 'Terminal' },
       T = { name = 'Tab' },
     }, { prefix = '<leader>' })
+    wk.register({
+      gt = { name = 'Todo Comments' }
+    })
   end
 }
