@@ -58,7 +58,7 @@ WEATHER_CODES = {
 data = {}
 
 
-weather = requests.get("https://wttr.in/?format=j1").json()
+weather = requests.get("https://wttr.in/?format=j1&lang=de").json()
 
 
 def format_time(time):
@@ -71,13 +71,13 @@ def format_temp(temp):
 
 def format_chances(hour):
     chances = {
-        "chanceoffog": "Fog",
+        "chanceoffog": "Nebel",
         "chanceoffrost": "Frost",
-        "chanceofovercast": "Overcast",
-        "chanceofrain": "Rain",
-        "chanceofsnow": "Snow",
-        "chanceofsunshine": "Sunshine",
-        "chanceofthunder": "Thunder",
+        "chanceofovercast": "Bedeckt",
+        "chanceofrain": "Regen",
+        "chanceofsnow": "Schnee",
+        "chanceofsunshine": "Sonne",
+        "chanceofthunder": "Gewitter",
         "chanceofwindy": "Wind"
     }
 
@@ -96,10 +96,10 @@ if tempint > 0 and tempint < 10:
 data['text'] = ' '+WEATHER_CODES[weather['current_condition'][0]['weatherCode']] + \
     " "+extrachar+weather['current_condition'][0]['FeelsLikeC']+"° "
 
-data['tooltip'] = f"<b>{weather['current_condition'][0]['weatherDesc'][0]['value']} {weather['current_condition'][0]['temp_C']}°</b>\n"
-data['tooltip'] += f"Feels like: {weather['current_condition'][0]['FeelsLikeC']}°\n"
+data['tooltip'] = f"<b>{weather['current_condition'][0]['lang_de'][0]['value']} {weather['current_condition'][0]['temp_C']}°</b>\n"
+data['tooltip'] += f"Gefühlt: {weather['current_condition'][0]['FeelsLikeC']}°\n"
 data['tooltip'] += f"Wind: {weather['current_condition'][0]['windspeedKmph']}Km/h\n"
-data['tooltip'] += f"Humidity: {weather['current_condition'][0]['humidity']}%\n"
+data['tooltip'] += f"Luftfeuchtigkeit: {weather['current_condition'][0]['humidity']}%\n"
 for i, day in enumerate(weather['weather']):
     data['tooltip'] += f"\n<b>"
     if i == 0:
@@ -113,7 +113,7 @@ for i, day in enumerate(weather['weather']):
         if i == 0:
             if int(format_time(hour['time'])) < datetime.now().hour-2:
                 continue
-        data['tooltip'] += f"{format_time(hour['time'])} {WEATHER_CODES[hour['weatherCode']]} {format_temp(hour['FeelsLikeC'])} {hour['weatherDesc'][0]['value']}, {format_chances(hour)}\n"
+        data['tooltip'] += f"{format_time(hour['time'])} {WEATHER_CODES[hour['weatherCode']]} {format_temp(hour['FeelsLikeC'])} {hour['lang_de'][0]['value']}, {format_chances(hour)}\n"
 
 
 print(json.dumps(data))

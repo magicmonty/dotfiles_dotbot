@@ -46,9 +46,9 @@ map('n', '*', '*zzzv', { desc = "Jump to next occurrence of word under cursor" }
 map('n', '#', '#zzzv', { desc = "Jump to previous occurrence of word under cursor" })
 
 -- Overload Control+L to clear the search highlight as it's redrawing the screen.
-map('n', '<C-L>', ':nohlsearch<cr><C-L>', { remap = false, silent = true })
-map('i', '<C-L>', '<Esc>:nohlsearch<cr><C-L>a', { remap = false, silent = true })
-map('v', '<C-L>', '<Esc>:nohlsearch<cr><C-L>gv', { remap = false, silent = true })
+-- map('n', '<C-L>', ':nohlsearch<cr><C-L>', { remap = false, silent = true })
+-- map('i', '<C-L>', '<Esc>:nohlsearch<cr><C-L>a', { remap = false, silent = true })
+-- map('v', '<C-L>', '<Esc>:nohlsearch<cr><C-L>gv', { remap = false, silent = true })
 
 -- Replace selected word without losing current paste buffer
 map('x', '<leader>p', '"_dP', { desc = "Replace selection without losing paste buffer" })

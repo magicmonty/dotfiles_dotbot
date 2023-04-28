@@ -1,9 +1,9 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Monoid Nerd Font, monospace;
+    font-family: "JetBrainsMono Nerd Font";
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     min-height: 0;
 }
 
@@ -15,23 +15,27 @@ window#waybar {
 tooltip {
     background: #192330;
     border-radius: 10px;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
     border-color: #59f0ff;
 }
 
+tooltip label {
+    color: #cdcecf;
+}
+
 #workspaces button {
     padding: 5px;
-    color: #192330;
+    color: #71839b;
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: #cdcecf;
 }
 
 #workspaces button.focused {
-    color: #a6adc8;
+    color: #cdcecf;
     background: #c94f6d;
     border-radius: 10px;
 }
@@ -44,7 +48,7 @@ tooltip {
 
 #workspaces button:hover {
     background: #192330;
-    color: #cdd6f4;
+    color: #63cdcf;
     border-radius: 10px;
 }
 
@@ -59,7 +63,11 @@ tooltip {
 #network,
 #workspaces,
 #tray,
+#cpu,
+#disk,
+#memory,
 #backlight {
+    opacity: 0.8;
     background: #192330;
     padding: 0px 10px;
     margin: 3px 0px;
@@ -93,11 +101,14 @@ tooltip {
     border-right: 0px;
 }
 
+#cpu {
+    border-radius: 10px 0px 0px 10px;
+}
+
 #custom-updates {
     color: #ffe37e;
     border-left: 0px;
     border-right: 0px;
-    border-radius: 10px 0px 0px 10px;
 }
 
 #window {
@@ -130,6 +141,10 @@ tooltip {
     color: #719cd6;
     border-left: 0px;
     border-right: 0px;
+}
+
+#backlight {
+    color: #cdcecf;
 }
 
 #battery {
