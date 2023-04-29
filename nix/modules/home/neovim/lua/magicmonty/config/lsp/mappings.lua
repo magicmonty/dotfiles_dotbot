@@ -8,39 +8,61 @@ M.set_mappings = function(client, bufnr)
   local telescope = require('telescope.builtin')
 
   nmap('<leader>dl', telescope.diagnostics, 'Workspace [d]iagnostics list')
-  nmap('<leader>dn', require('lspsaga.diagnostic').goto_next, 'Jump to next diagnostics entry')
-  nmap('<leader>dp', require('lspsaga.diagnostic').goto_prev, 'Jump to previous diagnostics entry')
-  nmap('<leader>o', function() vim.cmd.Lspsaga('outline') end, 'Toggle Outline')
+  nmap('<leader>dn', function()
+    require('lspsaga.diagnostic'):goto_next()
+  end, 'Jump to next diagnostics entry')
+  nmap('<leader>dp', function()
+    require('lspsaga.diagnostic'):goto_prev()
+  end, 'Jump to previous diagnostics entry')
+  nmap('<leader>o', function()
+    vim.cmd.Lspsaga('outline')
+  end, 'Toggle Outline')
 
   if client.server_capabilities.codeActionProvider then
-    nmap('<leader>ca', function() vim.cmd.Lspsaga('code_action') end, 'Code Action')
+    nmap('<leader>ca', function()
+      vim.cmd.Lspsaga('code_action')
+    end, 'Code Action')
   end
 
   nmap('<C-s>', vim.lsp.buf.signature_help, 'Signature Documentation')
-  nmap('gd', function() vim.cmd.Lspsaga('goto_definition') end, 'Goto Definition')
+  nmap('gd', function()
+    vim.cmd.Lspsaga('goto_definition')
+  end, 'Goto Definition')
   nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
-  nmap('gi', function() vim.cmd.Lspsaga('lsp_finder') end, 'Goto Implementation')
-  nmap('gr', function() vim.cmd.Lspsaga('lsp_finder') end, 'Goto References')
-  nmap('gT', function() vim.cmd.Lspsaga('lsp_type_definitions') end, 'Goto Type definition')
+  nmap('gi', function()
+    vim.cmd.Lspsaga('lsp_finder')
+  end, 'Goto Implementation')
+  nmap('gr', function()
+    vim.cmd.Lspsaga('lsp_finder')
+  end, 'Goto References')
+  nmap('gT', function()
+    vim.cmd.Lspsaga('lsp_type_definitions')
+  end, 'Goto Type definition')
 
   nmap('<leader>cs', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
   nmap('<leader>cS', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
-  nmap('K', function() vim.cmd.Lspsaga('hover_doc') end, 'Hover Documentation')
+  nmap('K', function()
+    vim.cmd.Lspsaga('hover_doc')
+  end, 'Hover Documentation')
 
   local inc_rename_installed, inc_rename = pcall(require, 'inc_rename')
   if inc_rename_installed then
     inc_rename.setup()
 
-    vim.keymap.set("n", "<leader>rr", function()
-      return ":IncRename " .. vim.fn.expand("<cword>")
+    vim.keymap.set('n', '<leader>rr', function()
+      return ':IncRename ' .. vim.fn.expand('<cword>')
     end, { expr = true })
-    vim.keymap.set("n", "<leader>cn", function()
-      return ":IncRename " .. vim.fn.expand("<cword>")
+    vim.keymap.set('n', '<leader>cn', function()
+      return ':IncRename ' .. vim.fn.expand('<cword>')
     end, { expr = true })
   else
-    nmap('<leader>cn', function() vim.cmd.Lspsaga("rename") end, 'Rename')
-    nmap('<leader>rr', function() vim.cmd.Lspsaga("rename") end, 'Rename')
+    nmap('<leader>cn', function()
+      vim.cmd.Lspsaga('rename')
+    end, 'Rename')
+    nmap('<leader>rr', function()
+      vim.cmd.Lspsaga('rename')
+    end, 'Rename')
   end
 end
 
@@ -64,7 +86,9 @@ M.setup_formatting = function(client, bufnr)
     Autocmd('BufWritePre', {
       buffer = bufnr,
       group = augroup_format,
-      callback = function() vim.cmd.Format() end
+      callback = function()
+        vim.cmd.Format()
+      end,
     })
   end
 end
