@@ -1,3 +1,5 @@
+@import url('./nightfox.css');
+
 * {
     border: none;
     border-radius: 0;
@@ -9,46 +11,46 @@
 
 window#waybar {
     background: rgba(21, 18, 27, 0);
-    color: #cdcecf;
+    color: @theme-fg0;
 }
 
 tooltip {
-    background: #192330;
+    background: @theme-bg1;
     border-radius: 10px;
     border-width: 1px;
     border-style: solid;
-    border-color: #59f0ff;
+    border-color: @theme-cyan-bright;
 }
 
 tooltip label {
-    color: #cdcecf;
+    color: @theme-fg1;
 }
 
 #workspaces button {
     padding: 5px;
-    color: #71839b;
+    color: @theme-fg3;
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: #cdcecf;
+    color: @theme-fg1;
 }
 
 #workspaces button.focused {
-    color: #cdcecf;
-    background: #c94f6d;
+    color: @theme-fg1;
+    background: @theme-red;
     border-radius: 10px;
 }
 
 #workspaces button.urgent {
-    color: #192330;
-    background: #81b29a;
+    color: @theme-bg1;
+    background: @theme-green;
     border-radius: 10px;
 }
 
 #workspaces button:hover {
-    background: #192330;
-    color: #63cdcf;
+    background: @theme-bg1;
+    color: @theme-cyan-bright;
     border-radius: 10px;
 }
 
@@ -68,11 +70,11 @@ tooltip label {
 #memory,
 #backlight {
     opacity: 0.8;
-    background: #192330;
+    background: @theme-bg1;
     padding: 0px 10px;
     margin: 3px 0px;
     margin-top: 10px;
-    border: 1px solid #192330;
+    border: 1px solid @theme-bg1;
 }
 
 #tray {
@@ -81,7 +83,7 @@ tooltip label {
 }
 
 #workspaces {
-    background: #192330;
+    background: @theme-bg1;
     border-radius: 10px;
     margin-left: 10px;
     padding-right: 0px;
@@ -89,14 +91,14 @@ tooltip label {
 }
 
 #custom-caffeine {
-    color: #63cdcf;
+    color: @theme-cyan-bright;
     border-radius: 10px 0px 0px 10px;
     border-right: 0px;
     margin-left: 10px;
 }
 
 #custom-language {
-    color: #c94f6d;
+    color: @theme-red;
     border-left: 0px;
     border-right: 0px;
 }
@@ -106,7 +108,7 @@ tooltip label {
 }
 
 #custom-updates {
-    color: #ffe37e;
+    color: @theme-orange-bright;
     border-left: 0px;
     border-right: 0px;
 }
@@ -118,7 +120,7 @@ tooltip label {
 }
 
 #clock {
-    color: #63cdcf;
+    color: @theme-cyan-bright;
     border-radius: 0px 10px 10px 0px;
     margin-left: 0px;
     margin-right: 10px;
@@ -126,29 +128,29 @@ tooltip label {
 }
 
 #network {
-    color: #ffe37e;
+    color: @theme-yellow-bright;
     border-left: 0px;
     border-right: 0px;
 }
 
 #pulseaudio {
-    color: #719cd6;
+    color: @theme-blue-bright;
     border-left: 0px;
     border-right: 0px;
 }
 
 #pulseaudio.microphone {
-    color: #719cd6;
+    color: @theme-blue-bright;
     border-left: 0px;
     border-right: 0px;
 }
 
 #backlight {
-    color: #cdcecf;
+    color: @theme-yellow-bright;
 }
 
 #battery {
-    color: #58cd8b;
+    color: @theme-green;
     border-radius: 0;
     margin-right: 0px;
     margin-left: 0px;

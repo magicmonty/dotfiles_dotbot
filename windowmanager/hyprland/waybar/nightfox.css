@@ -1,0 +1,45 @@
+@define-color theme-bg0 #131a24;
+@define-color theme-bg1 #192330;
+@define-color theme-bg2 #212e3f;
+@define-color theme-bg3 #29394f;
+@define-color theme-bg4 #39506d;
+
+@define-color theme-fg0 #d6d6d7;
+@define-color theme-fg1 #cdcecf;
+@define-color theme-fg2 #aeafb0;
+@define-color theme-fg3 #71839b;
+
+@define-color theme-black #393b44;
+@define-color theme-black-bright #575860;
+@define-color theme-black-dim #30323a;
+@define-color theme-blue #719cd6;
+@define-color theme-blue-bright #86abdc;
+@define-color theme-blue-dim #6085b6;
+@define-color theme-cyan #63cdcf;
+@define-color theme-cyan-bright #7ad5d6;
+@define-color theme-cyan-dim #54aeb0;
+@define-color theme-green #81b29a;
+@define-color theme-green-bright #8ebaa4;
+@define-color theme-green-dim #6e9783;
+@define-color theme-magenta #9d79d6;
+@define-color theme-magenta-bright #baa1e2;
+@define-color theme-magenta-dim #8567b6;
+@define-color theme-orange #f4a261;
+@define-color theme-orange-bright #f6b079;
+@define-color theme-orange-dim #cf8a52;
+@define-color theme-pink #d67ad2;
+@define-color theme-pink-bright #dc8ed9;
+@define-color theme-pink-dim #b668b3;
+@define-color theme-red #c94f6d;
+@define-color theme-red-bright #d16983;
+@define-color theme-red-dim #ab435d;
+@define-color theme-white #dfdfe0;
+@define-color theme-white-bright #e4e4e5;
+@define-color theme-white-dim #bebebe;
+@define-color theme-yellow #dbc074;
+@define-color theme-yellow-bright #e0c989;
+@define-color theme-yellow-dim #baa363;
+
+@define-color theme-sel0 #2b3b51;
+@define-color theme-sel1 #3c5372;
+@define-color theme-comment #738091;
