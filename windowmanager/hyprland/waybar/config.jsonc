@@ -18,8 +18,8 @@
     "cpu",
     "memory",
     "disk",
-    "custom/updates",
     "battery",
+    "custom/updates",
     "backlight",
     "pulseaudio",
     "pulseaudio#microphone",
@@ -113,10 +113,6 @@
     "interval": 30,
     "exec": "~/.config/waybar/scripts/waybar-wttr.py",
     "return-type": "json"
-  },
-  "tray": {
-    "icon-size": 13,
-    "spacing": 10
   },
   "clock": {
     "format": "{: %R   %d/%m}",

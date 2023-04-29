@@ -1,0 +1,4 @@
+#%PAM-1.0
+auth	    sufficient  pam_unix.so try_first_pass likeauth nullok
+auth 	    sufficient	pam_python3.so /lib/security/howdy/pam.py
+
