@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+enable_screensaver() {
+  if ! [ $(pgrep swayidle) ]; then
+    swayidle & disown
+    notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "Screensaver enabled"
+  fi
+}
+
+disable_screensaver() {
+  if [ $(pgrep swayidle) ]; then
+    pkill swayidle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "Screensaver disabled"
+  fi
+}
+
+toggle_screensaver() {
+  if [ $(pgrep swayidle) ]; then
+    disable_screensaver
+  else
+    enable_screensaver
+  fi
+}
+
+if [[ "$1" == "on" ]]; then
+  enable_screensaver
+elif [[ "$1" == "off" ]]; then
+  disable_screensaver
+else
+  toggle_screensaver
+fi
+
