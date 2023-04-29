@@ -7,6 +7,9 @@ vim.opt.hlsearch = false
 -- but highlight current search result while creating search term
 vim.opt.incsearch = true
 
+-- hide cmd line unless used
+vim.opt.cmdheight = 0
+
 -- Make line numbers default
 vim.wo.number = true
 vim.opt.relativenumber = true
