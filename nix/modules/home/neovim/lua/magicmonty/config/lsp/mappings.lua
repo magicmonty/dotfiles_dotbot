@@ -67,7 +67,7 @@ M.set_mappings = function(client, bufnr)
 end
 
 M.setup_formatting = function(client, bufnr)
-  if client.server_capabilities.documentFormattingProvider then
+  if client.supports_method('textDocument/formatting') then
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format buffer', silent = true })
     vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format buffer', silent = true })
   end

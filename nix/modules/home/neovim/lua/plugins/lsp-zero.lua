@@ -96,10 +96,10 @@ return {
 
       -- LSP settings.
       lsp.on_attach(function(client, bufnr)
-        if client.name == 'eslint' then
+        --[[ if client.name == 'eslint' then
           vim.cmd.LspStop('eslint')
           return
-        end
+        end ]]
 
         local mappings = require('magicmonty.config.lsp.mappings')
         mappings.set_mappings(client, bufnr)
@@ -124,42 +124,25 @@ return {
       })
 
       require('neodev').setup({})
-      lsp.setup()
 
       local null_ls = require('null-ls')
       local null_opts = lsp.build_options('null-ls', {})
-      null_ls.setup({
-        on_attach = null_opts.on_attach,
-        sources = {
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.prettier.with({
-            filetype = {
-              'javascript',
-              'javascriptreact',
-              'typescript',
-              'typescriptreact',
-              'vue',
-              'json',
-              'markdown',
-            },
-          }),
-          null_ls.builtins.formatting.eslint.with({
-            filetype = {
-              'javascript',
-              'javascriptreact',
-              'typescript',
-              'typescriptreact',
-              'vue',
-              'json',
-              'markdown',
-            },
-          }),
-        },
+
+      lsp.setup()
+
+      local mason_null_ls = require('mason-null-ls')
+      mason_null_ls.setup({
+        ensure_installed = { 'stylua', 'prettierd', 'eslint_d' },
+        automatic_installation = true,
+        automatic_setup = true,
+        handlers = {},
       })
 
-      require('mason-null-ls').setup({
-        ensure_installed = nil,
-        automatic_installation = true,
+      null_ls.setup({
+        border = 'rounded',
+        on_attach = function(client, buffer)
+          null_opts.on_attach(client, buffer)
+        end,
       })
 
       require('magicmonty.config.diagnostics').configure()
