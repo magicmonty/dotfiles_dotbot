@@ -68,7 +68,7 @@ vim.opt.expandtab = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 -- preserver undo tree on exit
-vim.opt.undodir = os.getenv('HOME') .. '/.local/share/nvim/undodir'
+vim.opt.undodir = vim.fn.stdpath('data') .. '/undodir'
 vim.opt.undofile = true
 
 vim.opt.scrolloff = 8

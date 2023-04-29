@@ -14,7 +14,6 @@ local opts = {
     'git_rebase',
     'gitcommit',
     'gitignore',
-    'help',
     'html',
     'http',
     'javascript',
@@ -36,36 +35,28 @@ local opts = {
   },
   auto_install = true,
   sync_install = false,
-
   highlight = {
     enable = true,
     disable = {},
     additional_vim_regex_highlighting = false
   },
-
   indent = {
     enable = true,
     diable = { 'yaml' }
   },
-
   refactor = {
     highlight_definitions = { enable = true },
     highlight_current_scope = { enable = false },
   },
-
   matchup = { enable = true },
-
   rainbow = {
     enable = true,
     disable = { 'html' },
     extended_mode = true, -- don't highlight non parentheses delimiters
     max_file_lines = 3000,
   },
-
   autotag = { enable = true },
-
   autopairs = { enable = true },
-
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
@@ -80,7 +71,6 @@ local opts = {
       json = '',
     }
   },
-
   incremental_selection = {
     enable = true,
     keymaps = {
