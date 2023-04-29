@@ -46,16 +46,8 @@ return {
       'smjonas/inc-rename.nvim',
 
       -- Formatters and Linters,
-      {
-        'jose-elias-alvarez/null-ls.nvim',
-        dependencies = {
-          {
-            'jay-babu/mason-null-ls.nvim',
-            cmd = { 'NullLsInstall', 'NullLsUninstall' },
-            opts = { handlers = {} },
-          },
-        },
-      },
+      'jose-elias-alvarez/null-ls.nvim',
+      'jay-babu/mason-null-ls.nvim',
     },
     config = function()
       local lsp = require('lsp-zero')
@@ -76,7 +68,7 @@ return {
         'html',
         'jsonls',
         'omnisharp',
-        -- 'sumneko_lua',
+        'lua_ls',
         -- 'solargraph',
         'marksman',
         'tsserver',
@@ -122,36 +114,52 @@ return {
       lsp.configure('omnisharp', require('magicmonty.config.lsp.omnisharp').opts)
       lsp.configure('texlab', require('magicmonty.config.lsp.texlab').opts)
 
+      lsp.format_on_save({
+        format_opts = {
+          timeout_ms = 10000,
+        },
+        servers = {
+          ['null-ls'] = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'json', 'lua' },
+        },
+      })
+
       require('neodev').setup({})
       lsp.setup()
 
       local null_ls = require('null-ls')
-      local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-      local null_opts = lsp.build_options('null-ls', {
-        on_attach = function(client, bufnr)
-          if client.supports_method('textDocument/formatting') then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              group = vim.api.nvim_create_augroup('LspFormatting', {}),
-              buffer = bufnr,
-              callback = function()
-                vim.lsp.buf.format({ bufnr = bufnr })
-              end,
-            })
-          end
-        end,
-      })
-
+      local null_opts = lsp.build_options('null-ls', {})
       null_ls.setup({
-        border = 'rounded',
         on_attach = null_opts.on_attach,
+        sources = {
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.prettier.with({
+            filetype = {
+              'javascript',
+              'javascriptreact',
+              'typescript',
+              'typescriptreact',
+              'vue',
+              'json',
+              'markdown',
+            },
+          }),
+          null_ls.builtins.formatting.eslint.with({
+            filetype = {
+              'javascript',
+              'javascriptreact',
+              'typescript',
+              'typescriptreact',
+              'vue',
+              'json',
+              'markdown',
+            },
+          }),
+        },
       })
 
-      local mason_null_ls = require('mason-null-ls')
-      mason_null_ls.setup({
-        ensure_installed = { 'stylua', 'prettierd', 'eslint_d', 'jq' },
+      require('mason-null-ls').setup({
+        ensure_installed = nil,
         automatic_installation = true,
-        automatic_setup = true,
       })
 
       require('magicmonty.config.diagnostics').configure()

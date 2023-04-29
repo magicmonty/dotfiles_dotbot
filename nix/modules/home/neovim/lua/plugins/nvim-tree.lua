@@ -8,14 +8,12 @@ local function on_attach(bufnr)
       buffer = bufnr,
       noremap = true,
       silent = true,
-      nowait = true
+      nowait = true,
     }
   end
 
-
   -- Default mappings.
   api.config.mappings.default_on_attach(bufnr)
-
 
   vim.keymap.set('n', 'cd', api.tree.change_root_to_node, opts('CD'))
   vim.keymap.set('n', '<C-s>', api.node.open.horizontal, opts('Open: Horizontal Split'))
@@ -38,7 +36,7 @@ return {
       disable_netrw = true,
       hijack_netrw = true,
       hijack_cursor = true,
-      update_cwd = true,
+      update_cwd = false,
       update_focused_file = {
         enable = true,
         update_cwd = true,
@@ -98,5 +96,5 @@ return {
         },
       },
     })
-  end
+  end,
 }

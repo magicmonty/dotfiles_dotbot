@@ -67,29 +67,9 @@ M.set_mappings = function(client, bufnr)
 end
 
 M.setup_formatting = function(client, bufnr)
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    if vim.lsp.buf.format then
-      vim.lsp.buf.format()
-    elseif vim.lsp.buf.formatting then
-      vim.lsp.buf.formatting()
-    end
-  end, { desc = 'Format current buffer with LSP' })
-
-  vim.keymap.set('n', '<leader>f', vim.cmd.Format, { buffer = bufnr, desc = 'Format buffer', silent = true })
-  vim.keymap.set('n', '<leader>cf', vim.cmd.Format, { buffer = bufnr, desc = 'Format buffer', silent = true })
-
-  -- Autoformat on save
   if client.server_capabilities.documentFormattingProvider then
-    local augroup_format = Augroup('lsp_format', { clear = true })
-    vim.api.nvim_clear_autocmds({ buffer = bufnr, group = augroup_format })
-    Autocmd('BufWritePre', {
-      buffer = bufnr,
-      group = augroup_format,
-      callback = function()
-        vim.cmd.Format()
-      end,
-    })
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format buffer', silent = true })
+    vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format buffer', silent = true })
   end
 end
 
