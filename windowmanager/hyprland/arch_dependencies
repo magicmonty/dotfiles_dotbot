@@ -8,6 +8,7 @@ gvfs
 hyprland
 jq
 kitty
+kmscon-patched-git
 lxappearance
 mako
 network-manager-applet
@@ -15,6 +16,8 @@ noto-fonts-emoji
 pacman-contrib
 pamixer
 pavucontrol
+plymouth
+plymouth-theme-spin
 polkit-gnome
 python-requests
 rofi
