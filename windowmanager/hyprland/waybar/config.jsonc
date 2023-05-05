@@ -15,9 +15,9 @@
   ],
   "modules-right": [
     "tray",
-    "cpu",
-    "memory",
-    "disk",
+    // "cpu",
+    // "memory",
+    // "disk",
     "battery",
     "custom/updates",
     "backlight",

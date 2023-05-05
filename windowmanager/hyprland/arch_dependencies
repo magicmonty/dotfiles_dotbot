@@ -20,6 +20,7 @@ plymouth
 plymouth-theme-spin
 polkit-gnome
 python-requests
+qutebrowser-qt6-git
 rofi
 sddm
 slurp
@@ -32,6 +33,8 @@ thunar
 thunar-archive-plugin
 ttf-jetbrains-mono-nerd
 waybar-hyprland
+wl-clipboard
+wl-clipboard-history-git
 wlogout
 wlsunset
 xdg-desktop-portal-hyprland
