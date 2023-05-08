@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+#
+# Started SQL Server per Docker
+# Macht nichts, wenn der container bereits läuft
+
+# Gibt es einen gestoppten Container, dann wird dieser neu gestartet
+
+# bacpac-Dateien, die unter ~/.local/share/sqlserver/bacpacs liegen werden nach dem Start automatisch importiert, sofern noch kein Docker container existiert
+
+# Zugriff auf den SQL-Server in der WSL über den Host-Namen "[::1]" (IPv6-Localhost), localhost (127.0.0.1) funktioniert nicht!
+
+# Username ist "sa", Passwort ist:
+
+SA_PASSWORD='Dev0nly!'
+CONFIG_DIR=~/.local/share/sqlserver
+BACPACS=${CONFIG_DIR}/bacpacs
+SQLPACKAGE="${CONFIG_DIR}/sqlpackage/sqlpackage"
+SQL_SERVER_VERSION='2019-latest' # '2016-latest', '2019-latest', '2022-latest'
+
+if ! [ -x ${SQLPACKAGE} ]; then
+  echo installing sqlpackage...
+
+  mkdir -p ${CONFIG_DIR}/sqlpackage
+
+  if ! [ -f ${CONFIG_DIR}/sqlpackage/sqlpackage.zip ]; then
+    echo downloading sqlpackage
+    wget https://aka.ms/sqlpackage-linux -O ${CONFIG_DIR}/sqlpackage/sqlpackage.zip
+  fi
+
+  unzip ${CONFIG_DIR}/sqlpackage/sqlpackage.zip -d ${CONFIG_DIR}/sqlpackage
+  rm ${CONFIG_DIR}/sqlpackage/sqlpackage.zip
+  chmod +x ${SQLPACKAGE}
+fi
+
+if docker ps | grep sqlserver > /dev/null 2>&1; then 
+  echo "SQL Server is already running"
+elif docker ps -a | grep sqlserver | grep Exited > /dev/null 2>&1; then
+  echo "Stopped container found. Restarting..."
+  docker start sqlserver
+else
+  echo "Starting new SQL Server"
+  docker volume rm -f sqlserver > /dev/null
+  docker volume create sqlserver > /dev/null
+
+  docker run -d \
+    -e 'ACCEPT_EULA=Y' \
+    -e "MSSQL_SA_PASSWORD=${SA_PASSWORD}" \
+    -e "MSSQL_PID=Developer" \
+    --name sqlserver \
+    -p 1433:1433 \
+    -v sqlserver:/var/opt/mssql \
+    mcr.microsoft.com/mssql/server:${SQL_SERVER_VERSION} 
+
+  if [ -e ${BACPACS} ]; then
+    # Only sleep, if there are bacpacs to import available
+    echo waiting for SQL Server to spin up...
+    sleep 10
+    echo SQL Server should be ready by now
+
+    for file in $(ls ${BACPACS}/*.bacpac); do 
+      echo "Importing ${file}..."
+
+      DBNAME=$(basename -s .bacpac $file)
+      ${SQLPACKAGE} /tsn:localhost /tu:sa /tp:"${SA_PASSWORD}" /ttsc:True /A:Import /tdn:"${DBNAME}" /sf:"${file}" 
+    done
+  fi
+fi
+

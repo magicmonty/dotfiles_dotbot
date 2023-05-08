@@ -72,6 +72,7 @@ return {
         -- 'solargraph',
         'marksman',
         'tsserver',
+        'nil_ls',
       })
 
       -- Make the Lua LSP server aware of the vim runtime paths
