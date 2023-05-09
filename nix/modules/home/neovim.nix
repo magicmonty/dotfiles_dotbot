@@ -13,6 +13,8 @@ with lib;
       unzip
       fd
       ripgrep
+      python310
+      python310Packages.pip
     ];
 
     programs.fzf = {
@@ -47,7 +49,7 @@ with lib;
         gcc
         nodejs
         ruby
-        python3
+        python310
       ];
 
       extraLuaConfig = ''

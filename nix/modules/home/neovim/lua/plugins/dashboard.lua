@@ -35,26 +35,26 @@ return {
     db.custom_center = {
       {
         icon = ' ',
-        desc = 'Find file                  ',
-        shortcut = 'SPC f F',
+        desc = 'Search file                  ',
+        shortcut = 'SPC s F',
         action = 'Telescope find_files',
       },
       {
         icon = ' ',
-        desc = 'Find project file          ',
-        shortcut = 'SPC f f',
+        desc = 'Search project file          ',
+        shortcut = 'SPC s f',
         action = "lua require('magicmonty.telescope').project_files()",
       },
       {
         icon = ' ',
-        desc = 'Find Project               ',
-        shortcut = 'SPC f p',
+        desc = 'Search Project               ',
+        shortcut = 'SPC s p',
         action = "lua require('telescope').extensions.project.project({ display_type = 'minimal' })",
       },
       {
         icon = ' ',
         desc = 'Recents                    ',
-        shortcut = 'SPC f o',
+        shortcut = 'SPC s o',
         action = 'Telescope oldfiles',
       },
       {
@@ -71,5 +71,5 @@ return {
     }
 
     vim.keymap.set('n', '<leader>nf', '<cmd>DashboardNewFile<CR>')
-  end
+  end,
 }
