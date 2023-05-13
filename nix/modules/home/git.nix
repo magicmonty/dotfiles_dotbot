@@ -113,6 +113,9 @@ with lib;
             rebase = true;
             ff = "only";
           };
+          commit = {
+              cleanup = "scissors";
+          };
           init.defaultBranch = "main";
           gui.pruneDuringFetch = true;
         };
