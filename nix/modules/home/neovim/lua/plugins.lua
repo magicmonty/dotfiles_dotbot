@@ -4,7 +4,7 @@ return {
 
   'amadeus/vim-convert-color-to',
 
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-surround',
 
   -- SCSS syntax support

@@ -67,3 +67,7 @@ Host bitbucket.org
   HostName bitbucket.org
   PreferredAuthentications publickey
   HostKeyAlgorithms=+ssh-rsa
+
+Host desktop
+  HostName desktop
+
