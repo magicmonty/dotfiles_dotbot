@@ -20,7 +20,7 @@ plymouth
 plymouth-theme-spin
 polkit-gnome
 python-requests
-qutebrowser-qt6-git
+qutebrowser
 rofi
 sddm
 slurp
