@@ -6,11 +6,12 @@ let
 in
 {
   imports = [
-    "/home/${username}/.dotfiles/nix/modules/home/git.nix"
-    "/home/${username}/.dotfiles/nix/modules/home/zsh.nix"
-    "/home/${username}/.dotfiles/nix/modules/home/neovim.nix"
-    "/home/${username}/.dotfiles/nix/modules/home/zathura.nix"
-    "/home/${username}/.dotfiles/nix/modules/home/kitty.nix"
+    "${homedir}/.dotfiles/nix/modules/home/git.nix"
+    "${homedir}/.dotfiles/nix/modules/home/zsh.nix"
+    "${homedir}/.dotfiles/nix/modules/home/neovim_light.nix"
+    "${homedir}/.dotfiles/nix/modules/home/zathura.nix"
+    "${homedir}/.dotfiles/nix/modules/home/kitty.nix"
+    "${homedir}/.dotfiles/nix/modules/home/hyprland.nix"
   ];
 
   modules = {
@@ -23,6 +24,11 @@ in
     neovim.enable = true;
     zathura.enable = true;
     kitty.enable = true;
+
+    hyprland = {
+      enable = true;
+      entrypoint = ../../modules/home/hyprland/hypr/hyprland.thinkmg.conf;
+    };
 
     zsh = {
       enable = true;

@@ -1,0 +1,108 @@
+configuration {
+  font:                "Monoid Nerd Font 18";
+  show-icons:          false;
+  drun-display-format: "{name}";
+  disable-history:     false;
+  sidebar-mode:        false;
+}
+
+@import "nightfox.rasi"
+
+window {
+  transparency:     "real";
+  border-radius:    12px;
+  border:           3px;
+  border-color:     @gutter;
+  height:           22%;
+  width:            37%;
+  location:         center;
+  x-offset:         0;
+  y-offset:         0;
+}
+
+prompt {
+  enabled:          false;
+}
+
+textbox-prompt-colon {
+  expand:           true;
+  str:              "Goodbye";
+  background-color: @background;
+  text-color:       @cyan;
+  margin:           0% 14% 0% 14%;
+}
+
+inputbar {
+  children:         [ textbox-prompt-colon ];
+  background-color: @background;
+  text-color:       @foreground;
+  expand:           false;
+  margin:           0;
+  padding:          1.5%;
+  position:         center;
+}
+
+listview {
+  background-color:               @background;
+  margin:                         1% 1% 1% 1%;
+  padding:                        1% 2%;
+  spacing:                        1%;
+  cycle:                          true;
+  dynamic:                        true;
+  layout:                         horizontal;
+}
+
+mainbox {
+  background-color:               @background;
+  children:                       [ inputbar, listview ];
+  spacing:                        1.5%;
+  padding:                        0;
+}
+
+element {
+  background-color:               @background-alt;
+  text-color:                     @cyan;
+  orientation:                    horizontal;
+  border-radius:                  100%;
+}
+
+element-text {
+  font:                           "Monoid Nerd Font 28";
+  text-color:                     inherit;
+  background-color:               inherit;
+  expand:                         true;
+  horizontal-align:               0.5;
+  vertical-align:                 0.5;
+  margin:                         2.5% 1.7% 2.5% 1.7%;
+}
+
+element normal.urgent,
+element alternate.urgent {
+  background-color:               @urgent;
+  text-color:                     @foreground;
+  border-radius:                  0.2%;
+}
+
+element normal.active,
+element alternate.active {
+  background-color:               @background-alt;
+  text-color:                     @foreground;
+}
+
+element selected {
+  background-color:               @selected;
+  text-color:                     @background;
+  border:                         0% 0.2% 0.2% 0%;
+  border-radius:                  100%;
+  border-color:                   @border;
+}
+
+element selected.urgent {
+  background-color:               @urgent;
+  text-color:                     @foreground;
+}
+
+element selected.active {
+  background-color:               @background-alt;
+  color:                          @foreground;
+}

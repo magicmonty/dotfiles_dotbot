@@ -151,6 +151,7 @@ with lib;
 
               pupd() {
                 notify-send -a 'Package Update' 'Upgrade started'
+                PATH=/usr/local/sbin:/usr/local/bin:/usr/bin
                 yay -Syyuv --noconfirm --noeditmenu && notify-send -a 'Package Update' 'Update completed' || notify-send -a 'Package Update' -u critical 'Update failed'
                 pkill -RTMIN+13 i3blocks
               }

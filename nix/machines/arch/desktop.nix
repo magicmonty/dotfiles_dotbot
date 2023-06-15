@@ -6,9 +6,11 @@ let
 in
 {
   imports = [
-    "/home/${username}/.dotfiles/nix/modules/home/git.nix"
-    "/home/${username}/.dotfiles/nix/modules/home/zsh.nix"
-    "/home/${username}/.dotfiles/nix/modules/home/zathura.nix"
+    "${homedir}/.dotfiles/nix/modules/home/git.nix"
+    "${homedir}/.dotfiles/nix/modules/home/zsh.nix"
+    "${homedir}/.dotfiles/nix/modules/home/kitty.nix"
+    "${homedir}/.dotfiles/nix/modules/home/neovim_light.nix"
+    "${homedir}/.dotfiles/nix/modules/home/hyprland.nix"
   ];
 
   modules = {
@@ -18,12 +20,20 @@ in
       email = "magicmonty@pagansoft.de";
     };
 
+    kitty.enable = true;
+    neovim.enable = true;
+
+    hyprland = {
+      enable = true;
+      entrypoint = ../../modules/home/hyprland/hypr/hyprland.thinkmg.conf;
+    };
+
     zsh = {
       enable = true;
       yayAliases = true;
       tmux = {
         enable = true;
-        autostart = false;
+        autostart = true;
       };
     };
   };
@@ -39,6 +49,10 @@ in
       text = ''
         { allowUnfree = true; }
       '';
+    };
+
+    file.".config/hypr/hyprland.conf" = {
+        source = ../../modules/home/hypr/hyprland.desktop.conf;
     };
 
     sessionPath = [

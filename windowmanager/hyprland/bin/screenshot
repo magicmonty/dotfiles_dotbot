@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-
-WIN_TREE=$(hyprctl clients -j | jq -r '.[] | select(.hidden==false and .mapped==true)')
-
-# Invoke slurp to let the user select a window
-SELECTION=$(echo $WIN_TREE | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | slurp)
-echo $SELECTION
-
-grim -t png -g "$SELECTION" - | swappy -f -
