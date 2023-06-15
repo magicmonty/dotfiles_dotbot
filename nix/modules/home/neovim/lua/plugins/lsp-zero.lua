@@ -30,7 +30,7 @@ return {
       'luasnip',
 
       -- Useful status updates for LSP
-      { 'j-hui/fidget.nvim', branch = 'legacy' },
+      { 'j-hui/fidget.nvim', tag = 'legacy' },
 
       -- LSP colorscheme
       'onsails/lspkind-nvim',
