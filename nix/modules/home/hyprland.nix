@@ -10,12 +10,8 @@ with lib;
   config = mkMerge [
     (mkIf config.modules.hyprland.enable {
       home = {
-        file."~/bin/hlprop" = {
-          source = ./hyprland/bin/hlprop;
-        };
-
-        file."~/bin/touchpad_toggle" = {
-          source = ./hyprland/bin/touchpad_toggle;
+        file."bin/hlprop" = {
+          source = ./hyprland/bindir/hlprop;
         };
 
         file.".config/hypr/hyprland.conf" = {
@@ -33,7 +29,7 @@ with lib;
         };
 
         file.".config/swaylock" = {
-          source = ./hyprland/swayidle;
+          source = ./hyprland/swaylock;
           recursive = true;
         };
 
