@@ -51,10 +51,6 @@ in
       '';
     };
 
-    file.".config/hypr/hyprland.conf" = {
-        source = ../../modules/home/hypr/hyprland.desktop.conf;
-    };
-
     sessionPath = [
       "$HOME/go/bin"
       "$HOME/.local/bin"
