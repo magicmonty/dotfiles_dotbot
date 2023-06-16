@@ -1,136 +1,143 @@
-{ ... }:
+{ config, lib, ... }:
 
+with lib;
 {
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
+  options.modules.starship = {
+    batterySymbol = mkOption { type = types.bool; default = false; };
+  };
 
-    settings = {
-      add_newline = true;
-      format = ''
-        [](blue)$env_var$os$username$hostname[](fg:blue)
-        [│](blue)$directory$git_branch$git_metrics$git_state$git_status$dotnet$lua$nodejs
-        [└─](blue)$battery$status[>](blue) '';
-
-      continuation_prompt = "[>](bright-black) ";
-      character.success_symbol = "[▶](bold green)";
-
-      battery = {
-        disabled = false;
-        full_symbol = "  ";
-        charging_symbol = "  ";
-        discharging_symbol = "  ";
-        unknown_symbol = "  ";
-        empty_symbol = "  ";
-
-        display = [
-          {
-            threshold = 80;
-            style = "green";
-          }
-          {
-            threshold = 30;
-            style = "bold yellow";
-          }
-          {
-            threshold = 20;
-            style = "bold red";
-          }
-        ];
-      };
-
-      git_metrics = {
-        disabled = false;
-        format = "([$added]($added_style) )([ $deleted]($deleted_style) )";
-      };
-
-      dotnet = {
-        disabled = true;
-        format = "\n[│](blue)(🎯 $tfm) via $symbol($version)]($style)";
-        symbol = " ";
-      };
-
-      lua = {
-        symbol = " ";
-        format = "\n[│](blue)[$symbol($version)]($style)";
-      };
-
-      nodejs = {
-        format = "\n[│](blue)[$symbol($version)]($style)";
-        symbol = " ";
-      };
-
-      package.disabled = true;
-
-      status = {
-        disabled = false;
-        format = "[$symbol]($style)";
-        map_symbol = true;
-        symbol = "";
-      };
-
-      directory = {
-        truncation_symbol = "…\\";
-        read_only = " ";
-
-        substitutions = {
-          "Documents" = " ";
-          "Dokumente" = " ";
-          "Downloads" = " ";
-          "Music" = " ";
-          "Musik" = " ";
-          "Pictures" = " ";
-          "Bilder" = " ";
-          "Images" = " ";
+  config = {
+    programs.starship = {
+      enable = true;
+      enableZshIntegration = true;
+  
+      settings = {
+        add_newline = true;
+        format = ''
+          [](blue)$env_var$os$username$hostname[](fg:blue)
+          [│](blue)$directory$git_branch$git_metrics$git_state$git_status$dotnet$lua$nodejs
+          [└─](blue)$battery$status[>](blue) '';
+  
+        continuation_prompt = "[>](bright-black) ";
+        character.success_symbol = "[▶](bold green)";
+  
+        battery = {
+          disabled = !config.modules.starship.batterySymbol;
+          full_symbol = " 󰁹 ";
+          charging_symbol = " 󰂄 ";
+          discharging_symbol = " 󰂃 ";
+          unknown_symbol = " 󰁽 ";
+          empty_symbol = " 󰂎 ";
+  
+          display = [
+            {
+              threshold = 80;
+              style = "green";
+            }
+            {
+              threshold = 30;
+              style = "bold yellow";
+            }
+            {
+              threshold = 20;
+              style = "bold red";
+            }
+          ];
         };
-      };
-
-      git_branch.symbol = " ";
-
-      username = {
-        show_always = true;
-        style_user = "bg:blue fg:white bold";
-        style_root = "bg:blue fg:white bold";
-        format = "[$user]($style)";
-      };
-
-      git_status = {
-        stashed = "異";
-        staged = "";
-        deleted = "";
-        style = "yellow bold";
-        ignore_submodules = true;
-        format = "([$all_status$ahead_behind]($style) )";
-      };
-
-      hostname = {
-        disabled = false;
-        ssh_only = false;
-        format = "[@$ssh_symbol$hostname]($style)";
-        style = "bg:blue fg:white bold";
-      };
-
-      env_var.SYSTEM_ICON = {
-        variable = "SYSTEM_ICON";
-        default = "";
-        style = "bg:blue fg:white bold";
-        format = "[$env_value ]($style)";
-        disabled = true;
-      };
-
-      os = {
-        style = "bg:blue fg:white bold";
-        format = "[$symbol]($style)";
-        disabled = false;
-
-        symbols = {
-          Ubuntu = " ";
-          Arch = " ";
-          Manjaro = " ";
-          Macos = " ";
-          Linux = " ";
-          Windows = " ";
-          Alpine = " ";
+  
+        git_metrics = {
+          disabled = false;
+          format = "([$added]($added_style) )([✘$deleted]($deleted_style) )";
+        };
+  
+        dotnet = {
+          disabled = true;
+          format = "\n[│](blue)(🎯 $tfm) via $symbol($version)]($style)";
+          symbol = " ";
+        };
+  
+        lua = {
+          symbol = " ";
+          format = "\n[│](blue)[$symbol($version)]($style)";
+        };
+  
+        nodejs = {
+          format = "\n[│](blue)[$symbol($version)]($style)";
+          symbol = " ";
+        };
+  
+        package.disabled = true;
+  
+        status = {
+          disabled = false;
+          format = "[$symbol]($style)";
+          map_symbol = true;
+          symbol = "";
+        };
+  
+        directory = {
+          truncation_symbol = "…\\";
+          read_only = " ";
+  
+          substitutions = {
+            "Documents" = "󰈙 ";
+            "Dokumente" = "󰈙 ";
+            "Downloads" = " ";
+            "Music" = " ";
+            "Musik" = " ";
+            "Pictures" = " ";
+            "Bilder" = " ";
+            "Images" = " ";
+          };
+        };
+  
+        git_branch.symbol = " ";
+  
+        username = {
+          show_always = true;
+          style_user = "bg:blue fg:white bold";
+          style_root = "bg:blue fg:white bold";
+          format = "[$user]($style)";
+        };
+  
+        git_status = {
+          stashed = "󱓞";
+          staged = "󰸞";
+          deleted = "✘";
+          style = "yellow bold";
+          ignore_submodules = true;
+          format = "([$all_status$ahead_behind]($style) )";
+        };
+  
+        hostname = {
+          disabled = false;
+          ssh_only = false;
+          format = "[@$ssh_symbol$hostname]($style)";
+          style = "bg:blue fg:white bold";
+        };
+  
+        env_var.SYSTEM_ICON = {
+          variable = "SYSTEM_ICON";
+          default = "";
+          style = "bg:blue fg:white bold";
+          format = "[$env_value ]($style)";
+          disabled = true;
+        };
+  
+        os = {
+          style = "bg:blue fg:white bold";
+          format = "[$symbol]($style)";
+          disabled = false;
+  
+          symbols = {
+            Ubuntu = " ";
+            Arch = " ";
+            Manjaro = " ";
+            Macos = " ";
+            Linux = " ";
+            Windows = " ";
+            Alpine = " ";
+          };
         };
       };
     };

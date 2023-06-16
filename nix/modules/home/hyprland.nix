@@ -5,7 +5,12 @@ with lib;
   options.modules.hyprland = {
     enable = mkOption { type = types.bool; default = false; };
     entrypoint = mkOption { type = types.path; };
+    batterySymbol = mkOption { type = types.bool; default = true; };
   };
+
+  imports = [
+    ./waybar.nix
+  ];
 
   config = mkMerge [
     (mkIf config.modules.hyprland.enable {
@@ -33,17 +38,19 @@ with lib;
           recursive = true;
         };
 
-        file.".config/waybar" = {
-          source = ./hyprland/waybar;
-          recursive = true;
-        };
-        
         file.".config/wlogout" = {
           source = ./hyprland/wlogout;
           recursive = true;
         };
+
       };
 
+      modules = {
+        waybar = {
+          enable = true;
+          batterySymbol = config.modules.hyprland.batterySymbol;
+        };
+      };
     })
   ];
 }

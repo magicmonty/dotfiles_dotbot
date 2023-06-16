@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+rofi -no-config -no-lazy-grab -modi drun -show drun -theme $HOME/.dotfiles/nix/modules/home/hyprland/rofi/launcher.rasi

@@ -20,12 +20,17 @@ in
       email = "magicmonty@pagansoft.de";
     };
 
+    starship = {
+      batterySymbol = false;
+    };
+
     kitty.enable = true;
     neovim.enable = true;
 
     hyprland = {
       enable = true;
-      entrypoint = ../../modules/home/hyprland/hypr/hyprland.thinkmg.conf;
+      entrypoint = ../../modules/home/hyprland/hypr/hyprland.desktop.conf;
+      batterySymbol = false;
     };
 
     zsh = {
